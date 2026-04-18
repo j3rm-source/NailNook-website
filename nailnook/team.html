@@ -64,8 +64,9 @@ a{text-decoration:none;color:inherit}
 .sc-badge{position:absolute;top:12px;right:12px;background:var(--pa);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.05em;padding:4px 10px;border-radius:var(--rf)}
 .sc-body{padding:20px}
 .sc-body h3{font-family:var(--fd);font-size:1.12rem;font-weight:700;margin-bottom:4px}
-.sc-role{font-size:.8rem;color:var(--pa);font-weight:700;letter-spacing:.05em;margin-bottom:4px;display:block}
-.sc-spec{font-size:.82rem;color:var(--chl);margin-bottom:16px}
+.sc-role{font-size:.8rem;color:var(--pa);font-weight:700;letter-spacing:.05em;margin-bottom:6px;display:block}
+.sc-phone{font-size:.82rem;color:var(--chl);display:block;margin-bottom:16px;transition:color var(--tr)}
+.sc-phone:hover{color:var(--pa)}
 .sc-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .sc-gal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:5px;cursor:pointer;transition:transform .3s ease}
 .sc-gal img:hover{transform:scale(1.06)}
@@ -234,20 +235,20 @@ a{text-decoration:none;color:inherit}
 
 <script>
 const specialists = [
-  {name:'Specialist 1',role:'Senior Nail Artist',spec:'Acrylic Extensions & 3D Nail Art',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[300,301,302,303,304,305]},
-  {name:'Specialist 2',role:'Nail Technician',spec:'Gel Polish & Ombre Blends',badge:'Gel Expert',bg:'f9a8c9',fg:'c2185b',seeds:[306,307,308,309,310,311]},
-  {name:'Specialist 3',role:'Senior Nail Artist',spec:'Dip Powder & Press-On Sets',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[312,313,314,315,316,317]},
-  {name:'Specialist 4',role:'Nail Technician',spec:'French Manicure & Minimalist Art',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[318,319,320,321,322,323]},
-  {name:'Specialist 5',role:'Senior Nail Artist',spec:'Chrome & Holographic Nails',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[324,325,326,327,328,329]},
-  {name:'Specialist 6',role:'Nail Technician',spec:'Spa Manicure & Pedicure',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[330,331,332,333,334,335]},
-  {name:'Specialist 7',role:'Senior Nail Artist',spec:'Nail Art & Hand-Painted Designs',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[336,337,338,339,340,341]},
-  {name:'Specialist 8',role:'Nail Technician',spec:'Gel Extensions & Builder Gel',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[342,343,344,345,346,347]},
-  {name:'Specialist 9',role:'Senior Nail Artist',spec:'Acrylic Sculpting & Stiletto',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[348,349,350,351,352,353]},
-  {name:'Specialist 10',role:'Nail Technician',spec:'Classic Manicure & Waxing',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[354,355,356,357,358,359]},
-  {name:'Specialist 11',role:'Senior Nail Artist',spec:'Nail Jewels & Embellishments',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[360,361,362,363,364,365]},
-  {name:'Specialist 12',role:'Nail Technician',spec:'Dip & Polygel Nails',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[366,367,368,369,370,371]},
-  {name:'Specialist 13',role:'Senior Nail Artist',spec:'Floral Art & Watercolor Nails',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[372,373,374,375,376,377]},
-  {name:'Specialist 14',role:'Nail Technician',spec:'Pedicure & Foot Care',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[378,379,380,381,382,383]}
+  {name:'Stephanie',role:'Owner / Nail Tech',spec:'Nail Tech',phone:'928-486-3524',badge:'Owner',bg:'fce4ec',fg:'e91e8c',seeds:[300,301,302,303,304,305]},
+  {name:'Raquel',role:'Nail Technician',spec:'Nail Tech',phone:'928-846-1087',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[306,307,308,309,310,311]},
+  {name:'Kendall',role:'Restoration Med Spa',spec:'Restoration Med Spa',phone:'928-706-1575',badge:'',bg:'fce4ec',fg:'e91e8c',seeds:[312,313,314,315,316,317]},
+  {name:'Laura',role:'Masus',spec:'Masus',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[318,319,320,321,322,323]},
+  {name:'Jessica',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-3735',badge:'',bg:'fce4ec',fg:'e91e8c',seeds:[324,325,326,327,328,329]},
+  {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[330,331,332,333,334,335]},
+  {name:'Shelby',role:'Waxing Specialist',spec:'Waxer',phone:'951-532-6685',badge:'',bg:'fce4ec',fg:'e91e8c',seeds:[336,337,338,339,340,341]},
+  {name:'Katie',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-3735',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[342,343,344,345,346,347]},
+  {name:'Ashly',role:'Eyelash Specialist',spec:'Eyelashes',phone:'928-302-0949',badge:'',bg:'fce4ec',fg:'e91e8c',seeds:[348,349,350,351,352,353]},
+  {name:'Cathy',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-706-6177',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[354,355,356,357,358,359]},
+  {name:'Selena',role:'Nail Technician',spec:'Nail Tech',phone:'928-662-8250',badge:'',bg:'fce4ec',fg:'e91e8c',seeds:[360,361,362,363,364,365]},
+  {name:'Shannon',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-6965',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[366,367,368,369,370,371]},
+  {name:'Amanda',role:'Hair Specialist',spec:'Hair Specialist',phone:'909-996-1121',badge:'',bg:'fce4ec',fg:'e91e8c',seeds:[372,373,374,375,376,377]},
+  {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'480-241-9972',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[378,379,380,381,382,383]}
 ];
 
 const allImgs=[];
@@ -268,8 +269,8 @@ specialists.forEach((sp,si)=>{
     </div>
     <div class="sc-body">
       <h3>${sp.name}</h3>
-      <span class="sc-role">${sp.role}</span>
-      <p class="sc-spec">Specialty: ${sp.spec}</p>
+      <span class="sc-role">${sp.spec}</span>
+      <a class="sc-phone" href="tel:${sp.phone.replace(/\D/g,'')}">${sp.phone}</a>
       <div class="sc-gal">
         ${galImgs.map((u,i)=>`<img src="${u}" alt="Work sample ${i+1}" loading="lazy" onclick="event.stopPropagation();lbxOpen(${baseIdx+i})">`).join('')}
       </div>
