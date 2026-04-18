@@ -1,0 +1,24 @@
+name,address,phone,rating,reviews,category,google_maps_url
+Volo Coffeehouse,"4360 Main St, Philadelphia, PA 19127",(215) 483-4580,4.5,676,Cafe,https://www.google.com/maps/search/?api=1&query=Volo%20Coffeehouse&query_place_id=ChIJUa7WZJW4xokRDLwqjJR2ymY
+Chapterhouse Cafe & Gallery,"620 S 9th St, Philadelphia, PA 19147",(215) 238-2626,4.6,592,Cafe,https://www.google.com/maps/search/?api=1&query=Chapterhouse%20Cafe%20%26%20Gallery&query_place_id=ChIJ67B24SDGxokRtoWJfgmWf6U
+Chestnut Hill Coffee Co,"8620 Germantown Ave, Philadelphia, PA 19118",(215) 242-8600,4.5,555,Coffee shop,https://www.google.com/maps/search/?api=1&query=Chestnut%20Hill%20Coffee%20Co&query_place_id=ChIJSyruP3q5xokReru3w4Y5ZJ4
+Coffee Zeit,"246 Race St, Philadelphia, PA 19106",,4.7,335,Coffee shop,https://www.google.com/maps/search/?api=1&query=Coffee%20Zeit&query_place_id=ChIJt6rAJi7JxokRgcOXIaTU-5Y
+Arterial Coffee,"3100-02 Spring Garden St, Philadelphia, PA 19104",(724) 919-5243,4.8,239,Coffee shop,https://www.google.com/maps/search/?api=1&query=Arterial%20Coffee&query_place_id=ChIJMUxKHG_HxokRzETitnQ1bpU
+Cherry Cafe,"inside of, 1601 Cherry St Suite 120, Philadelphia, PA 19102",(267) 777-0045,5,223,Cafe,https://www.google.com/maps/search/?api=1&query=Cherry%20Cafe&query_place_id=ChIJRVq2P33HxokRThGklZDlGUI
+Drip Vietnamese Cafe,"225 N 11th St, Philadelphia, PA 19107",(267) 243-0270,4.7,197,Coffee shop,https://www.google.com/maps/search/?api=1&query=Drip%20Vietnamese%20Cafe&query_place_id=ChIJKVxglJPHxokRQ9UmXDhI2OM
+Desforra Cafe,"1149 N 3rd St, Philadelphia, PA 19123",(215) 509-1009,4.9,188,Coffee shop,https://www.google.com/maps/search/?api=1&query=Desforra%20Cafe&query_place_id=ChIJYdc5PRzJxokRRDOU78cmBwA
+Caffè Ida,"1732 W Passyunk Ave, Philadelphia, PA 19145",(215) 218-0100,4.8,180,Cafe,https://www.google.com/maps/search/?api=1&query=Caff%C3%A8%20Ida&query_place_id=ChIJsZjXcgvGxokRy2rDYmDqg7Q
+Pop Up Café,"802 Christian St, Philadelphia, PA 19147",(267) 563-0926,4.9,153,Vietnamese restaurant,https://www.google.com/maps/search/?api=1&query=Pop%20Up%20Caf%C3%A9&query_place_id=ChIJ101eabLHxokRPU9sDw7OBBw
+Rox Café,"5134 Rochelle Ave, Philadelphia, PA 19128",(267) 500-2233,4.2,151,Cafe,https://www.google.com/maps/search/?api=1&query=Rox%20Caf%C3%A9&query_place_id=ChIJg9yZGaG5xokRGmtWaNV7KE8
+Aroma Bakery & Coffee,"160 N 3rd St, Philadelphia, PA 19106",(445) 245-9284,4.8,144,Cafe,https://www.google.com/maps/search/?api=1&query=Aroma%20Bakery%20%26%20Coffee&query_place_id=ChIJ-T2lt8rJxokRwO7IwrmIw4g
+Wayne Café,"4851 Wayne Ave, Philadelphia, PA 19144",(267) 206-9418,4.4,120,Cafe,https://www.google.com/maps/search/?api=1&query=Wayne%20Caf%C3%A9&query_place_id=ChIJb8yCViO4xokRyQ8hpRSzhp0
+Kabylian South Philly Coffee Shop,"1424 W Snyder Ave, Philadelphia, PA 19145",(215) 281-6051,4.8,112,Cafe,https://www.google.com/maps/search/?api=1&query=Kabylian%20South%20Philly%20Coffee%20Shop&query_place_id=ChIJUWxNSAnGxokR4cblzqRCE8k
+Sahabah Cafe,"5017 Germantown Ave, Philadelphia, PA 19144",(267) 385-7208,4.4,88,Cafe,https://www.google.com/maps/search/?api=1&query=Sahabah%20Cafe&query_place_id=ChIJs_XuiS-4xokRfTX-h4ASqDc
+Cypress Garden Coffee,"304 S 12th St, Philadelphia, PA 19107",(610) 573-0790,5,82,Coffee shop,https://www.google.com/maps/search/?api=1&query=Cypress%20Garden%20Coffee&query_place_id=ChIJ-WbluFDHxokRZbll1Vmu-l0
+Tina’s Cafe,"709 Passyunk Ave, Philadelphia, PA 19147",,5,74,Coffee shop,https://www.google.com/maps/search/?api=1&query=Tina%E2%80%99s%20Cafe&query_place_id=ChIJzT9d25LJxokRnQRqTTYtNHA
+Mediterranean Cafe,"1427 W Passyunk Ave, Philadelphia, PA 19145",,4.8,47,Cafe,https://www.google.com/maps/search/?api=1&query=Mediterranean%20Cafe&query_place_id=ChIJw2Eytg7GxokRJyA7t77GfX8
+Supreme Donut & Coffee,"737 E Chelten Ave, Philadelphia, PA 19144",,4.6,35,Coffee shop,https://www.google.com/maps/search/?api=1&query=Supreme%20Donut%20%26%20Coffee&query_place_id=ChIJ7TGV8NG5xokRbuc-13jvGBs
+Mama’s Boy Cafe,"4323 Main St, Philadelphia, PA 19127",(215) 403-6738,5,22,Coffee shop,https://www.google.com/maps/search/?api=1&query=Mama%E2%80%99s%20Boy%20Cafe&query_place_id=ChIJ62_8C5y5xokRCiR6iEUgu00
+New S & D Coffee Shop,"601 Dickinson St, Philadelphia, PA 19147",(215) 952-0790,4,19,Coffee shop,https://www.google.com/maps/search/?api=1&query=New%20S%20%26%20D%20Coffee%20Shop&query_place_id=ChIJffIqeh3GxokRpE-ei5gLMBQ
+Jax Cafe,"501 S 22nd St, Philadelphia, PA 19146",,4.8,16,Cafe,https://www.google.com/maps/search/?api=1&query=Jax%20Cafe&query_place_id=ChIJvztZ_ijHxokRlH0Axgg420M
+Saffron Cafe,"4331 Main St, Philadelphia, PA 19127",(302) 377-7543,5,2,Cafe,https://www.google.com/maps/search/?api=1&query=Saffron%20Cafe&query_place_id=ChIJDzyNlky5xokRbBuu0w2WelE
