@@ -254,11 +254,47 @@ const specialists = [
   {name:'Ashly',role:'Eyelash Specialist',spec:'Eyelashes',phone:'928-302-0949',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[348,349,350,351,352,353]}
 ];
 
+const nailnookPhotos=[
+  'https://cdn4.localdatacdn.com/az/lake-havasu-city/3897526/original/TKcG0YgFKr.jpg',
+  'https://cdn6.localdatacdn.com/az/lake-havasu-city/3897526/original/rsgxXXUnjr.jpg',
+  'https://cdn6.localdatacdn.com/az/lake-havasu-city/3897526/original/W55KSEQutB.jpg',
+  'https://cdn3.localdatacdn.com/az/lake-havasu-city/3897526/original/kNCkf0XFjy.jpg',
+  'https://cdn10.localdatacdn.com/az/lake-havasu-city/3897526/original/gZmWj1BsgR.jpg',
+  'https://cdn3.localdatacdn.com/az/lake-havasu-city/3897526/original/rmNJ5fJMyB.jpg',
+  'https://cdn2.localdatacdn.com/az/lake-havasu-city/3897526/original/dukQmfyqNn.jpg',
+  'https://cdn2.localdatacdn.com/az/lake-havasu-city/3897526/original/7JFDVLKWyw.jpg',
+  'https://cdn2.localdatacdn.com/az/lake-havasu-city/3897526/original/WA7SSlo0zl.jpg',
+  'https://cdn2.localdatacdn.com/az/lake-havasu-city/3897526/original/u4xWnWyzfJ.jpg',
+  'https://cdn3.localdatacdn.com/az/lake-havasu-city/3897526/original/kVLl9Hggak.jpg',
+  'https://cdn3.localdatacdn.com/az/lake-havasu-city/3897526/original/9IsXbDySHu.jpg',
+  'https://cdn2.localdatacdn.com/az/lake-havasu-city/3897526/original/YHNVWqafCZ.jpg',
+  'https://cdn3.localdatacdn.com/az/lake-havasu-city/3897526/original/veMUJEfeQA.jpg',
+  'https://cdn.localdatacdn.com/az/lake-havasu-city/3897526/original/YFTSGQaYwE.jpg',
+  'https://cdn.localdatacdn.com/az/lake-havasu-city/3897526/original/Rm9EgPVK4v.jpg',
+  'https://cdn.localdatacdn.com/az/lake-havasu-city/3897526/original/0WVGg6iGVk.jpg',
+  'https://cdn.localdatacdn.com/az/lake-havasu-city/3897526/original/WxYPtlCuXQ.jpg',
+  'https://cdn.localdatacdn.com/az/lake-havasu-city/3897526/original/VJspcnmZJR.jpg',
+  'https://cdn.localdatacdn.com/az/lake-havasu-city/3897526/original/EFE2l0dEBL.jpg',
+  'https://cdn2.localdatacdn.com/az/lake-havasu-city/3897526/original/7OADMHAazE.jpg',
+  'https://cdn.localdatacdn.com/az/lake-havasu-city/3897526/original/EFCG34oaMf.jpg',
+  'https://cdn.localdatacdn.com/az/lake-havasu-city/3897526/original/K4FL6KifUY.jpg',
+  'https://cdn.localdatacdn.com/az/lake-havasu-city/3897526/original/nbnKLhZB6Z.jpg',
+  'https://cdn2.localdatacdn.com/az/lake-havasu-city/3897526/original/4FMqfaxry0.jpg',
+  'https://cdn.localdatacdn.com/az/lake-havasu-city/3897526/original/RNtNsAKaXV.jpg',
+  'https://cdn2.localdatacdn.com/az/lake-havasu-city/3897526/original/OGdXebC2sZ.jpg',
+  'https://cdn.localdatacdn.com/az/lake-havasu-city/3897526/original/BJ0cfYgFj9.jpg',
+  'https://cdn2.localdatacdn.com/az/lake-havasu-city/3897526/original/LFJL363m74.jpg',
+  'https://cdn5.localdatacdn.com/az/lake-havasu-city/3897526/original/hgrLSU0sEu.jpg',
+  'https://cdn5.localdatacdn.com/az/lake-havasu-city/3897526/original/PQA3W2WJwt.jpg',
+  'https://cdn5.localdatacdn.com/az/lake-havasu-city/3897526/original/Sakzbh4ahC.jpg',
+  'https://cdn3.localdatacdn.com/az/lake-havasu-city/3897526/original/9zoRkeGxB4.jpg'
+];
+
 const allImgs=[];
 const grid=document.getElementById('specGrid');
 
 specialists.forEach((sp,si)=>{
-  const galImgs=sp.seeds.map(s=>`https://picsum.photos/seed/${s}/300/300`);
+  const galImgs=Array.from({length:6},(_,i)=>nailnookPhotos[(si*6+i)%nailnookPhotos.length]);
   galImgs.forEach(u=>allImgs.push(u));
   const baseIdx=si*6;
 

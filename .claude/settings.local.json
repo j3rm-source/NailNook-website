@@ -93,7 +93,18 @@
       "Bash(python -c ' *)",
       "Bash(node -e ' *)",
       "Bash(npm run *)",
-      "Bash(gh repo *)"
+      "Bash(gh repo *)",
+      "WebFetch(domain:belliata.com)",
+      "WebFetch(domain:localstylist.com)",
+      "WebFetch(domain:media-cdn.localstylist.com)",
+      "WebFetch(domain:www.facebook.com)",
+      "WebFetch(domain:nailmastersusa.com)",
+      "WebFetch(domain:bippermedia.com)",
+      "WebFetch(domain:www.instagram.com)",
+      "WebFetch(domain:cdn10.localdatacdn.com)",
+      "WebFetch(domain:cdn4.localdatacdn.com)",
+      "WebFetch(domain:cdn6.localdatacdn.com)",
+      "WebFetch(domain:cdn3.localdatacdn.com)"
     ]
   }
 }
