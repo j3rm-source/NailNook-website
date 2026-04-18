@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team — Nail Nook Lake Havasu City</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{--pl:#fff0f6;--pm:#fce4ec;--pp:#f9a8c9;--pa:#e91e8c;--pad:#c2185b;--ch:#1e1e1e;--chl:#555;--wh:#fff;--bd:rgba(249,168,201,.25);--fd:'Playfair Display',serif;--fb:'Lato',sans-serif;--r:12px;--rf:999px;--sh:0 8px 32px rgba(233,30,140,.13);--shh:0 20px 60px rgba(233,30,140,.18);--tr:.3s cubic-bezier(.4,0,.2,1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);color:var(--ch);background:var(--wh);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:900;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);padding:0 5vw;height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:9px;font-family:var(--fd);font-size:1.35rem;font-weight:700;color:var(--ch)}
+.logo svg{width:26px;height:26px;flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;color:var(--chl);position:relative;transition:color var(--tr)}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--pa);transition:width var(--tr)}
+.nav-links a:hover{color:var(--pa)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--pa)!important;color:#fff!important;padding:9px 22px;border-radius:var(--rf);font-weight:700}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--pad)!important;transform:translateY(-1px);box-shadow:0 4px 16px rgba(233,30,140,.35)!important}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
+.ham span{display:block;width:24px;height:2px;background:var(--ch);border-radius:2px}
+.mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1800}
+.mob-overlay.on{display:block}
+.mob-menu{position:fixed;top:0;right:-100%;width:78vw;max-width:310px;height:100vh;background:#fff;z-index:1900;padding:72px 36px;display:flex;flex-direction:column;gap:28px;box-shadow:-20px 0 60px rgba(0,0,0,.12);transition:right .4s cubic-bezier(.4,0,.2,1)}
+.mob-menu.on{right:0}
+.mob-menu a{font-family:var(--fd);font-size:1.4rem;color:var(--ch);border-bottom:1px solid var(--pm);padding-bottom:14px}
+.mob-close{position:absolute;top:18px;right:18px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ch)}
+
+/* HERO */
+.page-hero{padding:80px 5vw 60px;background:linear-gradient(160deg,#fff5f9 0%,var(--pm) 50%,#fff0f6 100%);text-align:center;position:relative;overflow:hidden}
+.page-hero::before,.page-hero::after{content:'';position:absolute;border-radius:50%;filter:blur(60px);z-index:0}
+.page-hero::before{width:340px;height:340px;background:radial-gradient(circle,rgba(233,30,140,.22),transparent 70%);top:-80px;right:-80px}
+.page-hero::after{width:280px;height:280px;background:radial-gradient(circle,rgba(249,168,201,.35),transparent 70%);bottom:-80px;left:-60px}
+.page-hero>*{position:relative;z-index:1}
+.lbl{font-size:.73rem;letter-spacing:.25em;text-transform:uppercase;color:var(--pa);font-weight:700;margin-bottom:10px;display:block}
+.pg-title{font-family:var(--fd);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;color:var(--ch);line-height:1.12;margin-bottom:16px}
+.pg-sub{font-size:1rem;color:var(--chl);max-width:520px;margin:0 auto;line-height:1.7}
+
+/* TEAM INTRO */
+.intro{padding:60px 5vw;max-width:800px;margin:0 auto;text-align:center}
+.intro p{font-size:1.05rem;color:var(--chl);line-height:1.8}
+.intro-divider{width:60px;height:3px;background:linear-gradient(to right,var(--pp),var(--pa));border-radius:2px;margin:28px auto 28px}
+
+/* SPECIALIST GRID */
+.spec-sec{padding:20px 5vw 80px}
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:28px}
+
+/* SPECIALIST CARD */
+.sc{background:#fff;border-radius:16px;border:1px solid var(--bd);overflow:hidden;transition:all var(--tr)}
+.sc:hover{transform:translateY(-6px);box-shadow:var(--shh);border-color:var(--pp)}
+.sc-top{position:relative;overflow:hidden}
+.sc-top img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform .5s ease}
+.sc:hover .sc-top img{transform:scale(1.05)}
+.sc-badge{position:absolute;top:12px;right:12px;background:var(--pa);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.05em;padding:4px 10px;border-radius:var(--rf)}
+.sc-body{padding:20px}
+.sc-body h3{font-family:var(--fd);font-size:1.12rem;font-weight:700;margin-bottom:4px}
+.sc-role{font-size:.8rem;color:var(--pa);font-weight:700;letter-spacing:.05em;margin-bottom:4px;display:block}
+.sc-spec{font-size:.82rem;color:var(--chl);margin-bottom:16px}
+.sc-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.sc-gal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:5px;cursor:pointer;transition:transform .3s ease}
+.sc-gal img:hover{transform:scale(1.06)}
+
+/* LIGHTBOX */
+.lbx{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9900;align-items:center;justify-content:center}
+.lbx.on{display:flex}
+.lbx img{max-width:92vw;max-height:92vh;object-fit:contain;border-radius:8px}
+.lbx-x{position:fixed;top:18px;right:18px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;z-index:9910;opacity:.8}
+.lbx-x:hover{opacity:1}
+.lbx-nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:none;color:#fff;font-size:1.6rem;padding:14px 18px;cursor:pointer;border-radius:8px;backdrop-filter:blur(4px);transition:background var(--tr);z-index:9910}
+.lbx-nav:hover{background:rgba(255,255,255,.22)}
+.lbx-prev{left:18px}
+.lbx-next{right:18px}
+
+/* FOOTER */
+.footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:60px 5vw 28px}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:38px;margin-bottom:44px}
+.f-logo{font-family:var(--fd);font-size:1.45rem;color:#fff;margin-bottom:10px}
+.f-tag{font-size:.84rem;line-height:1.65;opacity:.65}
+.footer h4{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pp);margin-bottom:14px;font-weight:700}
+.f-links{list-style:none}
+.f-links li{margin-bottom:9px}
+.f-links a{font-size:.88rem;opacity:.65;transition:opacity var(--tr)}
+.f-links a:hover{opacity:1;color:var(--pp)}
+.f-hrs p{font-size:.88rem;opacity:.65;line-height:1.8}
+.f-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.f-copy{font-size:.78rem;opacity:.45}
+.socials{display:flex;gap:13px}
+.soc{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;transition:all var(--tr);color:rgba(255,255,255,.78)}
+.soc svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.soc:hover{border-color:var(--pp);background:rgba(249,168,201,.12);color:var(--pp)}
+
+/* CHATBOT */
+.cw{position:fixed;bottom:22px;right:22px;z-index:5000}
+.cb{width:58px;height:58px;background:var(--pa);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(233,30,140,.42);transition:all var(--tr);position:relative;color:#fff}
+.cb svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cb:hover{transform:scale(1.1)}
+.cwin{position:absolute;bottom:74px;right:0;width:335px;max-width:calc(100vw - 44px);background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.16);overflow:hidden;display:none;flex-direction:column;max-height:480px}
+.cwin.on{display:flex}
+.ch2{background:linear-gradient(135deg,var(--pa),var(--pad));color:#fff;padding:15px 18px;display:flex;align-items:center;justify-content:space-between}
+.ch2-info{display:flex;align-items:center;gap:11px}
+.cav{width:34px;height:34px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:.85rem;font-weight:700;letter-spacing:.5px}
+.ch2-text h4{font-size:.92rem;font-weight:700}
+.ch2-text span{font-size:.72rem;opacity:.85}
+.cx{background:none;border:none;color:#fff;font-size:1.15rem;cursor:pointer;opacity:.8}
+.cmsgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:11px}
+.mb,.mu{max-width:86%;padding:9px 13px;border-radius:15px;font-size:.855rem;line-height:1.52}
+.mb{background:var(--pl);border-bottom-left-radius:3px;align-self:flex-start;color:var(--ch)}
+.mb a{color:var(--pa);font-weight:700}
+.mu{background:var(--pa);color:#fff;border-bottom-right-radius:3px;align-self:flex-end}
+.qrs{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 14px}
+.qr{background:#fff;border:1px solid var(--pp);color:var(--pa);padding:5px 13px;border-radius:var(--rf);font-size:.78rem;font-weight:700;cursor:pointer;transition:all var(--tr);font-family:var(--fb)}
+.qr:hover{background:var(--pa);border-color:var(--pa);color:#fff}
+.c-inp-area{padding:11px 14px;border-top:1px solid var(--bd);display:flex;gap:8px}
+.c-inp{flex:1;padding:8px 12px;border:1px solid var(--bd);border-radius:var(--rf);font-family:var(--fb);font-size:.855rem;outline:none;background:var(--pl)}
+.c-inp:focus{border-color:var(--pa)}
+.c-send{background:var(--pa);color:#fff;border:none;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.85rem;flex-shrink:0}
+.c-send:hover{background:var(--pad)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.rv{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+.btn{display:inline-block;padding:13px 34px;border-radius:var(--rf);font-weight:700;font-size:.93rem;cursor:pointer;border:2px solid var(--pa);transition:all var(--tr)}
+.btn-p{background:var(--pa);color:#fff}
+.btn-p:hover{background:var(--pad);transform:translateY(-2px);box-shadow:0 8px 24px rgba(233,30,140,.35)}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .ham{display:flex}
+  .spec-grid{grid-template-columns:1fr}
+  .pg-title{font-size:2.1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="logo">
+    <svg viewBox="0 0 28 28" fill="none"><rect x="10" y="1" width="8" height="5" rx="2.5" fill="#e91e8c"/><path d="M8 6h12l2.5 20H5.5L8 6z" fill="#f9a8c9"/><path d="M8 6h12l1.2 9H6.8L8 6z" fill="#e91e8c" opacity=".55"/><rect x="9.5" y="2.5" width="9" height="2" rx="1" fill="#c2185b"/></svg>
+    Nail Nook
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="team.html">Our Team</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="ham" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-overlay" id="mobOv" onclick="toggleMenu()"></div>
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="toggleMenu()">✕</button>
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="team.html" onclick="toggleMenu()">Our Team</a>
+  <a href="index.html#contact" onclick="toggleMenu()">Contact</a>
+  <a href="booking.html" class="btn btn-p" style="text-align:center" onclick="toggleMenu()">Book Now</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <span class="lbl" style="animation:fadeUp .7s ease both">Meet the Artists</span>
+  <h1 class="pg-title" style="animation:fadeUp .7s .15s ease both">Our Nail Specialists</h1>
+  <p class="pg-sub" style="animation:fadeUp .7s .3s ease both">14 passionate artists dedicated to making your nails a work of art. Each with their own signature style, specialty, and love for the craft.</p>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <p>At Nail Nook, we believe beautiful nails start with talented, caring people. Our team of certified nail technicians and senior artists bring years of expertise and genuine passion to every appointment — from classic manicures to complex custom designs. We take pride in a clean, welcoming environment and results that make you feel your absolute best.</p>
+  <div class="intro-divider"></div>
+  <a href="booking.html" class="btn btn-p">Book with a Specialist</a>
+</div>
+
+<!-- SPECIALISTS -->
+<div class="spec-sec">
+  <div class="spec-grid" id="specGrid"></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div><div class="f-logo">Nail Nook</div><p class="f-tag">Luxury nail care in Lake Havasu City. Where beauty meets artistry.</p></div>
+    <div><h4>Navigate</h4><ul class="f-links"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="team.html">Our Team</a></li><li><a href="booking.html">Book Now</a></li></ul></div>
+    <div><h4>Hours</h4><p class="f-hrs">Mon – Sat: 9 AM – 7 PM<br>Sunday: 10 AM – 5 PM</p><br><h4>Contact</h4><p class="f-hrs"><a href="tel:9288556425" style="color:rgba(255,255,255,.7)">(928) 855-6425</a><br>2120 McCulloch Blvd N, Ste 103<br>Lake Havasu City, AZ 86403</p></div>
+  </div>
+  <div class="f-bottom">
+    <p class="f-copy">© 2024 Nail Nook and More · Lake Havasu City, AZ</p>
+    <div class="socials"><a href="#" class="soc" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a><a href="#" class="soc" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="#" class="soc" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M15 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M15 3c0 2.8 2.2 5 5 5"/></svg></a></div>
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<div class="cw">
+  <div class="cwin" id="cwin">
+    <div class="ch2">
+      <div class="ch2-info"><div class="cav">NN</div><div class="ch2-text"><h4>Nail Nook Assistant</h4><span>● Online now</span></div></div>
+      <button class="cx" onclick="closeChat()">✕</button>
+    </div>
+    <div class="cmsgs" id="cmsgs"><div class="mb">Hi there. Looking to book with a specific specialist? I can help.</div></div>
+    <div class="qrs" id="qrs">
+      <button class="qr" onclick="qr('book')">Book Appointment</button>
+      <button class="qr" onclick="qr('svc')">View Services</button>
+      <button class="qr" onclick="qr('hrs')">Hours & Location</button>
+    </div>
+    <div class="c-inp-area">
+      <input type="text" class="c-inp" id="cinp" placeholder="Type a message…" onkeypress="if(event.key==='Enter')sendMsg()">
+      <button class="c-send" onclick="sendMsg()">➤</button>
+    </div>
+  </div>
+  <div class="cb" onclick="toggleChat()"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lbx" id="lbx" onclick="lbxClose()">
+  <button class="lbx-x">✕</button>
+  <button class="lbx-nav lbx-prev" onclick="event.stopPropagation();lbxNav(-1)">‹</button>
+  <img id="lbx-img" src="" alt="Nail art">
+  <button class="lbx-nav lbx-next" onclick="event.stopPropagation();lbxNav(1)">›</button>
+</div>
+
+<script>
+const specialists = [
+  {name:'Specialist 1',role:'Senior Nail Artist',spec:'Acrylic Extensions & 3D Nail Art',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[300,301,302,303,304,305]},
+  {name:'Specialist 2',role:'Nail Technician',spec:'Gel Polish & Ombre Blends',badge:'Gel Expert',bg:'f9a8c9',fg:'c2185b',seeds:[306,307,308,309,310,311]},
+  {name:'Specialist 3',role:'Senior Nail Artist',spec:'Dip Powder & Press-On Sets',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[312,313,314,315,316,317]},
+  {name:'Specialist 4',role:'Nail Technician',spec:'French Manicure & Minimalist Art',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[318,319,320,321,322,323]},
+  {name:'Specialist 5',role:'Senior Nail Artist',spec:'Chrome & Holographic Nails',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[324,325,326,327,328,329]},
+  {name:'Specialist 6',role:'Nail Technician',spec:'Spa Manicure & Pedicure',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[330,331,332,333,334,335]},
+  {name:'Specialist 7',role:'Senior Nail Artist',spec:'Nail Art & Hand-Painted Designs',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[336,337,338,339,340,341]},
+  {name:'Specialist 8',role:'Nail Technician',spec:'Gel Extensions & Builder Gel',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[342,343,344,345,346,347]},
+  {name:'Specialist 9',role:'Senior Nail Artist',spec:'Acrylic Sculpting & Stiletto',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[348,349,350,351,352,353]},
+  {name:'Specialist 10',role:'Nail Technician',spec:'Classic Manicure & Waxing',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[354,355,356,357,358,359]},
+  {name:'Specialist 11',role:'Senior Nail Artist',spec:'Nail Jewels & Embellishments',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[360,361,362,363,364,365]},
+  {name:'Specialist 12',role:'Nail Technician',spec:'Dip & Polygel Nails',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[366,367,368,369,370,371]},
+  {name:'Specialist 13',role:'Senior Nail Artist',spec:'Floral Art & Watercolor Nails',badge:'Senior',bg:'fce4ec',fg:'e91e8c',seeds:[372,373,374,375,376,377]},
+  {name:'Specialist 14',role:'Nail Technician',spec:'Pedicure & Foot Care',badge:'',bg:'f9a8c9',fg:'c2185b',seeds:[378,379,380,381,382,383]}
+];
+
+const allImgs=[];
+const grid=document.getElementById('specGrid');
+
+specialists.forEach((sp,si)=>{
+  const galImgs=sp.seeds.map(s=>`https://picsum.photos/seed/${s}/300/300`);
+  galImgs.forEach(u=>allImgs.push(u));
+  const baseIdx=si*6;
+
+  const card=document.createElement('div');
+  card.className='sc rv';
+  card.style.transitionDelay=(si*.06)+'s';
+  card.innerHTML=`
+    <div class="sc-top">
+      <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(sp.name)}&background=${sp.bg}&color=${sp.fg}&size=400&bold=true" alt="${sp.name}" loading="lazy">
+      ${sp.badge?`<span class="sc-badge">${sp.badge}</span>`:''}
+    </div>
+    <div class="sc-body">
+      <h3>${sp.name}</h3>
+      <span class="sc-role">${sp.role}</span>
+      <p class="sc-spec">Specialty: ${sp.spec}</p>
+      <div class="sc-gal">
+        ${galImgs.map((u,i)=>`<img src="${u}" alt="Work sample ${i+1}" loading="lazy" onclick="event.stopPropagation();lbxOpen(${baseIdx+i})">`).join('')}
+      </div>
+    </div>`;
+  grid.appendChild(card);
+});
+
+// SCROLL REVEAL
+const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+// LIGHTBOX
+let lbxIdx=0;
+function lbxOpen(i){lbxIdx=i;document.getElementById('lbx-img').src=allImgs[i];document.getElementById('lbx').classList.add('on');document.body.style.overflow='hidden'}
+function lbxClose(){document.getElementById('lbx').classList.remove('on');document.body.style.overflow=''}
+function lbxNav(d){lbxIdx=(lbxIdx+d+allImgs.length)%allImgs.length;document.getElementById('lbx-img').src=allImgs[lbxIdx]}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lbxClose();if(e.key==='ArrowLeft')lbxNav(-1);if(e.key==='ArrowRight')lbxNav(1)});
+
+// MOBILE MENU
+function toggleMenu(){document.getElementById('mobMenu').classList.toggle('on');document.getElementById('mobOv').classList.toggle('on');document.body.style.overflow=document.getElementById('mobMenu').classList.contains('on')?'hidden':''}
+
+// CHATBOT
+let chatOpen=false;
+setTimeout(()=>{if(!chatOpen){document.getElementById('cwin').classList.add('on');chatOpen=true}},2000);
+function toggleChat(){chatOpen=!chatOpen;document.getElementById('cwin').classList.toggle('on',chatOpen)}
+function closeChat(){chatOpen=false;document.getElementById('cwin').classList.remove('on')}
+function botMsg(t){const m=document.getElementById('cmsgs');const d=document.createElement('div');d.className='mb';d.innerHTML=t;m.appendChild(d);m.scrollTop=9999}
+function usrMsg(t){const m=document.getElementById('cmsgs');const d=document.createElement('div');d.className='mu';d.textContent=t;m.appendChild(d);m.scrollTop=9999}
+function resetQrs(){document.getElementById('qrs').innerHTML='<button class="qr" onclick="qr(\'book\')">Book Appointment</button><button class="qr" onclick="qr(\'svc\')">View Services</button><button class="qr" onclick="qr(\'hrs\')">Hours & Location</button>'}
+function qr(t){
+  document.getElementById('qrs').innerHTML='';
+  if(t==='book'){usrMsg('Book an appointment');setTimeout(()=>{botMsg('Head over to our <a href="index.html#contact">booking form</a>, or call us at <a href="tel:9288556425">(928) 855-6425</a>.');resetQrs()},500)}
+  else if(t==='svc'){usrMsg('View Services');setTimeout(()=>{botMsg('See our full menu on the <a href="services.html">services page</a>.');resetQrs()},500)}
+  else if(t==='hrs'){usrMsg('Hours & Location');setTimeout(()=>{botMsg('2120 McCulloch Blvd N, Suite 103, Lake Havasu City, AZ<br>Mon–Sat: 9 AM – 7 PM · Sun: 10 AM – 5 PM<br><a href="tel:9288556425">(928) 855-6425</a>');resetQrs()},500)}
+}
+function sendMsg(){const i=document.getElementById('cinp');const t=i.value.trim();if(!t)return;usrMsg(t);i.value='';setTimeout(()=>{botMsg("Thanks! For fastest service call <a href='tel:9288556425'>(928) 855-6425</a>");resetQrs()},700)}
+</script>
+</body>
+</html>

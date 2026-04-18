@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book an Appointment — Nail Nook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pl: #fff0f6;
+  --pm: #fce4ec;
+  --pp: #f9a8c9;
+  --pa: #e91e8c;
+  --pad: #c2185b;
+  --ch: #1e1e1e;
+  --chl: #555;
+  --wh: #fff;
+  --bd: rgba(249,168,201,0.25);
+  --fd: 'Playfair Display', serif;
+  --fb: 'Lato', sans-serif;
+  --rf: 999px;
+  --tr: .3s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--fb);color:var(--ch);background:var(--wh);display:flex;flex-direction:column}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{flex-shrink:0;position:sticky;top:0;z-index:900;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);padding:0 5vw;height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:9px;font-family:var(--fd);font-size:1.35rem;font-weight:700;color:var(--ch)}
+.logo svg{width:26px;height:26px;flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;color:var(--chl);position:relative;transition:color var(--tr)}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--pa);transition:width var(--tr)}
+.nav-links a:hover{color:var(--pa)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--pa)!important;color:#fff!important;padding:9px 22px;border-radius:var(--rf);font-weight:700}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--pad)!important;transform:translateY(-1px);box-shadow:0 4px 16px rgba(233,30,140,.35)!important}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
+.ham span{display:block;width:24px;height:2px;background:var(--ch);border-radius:2px;transition:var(--tr)}
+.mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1800}
+.mob-overlay.on{display:block}
+.mob-menu{position:fixed;top:0;right:-100%;width:78vw;max-width:310px;height:100vh;background:#fff;z-index:1900;padding:72px 36px;display:flex;flex-direction:column;gap:28px;box-shadow:-20px 0 60px rgba(0,0,0,.12);transition:right .4s cubic-bezier(.4,0,.2,1)}
+.mob-menu.on{right:0}
+.mob-menu a{font-family:var(--fd);font-size:1.4rem;color:var(--ch);border-bottom:1px solid var(--pm);padding-bottom:14px}
+.mob-close{position:absolute;top:18px;right:18px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ch)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border-radius:var(--rf);font-family:var(--fb);font-size:.92rem;font-weight:700;cursor:pointer;transition:all var(--tr);text-decoration:none}
+.btn-p{background:var(--pa);color:#fff}
+.btn-p:hover{background:var(--pad);transform:translateY(-2px);box-shadow:0 8px 28px rgba(233,30,140,.35)}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .ham{display:flex}
+}
+
+/* BOOKING IFRAME */
+.booking-wrap{flex:1;display:flex;flex-direction:column;min-height:0}
+.booking-iframe{flex:1;width:100%;border:none;background:#f9f9f9}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="logo">
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="1" width="8" height="5" rx="2.5" fill="#e91e8c"/>
+      <path d="M8 6h12l2.5 20H5.5L8 6z" fill="#f9a8c9"/>
+      <path d="M8 6h12l1.2 9H6.8L8 6z" fill="#e91e8c" opacity=".55"/>
+      <rect x="9.5" y="2.5" width="9" height="2" rx="1" fill="#c2185b"/>
+    </svg>
+    Nail Nook
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="team.html">Our Team</a></li>
+    <li><a href="services.html#contact">Contact</a></li>
+    <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="ham" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-overlay" id="mobOv" onclick="toggleMenu()"></div>
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="toggleMenu()">✕</button>
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="team.html" onclick="toggleMenu()">Our Team</a>
+  <a href="services.html#contact" onclick="toggleMenu()">Contact</a>
+  <a href="booking.html" class="btn btn-p" style="text-align:center" onclick="toggleMenu()">Book Now</a>
+</div>
+
+<div class="booking-wrap">
+  <iframe
+    class="booking-iframe"
+    src="http://localhost:3000"
+    title="Book an Appointment at Nail Nook"
+    allow="payment"
+  ></iframe>
+</div>
+
+<script>
+function toggleMenu(){
+  document.getElementById('mobMenu').classList.toggle('on');
+  document.getElementById('mobOv').classList.toggle('on');
+}
+</script>
+</body>
+</html>

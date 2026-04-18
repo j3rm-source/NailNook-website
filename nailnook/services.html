@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services & Pricing — Nail Nook Lake Havasu City</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{--pl:#fff0f6;--pm:#fce4ec;--pp:#f9a8c9;--pa:#e91e8c;--pad:#c2185b;--ch:#1e1e1e;--chl:#555;--wh:#fff;--bd:rgba(249,168,201,.25);--fd:'Playfair Display',serif;--fb:'Lato',sans-serif;--r:12px;--rf:999px;--sh:0 8px 32px rgba(233,30,140,.13);--shh:0 20px 60px rgba(233,30,140,.18);--tr:.3s cubic-bezier(.4,0,.2,1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);color:var(--ch);background:var(--wh);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:900;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);padding:0 5vw;height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:9px;font-family:var(--fd);font-size:1.35rem;font-weight:700;color:var(--ch)}
+.logo svg{width:26px;height:26px;flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;color:var(--chl);position:relative;transition:color var(--tr)}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--pa);transition:width var(--tr)}
+.nav-links a:hover{color:var(--pa)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--pa)!important;color:#fff!important;padding:9px 22px;border-radius:var(--rf);font-weight:700}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--pad)!important;transform:translateY(-1px);box-shadow:0 4px 16px rgba(233,30,140,.35)!important}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
+.ham span{display:block;width:24px;height:2px;background:var(--ch);border-radius:2px}
+.mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1800}
+.mob-overlay.on{display:block}
+.mob-menu{position:fixed;top:0;right:-100%;width:78vw;max-width:310px;height:100vh;background:#fff;z-index:1900;padding:72px 36px;display:flex;flex-direction:column;gap:28px;box-shadow:-20px 0 60px rgba(0,0,0,.12);transition:right .4s cubic-bezier(.4,0,.2,1)}
+.mob-menu.on{right:0}
+.mob-menu a{font-family:var(--fd);font-size:1.4rem;color:var(--ch);border-bottom:1px solid var(--pm);padding-bottom:14px}
+.mob-close{position:absolute;top:18px;right:18px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ch)}
+
+/* PAGE HERO */
+.page-hero{padding:100px 5vw 80px;background:linear-gradient(160deg,#fff5f9 0%,var(--pm) 50%,#fff0f6 100%);text-align:center;position:relative;overflow:hidden}
+.page-hero::before,.page-hero::after{content:'';position:absolute;border-radius:50%;filter:blur(60px);z-index:0}
+.page-hero::before{width:340px;height:340px;background:radial-gradient(circle,rgba(233,30,140,.22),transparent 70%);top:-80px;right:-80px;animation:float1 9s ease-in-out infinite}
+.page-hero::after{width:280px;height:280px;background:radial-gradient(circle,rgba(249,168,201,.35),transparent 70%);bottom:-80px;left:-60px;animation:float1 11s ease-in-out infinite reverse}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-16px) scale(1.08)}}
+.page-hero>*{position:relative;z-index:1}
+.pg-title em{font-style:italic;color:var(--pa);position:relative;white-space:nowrap}
+.pg-title em::after{content:'';position:absolute;left:0;right:0;bottom:2px;height:10px;background:rgba(249,168,201,.4);z-index:-1;border-radius:3px}
+.lbl{font-size:.73rem;letter-spacing:.25em;text-transform:uppercase;color:var(--pa);font-weight:700;margin-bottom:10px;display:inline-flex;align-items:center;gap:10px}
+.lbl::before,.lbl::after{content:'';width:24px;height:1px;background:var(--pa);display:inline-block}
+.pg-title{font-family:var(--fd);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;color:var(--ch);line-height:1.12;margin-bottom:16px}
+.pg-sub{font-size:1rem;color:var(--chl);max-width:500px;margin:0 auto;line-height:1.7}
+.pg-stats{display:flex;justify-content:center;gap:44px;margin-top:36px;flex-wrap:wrap}
+.pg-stat{display:flex;flex-direction:column;align-items:center}
+.pg-stat b{font-family:var(--fd);font-size:2rem;color:var(--pa);line-height:1}
+.pg-stat span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--chl);margin-top:5px}
+
+/* SERVICES NAV PILLS */
+.svc-pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:32px 5vw 0;position:sticky;top:68px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);z-index:800;padding-bottom:16px;border-bottom:1px solid var(--bd)}
+.pill{padding:7px 18px;border-radius:var(--rf);border:1px solid var(--bd);font-size:.82rem;font-weight:700;color:var(--chl);cursor:pointer;transition:all var(--tr);background:#fff;text-decoration:none;display:inline-block}
+.pill:hover,.pill.active{background:var(--pa);color:#fff;border-color:var(--pa)}
+
+/* SERVICE SECTIONS */
+.svc-section{padding:90px 5vw;border-bottom:1px solid var(--bd);position:relative;overflow:hidden}
+.svc-section:last-of-type{border-bottom:none}
+.svc-section:nth-child(even){background:var(--pl)}
+.svc-section::before{content:'';position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(249,168,201,.18),transparent 70%);top:-200px;right:-150px;z-index:0;pointer-events:none}
+.svc-section:nth-child(even)::before{left:-150px;right:auto;background:radial-gradient(circle,rgba(233,30,140,.09),transparent 70%)}
+.svc-inner{display:grid;gap:48px;max-width:1100px;margin:0 auto;position:relative;z-index:1}
+@media(min-width:768px){.svc-inner{grid-template-columns:1fr 1fr;align-items:center}}
+@media(min-width:768px){.svc-section:nth-child(even) .svc-inner{direction:rtl}}
+@media(min-width:768px){.svc-section:nth-child(even) .svc-inner>*{direction:ltr}}
+.svc-img{border-radius:18px;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(233,30,140,.18)}
+.svc-img::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.35));z-index:1;pointer-events:none}
+.svc-img::after{content:'';position:absolute;inset:0;border-radius:18px;border:1px solid rgba(255,255,255,.2);z-index:2;pointer-events:none}
+.svc-img img{width:100%;height:380px;object-fit:cover;transition:transform .7s ease}
+.svc-img:hover img{transform:scale(1.07)}
+.svc-img-label{position:absolute;bottom:18px;left:18px;background:rgba(255,255,255,.96);color:var(--pa);padding:8px 18px;border-radius:var(--rf);font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;z-index:2;backdrop-filter:blur(8px);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.svc-content{}
+.svc-icon-big{font-family:var(--fd);font-size:1.25rem;font-weight:700;color:var(--pa);width:68px;height:68px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--pm),#fff);border-radius:50%;margin-bottom:20px;box-shadow:0 8px 24px rgba(233,30,140,.2);position:relative;letter-spacing:.03em}
+.svc-icon-big::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px dashed var(--pp);opacity:.5}
+.svc-title{font-family:var(--fd);font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;color:var(--ch);margin-bottom:14px;line-height:1.2;position:relative;display:inline-block}
+.svc-title::after{content:'';display:block;width:50px;height:3px;background:linear-gradient(90deg,var(--pa),var(--pp));border-radius:3px;margin-top:10px}
+.svc-desc{font-size:.96rem;color:var(--chl);line-height:1.8;margin-bottom:28px}
+.price-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(233,30,140,.12);background:#fff}
+.price-table thead{background:linear-gradient(135deg,var(--pa),var(--pad));color:#fff}
+.price-table thead th{padding:14px 20px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;text-align:left;font-weight:700}
+.price-table tbody tr{border-bottom:1px solid var(--bd);transition:all var(--tr);position:relative}
+.price-table tbody tr:last-child{border-bottom:none}
+.price-table tbody tr:hover{background:var(--pl);transform:scale(1.01)}
+.price-table td{padding:14px 20px;font-size:.93rem;color:var(--ch)}
+.price-table td:last-child{font-weight:700;color:var(--pa);text-align:right;white-space:nowrap;font-family:var(--fd);font-size:1.05rem}
+.price-table tr.pop td:first-child::before{content:'★ POPULAR';display:inline-block;background:linear-gradient(135deg,var(--pa),var(--pad));color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.08em;padding:3px 9px;border-radius:var(--rf);margin-right:10px;vertical-align:middle}
+.price-note{font-size:.78rem;color:var(--chl);margin-top:14px;font-style:italic;display:flex;align-items:center;gap:6px}
+.price-note::before{content:'—';font-style:normal;color:var(--pa);font-weight:700}
+
+/* CONTACT / BOOKING STRIP */
+.booking-strip{background:linear-gradient(135deg,var(--pa),var(--pad));color:#fff;padding:60px 5vw;text-align:center}
+.booking-strip h2{font-family:var(--fd);font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:12px}
+.booking-strip p{font-size:1rem;opacity:.9;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.65}
+.btn-w{display:inline-block;padding:13px 34px;border-radius:var(--rf);background:#fff;color:var(--pa);font-weight:700;font-size:.95rem;border:2px solid #fff;transition:all var(--tr)}
+.btn-w:hover{background:transparent;color:#fff;transform:translateY(-2px)}
+
+/* CONTACT FORM */
+.contact-sec{padding:70px 5vw;background:var(--pl)}
+.contact-grid{display:grid;gap:48px;max-width:1000px;margin:0 auto}
+@media(min-width:768px){.contact-grid{grid-template-columns:1fr 1fr;align-items:start}}
+.sec-title{font-family:var(--fd);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--ch);margin-bottom:12px}
+.sec-sub{font-size:.95rem;color:var(--chl);line-height:1.72;margin-bottom:28px}
+.cd{display:flex;gap:12px;margin-bottom:16px;align-items:flex-start}
+.cd-icon{flex-shrink:0;width:22px;height:22px;margin-top:2px;color:var(--pa)}
+.cd-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cd-text h4{font-weight:700;font-size:.86rem;margin-bottom:3px}
+.cd-text p,.cd-text a{font-size:.86rem;color:var(--chl);line-height:1.55}
+.cd-text a:hover{color:var(--pa)}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:.82rem;font-weight:700;letter-spacing:.05em;margin-bottom:7px}
+.fg input,.fg select,.fg textarea{width:100%;padding:11px 15px;border:1px solid var(--bd);border-radius:8px;font-family:var(--fb);font-size:.93rem;color:var(--ch);background:#fff;transition:border-color var(--tr),box-shadow var(--tr);outline:none;appearance:none;-webkit-appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--pa);box-shadow:0 0 0 3px rgba(233,30,140,.1)}
+.fg textarea{resize:vertical;min-height:90px}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f-sub{width:100%;padding:13px;background:var(--pa);color:#fff;border:none;border-radius:var(--rf);font-family:var(--fb);font-size:.97rem;font-weight:700;letter-spacing:.04em;cursor:pointer;transition:all var(--tr)}
+.f-sub:hover{background:var(--pad);transform:translateY(-2px);box-shadow:0 8px 24px rgba(233,30,140,.35)}
+
+/* FOOTER */
+.footer{background:#1a1a1a;color:rgba(255,255,255,.78);padding:60px 5vw 28px}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:38px;margin-bottom:44px}
+.f-logo{font-family:var(--fd);font-size:1.45rem;color:#fff;margin-bottom:10px}
+.f-tag{font-size:.84rem;line-height:1.65;opacity:.65}
+.footer h4{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pp);margin-bottom:14px;font-weight:700}
+.f-links{list-style:none}
+.f-links li{margin-bottom:9px}
+.f-links a{font-size:.88rem;opacity:.65;transition:opacity var(--tr)}
+.f-links a:hover{opacity:1;color:var(--pp)}
+.f-hrs p{font-size:.88rem;opacity:.65;line-height:1.8}
+.f-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.f-copy{font-size:.78rem;opacity:.45}
+.socials{display:flex;gap:13px}
+.soc{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:all var(--tr)}
+.soc svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.soc{color:rgba(255,255,255,.78)}
+.soc:hover{border-color:var(--pp);background:rgba(249,168,201,.12);color:var(--pp)}
+
+/* CHATBOT */
+.cw{position:fixed;bottom:22px;right:22px;z-index:5000}
+.cb{width:58px;height:58px;background:var(--pa);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(233,30,140,.42);transition:all var(--tr);position:relative;color:#fff}
+.cb svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cb:hover{transform:scale(1.1)}
+.cwin{position:absolute;bottom:74px;right:0;width:335px;max-width:calc(100vw - 44px);background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.16);overflow:hidden;display:none;flex-direction:column;max-height:480px}
+.cwin.on{display:flex}
+.ch2{background:linear-gradient(135deg,var(--pa),var(--pad));color:#fff;padding:15px 18px;display:flex;align-items:center;justify-content:space-between}
+.ch2-info{display:flex;align-items:center;gap:11px}
+.cav{width:34px;height:34px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:.85rem;font-weight:700;letter-spacing:.5px}
+.ch2-text h4{font-size:.92rem;font-weight:700}
+.ch2-text span{font-size:.72rem;opacity:.85}
+.cx{background:none;border:none;color:#fff;font-size:1.15rem;cursor:pointer;opacity:.8}
+.cmsgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:11px}
+.mb,.mu{max-width:86%;padding:9px 13px;border-radius:15px;font-size:.855rem;line-height:1.52}
+.mb{background:var(--pl);border-bottom-left-radius:3px;align-self:flex-start;color:var(--ch)}
+.mb a{color:var(--pa);font-weight:700}
+.mu{background:var(--pa);color:#fff;border-bottom-right-radius:3px;align-self:flex-end}
+.qrs{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 14px}
+.qr{background:#fff;border:1px solid var(--pp);color:var(--pa);padding:5px 13px;border-radius:var(--rf);font-size:.78rem;font-weight:700;cursor:pointer;transition:all var(--tr);font-family:var(--fb)}
+.qr:hover{background:var(--pa);border-color:var(--pa);color:#fff}
+.c-inp-area{padding:11px 14px;border-top:1px solid var(--bd);display:flex;gap:8px}
+.c-inp{flex:1;padding:8px 12px;border:1px solid var(--bd);border-radius:var(--rf);font-family:var(--fb);font-size:.855rem;outline:none;background:var(--pl)}
+.c-inp:focus{border-color:var(--pa)}
+.c-send{background:var(--pa);color:#fff;border:none;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.85rem;flex-shrink:0}
+.c-send:hover{background:var(--pad)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.rv{opacity:0;transform:translateY(32px);transition:opacity .65s ease,transform .65s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+.btn{display:inline-block;padding:13px 34px;border-radius:var(--rf);font-weight:700;font-size:.93rem;cursor:pointer;border:2px solid var(--pa);transition:all var(--tr)}
+.btn-p{background:var(--pa);color:#fff}
+.btn-p:hover{background:var(--pad);transform:translateY(-2px);box-shadow:0 8px 24px rgba(233,30,140,.35)}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .ham{display:flex}
+  .fg-row{grid-template-columns:1fr}
+  .pg-title{font-size:2.1rem}
+  .svc-pills{top:68px;padding:12px 5vw}
+  .svc-inner{grid-template-columns:1fr!important;direction:ltr!important}
+  .svc-img img{height:220px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="logo">
+    <svg viewBox="0 0 28 28" fill="none"><rect x="10" y="1" width="8" height="5" rx="2.5" fill="#e91e8c"/><path d="M8 6h12l2.5 20H5.5L8 6z" fill="#f9a8c9"/><path d="M8 6h12l1.2 9H6.8L8 6z" fill="#e91e8c" opacity=".55"/><rect x="9.5" y="2.5" width="9" height="2" rx="1" fill="#c2185b"/></svg>
+    Nail Nook
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="team.html">Our Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="ham" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-overlay" id="mobOv" onclick="toggleMenu()"></div>
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="toggleMenu()">✕</button>
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="team.html" onclick="toggleMenu()">Our Team</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="booking.html" class="btn btn-p" style="text-align:center" onclick="toggleMenu()">Book Now</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <span class="lbl" style="animation:fadeUp .7s ease both">Full Service Menu</span>
+  <h1 class="pg-title" style="animation:fadeUp .7s .15s ease both">Services & <em>Pricing</em></h1>
+  <p class="pg-sub" style="animation:fadeUp .7s .3s ease both">Everything you need for stunning nails, all under one roof. Transparent pricing, expert care.</p>
+  <div class="pg-stats" style="animation:fadeUp .7s .45s ease both">
+    <div class="pg-stat"><b>14</b><span>Specialists</span></div>
+    <div class="pg-stat"><b>7</b><span>Services</span></div>
+    <div class="pg-stat"><b>500+</b><span>5-star reviews</span></div>
+  </div>
+</div>
+
+<!-- PILL NAV -->
+<div class="svc-pills">
+  <a href="#manicure" class="pill">Manicure</a>
+  <a href="#pedicure" class="pill">Pedicure</a>
+  <a href="#acrylic" class="pill">Acrylic</a>
+  <a href="#gel" class="pill">Gel Extensions</a>
+  <a href="#dip" class="pill">Dip Powder</a>
+  <a href="#art" class="pill">Nail Art</a>
+  <a href="#waxing" class="pill">Waxing</a>
+</div>
+
+<!-- MANICURE -->
+<div class="svc-section" id="manicure">
+  <div class="svc-inner rv">
+    <div class="svc-img">
+      <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=700&h=500&fit=crop&auto=format" alt="Manicure" loading="lazy">
+      <span class="svc-img-label">Manicure</span>
+    </div>
+    <div class="svc-content">
+      <span class="svc-icon-big">01</span>
+      <h2 class="svc-title">Manicure</h2>
+      <p class="svc-desc">Our manicure services range from a classic shape-and-polish to a full spa experience. All manicures include nail shaping, cuticle care, hand massage, and your choice of polish. Gel options provide up to 3 weeks of chip-free color.</p>
+      <table class="price-table">
+        <thead><tr><th>Service</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr><td>Classic Manicure</td><td>$25</td></tr>
+          <tr class="pop"><td>Gel Manicure</td><td>$40</td></tr>
+          <tr><td>Spa Manicure</td><td>$45</td></tr>
+          <tr><td>Gel Removal</td><td>$10</td></tr>
+        </tbody>
+      </table>
+      <p class="price-note">* Prices may vary based on nail length and condition.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PEDICURE -->
+<div class="svc-section" id="pedicure">
+  <div class="svc-inner rv">
+    <div class="svc-img">
+      <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=700&h=500&fit=crop&auto=format" alt="Pedicure" loading="lazy">
+      <span class="svc-img-label">Pedicure</span>
+    </div>
+    <div class="svc-content">
+      <span class="svc-icon-big">02</span>
+      <h2 class="svc-title">Pedicure</h2>
+      <p class="svc-desc">Treat your feet to the care they deserve. Our pedicure services include foot soak, callus removal, nail shaping, cuticle care, exfoliation, hydrating massage, and polish. Upgrade to a deluxe or spa pedicure for a truly luxurious experience.</p>
+      <table class="price-table">
+        <thead><tr><th>Service</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr><td>Classic Pedicure</td><td>$35</td></tr>
+          <tr><td>Gel Pedicure</td><td>$50</td></tr>
+          <tr class="pop"><td>Spa Pedicure</td><td>$55</td></tr>
+          <tr><td>Deluxe Pedicure</td><td>$65</td></tr>
+        </tbody>
+      </table>
+      <p class="price-note">* Add-ons available: paraffin wax +$10, callus peel +$8.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ACRYLIC -->
+<div class="svc-section" id="acrylic">
+  <div class="svc-inner rv">
+    <div class="svc-img">
+      <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=700&h=500&fit=crop&q=80&auto=format&sat=-20" alt="Acrylic Nails" loading="lazy">
+      <span class="svc-img-label">Acrylic Nails</span>
+    </div>
+    <div class="svc-content">
+      <span class="svc-icon-big">03</span>
+      <h2 class="svc-title">Acrylic Nails</h2>
+      <p class="svc-desc">Acrylic nails offer durability and versatility in one. Whether you want natural-looking extensions or dramatic stilettos, our technicians sculpt to your exact specifications. Includes shaping, filing, and your choice of gel color or polish.</p>
+      <table class="price-table">
+        <thead><tr><th>Service</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr class="pop"><td>Full Set</td><td>$55</td></tr>
+          <tr><td>Full Set with Tips</td><td>$65</td></tr>
+          <tr><td>Fill-In</td><td>$35</td></tr>
+          <tr><td>Acrylic Removal</td><td>$15</td></tr>
+        </tbody>
+      </table>
+      <p class="price-note">* Nail art, chrome, or complex shapes may incur additional charges.</p>
+    </div>
+  </div>
+</div>
+
+<!-- GEL EXTENSIONS -->
+<div class="svc-section" id="gel">
+  <div class="svc-inner rv">
+    <div class="svc-img">
+      <img src="https://images.unsplash.com/photo-1604168177401-9a78da1b4ff6?w=700&h=500&fit=crop&auto=format" alt="Gel Extensions" loading="lazy">
+      <span class="svc-img-label">Gel Extensions</span>
+    </div>
+    <div class="svc-content">
+      <span class="svc-icon-big">04</span>
+      <h2 class="svc-title">Gel Extensions</h2>
+      <p class="svc-desc">Gel extensions are the lightweight, flexible alternative to acrylics. They feel more natural and are gentler on your natural nails. Perfect for those who want length and durability without the heaviness of traditional acrylics.</p>
+      <table class="price-table">
+        <thead><tr><th>Service</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr class="pop"><td>Full Set</td><td>$65</td></tr>
+          <tr><td>Refill</td><td>$45</td></tr>
+          <tr><td>Builder Gel Full Set</td><td>$70</td></tr>
+          <tr><td>Gel Extension Removal</td><td>$15</td></tr>
+        </tbody>
+      </table>
+      <p class="price-note">* Includes gel color polish. Nail art add-ons available.</p>
+    </div>
+  </div>
+</div>
+
+<!-- DIP POWDER -->
+<div class="svc-section" id="dip">
+  <div class="svc-inner rv">
+    <div class="svc-img">
+      <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=700&h=500&fit=crop&auto=format&hue-rotate=20" alt="Dip Powder Nails" loading="lazy">
+      <span class="svc-img-label">Dip Powder</span>
+    </div>
+    <div class="svc-content">
+      <span class="svc-icon-big">05</span>
+      <h2 class="svc-title">Dip Powder</h2>
+      <p class="svc-desc">Dip powder nails are odor-free, long-lasting, and available in hundreds of stunning shades. They're stronger than gel and last up to 4–5 weeks without chipping. No UV lamp needed — just dip, seal, and go.</p>
+      <table class="price-table">
+        <thead><tr><th>Service</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr><td>Dip Manicure</td><td>$45</td></tr>
+          <tr><td>Dip with Tips</td><td>$55</td></tr>
+          <tr><td>Dip Removal</td><td>$12</td></tr>
+        </tbody>
+      </table>
+      <p class="price-note">* Available in hundreds of colors. Ombre dip available.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NAIL ART -->
+<div class="svc-section" id="art">
+  <div class="svc-inner rv">
+    <div class="svc-img">
+      <img src="https://images.unsplash.com/photo-1604168177401-9a78da1b4ff6?w=700&h=500&fit=crop&q=80&auto=format&brightness=1.1" alt="Nail Art" loading="lazy">
+      <span class="svc-img-label">Nail Art</span>
+    </div>
+    <div class="svc-content">
+      <span class="svc-icon-big">06</span>
+      <h2 class="svc-title">Nail Art</h2>
+      <p class="svc-desc">Bring your vision to life with custom nail art. From simple geometric accents to intricate hand-painted florals, chrome powder, rhinestone embellishments, and 3D designs — our artists love a creative challenge.</p>
+      <table class="price-table">
+        <thead><tr><th>Design Type</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr><td>Simple Design (per nail)</td><td>$5+</td></tr>
+          <tr><td>Complex Art (per nail)</td><td>$15+</td></tr>
+          <tr><td>Full Set Nail Art</td><td>$25+</td></tr>
+          <tr><td>Chrome / Mirror Powder</td><td>$10+</td></tr>
+          <tr><td>Rhinestones / Gems</td><td>$5+</td></tr>
+          <tr><td>3D Nail Art</td><td>$20+</td></tr>
+        </tbody>
+      </table>
+      <p class="price-note">* Pricing varies by complexity. Consult your specialist for a quote.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WAXING -->
+<div class="svc-section" id="waxing">
+  <div class="svc-inner rv">
+    <div class="svc-img">
+      <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&h=500&fit=crop&auto=format" alt="Waxing Services" loading="lazy">
+      <span class="svc-img-label">Waxing</span>
+    </div>
+    <div class="svc-content">
+      <span class="svc-icon-big">07</span>
+      <h2 class="svc-title">Waxing</h2>
+      <p class="svc-desc">Our waxing services deliver smooth, precise results using premium wax formulas gentle on sensitive skin. Perfect for quick touchups or a full facial wax before a big event. All waxing includes soothing aftercare.</p>
+      <table class="price-table">
+        <thead><tr><th>Area</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr><td>Eyebrow Wax</td><td>$15</td></tr>
+          <tr><td>Lip Wax</td><td>$10</td></tr>
+          <tr><td>Chin Wax</td><td>$10</td></tr>
+          <tr><td>Full Face Wax</td><td>$35</td></tr>
+          <tr><td>Underarm Wax</td><td>$25</td></tr>
+          <tr><td>Eyebrow Tint</td><td>$15</td></tr>
+        </tbody>
+      </table>
+      <p class="price-note">* All waxing includes soothing aftercare lotion.</p>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING STRIP -->
+<div class="booking-strip">
+  <h2>Ready to Book?</h2>
+  <p>Call us directly or fill out our booking form. We'll match you with the perfect specialist for your service.</p>
+  <a href="booking.html" class="btn-w">Book an Appointment</a>
+  &nbsp;&nbsp;
+  <a href="tel:9288556425" class="btn-w">Call (928) 855-6425</a>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div><div class="f-logo">Nail Nook</div><p class="f-tag">Luxury nail care in Lake Havasu City. Where beauty meets artistry.</p></div>
+    <div><h4>Navigate</h4><ul class="f-links"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="team.html">Our Team</a></li><li><a href="booking.html">Book Now</a></li></ul></div>
+    <div><h4>Hours</h4><p class="f-hrs">Mon – Sat: 9 AM – 7 PM<br>Sunday: 10 AM – 5 PM</p><br><h4>Contact</h4><p class="f-hrs"><a href="tel:9288556425" style="color:rgba(255,255,255,.7)">(928) 855-6425</a><br>2120 McCulloch Blvd N, Ste 103<br>Lake Havasu City, AZ 86403</p></div>
+  </div>
+  <div class="f-bottom">
+    <p class="f-copy">© 2024 Nail Nook and More · Lake Havasu City, AZ</p>
+    <div class="socials"><a href="#" class="soc" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a><a href="#" class="soc" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="#" class="soc" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M15 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M15 3c0 2.8 2.2 5 5 5"/></svg></a></div>
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<div class="cw">
+  <div class="cwin" id="cwin">
+    <div class="ch2">
+      <div class="ch2-info"><div class="cav">NN</div><div class="ch2-text"><h4>Nail Nook Assistant</h4><span>● Online now</span></div></div>
+      <button class="cx" onclick="closeChat()">✕</button>
+    </div>
+    <div class="cmsgs" id="cmsgs"><div class="mb">Hi there. Have questions about a service or pricing? I'm happy to help.</div></div>
+    <div class="qrs" id="qrs">
+      <button class="qr" onclick="qr('book')">Book Appointment</button>
+      <button class="qr" onclick="qr('prices')">Pricing Info</button>
+      <button class="qr" onclick="qr('hrs')">Hours & Location</button>
+    </div>
+    <div class="c-inp-area">
+      <input type="text" class="c-inp" id="cinp" placeholder="Type a message…" onkeypress="if(event.key==='Enter')sendMsg()">
+      <button class="c-send" onclick="sendMsg()">➤</button>
+    </div>
+  </div>
+  <div class="cb" onclick="toggleChat()"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg></div>
+</div>
+
+<script>
+// SCROLL REVEAL
+const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+// PILL ACTIVE STATE
+const pills=document.querySelectorAll('.pill');
+const sections=document.querySelectorAll('.svc-section');
+const sio=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      pills.forEach(p=>{p.classList.toggle('active',p.getAttribute('href')==='#'+id)});
+    }
+  });
+},{threshold:.4});
+sections.forEach(s=>sio.observe(s));
+
+// MOBILE MENU
+function toggleMenu(){document.getElementById('mobMenu').classList.toggle('on');document.getElementById('mobOv').classList.toggle('on');document.body.style.overflow=document.getElementById('mobMenu').classList.contains('on')?'hidden':''}
+
+// FORM
+function handleForm(e){e.preventDefault();const b=e.target.querySelector('.f-sub');b.textContent='Request Sent';b.style.background='#4caf50';setTimeout(()=>{b.textContent='Send Booking Request';b.style.background='';e.target.reset()},3500)}
+
+// CHATBOT
+let chatOpen=false;
+setTimeout(()=>{if(!chatOpen){document.getElementById('cwin').classList.add('on');chatOpen=true}},2000);
+function toggleChat(){chatOpen=!chatOpen;document.getElementById('cwin').classList.toggle('on',chatOpen)}
+function closeChat(){chatOpen=false;document.getElementById('cwin').classList.remove('on')}
+function botMsg(t){const m=document.getElementById('cmsgs');const d=document.createElement('div');d.className='mb';d.innerHTML=t;m.appendChild(d);m.scrollTop=9999}
+function usrMsg(t){const m=document.getElementById('cmsgs');const d=document.createElement('div');d.className='mu';d.textContent=t;m.appendChild(d);m.scrollTop=9999}
+function resetQrs(){document.getElementById('qrs').innerHTML='<button class="qr" onclick="qr(\'book\')">Book Appointment</button><button class="qr" onclick="qr(\'prices\')">Pricing Info</button><button class="qr" onclick="qr(\'hrs\')">Hours & Location</button>'}
+function qr(t){
+  document.getElementById('qrs').innerHTML='';
+  if(t==='book'){usrMsg('Book an appointment');setTimeout(()=>{botMsg('Scroll down to our booking form, or call us at <a href="tel:9288556425">(928) 855-6425</a>.');resetQrs()},500)}
+  else if(t==='prices'){usrMsg('Pricing info');setTimeout(()=>{botMsg('Manicure from $25 · Pedicure from $35 · Acrylic from $55 · Gel Extensions from $65 · Dip from $45 · Nail Art from $5 · Waxing from $10. Scroll up to see full menus!');resetQrs()},500)}
+  else if(t==='hrs'){usrMsg('Hours & Location');setTimeout(()=>{botMsg('2120 McCulloch Blvd N, Suite 103, Lake Havasu City, AZ<br>Mon–Sat: 9 AM – 7 PM · Sun: 10 AM – 5 PM<br><a href="tel:9288556425">(928) 855-6425</a>');resetQrs()},500)}
+}
+function sendMsg(){const i=document.getElementById('cinp');const t=i.value.trim();if(!t)return;usrMsg(t);i.value='';setTimeout(()=>{botMsg("Great question. For the fastest answer, call us at <a href='tel:9288556425'>(928) 855-6425</a>.");resetQrs()},700)}
+</script>
+</body>
+</html>
