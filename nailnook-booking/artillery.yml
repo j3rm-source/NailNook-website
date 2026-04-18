@@ -1,0 +1,76 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    # Warm up — 5 users over 30s
+    - duration: 30
+      arrivalRate: 5
+      name: "Warm up"
+    # Ramp up — climb to 20 concurrent users over 60s
+    - duration: 60
+      arrivalRate: 5
+      rampTo: 20
+      name: "Ramp up"
+    # Peak load — hold 20 concurrent users for 60s
+    - duration: 60
+      arrivalRate: 20
+      name: "Peak load"
+
+scenarios:
+  # Scenario 1: Customer browses and books (most common flow)
+  - name: "Full booking flow"
+    weight: 70
+    flow:
+      - get:
+          url: "/"
+          expect:
+            - statusCode: 200
+      - get:
+          url: "/api/services"
+          expect:
+            - statusCode: 200
+      - get:
+          url: "/api/staff"
+          expect:
+            - statusCode: 200
+      - get:
+          url: "/api/timeslots?staffId=aaaaaaaa-0000-0000-0000-000000000002&date=2026-05-01"
+      - post:
+          url: "/api/bookings"
+          json:
+            staffId: "aaaaaaaa-0000-0000-0000-000000000002"
+            serviceId: "bbbbbbbb-0000-0000-0000-000000000001"
+            customerName: "Test Customer"
+            customerPhone: "+19285551234"
+            customerEmail: "test@example.com"
+            bookingDate: "2026-05-01"
+            bookingTime: "10:00"
+
+  # Scenario 2: Customer just browses services (window shopping)
+  - name: "Browse only"
+    weight: 20
+    flow:
+      - get:
+          url: "/"
+          expect:
+            - statusCode: 200
+      - get:
+          url: "/api/services"
+          expect:
+            - statusCode: 200
+      - get:
+          url: "/api/staff"
+          expect:
+            - statusCode: 200
+
+  # Scenario 3: Staff login check
+  - name: "Staff login"
+    weight: 10
+    flow:
+      - get:
+          url: "/staff/login"
+          expect:
+            - statusCode: 200
+      - post:
+          url: "/api/auth/login"
+          json:
+            pin: "1111"

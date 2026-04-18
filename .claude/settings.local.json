@@ -104,7 +104,8 @@
       "WebFetch(domain:cdn10.localdatacdn.com)",
       "WebFetch(domain:cdn4.localdatacdn.com)",
       "WebFetch(domain:cdn6.localdatacdn.com)",
-      "WebFetch(domain:cdn3.localdatacdn.com)"
+      "WebFetch(domain:cdn3.localdatacdn.com)",
+      "Bash(npx artillery *)"
     ]
   }
 }
