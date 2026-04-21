@@ -16,9 +16,6 @@ Each skill = `SKILL.md` (intent + process) + `scripts/` folder. Skills are self-
 **Layer 2 — Orchestration**
 That's you. Your job: read the right SKILL.md, run bundled scripts in the right order, route between skills, and update them when you learn something new.
 
-**Layer 3 — Cloud Webhooks** (`execution/`)
-Modal webhook infrastructure for event-driven execution. Only required if deploying webhooks — deploy with `modal deploy execution/modal_webhook.py`.
-
 ## Skills
 
 | Skill | Trigger |
@@ -40,7 +37,7 @@ Run scripts from the project root (the directory containing this CLAUDE.md):
 python3 skills/scrape-leads/scripts/scrape_apify.py --query "Plumbers" --location "Texas" --max_items 25 --output .tmp/test.json
 ```
 
-## Subagents (`.claude/Agents/`)
+## Subagents (`Agents/`)
 
 Three subagents, each with a self-contained context. All are **read-only reporters** — they never modify files. The parent agent applies all fixes.
 
@@ -70,21 +67,20 @@ Launch Claude Code from the project root (the directory containing this CLAUDE.m
 pip install -r requirements.txt
 ```
 
-Edit `.env` in the project root with the keys you need (see Environment Variables below).
+Edit `.env` in the project root with the keys you need.
 
 ## File Layout
 
 ```
-skills/         # Skills (SKILL.md + scripts/) — each skill is self-contained
-Agents/         # Subagent definitions (code-reviewer, qa, research)
-rules/          # Modular rule files (loaded automatically by Claude Code)
-nailnook/       # Static HTML/CSS site for NailNook client — edit directly, no build step
-execution/      # Modal webhook infrastructure (deploy only when needed)
-.tmp/           # Temporary intermediates — never commit
-.env            # API keys
+skills/           # Skills (SKILL.md + scripts/) — each skill is self-contained
+Agents/           # Subagent definitions (code-reviewer, qa, research)
+rules/            # Modular rule files (loaded automatically by Claude Code)
+nailnook/         # Static HTML/CSS site for NailNook client — edit directly, no build step
+nailnook-booking/ # Next.js booking app for NailNook — separate deliverable
+Scheduale page/   # Generic Next.js booking app template — separate deliverable
+.tmp/             # Temporary intermediates — never commit
+.env              # API keys
 ```
-
-The `nailnook/` folder is a standalone deliverable — static HTML/CSS for a client site. Edit its files directly; no build step required.
 
 ## Environment Variables
 
@@ -99,24 +95,19 @@ Required keys per skill area (set in `.env`):
 - `UNSPLASH_ACCESS_KEY` — `design-website` (falls back to picsum.photos if absent)
 - Google OAuth (`credentials.json`, `token.json`) — any Sheets-writing skill
 
-## Cloud Webhooks (Modal)
+---
 
-Deploy: `modal deploy execution/modal_webhook.py`
+## NailNook Static Site (`nailnook/`)
 
-Endpoints (replace `your-modal-username`):
-- `https://your-modal-username--claude-orchestrator-list-webhooks.modal.run` — list
-- `https://your-modal-username--claude-orchestrator-directive.modal.run?slug={slug}` — execute
-- `https://your-modal-username--claude-orchestrator-test-email.modal.run` — test
-
-To add a new webhook: use the `add-webhook` skill (creates directive file → updates `execution/webhooks.json` → redeploys).
+Static HTML/CSS client site. Edit files directly — no build step. Pages: `index.html`, `booking.html`, `services.html`, `team.html`.
 
 ---
 
-## Scheduale Page (`Scheduale page/`)
+## NailNook Booking App (`nailnook-booking/`)
 
-A standalone Next.js 15 booking app (React 19, TypeScript, Tailwind, Supabase, Twilio). No relation to the skills system — it's a separate deliverable.
+A Next.js booking app for NailNook (Next.js 14, React, TypeScript, Tailwind, Supabase, Twilio). No relation to the skills system — it's a separate deliverable.
 
-### Dev commands (run from inside `Scheduale page/`)
+### Dev commands (run from inside `nailnook-booking/`)
 ```bash
 npm run dev      # start dev server on :3000
 npm run build    # production build
@@ -134,11 +125,36 @@ npm run lint     # ESLint
 ### Key types (`src/lib/types.ts`)
 `Staff`, `Service`, `Availability`, `Booking`, `TimeSlot`, `AvailableDate`, `BookingCreatePayload`
 
-### Environment variables (add to `Scheduale page/.env.local`)
+### Environment variables (add to `nailnook-booking/.env.local`)
 - `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` — client-side Supabase
 - `SUPABASE_SERVICE_ROLE_KEY` — server-side admin client (never expose to browser)
 - `TWILIO_ACCOUNT_SID` / `TWILIO_AUTH_TOKEN` / `TWILIO_PHONE_NUMBER` — SMS
-- `NEXT_PUBLIC_BUSINESS_NAME` / `NEXT_PUBLIC_BUSINESS_TAGLINE` — branding on the booking page
+- `NEXT_PUBLIC_BUSINESS_NAME` / `NEXT_PUBLIC_BUSINESS_TAGLINE` — branding
 
 ### DB schema
-Migrations live in `Scheduale page/supabase/migrations/`. Apply with the Supabase CLI or paste into the SQL editor. Seed data in `seed.sql`.
+Migrations live in `nailnook-booking/supabase/migrations/`. Seed data in `supabase/seed.sql`.
+
+---
+
+## Scheduale Page (`Scheduale page/`)
+
+A generic Next.js booking app template (Next.js 15, React 19, TypeScript, Tailwind, Supabase, Twilio). Same architecture as `nailnook-booking/` but a separate deliverable.
+
+### Dev commands (run from inside `Scheduale page/`)
+```bash
+npm run dev      # start dev server on :3000
+npm run build    # production build
+npm run lint     # ESLint
+```
+
+### Architecture
+Same pattern as `nailnook-booking/`: public booking wizard → staff portal (PIN auth) → admin panel. API routes use service-role Supabase client; browser uses anon client with RLS.
+
+### Environment variables (add to `Scheduale page/.env.local`)
+- `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `TWILIO_ACCOUNT_SID` / `TWILIO_AUTH_TOKEN` / `TWILIO_PHONE_NUMBER`
+- `NEXT_PUBLIC_BUSINESS_NAME` / `NEXT_PUBLIC_BUSINESS_TAGLINE`
+
+### DB schema
+Migrations live in `Scheduale page/supabase/migrations/`. Seed data in `seed.sql`.
