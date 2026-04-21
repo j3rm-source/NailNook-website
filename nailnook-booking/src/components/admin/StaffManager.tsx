@@ -111,6 +111,9 @@ export function StaffManager({ staff, onRefresh }: StaffManagerProps) {
             <div className="flex-1 min-w-0">
               <p className="font-medium text-gray-900 truncate">{member.name}</p>
               <p className="text-xs text-gray-400 capitalize">{member.role}</p>
+              <p className="text-xs text-gray-400">
+                {member.phone ? `📱 ${member.phone}` : '⚠️ No phone — SMS disabled'}
+              </p>
             </div>
             <div className="flex gap-2">
               <Button variant="ghost" size="sm" onClick={() => openEdit(member)}>Edit</Button>
