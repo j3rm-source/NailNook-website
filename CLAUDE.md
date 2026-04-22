@@ -21,10 +21,10 @@ That's you. Your job: read the right SKILL.md, run bundled scripts in the right 
 | Skill | Trigger |
 |-------|---------|
 | `scrape-leads` | Find leads via Apify; industry + location + count → Google Sheet |
-| `googlemaps-scraper` | Google Maps B2B scrape with website enrichment → Google Sheet |
-| `classify-leads` | LLM classification of leads (e.g. product SaaS vs agency) |
+| `googlemaps-scraper` | Google Maps B2B scrape with website enrichment → Google Sheet (~$0.012–0.022/lead) |
+| `classify-leads` | LLM classification of leads (e.g. product SaaS vs agency) (~$0.30/1,000 leads, ~2 min) |
 | `instantly-autoreply` | Auto-reply to incoming Instantly email threads via Claude |
-| `instantly-campaigns` | Create 3 cold email campaigns in Instantly with AI-written sequences |
+| `instantly-campaigns` | Create 3 cold email campaigns in Instantly with AI-written sequences (uses extended thinking) |
 | `create-proposal` | Generate PandaDoc proposal with Claude-written copy; optionally send for signing |
 | `upwork-apply` | Scrape Upwork jobs, score for fit, write tailored proposals → Markdown |
 | `onboarding-kickoff` | Full post-kickoff automation: leads → campaigns → auto-reply setup |
@@ -74,6 +74,7 @@ Edit `.env` in the project root with the keys you need.
 ```
 skills/           # Skills (SKILL.md + scripts/) — each skill is self-contained
 Agents/           # Subagent definitions (code-reviewer, qa, research)
+execution/        # Shared infrastructure: Modal webhook server, shared utilities
 rules/            # Modular rule files (loaded automatically by Claude Code)
 nailnook/         # Static HTML/CSS site for NailNook client — edit directly, no build step
 nailnook-booking/ # Next.js booking app for NailNook — separate deliverable
@@ -87,7 +88,7 @@ Scheduale page/   # Generic Next.js booking app template — separate deliverabl
 Required keys per skill area (set in `.env`):
 - `ANTHROPIC_API_KEY` — All skills
 - `APIFY_API_TOKEN` — `scrape-leads`, `googlemaps-scraper`
-- `INSTANTLY_API_KEY` — `instantly-autoreply`, `onboarding-kickoff`
+- `INSTANTLY_API_KEY` — `instantly-campaigns`, `instantly-autoreply`, `onboarding-kickoff`
 - `ANYMAILFINDER_API_KEY` — `scrape-leads` email enrichment
 - `PANDADOC_API_KEY` — `create-proposal`
 - `OPENAI_API_KEY` — embeddings in RAG-based skills
@@ -112,6 +113,7 @@ A Next.js booking app for NailNook (Next.js 14, React, TypeScript, Tailwind, Sup
 npm run dev      # start dev server on :3000
 npm run build    # production build
 npm run lint     # ESLint
+npx artillery run artillery.yml  # load test
 ```
 
 ### Architecture
@@ -119,7 +121,7 @@ npm run lint     # ESLint
 - **Staff portal** (`/staff/login`, `/staff/dashboard`) — PIN-based auth; staff view their own upcoming bookings.
 - **Admin panel** (`/admin`) — manage staff, services, availability, and all bookings.
 - **API routes** (`src/app/api/`) — all DB writes go server-side; browser uses the anon Supabase client (RLS enforced), API routes use the service-role admin client (`createAdminClient()` in `src/lib/supabase.ts`).
-- **Twilio** (`src/lib/twilio.ts`) — SMS confirmations/reminders triggered from API routes.
+- **Twilio** (`src/lib/twilio.ts`) — SMS confirmations/reminders triggered from API routes; 24-hour reminders run via a Supabase Edge Function cron.
 - **Auth** (`src/lib/auth.ts`) — session stored in a cookie; PIN is bcrypt-hashed in the DB.
 
 ### Key types (`src/lib/types.ts`)
