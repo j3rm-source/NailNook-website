@@ -127,7 +127,23 @@
       "Bash(mkdir -p \"c:\\\\Users\\\\jerem\\\\OneDrive\\\\Documents\\\\New folder\\\\.claude\\\\.claude\\\\nailnook-booking\\\\src\\\\styles\")",
       "Bash(mkdir -p \"c:\\\\Users\\\\jerem\\\\OneDrive\\\\Documents\\\\New folder\\\\.claude\\\\.claude\\\\nailnook-booking\\\\src\\\\app\\\\book\")",
       "Bash(mkdir -p \"c:\\\\Users\\\\jerem\\\\OneDrive\\\\Documents\\\\New folder\\\\.claude\\\\.claude\\\\nailnook-booking\\\\src\\\\app\\\\services\")",
-      "Bash(mkdir -p \"c:\\\\Users\\\\jerem\\\\OneDrive\\\\Documents\\\\New folder\\\\.claude\\\\.claude\\\\nailnook-booking\\\\src\\\\app\\\\team\")"
+      "Bash(mkdir -p \"c:\\\\Users\\\\jerem\\\\OneDrive\\\\Documents\\\\New folder\\\\.claude\\\\.claude\\\\nailnook-booking\\\\src\\\\app\\\\team\")",
+      "Bash(npx tsc *)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(python3 -c \"import sys,re; body=sys.stdin.read\\(\\); errs=re.findall\\(r'digest[^\\\\\"]*|error[^\\\\\"<]{0,200}', body, re.I\\); print\\('\\\\n'.join\\(errs[:20]\\)\\)\")",
+      "Bash(curl -v http://localhost:3000/)",
+      "Bash(curl -s -w \"\\\\nHTTP_STATUS:%{http_code}\" http://localhost:3000/)",
+      "Bash(curl -s http://localhost:3001/)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' http://localhost:3001__TRACKED_VAR__)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:3001/)",
+      "Bash(curl -s http://localhost:3001/services)",
+      "Bash(curl -s http://localhost:3001/team)",
+      "Bash(curl -s http://localhost:3001/book)",
+      "Bash(curl -s -X POST http://localhost:3001/api/bookings -H 'Content-Type: application/json' -d '{\"staffId\":\"00000000-0000-0000-0000-000000000001\",\"serviceId\":\"00000000-0000-0000-0000-000000000001\",\"customerName\":\"Test User\",\"customerPhone\":\"+19289628127\",\"customerEmail\":\"test@example.com\",\"bookingDate\":\"2026-05-01\",\"bookingTime\":\"10:00\"}')",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/api/auth/me)",
+      "Bash(curl -s http://localhost:3001/api/staff)"
     ]
   }
 }

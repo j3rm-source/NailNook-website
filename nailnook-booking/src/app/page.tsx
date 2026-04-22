@@ -481,7 +481,7 @@ export default function HomePage() {
       <div className="lbx" id="lbx" onClick={() => (window as any).__lbxClose?.()}>
         <button className="lbx-x">✕</button>
         <button className="lbx-nav lbx-prev" onClick={(e) => { e.stopPropagation(); (window as any).__lbxNav?.(-1) }}>‹</button>
-        <img id="lbx-img" src="" alt="Nail art"/>
+        <img id="lbx-img" src="data:," alt="Nail art"/>
         <button className="lbx-nav lbx-next" onClick={(e) => { e.stopPropagation(); (window as any).__lbxNav?.(1) }}>›</button>
       </div>
     </div>
