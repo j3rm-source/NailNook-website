@@ -73,6 +73,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
+    // Normalize to E.164 (+1XXXXXXXXXX)
+    const normalizedPhone = customerPhone.replace(/\D/g, '').replace(/^1?(\d{10})$/, '+1$1')
+
     const admin = createAdminClient()
 
     // Check slot is still available
@@ -96,7 +99,7 @@ export async function POST(request: NextRequest) {
         staff_id: staffId,
         service_id: serviceId,
         customer_name: customerName,
-        customer_phone: customerPhone,
+        customer_phone: normalizedPhone,
         customer_email: customerEmail || null,
         customer_note: customerNote || null,
         booking_date: bookingDate,
@@ -124,7 +127,7 @@ export async function POST(request: NextRequest) {
     }
 
     sendSMS(
-      customerPhone,
+      normalizedPhone,
       buildBookingConfirmationCustomerSMS(
         customerName,
         booking.service.name,
