@@ -69,6 +69,7 @@ export async function POST(request: NextRequest) {
       bookingTime,
     } = body
 
+    console.log('[DEBUG] customerPhone received:', customerPhone)
     if (!staffId || !serviceId || !customerName || !customerPhone || !bookingDate || !bookingTime) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
