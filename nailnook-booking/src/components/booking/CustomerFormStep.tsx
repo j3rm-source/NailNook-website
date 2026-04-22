@@ -66,7 +66,7 @@ export function CustomerFormStep({ initial, onSubmit, submitting }: CustomerForm
             setForm({ ...form, phone: val.startsWith('+1') ? val : '+1 ' })
           }}
           error={errors.phone}
-          autoComplete="tel"
+          autoComplete="off"
         />
         <Input
           label="Email (optional)"
