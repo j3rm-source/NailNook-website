@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 
-export default function StaffLoginPage() {
+function StaffLoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirect = searchParams.get('redirect') ?? '/staff/dashboard'
@@ -37,7 +37,7 @@ export default function StaffLoginPage() {
         return
       }
 
-      router.push(data.role === 'admin' ? '/admin' : '/staff/dashboard')
+      router.push(data.role === 'admin' ? '/admin' : redirect)
     } catch {
       setError('Network error — please try again')
     } finally {
@@ -168,5 +168,13 @@ export default function StaffLoginPage() {
         </p>
       </div>
     </div>
+  )
+}
+
+export default function StaffLoginPage() {
+  return (
+    <Suspense>
+      <StaffLoginForm />
+    </Suspense>
   )
 }

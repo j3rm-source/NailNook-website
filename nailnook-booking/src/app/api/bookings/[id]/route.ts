@@ -8,8 +8,9 @@ import {
 import { formatDateLong, formatTime } from '@/lib/utils'
 
 // PUT /api/bookings/[id] — update status (mainly cancellation)
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params
     const body = await request.json()
     const { status } = body
 
@@ -20,7 +21,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     const { data: booking, error } = await admin
       .from('bookings')
       .update({ status })
-      .eq('id', params.id)
+      .eq('id', id)
       .select(`
         *,
         staff:staff_id (id, name, phone),
