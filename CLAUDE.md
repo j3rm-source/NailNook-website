@@ -61,26 +61,22 @@ Three subagents, each with a self-contained context. All are **read-only reporte
 
 ## Setup
 
-Launch Claude Code from the project root (the directory containing this CLAUDE.md). All script paths are relative to that directory.
-
-```bash
-pip install -r requirements.txt
-```
+Launch Claude Code from the project root (the directory containing this CLAUDE.md). All script paths are relative to that directory. Each skill bundles its own dependencies — install them as needed per skill.
 
 Edit `.env` in the project root with the keys you need.
 
 ## File Layout
 
 ```
-skills/           # Skills (SKILL.md + scripts/) — each skill is self-contained
-Agents/           # Subagent definitions (code-reviewer, qa, research)
-execution/        # Shared infrastructure: Modal webhook server, shared utilities
-rules/            # Modular rule files (loaded automatically by Claude Code)
-nailnook/         # Static HTML/CSS site for NailNook client — edit directly, no build step
-nailnook-booking/ # Next.js booking app for NailNook — separate deliverable
-Scheduale page/   # Generic Next.js booking app template — separate deliverable
-.tmp/             # Temporary intermediates — never commit
-.env              # API keys
+skills/            # Skills (SKILL.md + scripts/) — each skill is self-contained
+Agents/            # Subagent definitions (code-reviewer, qa, research)
+rules/             # Modular rule files (loaded automatically by Claude Code)
+nailnook/          # Static HTML/CSS site for NailNook client — edit directly, no build step
+nailnook-booking/  # Next.js booking app for NailNook — separate deliverable
+Scheduale page/    # Generic Next.js booking app template — separate deliverable
+plumbing booking/  # Next.js booking app template for a plumbing client — separate deliverable
+.tmp/              # Temporary intermediates — never commit
+.env               # API keys
 ```
 
 ## Environment Variables
@@ -106,7 +102,7 @@ Static HTML/CSS client site. Edit files directly — no build step. Pages: `inde
 
 ## NailNook Booking App (`nailnook-booking/`)
 
-A Next.js booking app for NailNook (Next.js 14, React, TypeScript, Tailwind, Supabase, Twilio). No relation to the skills system — it's a separate deliverable.
+A Next.js booking app for NailNook (Next.js 15, React 19, TypeScript, Tailwind, Supabase, Twilio). No relation to the skills system — it's a separate deliverable.
 
 ### Dev commands (run from inside `nailnook-booking/`)
 ```bash
