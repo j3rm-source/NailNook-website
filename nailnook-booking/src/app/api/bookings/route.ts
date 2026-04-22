@@ -69,7 +69,6 @@ export async function POST(request: NextRequest) {
       bookingTime,
     } = body
 
-    console.log('[DEBUG] customerPhone received:', customerPhone)
     if (!staffId || !serviceId || !customerName || !customerPhone || !bookingDate || !bookingTime) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
@@ -121,14 +120,12 @@ export async function POST(request: NextRequest) {
     const timeFormatted = formatTime(bookingTime)
 
     if (booking.staff?.phone) {
-      console.log('[DEBUG] sending staff SMS to:', booking.staff.phone)
       sendSMS(
         booking.staff.phone,
         buildBookingConfirmationStaffSMS(customerName, booking.service.name, dateFormatted, timeFormatted)
       ).catch(console.error)
     }
 
-    console.log('[DEBUG] sending SMS to normalizedPhone:', normalizedPhone)
     sendSMS(
       normalizedPhone,
       buildBookingConfirmationCustomerSMS(
