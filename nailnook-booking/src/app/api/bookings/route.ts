@@ -121,6 +121,7 @@ export async function POST(request: NextRequest) {
     const timeFormatted = formatTime(bookingTime)
 
     if (booking.staff?.phone) {
+      console.log('[DEBUG] sending staff SMS to:', booking.staff.phone)
       sendSMS(
         booking.staff.phone,
         buildBookingConfirmationStaffSMS(customerName, booking.service.name, dateFormatted, timeFormatted)
