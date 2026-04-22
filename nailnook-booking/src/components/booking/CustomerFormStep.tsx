@@ -13,7 +13,7 @@ interface CustomerFormStepProps {
 
 export function CustomerFormStep({ initial, onSubmit, submitting }: CustomerFormStepProps) {
   const [form, setForm] = useState<CustomerInfo>(
-    initial ?? { name: '', phone: '', email: '', note: '' }
+    initial ?? { name: '', phone: '+1 ', email: '', note: '' }
   )
   const [errors, setErrors] = useState<Partial<CustomerInfo>>({})
 
@@ -59,9 +59,12 @@ export function CustomerFormStep({ initial, onSubmit, submitting }: CustomerForm
         <Input
           label="Phone Number"
           type="tel"
-          placeholder="+1 555 000 0000"
+          placeholder="+1 (928) 000-0000"
           value={form.phone}
-          onChange={(e) => setForm({ ...form, phone: e.target.value })}
+          onChange={(e) => {
+            const val = e.target.value
+            setForm({ ...form, phone: val.startsWith('+1') ? val : '+1 ' })
+          }}
           error={errors.phone}
           autoComplete="tel"
         />
