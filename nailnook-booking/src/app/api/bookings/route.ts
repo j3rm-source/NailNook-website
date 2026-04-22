@@ -127,6 +127,7 @@ export async function POST(request: NextRequest) {
       ).catch(console.error)
     }
 
+    console.log('[DEBUG] sending SMS to normalizedPhone:', normalizedPhone)
     sendSMS(
       normalizedPhone,
       buildBookingConfirmationCustomerSMS(
