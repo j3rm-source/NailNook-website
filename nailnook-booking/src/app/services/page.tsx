@@ -87,20 +87,12 @@ export default function ServicesPage() {
     }
   }, [])
 
-  const Logo = () => (
-    <svg viewBox="0 0 28 28" fill="none">
-      <rect x="10" y="1" width="8" height="5" rx="2.5" fill="#e91e8c"/>
-      <path d="M8 6h12l2.5 20H5.5L8 6z" fill="#f9a8c9"/>
-      <path d="M8 6h12l1.2 9H6.8L8 6z" fill="#e91e8c" opacity=".55"/>
-      <rect x="9.5" y="2.5" width="9" height="2" rx="1" fill="#c2185b"/>
-    </svg>
-  )
 
   return (
     <div className="mkt">
       {/* NAV */}
       <nav className="nav">
-        <Link href="/" className="logo"><Logo/>Nail Nook</Link>
+        <Link href="/" className="logo"><img src="/logo.png" alt="The Nail Nook & More" className="nav-logo-img"/></Link>
         <ul className="nav-links">
           <li><Link href="/">Home</Link></li>
           <li><Link href="/services">Services</Link></li>
@@ -129,14 +121,14 @@ export default function ServicesPage() {
         <p className="pg-sub" style={{animation:'mktFadeUp .7s .3s ease both'}}>Everything you need for stunning nails, all under one roof. Transparent pricing, expert care.</p>
         <div className="pg-stats" style={{animation:'mktFadeUp .7s .45s ease both'}}>
           <div className="pg-stat"><b>14</b><span>Specialists</span></div>
-          <div className="pg-stat"><b>7</b><span>Services</span></div>
+          <div className="pg-stat"><b>10</b><span>Services</span></div>
           <div className="pg-stat"><b>500+</b><span>5-star reviews</span></div>
         </div>
       </div>
 
       {/* PILL NAV */}
       <div className="svc-pills">
-        {[['#manicure','Manicure'],['#pedicure','Pedicure'],['#acrylic','Acrylic'],['#gel','Gel Extensions'],['#dip','Dip Powder'],['#art','Nail Art'],['#waxing','Waxing']].map(([href,label]) => (
+        {[['#manicure','Manicure'],['#pedicure','Pedicure'],['#acrylic','Acrylic'],['#gel','Gel Extensions'],['#art','Nail Art'],['#waxing','Waxing'],['#lashes','Lash Extensions'],['#permmakeup','Perm. Makeup'],['#botox','Botox'],['#massage','Massage']].map(([href,label]) => (
           <a key={href} href={href} className="pill">{label}</a>
         ))}
       </div>
@@ -145,7 +137,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="manicure">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=700&h=500&fit=crop&auto=format" alt="Manicure" loading="lazy"/>
+            <img src="/gallery/IMG_1020.JPEG" alt="Manicure" loading="lazy"/>
             <span className="svc-img-label">Manicure</span>
           </div>
           <div>
@@ -195,7 +187,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="acrylic">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=700&h=500&fit=crop&q=80&auto=format&sat=-20" alt="Acrylic Nails" loading="lazy"/>
+            <img src="/gallery/IMG_1017.JPEG" alt="Acrylic Nails" loading="lazy"/>
             <span className="svc-img-label">Acrylic Nails</span>
           </div>
           <div>
@@ -220,7 +212,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="gel">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="https://images.unsplash.com/photo-1604168177401-9a78da1b4ff6?w=700&h=500&fit=crop&auto=format" alt="Gel Extensions" loading="lazy"/>
+            <img src="/gallery/IMG_1018.JPEG" alt="Gel Extensions" loading="lazy"/>
             <span className="svc-img-label">Gel Extensions</span>
           </div>
           <div>
@@ -241,39 +233,15 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      {/* DIP POWDER */}
-      <div className="svc-section" id="dip">
-        <div className="svc-inner rv">
-          <div className="svc-detail-img">
-            <img src="https://images.unsplash.com/photo-1604902396830-aca29e19b067?w=700&h=500&fit=crop&auto=format" alt="Dip Powder Nails" loading="lazy"/>
-            <span className="svc-img-label">Dip Powder</span>
-          </div>
-          <div>
-            <span className="svc-icon-big">05</span>
-            <h2 className="svc-title">Dip Powder</h2>
-            <p className="svc-desc">Dip powder nails are odor-free, long-lasting, and available in hundreds of stunning shades. They&apos;re stronger than gel and last up to 4–5 weeks without chipping. No UV lamp needed — just dip, seal, and go.</p>
-            <table className="price-table">
-              <thead><tr><th>Service</th><th>Price</th></tr></thead>
-              <tbody>
-                <tr><td>Dip Manicure</td><td>$45</td></tr>
-                <tr><td>Dip with Tips</td><td>$55</td></tr>
-                <tr><td>Dip Removal</td><td>$12</td></tr>
-              </tbody>
-            </table>
-            <p className="price-note">Available in hundreds of colors. Ombre dip available.</p>
-          </div>
-        </div>
-      </div>
-
       {/* NAIL ART */}
       <div className="svc-section" id="art">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="https://images.unsplash.com/photo-1632345031435-8727f592d8db?w=700&h=500&fit=crop&auto=format" alt="Nail Art" loading="lazy"/>
+            <img src="/gallery/IMG_1030.JPEG" alt="Nail Art" loading="lazy"/>
             <span className="svc-img-label">Nail Art</span>
           </div>
           <div>
-            <span className="svc-icon-big">06</span>
+            <span className="svc-icon-big">05</span>
             <h2 className="svc-title">Nail Art</h2>
             <p className="svc-desc">Bring your vision to life with custom nail art. From simple geometric accents to intricate hand-painted florals, chrome powder, rhinestone embellishments, and 3D designs — our artists love a creative challenge.</p>
             <table className="price-table">
@@ -300,7 +268,7 @@ export default function ServicesPage() {
             <span className="svc-img-label">Waxing</span>
           </div>
           <div>
-            <span className="svc-icon-big">07</span>
+            <span className="svc-icon-big">06</span>
             <h2 className="svc-title">Waxing</h2>
             <p className="svc-desc">Our waxing services deliver smooth, precise results using premium wax formulas gentle on sensitive skin. Perfect for quick touchups or a full facial wax before a big event. All waxing includes soothing aftercare.</p>
             <table className="price-table">
@@ -315,6 +283,110 @@ export default function ServicesPage() {
               </tbody>
             </table>
             <p className="price-note">All waxing includes soothing aftercare lotion.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* EYELASH EXTENSIONS */}
+      <div className="svc-section" id="lashes">
+        <div className="svc-inner rv">
+          <div className="svc-detail-img">
+            <img src="/gallery/IMG_1061.JPEG" alt="Eyelash Extensions" loading="lazy"/>
+            <span className="svc-img-label">Eyelash Extensions</span>
+          </div>
+          <div>
+            <span className="svc-icon-big">07</span>
+            <h2 className="svc-title">Eyelash Extensions</h2>
+            <p className="svc-desc">Wake up every morning with full, gorgeous lashes. Our lash artists apply individual extensions for a look that ranges from natural and wispy to bold and dramatic. Long-lasting, lightweight, and completely customized to your eye shape.</p>
+            <table className="price-table">
+              <thead><tr><th>Service</th><th>Price</th></tr></thead>
+              <tbody>
+                <tr className="pop"><td>Classic Full Set</td><td>$75</td></tr>
+                <tr><td>Volume Full Set</td><td>$100</td></tr>
+                <tr><td>Mega Volume Set</td><td>$125</td></tr>
+                <tr><td>Classic Fill</td><td>$45</td></tr>
+                <tr><td>Volume Fill</td><td>$60</td></tr>
+                <tr><td>Lash Removal</td><td>$20</td></tr>
+              </tbody>
+            </table>
+            <p className="price-note">Fills recommended every 2–3 weeks to maintain fullness.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* PERMANENT MAKEUP */}
+      <div className="svc-section" id="permmakeup">
+        <div className="svc-inner rv">
+          <div className="svc-detail-img">
+            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&h=500&fit=crop&auto=format" alt="Permanent Makeup" loading="lazy"/>
+            <span className="svc-img-label">Permanent Makeup</span>
+          </div>
+          <div>
+            <span className="svc-icon-big">08</span>
+            <h2 className="svc-title">Permanent Makeup</h2>
+            <p className="svc-desc">Skip the daily routine with semi-permanent makeup that looks flawless around the clock. From microbladed brows to defined lip color and eyeliner, our technicians use precision pigmentation techniques to enhance your natural features.</p>
+            <table className="price-table">
+              <thead><tr><th>Service</th><th>Price</th></tr></thead>
+              <tbody>
+                <tr className="pop"><td>Microblading (Brows)</td><td>$200</td></tr>
+                <tr><td>Powder / Ombre Brows</td><td>$200</td></tr>
+                <tr><td>Permanent Eyeliner</td><td>$150</td></tr>
+                <tr><td>Lip Blush</td><td>$200</td></tr>
+                <tr><td>Touch-Up (within 8 weeks)</td><td>$75</td></tr>
+              </tbody>
+            </table>
+            <p className="price-note">A touch-up session 6–8 weeks after your initial appointment is recommended for best results.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* BOTOX */}
+      <div className="svc-section" id="botox">
+        <div className="svc-inner rv">
+          <div className="svc-detail-img">
+            <img src="/gallery/IMG_1054.JPEG" alt="Botox" loading="lazy"/>
+            <span className="svc-img-label">Botox</span>
+          </div>
+          <div>
+            <span className="svc-icon-big">09</span>
+            <h2 className="svc-title">Botox</h2>
+            <p className="svc-desc">Refresh your look with expertly administered cosmetic injections. Whether you want to soften forehead lines, crow&apos;s feet, or frown lines, our injector creates natural-looking results tailored to your face — never frozen, always you.</p>
+            <table className="price-table">
+              <thead><tr><th>Area</th><th>Price</th></tr></thead>
+              <tbody>
+                <tr><td>Forehead Lines</td><td>Call for pricing</td></tr>
+                <tr><td>Crow&apos;s Feet</td><td>Call for pricing</td></tr>
+                <tr><td>Frown Lines (11s)</td><td>Call for pricing</td></tr>
+                <tr className="pop"><td>Full Face Consult</td><td>Free</td></tr>
+              </tbody>
+            </table>
+            <p className="price-note">Pricing based on units used. Free consultation available — call (928) 855-6425.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* MASSAGE */}
+      <div className="svc-section" id="massage">
+        <div className="svc-inner rv">
+          <div className="svc-detail-img">
+            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=700&h=500&fit=crop&auto=format" alt="Massage" loading="lazy"/>
+            <span className="svc-img-label">Massage</span>
+          </div>
+          <div>
+            <span className="svc-icon-big">10</span>
+            <h2 className="svc-title">Massage</h2>
+            <p className="svc-desc">Unwind completely with a therapeutic massage designed to ease tension, improve circulation, and restore balance. From a quick relaxation session to a deep tissue treatment, our massage therapists customize every session to your needs.</p>
+            <table className="price-table">
+              <thead><tr><th>Service</th><th>Price</th></tr></thead>
+              <tbody>
+                <tr><td>30-Minute Relaxation</td><td>$45</td></tr>
+                <tr className="pop"><td>60-Minute Relaxation</td><td>$75</td></tr>
+                <tr><td>90-Minute Relaxation</td><td>$110</td></tr>
+                <tr><td>60-Minute Deep Tissue</td><td>$85</td></tr>
+                <tr><td>Hot Stone Add-On</td><td>$20</td></tr>
+              </tbody>
+            </table>
+            <p className="price-note">Book in advance — massage appointments fill quickly.</p>
           </div>
         </div>
       </div>

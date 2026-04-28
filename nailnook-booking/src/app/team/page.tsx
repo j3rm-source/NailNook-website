@@ -12,8 +12,7 @@ const SPECIALISTS = [
   {name:'Shannon',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-6965',badge:'',bg:'f9a8c9',fg:'c2185b'},
   {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'480-241-9972',badge:'',bg:'fce4ec',fg:'e91e8c'},
   {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b'},
-  {name:'Cathy',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-706-6177',badge:'',bg:'fce4ec',fg:'e91e8c'},
-  {name:'Amanda',role:'Hair Specialist',spec:'Hair Specialist',phone:'909-996-1121',badge:'',bg:'f9a8c9',fg:'c2185b'},
+  {name:'Kathy',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-706-6177',badge:'',bg:'fce4ec',fg:'e91e8c'},
   {name:'Kendall',role:'Restoration Med Spa',spec:'Restoration Med Spa',phone:'928-706-1575',badge:'',bg:'fce4ec',fg:'e91e8c'},
   {name:'Laura',role:'Masus',spec:'Masus',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b'},
   {name:'Shelby',role:'Waxing Specialist',spec:'Waxer',phone:'951-532-6685',badge:'',bg:'fce4ec',fg:'e91e8c'},
@@ -156,20 +155,11 @@ export default function TeamPage() {
     }
   }, [])
 
-  const Logo = () => (
-    <svg viewBox="0 0 28 28" fill="none">
-      <rect x="10" y="1" width="8" height="5" rx="2.5" fill="#e91e8c"/>
-      <path d="M8 6h12l2.5 20H5.5L8 6z" fill="#f9a8c9"/>
-      <path d="M8 6h12l1.2 9H6.8L8 6z" fill="#e91e8c" opacity=".55"/>
-      <rect x="9.5" y="2.5" width="9" height="2" rx="1" fill="#c2185b"/>
-    </svg>
-  )
-
   return (
     <div className="mkt">
       {/* NAV */}
       <nav className="nav">
-        <Link href="/" className="logo"><Logo/>Nail Nook</Link>
+        <Link href="/" className="logo"><img src="/logo.png" alt="The Nail Nook & More" className="nav-logo-img"/></Link>
         <ul className="nav-links">
           <li><Link href="/">Home</Link></li>
           <li><Link href="/services">Services</Link></li>

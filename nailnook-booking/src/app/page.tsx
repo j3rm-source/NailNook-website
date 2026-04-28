@@ -3,13 +3,115 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import '@/styles/marketing.css'
 
+const REVIEWS = [
+  // a month ago
+  {i:'AL',n:'Alison R.',t:'a month ago',q:"Great salon! Got exactly what I needed for my hair. Simple, and super cute beach waves."},
+  // 6–7 months ago
+  {i:'LF',n:'Linda F.',t:'6 months ago',q:"HIGHLY RECOMMENDED! Stephanie is amazing. She had quite a job to completely remove the old acrylic nail stuff from my nails. She was patient, gentle, and my nails have never looked better."},
+  {i:'TL',n:'Tricia L.',t:'7 months ago',q:"My tech is Kattie & she's a pro for sure. She did a hard gel full set with French manicure — OMG I'm so thrilled! Finally a tech that listens to me. She made sure everything looked FABULOUS and the place was very clean."},
+  // a year ago
+  {i:'CG',n:'Caitlin G.',t:'a year ago',q:"I can't say enough positive things about the Nail Nook! I have been getting my nails done with Stephanie for 6 years and truly look forward to every appointment. My nails last forever, never break and have remained super healthy."},
+  {i:'EP',n:'Exit Plan',t:'a year ago',q:"Rita at Nail Nook is amazing! She's not only incredibly talented but also so kind and professional. She went above and beyond to squeeze us in right before Christmas, and we couldn't be happier with the results."},
+  {i:'ML',n:'Megan L.',t:'a year ago',q:"Steph does amazing work! My nails are extremely healthy and beautiful. The atmosphere is very comfortable and clean and doesn't reek of hair product like most others. The staff is extremely welcoming — it's everything a salon should be."},
+  {i:'JS',n:'Janet S.',t:'a year ago',q:"The Nail Nook is the best full service salon in Lake Havasu! I have my nails, pedi and hair done all in one place! I've been going to Stephanie for 8 years and she is Amazing. I have also had facials, massages, and spray tans."},
+  {i:'DS',n:'Diane S.',t:'a year ago',q:"Rita Davenport gave me the best pedi I have ever had in Lake Havasu. She was gentle yet so thorough — my tootsies are in great shape. I feel so lucky to find someone who gives a great spa pedi right here in town."},
+  {i:'SS',n:'Stephanie S.',t:'a year ago',q:"I've been getting my nails done at the Nail Nook since 2017. Stephanie has been providing me with quality nails that keep me running back every 3 weeks to freshen them up. She does great work and she's a wonderful lady."},
+  {i:'KC',n:'Kortney C.',t:'a year ago',q:"Stephanie and all the girls at the Nail Nook are fabulous! I have been getting my nails done there for 4 years and would never go anywhere else. It's clean, beautiful and everyone is so kind."},
+  {i:'BZ',n:'Brooke Z.',t:'a year ago',q:"I've had the most amazing experiences ever since going to Stephanie at The Nail Nook. She is always willing to do any nail design I find, and if I can't figure out what I want she goes above and beyond with her own designs."},
+  {i:'DG',n:'Debbie G.',t:'a year ago',q:"Clean, friendly shop offering everything from hair, nails, tanning, eyelashes, facials and skin care. I love my hard gel nails! Five very talented nail artists."},
+  {i:'DJ',n:'Deborah G.',t:'a year ago',q:"I've had my nails done at The Nail Nook for several years and will continue. Best nail shop I've ever used. My nails last 3–4 weeks without breaking. Highly recommend!"},
+  {i:'JC',n:'Jill C.',t:'a year ago',q:"Best salon in Lake Havasu City. From nails and toes, to lashes and facials — you can find all your beauty needs here."},
+  {i:'KP',n:'Kristy P.',t:'a year ago',q:"Stephanie is both an artist and a perfectionist. Her gel manicures are stunning!"},
+  {i:'MR',n:'Michille R.',t:'a year ago',q:"Shannon was wonderful! I love my Christmas nails!"},
+  {i:'DR',n:'DraGuNGrL',t:'a year ago',q:"We were looking for somebody to cut our frizzy curly hair. Went to see Kathy and she's very sweet and kind. Knowledgeable about hair and has the experience to get it done in a timely fashion."},
+  // 2 years ago
+  {i:'JH',n:'Jeff H.',t:'2 years ago',q:"A fantastic group of people supplying many different services at one location — friendly, fair, and you will definitely enjoy your visit to the salon."},
+  // 3 years ago
+  {i:'KH',n:'Kacee H.',t:'3 years ago',q:"Ricci does my hair color and extension installation. My highlights are always done beautifully and make me look and feel amazing. When I have a vision for what I want, she does exactly what I'm looking for."},
+  {i:'GA',n:'G.',t:'3 years ago',q:"Kattie did my wedding trial nails and WOW. She exceeded my expectations. Not only is her work amazing but she is the sweetest and made me feel so comfortable during my visit."},
+  {i:'CH',n:'Christina',t:'3 years ago',q:"Miss NailsByJudy did an amazing job recreating a nail design with a little personal touch. Absolutely loved them! Very good price too — I recommend anyone in town go there and see her."},
+  {i:'SE',n:'Sierra E.',t:'3 years ago',q:"First off this salon is SO cute. Ricci was a pleasure to work with, made booking super easy and was prompt with following up. She exceeded my expectations and achieved exactly what I was looking for."},
+  {i:'MC',n:'Michelle C.',t:'3 years ago',q:"Ricci is the absolute best. I have seen multiple stylists before her who could never get my hair to look like I envisioned, but Ricci did it! She is kind, listens to what you want, and truly cares about her work."},
+  {i:'KB',n:'Katie B.',t:'3 years ago',q:"When every other salon was booked, they squeezed in two young ladies celebrating a birthday! They were so gentle and sweet. The girls couldn't stop looking at their nails — they did such a good job."},
+  {i:'SD',n:'Sayg D.',t:'3 years ago',q:"Ricci did my hair, and I'm absolutely obsessed! She is so kind and professional and listened to my vision. She kept me laughing the whole time and made sure I was comfortable. 10/10 recommend!"},
+  {i:'CB',n:'Coree B.',t:'3 years ago',q:"Ricci is amazing, has so much natural talent, and worked wonders on my hair. Absolutely recommend her to anybody looking for an incredibly talented stylist!"},
+  {i:'AN',n:'Annie',t:'3 years ago',q:"I will never go to another nail shop again. I got a gift certificate for Nail Nook for my birthday, just used it today with Kattie and I found my new place — she is wonderful wonderful wonderful!"},
+  // 4 years ago
+  {i:'NM',n:'Nikki M.',t:'4 years ago',q:"Kattie did my nails and was absolutely amazing. She was so sweet and made sure to explain every decision she made and how it would help my nails stay healthy. The salon is very cute too — highly recommend."},
+  {i:'SW',n:'Sarah W.',t:'4 years ago',q:"This salon has absolutely everything you could want! The Nail Nook and More definitely take the 'and more' part seriously! They have all your beauty needs in one spot AND a great experience to top it off."},
+  {i:'DI',n:'Diana S.',t:'4 years ago',q:"Macy did an amazing job, especially the free hand nail art. The salon is nice and clean and PINK! Highly recommend."},
+  // 5 years ago
+  {i:'CS',n:'Csmilez S.',t:'5 years ago',q:"Great place to get a manicure and pedicure. The staff is kind and friendly and the place is clean. The prices are awesome. I go every two weeks to get my nails done — I love this place!"},
+  {i:'AM',n:'Amanda S.',t:'5 years ago',q:"Nice people! Kattie did my nails and did a wonderful job — couldn't be happier! Would highly recommend!"},
+  {i:'AR',n:'Angie R.',t:'5 years ago',q:"I don't trust any other place in Havasu with my nails or my feet. Love them all 10/10."},
+  // 6 years ago
+  {i:'JR',n:'Jennifer R.',t:'6 years ago',q:"The girls at The Nail Nook are professional, friendly, and talented. I go every two weeks to get my nails done with Janette and she always does an amazing job! Stephanie, Brittany, and Janet also do awesome work. I HIGHLY recommend."},
+  {i:'LG',n:'Lindsay G.',t:'6 years ago',q:"Absolutely wonderful staff that put out a beautiful nail product. These girls can do just about everything! I highly recommend them and am happy to refer their business to anyone looking for a reliable, communicative nail salon."},
+  {i:'MF',n:'Mellissa F.',t:'6 years ago',q:"Awesome customer service and attention to detail. Great quality pedicures if you're wanting a spa pedicure."},
+  {i:'AA',n:'Ashley A.',t:'6 years ago',q:"Such a cute place and all the girls there are so talented. Highly recommend!"},
+  {i:'KS',n:'Kylee S.',t:'6 years ago',q:"Stephanie is absolutely amazing! Love her."},
+  // 7 years ago
+  {i:'SK',n:'Susan K.',t:'7 years ago',q:"I'm from out of town and needed to get my nails done. The reviews on The Nail Nook were outstanding! Omgosh, you need to go there — they are wonderful! Janette did mine and was very thorough."},
+  {i:'HC',n:'Heidi C.',t:'7 years ago',q:"Best pedi I've had since moving back to Havasu! Janette is sweet, fun and full of positivity. Her pedi was on point — incredible foot scrub and foot massage. Incredibly relaxing."},
+  {i:'CR',n:'Crystal S.',t:'7 years ago',q:"Brytney does a beautiful job and I always have a great time talking with her too. It's a fabulous little shop — kind of hidden but totally worth finding!!!"},
+  {i:'LP',n:'Linda P.',t:'7 years ago',q:"New resident of the city and in need of pampering. Found this cute little 'nook' online with great reviews — now I can add to the list! Very friendly and Brytney did a great job and made me feel at home."},
+  // 8 years ago
+  {i:'MM',n:'Marcie M.',t:'8 years ago',q:"Stephanie is an artist! She knows and skillfully uses amazing techniques to ensure the best manicure and pedicure you will ever have. Look no further!"},
+  {i:'JA',n:'Jamie H.',t:'8 years ago',q:"Very clean nail salon with talented girls. The best pedicure chairs!"},
+]
+
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [revIdx, setRevIdx] = useState(0)
+  const [revTick, setRevTick] = useState(0)
+
+  function revNav(d: number) {
+    setRevIdx(i => (i + d + REVIEWS.length) % REVIEWS.length)
+    setRevTick(t => t + 1)
+  }
+
+  useEffect(() => {
+    const timer = setInterval(() => setRevIdx(i => (i + 1) % REVIEWS.length), 4000)
+    return () => clearInterval(timer)
+  }, [revTick])
 
   useEffect(() => {
     // ---- GALLERY SLIDESHOW ----
-    const seeds = [200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217]
-    const imgs = seeds.map(s => `https://picsum.photos/seed/${s}/800/1000`)
+    const imgs = [
+      '/gallery/IMG_1017.JPEG', // chrome opal almond nails
+      '/gallery/IMG_1018.JPEG', // blue ombre glitter coffin
+      '/gallery/IMG_1019.JPEG', // silver holographic glitter
+      '/gallery/IMG_1046.JPEG', // teal wave French tip
+      '/gallery/IMG_1025.JPEG', // classic red almond
+      '/gallery/IMG_1052.JPEG', // red with gold gem accent
+      '/gallery/IMG_1020.JPEG', // white nude glitter
+      '/gallery/IMG_1016.JPEG', // blue/purple floral art
+      '/gallery/IMG_1021.JPEG', // Christmas plaid & gems
+      '/gallery/IMG_1023.JPEG', // teal + leopard print
+      '/gallery/IMG_1026.JPEG', // dark green tortoiseshell
+      '/gallery/IMG_1028.JPEG', // colorful tie-dye festival
+      '/gallery/IMG_1029.JPEG', // purple marble geode
+      '/gallery/IMG_1030.JPEG', // black/white celestial stiletto
+      '/gallery/IMG_1031.JPEG', // Halloween green/purple ghost
+      '/gallery/IMG_1032.JPEG', // purple celestial moon
+      '/gallery/IMG_1033.JPEG', // Halloween red/black drip
+      '/gallery/IMG_1034.JPEG', // checkerboard + flames
+      '/gallery/IMG_1040.JPEG', // neon yellow 3D floral
+      '/gallery/IMG_1041.JPEG', // colorful abstract art
+      '/gallery/IMG_1042.JPEG', // patriotic red/white/blue
+      '/gallery/IMG_1048.JPEG', // black/green drip with gems
+      '/gallery/IMG_1049.JPEG', // Jessica lace floral (@NAILZBYJESSICAA)
+      '/gallery/IMG_1051.JPEG', // grey/black glitter hearts
+      '/gallery/IMG_1058.JPEG', // colored lash extensions
+      '/gallery/IMG_1061.JPEG', // lash extensions (green eye)
+      '/gallery/IMG_1062.JPEG', // lash extensions (both eyes)
+      '/gallery/IMG_1060.JPEG', // lash before & after
+      '/gallery/IMG_1059.JPEG', // brow lamination before & after
+      '/gallery/IMG_1035.JPEG', // wavy brown highlights
+      '/gallery/IMG_1036.JPEG', // brown balayage
+      '/gallery/IMG_1037.JPEG', // silver/ash highlights
+      '/gallery/IMG_1038.JPEG', // blonde waves
+    ]
     const slidesEl = document.getElementById('slides') as HTMLElement | null
     const dotsEl = document.getElementById('ssDots') as HTMLElement | null
     if (!slidesEl || !dotsEl) return
@@ -274,13 +376,7 @@ export default function HomePage() {
       {/* NAV */}
       <nav className="nav">
         <Link href="/" className="logo">
-          <svg viewBox="0 0 28 28" fill="none">
-            <rect x="10" y="1" width="8" height="5" rx="2.5" fill="#e91e8c"/>
-            <path d="M8 6h12l2.5 20H5.5L8 6z" fill="#f9a8c9"/>
-            <path d="M8 6h12l1.2 9H6.8L8 6z" fill="#e91e8c" opacity=".55"/>
-            <rect x="9.5" y="2.5" width="9" height="2" rx="1" fill="#c2185b"/>
-          </svg>
-          Nail Nook
+          <img src="/logo.png" alt="The Nail Nook & More" className="nav-logo-img"/>
         </Link>
         <ul className="nav-links">
           <li><Link href="/">Home</Link></li>
@@ -328,13 +424,16 @@ export default function HomePage() {
         </div>
         <div className="svc-grid">
           {[
-            {href:'/services#manicure',img:'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=450&fit=crop&auto=format',alt:'Manicure',name:'Manicure',desc:'Classic, gel, and spa manicures. Perfectly shaped and polished every time.',from:'From $25',cls:'rv'},
+            {href:'/services#manicure',img:'/gallery/IMG_1020.JPEG',alt:'Manicure',name:'Manicure',desc:'Classic, gel, and spa manicures. Perfectly shaped and polished every time.',from:'From $25',cls:'rv'},
             {href:'/services#pedicure',img:'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=600&h=450&fit=crop&auto=format',alt:'Pedicure',name:'Pedicure',desc:'Relaxing pedicure treatments from classic to luxurious spa experiences.',from:'From $35',cls:'rv d1'},
-            {href:'/services#acrylic',img:'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=450&fit=crop&auto=format&crop=right',alt:'Acrylic Nails',name:'Acrylic Nails',desc:'Long-lasting acrylic extensions for a glamorous, durable finish.',from:'From $55',cls:'rv d2'},
-            {href:'/services#gel',img:'https://images.unsplash.com/photo-1604902396830-aca29e19b067?w=600&h=450&fit=crop&auto=format',alt:'Gel Extensions',name:'Gel Extensions',desc:'Lightweight, flexible gel extensions with a natural look and feel.',from:'From $65',cls:'rv d3'},
-            {href:'/services#dip',img:'https://images.unsplash.com/photo-1604902396830-aca29e19b067?w=600&h=450&fit=crop&auto=format&crop=left',alt:'Dip Powder',name:'Dip Powder',desc:'Chip-resistant dip powder nails in hundreds of gorgeous shades.',from:'From $45',cls:'rv d4'},
-            {href:'/services#art',img:'https://images.unsplash.com/photo-1632345031435-8727f592d8db?w=600&h=450&fit=crop&auto=format',alt:'Nail Art',name:'Nail Art',desc:'Custom designs, gems, chrome, ombre, and hand-painted artwork.',from:'From $5',cls:'rv d5'},
+            {href:'/services#acrylic',img:'/gallery/IMG_1017.JPEG',alt:'Acrylic Nails',name:'Acrylic Nails',desc:'Long-lasting acrylic extensions for a glamorous, durable finish.',from:'From $55',cls:'rv d2'},
+            {href:'/services#gel',img:'/gallery/IMG_1018.JPEG',alt:'Gel Extensions',name:'Gel Extensions',desc:'Lightweight, flexible gel extensions with a natural look and feel.',from:'From $65',cls:'rv d3'},
+            {href:'/services#lashes',img:'/gallery/IMG_1061.JPEG',alt:'Eyelash Extensions',name:'Eyelash Extensions',desc:'Lush, full lash extensions for a wide-awake look that lasts weeks.',from:'From $75',cls:'rv d4'},
+            {href:'/services#art',img:'/gallery/IMG_1030.JPEG',alt:'Nail Art',name:'Nail Art',desc:'Custom designs, gems, chrome, ombre, and hand-painted artwork.',from:'From $5',cls:'rv d5'},
             {href:'/services#waxing',img:'https://images.unsplash.com/photo-1560869713-7d0a29430803?w=600&h=450&fit=crop&auto=format',alt:'Waxing',name:'Waxing',desc:'Smooth, precise waxing for eyebrows, lips, face, and more.',from:'From $10',cls:'rv'},
+            {href:'/services#permmakeup',img:'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=450&fit=crop&auto=format',alt:'Permanent Makeup',name:'Permanent Makeup',desc:'Flawless brows, liner, and lips that look perfect every single morning.',from:'From $150',cls:'rv d1'},
+            {href:'/services#botox',img:'/gallery/IMG_1054.JPEG',alt:'Botox',name:'Botox',desc:'Smooth fine lines and refresh your look with expert cosmetic injections.',from:'Call for pricing',cls:'rv d2'},
+            {href:'/services#massage',img:'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=450&fit=crop&auto=format',alt:'Massage',name:'Massage',desc:'Relaxing therapeutic massage to melt away tension from head to toe.',from:'From $60',cls:'rv d3'},
           ].map(s => (
             <Link key={s.name} href={s.href} className={`svc-card ${s.cls}`}>
               <img className="svc-img" src={s.img} alt={s.alt} loading="lazy"/>
@@ -382,28 +481,35 @@ export default function HomePage() {
       <section className="sec">
         <div className="sec-hdr c">
           <span className="lbl-plain">Client Love</span>
-          <h2 className="sec-title">What Our Guests Say</h2>
-          <p className="sec-sub">Real reviews from real clients across Lake Havasu City.</p>
+          <h2 className="sec-title">Serving Havasu for 9+ Years</h2>
+          <p className="sec-sub">Don&apos;t take our word for it — here&apos;s what your neighbors are saying.</p>
         </div>
-        <div className="reviews-grid">
-          {[
-            {i:'LF',n:'Linda F.',t:'5 months ago',q:'Highly recommended. Stephanie is amazing. During my first appointment she had quite a job to completely remove the old acrylic nail stuff from my nails. She was patient, gentle, and my nails have never looked better.',c:'rv'},
-            {i:'TL',n:'Tricia L.',t:'7 months ago',q:"My tech is Kattie and she's a pro for sure. She did a hard gel full set with French manicure. OMG I'm so thrilled with how they turned out — the shape, the color, everything is perfect.",c:'rv d1'},
-            {i:'KB',n:'Kathryn B.',t:'January 2025',q:"Rita at Nail Nook is amazing. She's not only incredibly talented but also so kind and professional. She fit me in last-minute before the holidays and her attention to detail is next level.",c:'rv d2'},
-            {i:'DW',n:'Denise W.',t:'November 2024',q:'Rita Davenport gave me the best pedi I have ever had in Lake Havasu. She was gentle yet so thorough. So grateful to have found a place that feels like a true spa experience right here in town.',c:'rv d3'},
-            {i:'NM',n:'Nikki M.',t:'2 years ago',q:'Kattie did my nails and was absolutely amazing. She was so sweet and made sure to explain every decision she made and how it would help my nails stay healthy. The salon is very cute too — highly recommend.',c:'rv d4'},
-            {i:'MG',n:'Maria G.',t:'4 years ago',q:"I've been coming to Nail Nook for years now and wouldn't go anywhere else. The staff remembers you by name, the salon is spotless, and my nails always look flawless when I leave. A true Lake Havasu gem.",c:'rv d5'},
-          ].map(r => (
-            <div key={r.n} className={`rev-card ${r.c}`}>
-              <span className="rev-source">Google</span>
-              <div className="rev-stars">★★★★★</div>
-              <p className="rev-text">&ldquo;{r.q}&rdquo;</p>
-              <div className="rev-meta">
-                <div className="rev-avatar">{r.i}</div>
-                <div className="rev-info"><h4>{r.n}</h4><span>{r.t}</span></div>
-              </div>
+        <div className="rev-wrap">
+          <button className="rev-btn rev-prev" onClick={() => revNav(-1)} aria-label="Previous review">‹</button>
+          <div className="rev-slider">
+            <div className="rev-track" style={{ transform: `translateX(-${revIdx * 100}%)` }}>
+              {REVIEWS.map(r => (
+                <div key={r.n} className="rev-card">
+                  <span className="rev-source">Google</span>
+                  <div className="rev-stars">★★★★★</div>
+                  <p className="rev-text">&ldquo;{r.q}&rdquo;</p>
+                  <div className="rev-meta">
+                    <div className="rev-avatar">{r.i}</div>
+                    <div className="rev-info"><h4>{r.n}</h4><span>{r.t}</span></div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+          <button className="rev-btn rev-next" onClick={() => revNav(1)} aria-label="Next review">›</button>
+          <div className="rev-dots">
+            {REVIEWS.map((_, i) => (
+              <button key={i} className={`ss-dot${i === revIdx ? ' on' : ''}`} onClick={() => { setRevIdx(i); setRevTick(t => t + 1) }} aria-label={`Review ${i + 1}`}/>
+            ))}
+          </div>
+        </div>
+        <div style={{textAlign:'center',marginTop:'36px'}}>
+          <Link href="/book" className="btn btn-p">Book Now</Link>
         </div>
       </section>
 
