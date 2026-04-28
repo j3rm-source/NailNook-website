@@ -87,15 +87,15 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
   const planInfo = PLAN_LABELS[planTier]
 
   return (
-    <aside className="w-64 flex-shrink-0 bg-slate-900/80 border-r border-slate-800 flex flex-col">
+    <aside className="w-64 flex-shrink-0 flex flex-col" style={{ backgroundColor: '#080808', borderRight: '1px solid #111' }}>
       {/* Logo + Business */}
-      <div className="p-5 border-b border-slate-800">
+      <div className="p-5" style={{ borderBottom: '1px solid #111' }}>
         <Link href="/dashboard" className="flex items-center gap-2.5 mb-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shrink-0">
-            <Zap size={15} className="text-white" />
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#00d4b8' }}>
+            <Zap size={15} color="#050505" />
           </div>
-          <span className="font-800 text-white text-lg" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
-            Trade<span className="gradient-text">Desk</span>
+          <span className="font-800 text-white text-lg" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif', letterSpacing: '-0.02em' }}>
+            TradeDesk
           </span>
         </Link>
         <div className="flex items-center justify-between">
@@ -108,7 +108,7 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
 
       {/* Main Nav */}
       <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
-        <div className="text-[10px] font-600 uppercase tracking-widest text-slate-600 px-3 py-2 mt-1">
+        <div className="text-[10px] font-600 uppercase tracking-widest px-3 py-2 mt-1" style={{ color: '#333' }}>
           Main
         </div>
 
@@ -147,7 +147,7 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
           )
         })}
 
-        <div className="text-[10px] font-600 uppercase tracking-widest text-slate-600 px-3 py-2 mt-4">
+        <div className="text-[10px] font-600 uppercase tracking-widest px-3 py-2 mt-4" style={{ color: '#333' }}>
           Account
         </div>
 
@@ -168,13 +168,14 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
 
       {/* Upgrade CTA for Plan 1 */}
       {planTier === 1 && (
-        <div className="p-3 border-t border-slate-800">
+        <div className="p-3" style={{ borderTop: '1px solid #111' }}>
           <Link
             href="/dashboard/settings/billing"
-            className="block rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-600/10 border border-orange-500/30 p-3 text-center hover:from-orange-500/30 transition-all duration-200"
+            className="block rounded-xl p-3 text-center transition-all duration-200 hover:opacity-90"
+            style={{ backgroundColor: 'rgba(0,212,184,0.08)', border: '1px solid rgba(0,212,184,0.2)' }}
           >
-            <p className="text-xs font-600 text-orange-300">Upgrade to Growth</p>
-            <p className="text-[11px] text-orange-400/60 mt-0.5">Get AI receptionist + SMS</p>
+            <p className="text-xs font-600" style={{ color: '#00d4b8' }}>Upgrade to Growth</p>
+            <p className="text-[11px] mt-0.5" style={{ color: 'rgba(0,212,184,0.5)' }}>Get AI receptionist + SMS</p>
           </Link>
         </div>
       )}

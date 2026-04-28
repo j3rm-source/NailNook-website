@@ -30,7 +30,7 @@ export default async function DashboardLayout({
     .single()
 
   return (
-    <div className="flex h-screen bg-slate-950 overflow-hidden">
+    <div className="flex h-screen overflow-hidden" style={{ backgroundColor: '#050505' }}>
       <DashboardSidebar
         businessName={tenant?.business_name ?? 'My Business'}
         planTier={(tenant?.plan_tier ?? 1) as 1 | 2 | 3}
