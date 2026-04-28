@@ -144,7 +144,22 @@
       "Bash(curl -s -X POST http://localhost:3001/api/bookings -H 'Content-Type: application/json' -d '{\"staffId\":\"00000000-0000-0000-0000-000000000001\",\"serviceId\":\"00000000-0000-0000-0000-000000000001\",\"customerName\":\"Test User\",\"customerPhone\":\"+19289628127\",\"customerEmail\":\"test@example.com\",\"bookingDate\":\"2026-05-01\",\"bookingTime\":\"10:00\"}')",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/api/auth/me)",
       "Bash(curl -s http://localhost:3001/api/staff)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(curl -s http://localhost:3000/api/staff)",
+      "Bash(stripe --version)",
+      "Bash(xargs grep *)",
+      "Bash(python3 skills/create-proposal/scripts/create_google_doc_contract.py)",
+      "Bash(python skills/create-proposal/scripts/create_google_doc_contract.py)",
+      "Bash(pip install *)",
+      "Bash(cmd /c start \"\" \"C:\\\\Users\\\\jerem\\\\OneDrive\\\\Documents\\\\New folder\\\\.claude\\\\.claude\\\\.tmp\\\\client_contract.html\")",
+      "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --print-to-pdf=\"C:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/.tmp/contract.pdf\" --no-pdf-header-footer \"C:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/.tmp/client_contract.html\")",
+      "Bash(cmd /c start \"\" \"C:\\\\Users\\\\jerem\\\\OneDrive\\\\Documents\\\\New folder\\\\.claude\\\\.claude\\\\.tmp\\\\contract.pdf\")",
+      "Bash(explorer \"c:\\\\Users\\\\jerem\\\\OneDrive\\\\Documents\\\\New folder\\\\.claude\\\\.claude\\\\nailnook-booking\\\\public\")",
+      "Bash(netstat -ano)",
+      "Bash(taskkill /PID 21560 /F)",
+      "PowerShell(Stop-Process -Id 21560 -Force)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }

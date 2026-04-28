@@ -74,7 +74,7 @@ rules/             # Modular rule files (loaded automatically by Claude Code)
 nailnook/          # Static HTML/CSS site for NailNook client — edit directly, no build step
 nailnook-booking/  # Next.js booking app for NailNook — separate deliverable
 Scheduale page/    # Generic Next.js booking app template — separate deliverable
-plumbing booking/  # Next.js booking app template for a plumbing client — separate deliverable
+hvac-saas/         # TradeDesk — multi-tenant SaaS for HVAC/plumbing businesses — separate deliverable
 .tmp/              # Temporary intermediates — never commit
 .env               # API keys
 ```
@@ -156,3 +156,54 @@ Same pattern as `nailnook-booking/`: public booking wizard → staff portal (PIN
 
 ### DB schema
 Migrations live in `Scheduale page/supabase/migrations/`. Seed data in `seed.sql`.
+
+---
+
+## TradeDesk SaaS (`hvac-saas/`)
+
+A multi-tenant SaaS platform for HVAC and plumbing businesses (Next.js, React 19, TypeScript, Tailwind, Supabase, Stripe, Twilio, Bland AI, BullMQ/Redis). Separate deliverable from the skills system.
+
+### Dev commands (run from inside `hvac-saas/`)
+```bash
+npm run dev      # dev server on :3000
+npm run build    # production build
+npm run lint     # ESLint
+npm run worker   # BullMQ background worker (SMS sequences + review requests)
+```
+
+### What it does
+- **AI phone receptionist** — Bland AI answers missed calls 24/7, collects lead info, sends booking links via SMS
+- **SMS automation** — 3-message follow-up sequence (t+0, +24h, +72h) via Twilio + BullMQ
+- **Website builder** — Auto-generated public site at `/[tenant]` with Cal.com booking widget
+- **CRM** — Contacts with source/status tracking (calls, SMS, Cal.com, forms)
+- **Job pipeline** — Kanban board: New → Quoted → Scheduled → In Progress → Completed
+- **Analytics** — Conversion rates, pipeline revenue, lead source breakdown
+- **Billing** — Stripe subscriptions: Starter $49/mo · Growth $99/mo · Pro $199/mo
+
+### Routes
+**Public:** `/` (landing), `/login`, `/signup`, `/signup/plan`, `/[tenant]` (generated website)  
+**Authenticated:** `/dashboard`, `/dashboard/analytics`, `/dashboard/contacts`, `/dashboard/jobs`, `/dashboard/bookings`, `/dashboard/ai-calls`, `/dashboard/sms`, `/dashboard/website`, `/dashboard/settings/billing`, `/dashboard/settings/sms-templates`, `/dashboard/settings/website`  
+**API webhooks:** `/api/stripe/webhook`, `/api/twilio/voice`, `/api/bland/webhook`, `/api/calcom/webhook`
+
+### Architecture
+- **Multi-tenancy** — Tenant ID in JWT cookie; all DB queries filtered by `tenant_id` (Supabase RLS)
+- **Auth** — Email/password via Supabase + `@supabase/ssr`; server client in `src/lib/supabase/server.ts`, browser client in `src/lib/supabase/client.ts`
+- **SMS worker** — Runs as a separate process (`npm run worker`); BullMQ queues in Redis, two queues: SMS sequences and review requests
+- **Plan gates** — `src/lib/plan-gate.ts` + `getPlanFeatures()` in `src/lib/types.ts` control feature access by tier
+- **Bland AI** — Outbound call triggered via `/api/bland/create-call`; outcome webhook at `/api/bland/webhook` creates contact and enqueues SMS
+- **Cal.com** — Widget embedded in tenant website; booking webhook at `/api/calcom/webhook` creates Contact + Job
+
+### Key types (`src/lib/types.ts`)
+`Tenant`, `UserProfile`, `Contact`, `Job`, `Booking`, `SmsTemplate`, `SmsSequence`, `AiCall`, `PlanFeatures`
+
+### Environment variables (add to `hvac-saas/.env.local`)
+- `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` / `SUPABASE_SERVICE_ROLE_KEY`
+- `STRIPE_SECRET_KEY` / `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` / `STRIPE_WEBHOOK_SECRET`
+- `STRIPE_PRICE_PLAN1` / `STRIPE_PRICE_PLAN2` / `STRIPE_PRICE_PLAN3`
+- `TWILIO_ACCOUNT_SID` / `TWILIO_AUTH_TOKEN` / `TWILIO_PHONE_NUMBER`
+- `REDIS_URL` — BullMQ worker queues
+- `BLAND_API_KEY` — AI receptionist
+- `CALCOM_API_KEY` — Cal.com webhook validation
+
+### DB schema
+Migrations live in `hvac-saas/supabase/migrations/`.
