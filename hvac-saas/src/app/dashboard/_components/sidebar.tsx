@@ -16,9 +16,9 @@ const SETTINGS_ITEMS = [
 ]
 
 const PLAN_LABELS: Record<PlanTier, { label: string; color: string }> = {
-  1: { label: 'Starter', color: 'badge-blue' },
-  2: { label: 'Growth', color: 'badge-orange' },
-  3: { label: 'Pro', color: 'bg-purple-500/15 text-purple-300 border border-purple-500/30 badge' },
+  1: { label: 'Foundation', color: 'badge-blue' },
+  2: { label: 'Growth System', color: 'badge-orange' },
+  3: { label: 'Revenue Partner', color: 'bg-purple-500/15 text-purple-300 border border-purple-500/30 badge' },
 }
 
 interface SidebarProps {
@@ -169,7 +169,7 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
             className="block rounded-xl p-3 text-center transition-all duration-200 hover:opacity-90"
             style={{ backgroundColor: 'rgba(0,212,184,0.08)', border: '1px solid rgba(0,212,184,0.2)' }}
           >
-            <p className="text-xs font-600" style={{ color: '#00d4b8' }}>Upgrade to Growth</p>
+            <p className="text-xs font-600" style={{ color: '#00d4b8' }}>Upgrade to Growth System</p>
             <p className="text-[11px] mt-0.5" style={{ color: 'rgba(0,212,184,0.5)' }}>Get AI receptionist + SMS</p>
           </Link>
         </div>

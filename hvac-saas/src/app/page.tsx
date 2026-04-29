@@ -6,24 +6,24 @@ const BRAND = 'var(--brand-500)'
 
 const PLANS = [
   {
-    name: 'Starter',
-    price: '$49',
+    name: 'Foundation',
+    price: '$197',
     plan: '1',
     features: ['Professional booking website', 'CRM & contact management', 'Jobs pipeline', 'Cal.com booking widget'],
     highlight: false,
   },
   {
-    name: 'Growth',
-    price: '$99',
+    name: 'Growth System',
+    price: '$497',
     plan: '2',
-    features: ['Everything in Starter', 'AI phone receptionist', 'SMS follow-ups (t+0, 24h, 72h)', 'SMS inbox'],
+    features: ['Everything in Foundation', 'AI phone receptionist', 'SMS follow-ups (t+0, 24h, 72h)', 'SMS inbox'],
     highlight: true,
   },
   {
-    name: 'Pro',
-    price: '$199',
+    name: 'Revenue Partner',
+    price: '$997',
     plan: '3',
-    features: ['Everything in Growth', 'Analytics dashboard', 'Lead gen tracking', 'Monthly optimization reports'],
+    features: ['Everything in Growth System', 'Analytics dashboard', 'Lead gen tracking', 'Monthly optimization reports'],
     highlight: false,
   },
 ]
