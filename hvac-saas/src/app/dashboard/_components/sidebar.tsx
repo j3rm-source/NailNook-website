@@ -91,7 +91,7 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
       {/* Logo + Business */}
       <div className="p-5" style={{ borderBottom: '1px solid #111' }}>
         <Link href="/dashboard" className="flex items-center mb-3">
-          <img src="/logo.png" alt="J2 Systems" style={{ height: 160, width: 'auto', maxWidth: '100%' }} />
+          <img src="/logo.png" alt="J2 Systems" style={{ height: 320, width: 'auto', maxWidth: '100%' }} />
         </Link>
         <div className="flex items-center justify-between">
           <span className="text-xs text-slate-400 truncate max-w-[140px]">{businessName}</span>
