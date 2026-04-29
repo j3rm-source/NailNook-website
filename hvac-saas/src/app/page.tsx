@@ -8,22 +8,44 @@ const PLANS = [
   {
     name: 'Foundation',
     price: '$197',
+    subtitle: 'Everything you need to get found and capture leads online',
     plan: '1',
-    features: ['Professional booking website', 'CRM & contact management', 'Jobs pipeline', 'Cal.com booking widget'],
+    features: [
+      'Professional mobile-ready website',
+      'Contact form + lead inbox (never miss an inquiry)',
+      'AI chat assistant on your site — captures leads 24/7 even when you\'re on a job',
+      'CRM to organize and follow up with every contact',
+      'Online booking widget so customers can schedule instantly',
+    ],
     highlight: false,
   },
   {
     name: 'Growth System',
     price: '$497',
+    subtitle: 'Your business runs and follows up automatically — even at 2am',
     plan: '2',
-    features: ['Everything in Foundation', 'AI phone receptionist', 'SMS follow-ups (t+0, 24h, 72h)', 'SMS inbox'],
+    features: [
+      'Everything in Foundation',
+      'AI phone receptionist — answers calls, qualifies leads, books jobs 24/7',
+      'Automated SMS follow-ups sent at the right time (immediately, 24hrs, 72hrs)',
+      'SMS inbox to manage all customer conversations in one place',
+      'Google SEO management so customers find you first',
+    ],
     highlight: true,
   },
   {
     name: 'Revenue Partner',
     price: '$997',
+    subtitle: 'A full growth engine with paid ads, tracking, and a partner optimizing it every month',
     plan: '3',
-    features: ['Everything in Growth System', 'Analytics dashboard', 'Lead gen tracking', 'Monthly optimization reports'],
+    features: [
+      'Everything in Growth System',
+      'Paid ads management (Google & Facebook) to drive inbound leads on demand',
+      'Lead tracking & attribution — know exactly where every job came from',
+      'Review generation system — automatically collect 5-star Google reviews',
+      'Ongoing conversation optimization to improve booking rates over time',
+      'Monthly performance report',
+    ],
     highlight: false,
   },
 ]
@@ -242,7 +264,8 @@ export default function LandingPage() {
                   Most Popular
                 </div>
               )}
-              <p className="text-sm font-700 uppercase tracking-widest mb-4" style={{ color: plan.highlight ? BRAND: '#555' }}>{plan.name}</p>
+              <p className="text-sm font-700 uppercase tracking-widest mb-2" style={{ color: plan.highlight ? BRAND: '#555' }}>{plan.name}</p>
+              <p className="text-xs mb-4 leading-relaxed" style={{ color: '#444' }}>{plan.subtitle}</p>
               <p className="text-5xl font-800 mb-1 text-white">{plan.price}<span className="text-base font-400 ml-1" style={{ color: '#444' }}>/mo</span></p>
               <p className="text-xs mb-8" style={{ color: '#444' }}>billed monthly</p>
               <ul className="space-y-3 flex-1 mb-8">
