@@ -23,47 +23,44 @@ export default function DashboardTopbar({ userEmail, userName }: TopbarProps) {
   }
 
   return (
-    <header className="h-16 border-b border-slate-800 bg-slate-900/60 backdrop-blur-sm flex items-center justify-between px-6 shrink-0">
-      {/* Left — breadcrumb / search can go here */}
+    <header className="h-16 flex items-center justify-between px-6 shrink-0" style={{ borderBottom: '1px solid #111', backgroundColor: 'rgba(5,5,5,0.8)', backdropFilter: 'blur(12px)' }}>
       <div />
 
-      {/* Right */}
       <div className="flex items-center gap-3">
-        {/* Notifications */}
-        <button
-          id="btn-notifications"
-          className="btn-ghost w-9 h-9 rounded-xl p-0 relative"
-          aria-label="Notifications"
-        >
+        <button className="btn-ghost w-9 h-9 rounded-xl p-0 relative" aria-label="Notifications">
           <Bell size={17} />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-orange-500 rounded-full" />
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full" style={{ backgroundColor: '#00d4b8' }} />
         </button>
 
-        {/* User menu */}
         <div className="relative">
           <button
-            id="btn-user-menu"
             onClick={() => setMenuOpen((v) => !v)}
-            className="flex items-center gap-2.5 rounded-xl px-3 py-2 hover:bg-slate-700/60 transition-colors"
+            className="flex items-center gap-2.5 rounded-xl px-3 py-2 transition-colors"
+            style={{ color: '#888' }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#111')}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
           >
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-xs font-700">
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-700" style={{ backgroundColor: '#00d4b8', color: '#050505' }}>
               {getInitials(userName)}
             </div>
-            <span className="text-sm text-slate-300 max-w-[120px] truncate hidden sm:block">
+            <span className="text-sm max-w-[120px] truncate hidden sm:block" style={{ color: '#aaa' }}>
               {userName}
             </span>
-            <ChevronDown size={14} className="text-slate-500" />
+            <ChevronDown size={14} style={{ color: '#444' }} />
           </button>
 
           {menuOpen && (
-            <div className="absolute right-0 top-full mt-2 w-52 rounded-xl border border-slate-700 bg-slate-800 shadow-xl z-50 py-1 animate-fade-in">
-              <div className="px-4 py-2.5 border-b border-slate-700">
-                <p className="text-xs font-500 text-slate-300 truncate">{userName}</p>
-                <p className="text-xs text-slate-500 truncate">{userEmail}</p>
+            <div className="absolute right-0 top-full mt-2 w-52 rounded-xl shadow-xl z-50 py-1 animate-fade-in" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1e1e1e' }}>
+              <div className="px-4 py-2.5" style={{ borderBottom: '1px solid #1a1a1a' }}>
+                <p className="text-xs font-500 truncate" style={{ color: '#aaa' }}>{userName}</p>
+                <p className="text-xs truncate" style={{ color: '#555' }}>{userEmail}</p>
               </div>
 
               <button
-                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-300 hover:bg-slate-700/60 hover:text-slate-100 transition-colors"
+                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors"
+                style={{ color: '#888' }}
+                onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#111'; e.currentTarget.style.color = '#fff' }}
+                onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#888' }}
                 onClick={() => { setMenuOpen(false); router.push('/dashboard/settings') }}
               >
                 <User size={14} />
@@ -71,9 +68,11 @@ export default function DashboardTopbar({ userEmail, userName }: TopbarProps) {
               </button>
 
               <button
-                id="btn-logout"
-                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors"
                 onClick={handleLogout}
+                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors"
+                style={{ color: '#ef4444' }}
+                onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'rgba(239,68,68,0.08)')}
+                onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
               >
                 <LogOut size={14} />
                 Sign out
