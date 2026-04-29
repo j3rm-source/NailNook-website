@@ -293,7 +293,7 @@ export default function LandingPage() {
       <footer style={{ backgroundColor: '#030303', borderTop: '1px solid #111' }}>
         <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="J2 Systems" style={{ height: 28, width: 'auto', opacity: 0.6 }} />
+            <img src="/logo.png" alt="J2 Systems" style={{ height: 112, width: 'auto', opacity: 0.6 }} />
           </div>
           <p className="text-xs" style={{ color: '#333' }}>© {new Date().getFullYear()} J2 Systems. All rights reserved.</p>
           <div className="flex gap-4">
