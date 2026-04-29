@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import SwRegister from './_components/sw-register'
+import IosInstallBanner from './_components/ios-install-banner'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -52,6 +53,7 @@ export default function RootLayout({
       <body className="antialiased">
         {children}
         <SwRegister />
+        <IosInstallBanner />
       </body>
     </html>
   )
