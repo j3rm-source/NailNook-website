@@ -32,11 +32,10 @@ const COMPARISON: { feature: string; human: boolean }[] = [
   { feature: 'Answers every missed call',        human: true  },
   { feature: 'Sends booking link automatically', human: true  },
   { feature: '3-touch SMS follow-up sequence',   human: true  },
-  { feature: 'Professional booking website',     human: true  },
-  { feature: 'Full CRM & jobs pipeline',         human: true  },
+  { feature: 'Professional booking website',     human: false },
+  { feature: 'Full CRM & jobs pipeline',         human: false },
   { feature: 'Available 24/7',                   human: false },
   { feature: 'No sick days or holidays',         human: false },
-  { feature: 'Costs under $200/mo',              human: false },
 ]
 
 const INDUSTRIES = ['HVAC', 'PLUMBING', 'AC REPAIR', 'HEATING', 'WATER HEATER', 'DRAIN CLEANING', 'ELECTRICAL', 'AND MORE']
