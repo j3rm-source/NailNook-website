@@ -268,6 +268,9 @@ export default function LandingPage() {
             </div>
           ))}
         </div>
+        <p className="text-center mt-8 text-sm font-600" style={{ color: '#555' }}>
+          * A one-time setup fee is required to build and launch your system
+        </p>
       </section>
 
       {/* ── Bottom CTA ── */}
