@@ -130,9 +130,9 @@ export default function LandingPage() {
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
           {[
-            { n: '01', title: 'Missed call comes in', desc: 'A customer calls your Twilio number. You\'re on the job and can\'t pick up. J2 Systems\'s AI immediately calls them back — within seconds.' },
-            { n: '02', title: 'AI collects their info', desc: 'The AI greets them by your business name, asks what service they need, gets their address, and offers to send a booking link.' },
-            { n: '03', title: 'SMS sequence fires', desc: 'If they don\'t book on the call, 3 automated follow-up texts go out: right away, 24 hours later, and 72 hours later. Stops when they book.' },
+            { n: '01', title: 'Missed call comes in', desc: 'Busy on a job when a customer calls? No worries — we\'ve got your back. We call them back instantly, before they even think about going to your competitor.' },
+            { n: '02', title: 'Your AI Receptionist, On Call 24/7', desc: 'The AI answers in your business name, finds out what they need, grabs their address, and sends them a booking link — all before you\'ve put down your wrench.' },
+            { n: '03', title: 'Never Let a Lead Go Cold', desc: '3 automated follow-ups: right away, 24 hours later, and 72 hours later — and they stop the moment someone books. No lead goes cold because follow-up fell through the cracks.' },
           ].map(({ n, title, desc }) => (
             <div key={n} className="rounded-2xl p-7" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
               <p className="text-6xl font-800 mb-4" style={{ color: '#1a1a1a', letterSpacing: '-0.04em' }}>{n}</p>
@@ -163,15 +163,15 @@ export default function LandingPage() {
       <section className="max-w-6xl mx-auto px-6 py-24">
         <p className="text-center text-xs font-700 uppercase tracking-widest mb-3" style={{ color: BRAND}}>Everything you need</p>
         <h2 className="text-4xl md:text-5xl font-800 text-center mb-16" style={{ letterSpacing: '-0.03em' }}>
-          Built for the trades
+          Turn Missed Calls Into Booked Jobs
         </h2>
         <div className="grid md:grid-cols-3 gap-4">
           {[
             { icon: Phone, title: 'AI Receptionist', desc: 'Answers missed calls by your business name, gathers info, and offers a booking link. Sounds human. Works 24/7.' },
             { icon: MessageSquare, title: 'Smart SMS Sequences', desc: '3 automated follow-up texts at t+0, 24hr, and 72hr. Stops automatically when they book. Fully customizable.' },
-            { icon: Globe, title: 'Booking Website', desc: 'A professional site with your services, Cal.com booking widget, and contact form — published in minutes.' },
+            { icon: Globe, title: 'Booking Website', desc: 'A website that works as hard as you do — services, booking, and contact all in one. Live in minutes.' },
             { icon: Users, title: 'CRM', desc: 'Every lead from calls, texts, and your website lands in your CRM automatically with source tracking and status.' },
-            { icon: Briefcase, title: 'Jobs Pipeline', desc: 'Kanban board: New → Quoted → Scheduled → In Progress → Completed. Tracks revenue at every stage.' },
+            { icon: Briefcase, title: 'Jobs Pipeline', desc: 'See every job, every stage, every dollar — all in one board.' },
             { icon: BarChart3, title: 'Analytics', desc: 'Conversion rates, pipeline revenue, lead source breakdown. Know exactly what\'s working.' },
           ].map(({ icon: Icon, title, desc }) => (
             <div key={title} className="rounded-2xl p-6 transition-all hover:border-[#00d4b8]/30 group" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
