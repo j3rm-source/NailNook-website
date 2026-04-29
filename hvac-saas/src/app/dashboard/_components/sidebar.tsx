@@ -10,6 +10,17 @@ import {
 import { cn } from '@/lib/utils'
 import { getPlanFeatures, type PlanTier } from '@/lib/types'
 
+const SETTINGS_ITEMS = [
+  { label: 'Settings', href: '/dashboard/settings', icon: Settings },
+  { label: 'Billing', href: '/dashboard/settings/billing', icon: CreditCard },
+]
+
+const PLAN_LABELS: Record<PlanTier, { label: string; color: string }> = {
+  1: { label: 'Starter', color: 'badge-blue' },
+  2: { label: 'Growth', color: 'badge-orange' },
+  3: { label: 'Pro', color: 'bg-purple-500/15 text-purple-300 border border-purple-500/30 badge' },
+}
+
 interface SidebarProps {
   businessName: string
   planTier: PlanTier
@@ -72,17 +83,6 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
       badge: 'Plan 3',
     },
   ]
-
-  const settingsItems = [
-    { label: 'Settings', href: '/dashboard/settings', icon: Settings },
-    { label: 'Billing', href: '/dashboard/settings/billing', icon: CreditCard },
-  ]
-
-  const PLAN_LABELS: Record<PlanTier, { label: string; color: string }> = {
-    1: { label: 'Starter', color: 'badge-blue' },
-    2: { label: 'Growth', color: 'badge-orange' },
-    3: { label: 'Pro', color: 'bg-purple-500/15 text-purple-300 border border-purple-500/30 badge' },
-  }
 
   const planInfo = PLAN_LABELS[planTier]
 
@@ -151,7 +151,7 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
           Account
         </div>
 
-        {settingsItems.map((item) => {
+        {SETTINGS_ITEMS.map((item) => {
           const isActive = pathname.startsWith(item.href)
           return (
             <Link

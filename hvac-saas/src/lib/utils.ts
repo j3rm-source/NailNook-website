@@ -48,6 +48,12 @@ export function interpolateSmsTemplate(
   return template.replace(/\{(\w+)\}/g, (_, key) => vars[key] ?? `{${key}}`)
 }
 
+export function formatCurrencyCompact(n: number): string {
+  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`
+  if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}k`
+  return `$${n}`
+}
+
 export function getInitials(name: string): string {
   return name
     .split(' ')

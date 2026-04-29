@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Bell, LogOut, User, ChevronDown } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
@@ -14,12 +14,22 @@ interface TopbarProps {
 export default function DashboardTopbar({ userEmail, userName }: TopbarProps) {
   const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   async function handleLogout() {
     const supabase = createClient()
     await supabase.auth.signOut()
     router.push('/login')
-    router.refresh()
   }
 
   return (
@@ -29,18 +39,15 @@ export default function DashboardTopbar({ userEmail, userName }: TopbarProps) {
       <div className="flex items-center gap-3">
         <button className="btn-ghost w-9 h-9 rounded-xl p-0 relative" aria-label="Notifications">
           <Bell size={17} />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full" style={{ backgroundColor: '#00d4b8' }} />
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--brand-500)' }} />
         </button>
 
-        <div className="relative">
+        <div className="relative" ref={menuRef}>
           <button
             onClick={() => setMenuOpen((v) => !v)}
-            className="flex items-center gap-2.5 rounded-xl px-3 py-2 transition-colors"
-            style={{ color: '#888' }}
-            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#111')}
-            onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
+            className="btn-ghost flex items-center gap-2.5 rounded-xl px-3 py-2"
           >
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-700" style={{ backgroundColor: '#00d4b8', color: '#050505' }}>
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-700" style={{ backgroundColor: 'var(--brand-500)', color: '#050505' }}>
               {getInitials(userName)}
             </div>
             <span className="text-sm max-w-[120px] truncate hidden sm:block" style={{ color: '#aaa' }}>
@@ -57,10 +64,7 @@ export default function DashboardTopbar({ userEmail, userName }: TopbarProps) {
               </div>
 
               <button
-                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors"
-                style={{ color: '#888' }}
-                onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#111'; e.currentTarget.style.color = '#fff' }}
-                onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#888' }}
+                className="btn-ghost w-full flex items-center gap-2.5 px-4 py-2.5 text-sm rounded-none"
                 onClick={() => { setMenuOpen(false); router.push('/dashboard/settings') }}
               >
                 <User size={14} />
@@ -69,10 +73,8 @@ export default function DashboardTopbar({ userEmail, userName }: TopbarProps) {
 
               <button
                 onClick={handleLogout}
-                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors"
+                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors rounded-none"
                 style={{ color: '#ef4444' }}
-                onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'rgba(239,68,68,0.08)')}
-                onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
               >
                 <LogOut size={14} />
                 Sign out

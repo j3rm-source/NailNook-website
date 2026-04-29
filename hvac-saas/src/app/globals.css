@@ -321,7 +321,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 40px -10px rgba(0, 212, 184, 0.4);
 }
 
-@utility glow-orange {
+@utility glow-teal-soft {
   box-shadow: 0 0 40px -10px rgba(0, 212, 184, 0.3);
 }
 
