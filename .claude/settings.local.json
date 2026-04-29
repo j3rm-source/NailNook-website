@@ -159,7 +159,8 @@
       "Bash(taskkill /PID 21560 /F)",
       "PowerShell(Stop-Process -Id 21560 -Force)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(npx next *)"
     ]
   }
 }

@@ -49,7 +49,7 @@ export default function LandingPage() {
       <nav style={{ borderBottom: '1px solid #111111', position: 'sticky', top: 0, zIndex: 50, backgroundColor: 'rgba(5,5,5,0.92)', backdropFilter: 'blur(12px)' }}>
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/">
-            <img src="/logo.png" alt="J2 Systems" style={{ height: 48, width: 'auto' }} />
+            <img src="/logo.png" alt="J2 Systems" style={{ height: 56, width: 'auto' }} />
           </Link>
           <div className="hidden md:flex items-center gap-8 text-sm font-500" style={{ color: '#666' }}>
             <a href="#how-it-works" className="hover:text-white transition-colors">HOW IT WORKS</a>
