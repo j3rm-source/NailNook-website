@@ -271,7 +271,7 @@ export default function LandingPage() {
               <ul className="space-y-3 flex-1 mb-8">
                 {plan.features.map(f => (
                   <li key={f} className="flex items-start gap-2.5 text-sm" style={{ color: '#888' }}>
-                    <CheckCircle2 size={14} className="shrink-0 mt-0.5" style={{ color: '#22c55e' }} />
+                    <CheckCircle2 size={14} className="shrink-0 mt-0.5" style={{ color: BRAND }} />
                     {f}
                   </li>
                 ))}
