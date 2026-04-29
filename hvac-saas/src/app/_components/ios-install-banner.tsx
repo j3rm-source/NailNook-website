@@ -8,18 +8,21 @@ export default function IosInstallBanner() {
 
   useEffect(() => {
     const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent)
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches
-    const dismissed = localStorage.getItem('pwa-banner-dismissed')
+    const isStandalone =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      (window.navigator as any).standalone === true
+
+    let dismissed = false
+    try { dismissed = !!localStorage.getItem('pwa-banner-dismissed') } catch {}
 
     if (isIos && !isStandalone && !dismissed) {
-      // Small delay so it doesn't flash immediately on load
       const t = setTimeout(() => setShow(true), 2500)
       return () => clearTimeout(t)
     }
   }, [])
 
   function dismiss() {
-    localStorage.setItem('pwa-banner-dismissed', '1')
+    try { localStorage.setItem('pwa-banner-dismissed', '1') } catch {}
     setShow(false)
   }
 

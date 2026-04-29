@@ -14,7 +14,7 @@ export const viewport: Viewport = {
   themeColor: '#00d4b8',
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 5,
 }
 
 export const metadata: Metadata = {
@@ -46,8 +46,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="apple-touch-icon" href="/logo.png" />
       </head>
       <body className="antialiased">
