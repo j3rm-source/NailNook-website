@@ -5,7 +5,7 @@ import AuthForm from '../_components/auth-form'
 
 export const metadata: Metadata = {
   title: 'Sign In',
-  description: 'Sign in to your TradeDesk account.',
+  description: 'Sign in to your J2 Systems account.',
 }
 
 export default function LoginPage({

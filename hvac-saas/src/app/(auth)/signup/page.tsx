@@ -5,7 +5,7 @@ import AuthForm from '../_components/auth-form'
 
 export const metadata: Metadata = {
   title: 'Create Account',
-  description: 'Start your free trial of TradeDesk.',
+  description: 'Start your free trial of J2 Systems.',
 }
 
 export default function SignupPage() {

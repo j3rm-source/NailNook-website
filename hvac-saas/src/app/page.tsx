@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Phone, MessageSquare, Globe, BarChart3, CheckCircle2, Zap, ArrowRight, Bot, Users, Briefcase } from 'lucide-react'
+import { Phone, MessageSquare, Globe, BarChart3, CheckCircle2, ArrowRight, Bot, Users, Briefcase } from 'lucide-react'
 import RoiCalculator from './_components/roi-calculator'
 
 const BRAND = 'var(--brand-500)'
@@ -48,11 +48,8 @@ export default function LandingPage() {
       {/* ── Nav ── */}
       <nav style={{ borderBottom: '1px solid #111111', position: 'sticky', top: 0, zIndex: 50, backgroundColor: 'rgba(5,5,5,0.92)', backdropFilter: 'blur(12px)' }}>
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ backgroundColor: BRAND}}>
-              <Zap size={13} color="#050505" />
-            </div>
-            <span className="font-800 text-lg text-white" style={{ letterSpacing: '-0.02em' }}>TradeDesk</span>
+          <Link href="/">
+            <img src="/logo.png" alt="J2 Systems" style={{ height: 36, width: 'auto' }} />
           </Link>
           <div className="hidden md:flex items-center gap-8 text-sm font-500" style={{ color: '#666' }}>
             <a href="#how-it-works" className="hover:text-white transition-colors">HOW IT WORKS</a>
@@ -83,7 +80,7 @@ export default function LandingPage() {
           <br />INTO BOOKED JOBS
         </h1>
         <p className="text-xl mb-12 max-w-2xl mx-auto" style={{ color: '#666', lineHeight: 1.7 }}>
-          TradeDesk gives HVAC and plumbing businesses an AI receptionist that answers every missed call, sends SMS follow-ups automatically, and fills your schedule — 24/7.
+          J2 Systems gives HVAC and plumbing businesses an AI receptionist that answers every missed call, sends SMS follow-ups automatically, and fills your schedule — 24/7.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
@@ -133,7 +130,7 @@ export default function LandingPage() {
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
           {[
-            { n: '01', title: 'Missed call comes in', desc: 'A customer calls your Twilio number. You\'re on the job and can\'t pick up. TradeDesk\'s AI immediately calls them back — within seconds.' },
+            { n: '01', title: 'Missed call comes in', desc: 'A customer calls your Twilio number. You\'re on the job and can\'t pick up. J2 Systems\'s AI immediately calls them back — within seconds.' },
             { n: '02', title: 'AI collects their info', desc: 'The AI greets them by your business name, asks what service they need, gets their address, and offers to send a booking link.' },
             { n: '03', title: 'SMS sequence fires', desc: 'If they don\'t book on the call, 3 automated follow-up texts go out: right away, 24 hours later, and 72 hours later. Stops when they book.' },
           ].map(({ n, title, desc }) => (
@@ -192,15 +189,15 @@ export default function LandingPage() {
       <section style={{ borderTop: '1px solid #111', backgroundColor: '#080808' }}>
         <div className="max-w-4xl mx-auto px-6 py-24">
           <p className="text-center text-xs font-700 uppercase tracking-widest mb-3" style={{ color: BRAND}}>
-            Does TradeDesk have the following?
+            Does J2 Systems have the following?
           </p>
           <h2 className="text-4xl font-800 text-center mb-14" style={{ letterSpacing: '-0.03em' }}>
-            TradeDesk vs. a human receptionist
+            J2 Systems vs. a human receptionist
           </h2>
           <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid #1a1a1a' }}>
             <div className="grid grid-cols-3 text-xs font-700 uppercase tracking-widest px-6 py-4" style={{ backgroundColor: '#0d0d0d', borderBottom: '1px solid #1a1a1a', color: '#555' }}>
               <span className="col-span-1">Feature</span>
-              <span className="text-center" style={{ color: BRAND}}>TradeDesk</span>
+              <span className="text-center" style={{ color: BRAND}}>J2 Systems</span>
               <span className="text-center">Human Receptionist</span>
             </div>
             {COMPARISON.map(({ feature, human }, i) => (
@@ -280,7 +277,7 @@ export default function LandingPage() {
             Stop losing jobs to missed calls
           </h2>
           <p className="mb-10 text-lg" style={{ color: 'rgba(5,5,5,0.65)' }}>
-            Join HVAC and plumbing pros who use TradeDesk to fill their schedule automatically.
+            Join HVAC and plumbing pros who use J2 Systems to fill their schedule automatically.
           </p>
           <Link
             href="/signup"
@@ -296,12 +293,9 @@ export default function LandingPage() {
       <footer style={{ backgroundColor: '#030303', borderTop: '1px solid #111' }}>
         <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md flex items-center justify-center" style={{ backgroundColor: BRAND}}>
-              <Zap size={11} color="#050505" />
-            </div>
-            <span className="font-700 text-sm" style={{ color: '#555' }}>TradeDesk</span>
+            <img src="/logo.png" alt="J2 Systems" style={{ height: 28, width: 'auto', opacity: 0.6 }} />
           </div>
-          <p className="text-xs" style={{ color: '#333' }}>© {new Date().getFullYear()} TradeDesk. All rights reserved.</p>
+          <p className="text-xs" style={{ color: '#333' }}>© {new Date().getFullYear()} J2 Systems. All rights reserved.</p>
           <div className="flex gap-4">
             <Link href="/login" className="text-xs transition-colors hover:text-white" style={{ color: '#444' }}>Log in</Link>
             <Link href="/signup" className="text-xs transition-colors hover:text-white" style={{ color: '#444' }}>Sign up</Link>

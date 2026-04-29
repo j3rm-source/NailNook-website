@@ -10,8 +10,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'TradeDesk — HVAC & Plumbing Business Platform',
-    template: '%s | TradeDesk',
+    default: 'J2 Systems — Automated Systems. Real Results.',
+    template: '%s | J2 Systems',
   },
   description:
     'All-in-one platform for HVAC and plumbing businesses. CRM, booking, AI receptionist, SMS follow-ups, and your own professional website.',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    siteName: 'TradeDesk',
+    siteName: 'J2 Systems',
   },
 }
 

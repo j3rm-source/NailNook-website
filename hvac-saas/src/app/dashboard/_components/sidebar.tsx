@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard, Users, Briefcase, CalendarCheck,
   MessageSquare, Phone, BarChart3, Settings,
-  CreditCard, Zap, Globe
+  CreditCard, Globe
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getPlanFeatures, type PlanTier } from '@/lib/types'
@@ -90,13 +90,8 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
     <aside className="w-64 flex-shrink-0 flex flex-col" style={{ backgroundColor: '#080808', borderRight: '1px solid #111' }}>
       {/* Logo + Business */}
       <div className="p-5" style={{ borderBottom: '1px solid #111' }}>
-        <Link href="/dashboard" className="flex items-center gap-2.5 mb-3">
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#00d4b8' }}>
-            <Zap size={15} color="#050505" />
-          </div>
-          <span className="font-800 text-white text-lg" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif', letterSpacing: '-0.02em' }}>
-            TradeDesk
-          </span>
+        <Link href="/dashboard" className="flex items-center mb-3">
+          <img src="/logo.png" alt="J2 Systems" style={{ height: 32, width: 'auto' }} />
         </Link>
         <div className="flex items-center justify-between">
           <span className="text-xs text-slate-400 truncate max-w-[140px]">{businessName}</span>

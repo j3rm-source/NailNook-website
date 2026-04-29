@@ -78,7 +78,7 @@ export default function RoiCalculator() {
               </div>
             </div>
             <div>
-              <p className="text-xs font-600 uppercase tracking-wider mb-2" style={{ color: 'var(--brand-500)' }}>What TradeDesk recovers</p>
+              <p className="text-xs font-600 uppercase tracking-wider mb-2" style={{ color: 'var(--brand-500)' }}>What J2 Systems recovers</p>
               <p className="text-5xl font-800 mb-1" style={{ color: 'var(--brand-500)' }}>
                 {formatCurrencyCompact(recovered)}
                 <span className="text-lg font-400 ml-1" style={{ color: 'var(--brand-600)' }}>/yr</span>

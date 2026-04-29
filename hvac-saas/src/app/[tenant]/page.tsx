@@ -171,7 +171,7 @@ export default async function TenantWebsitePage({ params }: Props) {
           {phone && <span className="mx-2">·</span>}
           {phone && <a href={`tel:${phone}`} className="hover:text-slate-400 transition-colors">{phone}</a>}
           <span className="mx-2">·</span>
-          <span className="text-slate-700">Powered by TradeDesk</span>
+          <span className="text-slate-700">Powered by J2 Systems</span>
         </p>
       </footer>
     </div>
