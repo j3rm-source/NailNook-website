@@ -168,7 +168,7 @@ export default function LandingPage() {
         <div className="grid md:grid-cols-3 gap-4">
           {[
             { icon: Phone, title: 'AI Receptionist', desc: 'Answers missed calls by your business name, gathers info, and offers a booking link. Sounds human. Works 24/7.' },
-            { icon: MessageSquare, title: 'Smart SMS Sequences', desc: '3 automated follow-up texts at t+0, 24hr, and 72hr. Stops automatically when they book. Fully customizable.' },
+            { icon: MessageSquare, title: 'Smart SMS Sequences', desc: '3 automated follow-up texts: instantly, 24hr, and 72hr. Stops automatically when they book. Fully customizable.' },
             { icon: Globe, title: 'Booking Website', desc: 'A website that works as hard as you do — services, booking, and contact all in one. Live in minutes.' },
             { icon: Users, title: 'CRM', desc: 'Every lead from calls, texts, and your website lands in your CRM automatically with source tracking and status.' },
             { icon: Briefcase, title: 'Jobs Pipeline', desc: 'See every job, every stage, every dollar — all in one board.' },
