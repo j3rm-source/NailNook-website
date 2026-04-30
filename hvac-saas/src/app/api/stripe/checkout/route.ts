@@ -2,6 +2,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { stripe, PLAN_PRICE_IDS, PLAN_SETUP_FEE_IDS } from '@/lib/stripe'
 
+function firstOfNextMonthUnix(): number {
+  const now = new Date()
+  const first = new Date(now.getFullYear(), now.getMonth() + 1, 1)
+  return Math.floor(first.getTime() / 1000)
+}
+
 export async function POST(request: NextRequest) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -26,7 +32,6 @@ export async function POST(request: NextRequest) {
     payment_method_types: ['card'],
     line_items: [
       { price: priceId, quantity: 1 },
-      { price: setupFeeId, quantity: 1 },
     ],
     customer_email: user.email,
     metadata: {
@@ -38,6 +43,9 @@ export async function POST(request: NextRequest) {
     cancel_url: `${appUrl}/signup/plan?cancelled=true`,
     subscription_data: {
       metadata: { user_id: user.id, plan_tier: String(plan) },
+      add_invoice_items: [{ price: setupFeeId }],
+      billing_cycle_anchor: firstOfNextMonthUnix(),
+      proration_behavior: 'none',
     },
   })
 
