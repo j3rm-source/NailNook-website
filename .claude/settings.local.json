@@ -172,7 +172,8 @@
       "Bash(rm \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/workers/sms-worker.ts\")",
       "Bash(rmdir \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/workers\")",
       "Bash(git branch *)",
-      "Bash(git remote *)"
+      "Bash(git remote *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001)"
     ]
   }
 }
