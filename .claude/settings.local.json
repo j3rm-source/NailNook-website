@@ -163,7 +163,8 @@
       "Bash(npx next *)",
       "PowerShell(Get-Process node, npm -ErrorAction SilentlyContinue)",
       "PowerShell(Get-Process | Where-Object { $_.Name -match \"node|npm\" } | Select-Object Id, Name)",
-      "PowerShell(Get-Process | ForEach-Object { try { $_.Modules | Where-Object { $_.FileName -match \"hvac-saas\" } | ForEach-Object { \"$\\($_.FileName\\) — PID $\\($_.BaseAddress\\)\" } } catch {} } 2>&1)"
+      "PowerShell(Get-Process | ForEach-Object { try { $_.Modules | Where-Object { $_.FileName -match \"hvac-saas\" } | ForEach-Object { \"$\\($_.FileName\\) — PID $\\($_.BaseAddress\\)\" } } catch {} } 2>&1)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({k:d[k] for k in ['scripts','dependencies','devDependencies'] if k in d}, indent=2\\)\\)\")"
     ]
   }
 }

@@ -165,11 +165,13 @@ A multi-tenant SaaS platform for HVAC and plumbing businesses (Next.js, React 19
 
 ### Dev commands (run from inside `hvac-saas/`)
 ```bash
-npm run dev      # dev server on :3000
+npm run dev      # dev server on :3001
 npm run build    # production build
 npm run lint     # ESLint
 npm run worker   # BullMQ background worker (SMS sequences + review requests)
 ```
+
+> **Next.js version warning:** `hvac-saas` runs Next.js 16 which has breaking changes from earlier versions — APIs, conventions, and file structure may differ from training data. Read `node_modules/next/dist/docs/` before writing any Next.js code here.
 
 ### What it does
 - **AI phone receptionist** — Bland AI answers missed calls 24/7, collects lead info, sends booking links via SMS
