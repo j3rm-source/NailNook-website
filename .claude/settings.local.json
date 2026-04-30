@@ -160,7 +160,9 @@
       "PowerShell(Stop-Process -Id 21560 -Force)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "PowerShell(Get-Process node, npm -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Process | Where-Object { $_.Name -match \"node|npm\" } | Select-Object Id, Name)"
     ]
   }
 }
