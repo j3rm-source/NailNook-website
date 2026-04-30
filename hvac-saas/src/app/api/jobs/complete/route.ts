@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/server'
-import { reviewQueue } from '@/lib/queue'
+import { publishDelayed } from '@/lib/qstash'
 
 export async function PATCH(request: NextRequest) {
   const { jobId } = await request.json() as { jobId: string }
@@ -11,7 +11,6 @@ export async function PATCH(request: NextRequest) {
 
   const supabase = await createAdminClient()
 
-  // Mark job completed
   const { data: job, error } = await supabase
     .from('jobs')
     .update({ status: 'completed', completed_at: new Date().toISOString() })
@@ -24,16 +23,14 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error: 'Job not found' }, { status: 404 })
   }
 
-  // Fetch contact phone + tenant review link
   const [{ data: contact }, { data: tenant }] = await Promise.all([
     supabase.from('contacts').select('phone, first_name').eq('id', job.contact_id).single(),
     supabase.from('tenants').select('business_name, google_review_link, twilio_number').eq('id', job.tenant_id).single(),
   ])
 
-  // Only send review request if we have a phone and review link
   if (contact?.phone && tenant?.google_review_link && tenant?.twilio_number) {
-    await reviewQueue.add(
-      'send-review-request',
+    await publishDelayed(
+      '/api/qstash/review-request',
       {
         tenantId: job.tenant_id,
         contactId: job.contact_id,
@@ -41,10 +38,7 @@ export async function PATCH(request: NextRequest) {
         businessName: tenant.business_name,
         reviewLink: tenant.google_review_link,
       },
-      {
-        delay: 2 * 60 * 60 * 1000, // 2 hours
-        attempts: 2,
-      }
+      2 * 60 * 60 // 2 hours
     )
   }
 

@@ -164,7 +164,13 @@
       "PowerShell(Get-Process node, npm -ErrorAction SilentlyContinue)",
       "PowerShell(Get-Process | Where-Object { $_.Name -match \"node|npm\" } | Select-Object Id, Name)",
       "PowerShell(Get-Process | ForEach-Object { try { $_.Modules | Where-Object { $_.FileName -match \"hvac-saas\" } | ForEach-Object { \"$\\($_.FileName\\) — PID $\\($_.BaseAddress\\)\" } } catch {} } 2>&1)",
-      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({k:d[k] for k in ['scripts','dependencies','devDependencies'] if k in d}, indent=2\\)\\)\")"
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({k:d[k] for k in ['scripts','dependencies','devDependencies'] if k in d}, indent=2\\)\\)\")",
+      "Bash(npm uninstall *)",
+      "Bash(mkdir -p \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/app/api/qstash/sms-followup\")",
+      "Bash(mkdir -p \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/app/api/qstash/review-request\")",
+      "Bash(rm \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/lib/queue.ts\")",
+      "Bash(rm \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/workers/sms-worker.ts\")",
+      "Bash(rmdir \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/workers\")"
     ]
   }
 }

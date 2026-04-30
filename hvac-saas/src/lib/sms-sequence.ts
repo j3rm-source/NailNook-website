@@ -1,11 +1,11 @@
-import { smsQueue } from './queue'
+import { publishDelayed, cancelMessage } from './qstash'
 import { createAdminClient } from './supabase/server'
 import { interpolateSmsTemplate } from './utils'
 
-const SEQUENCE_DELAYS_MS = [
-  0,                        // t+0  immediate
-  24 * 60 * 60 * 1000,      // t+24hr
-  72 * 60 * 60 * 1000,      // t+72hr
+const SEQUENCE_DELAYS_S = [
+  0,                  // t+0  immediate
+  24 * 60 * 60,       // t+24hr
+  72 * 60 * 60,       // t+72hr
 ]
 
 export interface SmsSequencePayload {
@@ -15,14 +15,9 @@ export interface SmsSequencePayload {
   templateVars: Record<string, string>
 }
 
-/**
- * Start a 3-message SMS follow-up sequence for a contact.
- * Returns the BullMQ job IDs so they can be cancelled later.
- */
 export async function startSmsSequence(payload: SmsSequencePayload): Promise<string[]> {
   const supabase = await createAdminClient()
 
-  // Fetch templates for this tenant
   const { data: templates } = await supabase
     .from('sms_templates')
     .select('*')
@@ -31,41 +26,28 @@ export async function startSmsSequence(payload: SmsSequencePayload): Promise<str
 
   if (!templates || templates.length === 0) return []
 
-  const jobIds: string[] = []
+  const messageIds: string[] = []
 
   for (let i = 0; i < templates.length; i++) {
-    const template = templates[i]
-    const delay = SEQUENCE_DELAYS_MS[i] ?? 0
-    const body = interpolateSmsTemplate(template.body, payload.templateVars)
-
-    const job = await smsQueue.add(
-      'send-sms',
-      {
-        tenantId: payload.tenantId,
-        contactId: payload.contactId,
-        to: payload.contactPhone,
-        body,
-      },
-      { delay, attempts: 3, backoff: { type: 'exponential', delay: 5000 } }
+    const body = interpolateSmsTemplate(templates[i].body, payload.templateVars)
+    const messageId = await publishDelayed(
+      '/api/qstash/sms-followup',
+      { tenantId: payload.tenantId, contactId: payload.contactId, to: payload.contactPhone, body },
+      SEQUENCE_DELAYS_S[i] ?? 0
     )
-
-    jobIds.push(job.id!)
+    messageIds.push(messageId)
   }
 
-  // Record the sequence in DB
   await supabase.from('sms_sequences').insert({
     tenant_id: payload.tenantId,
     contact_id: payload.contactId,
-    bullmq_job_ids: jobIds,
+    bullmq_job_ids: messageIds,
     status: 'active',
   })
 
-  return jobIds
+  return messageIds
 }
 
-/**
- * Cancel all pending SMS jobs for a contact (e.g. when they book).
- */
 export async function cancelSmsSequence(contactId: string): Promise<void> {
   const supabase = await createAdminClient()
 
@@ -78,13 +60,8 @@ export async function cancelSmsSequence(contactId: string): Promise<void> {
   if (!sequences) return
 
   for (const seq of sequences) {
-    for (const jobId of seq.bullmq_job_ids) {
-      try {
-        const job = await smsQueue.getJob(jobId)
-        await job?.remove()
-      } catch {
-        // Job may have already fired — ignore
-      }
+    for (const messageId of seq.bullmq_job_ids) {
+      await cancelMessage(messageId)
     }
 
     await supabase
