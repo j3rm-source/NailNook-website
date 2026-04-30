@@ -109,7 +109,7 @@ export default function LandingPage() {
             className="flex items-center gap-2 text-base font-700 px-8 py-4 rounded-xl transition-all hover:opacity-90"
             style={{ backgroundColor: BRAND, color: '#050505', boxShadow: '0 4px 30px -4px rgba(0,212,184,0.4)' }}
           >
-            TRY FREE DEMO <ArrowRight size={17} />
+            Claim Your Free Audit Today <ArrowRight size={17} />
           </Link>
           <a
             href="#pricing"
@@ -119,7 +119,6 @@ export default function LandingPage() {
             See Pricing
           </a>
         </div>
-        <p className="text-xs mt-5" style={{ color: '#333' }}>No credit card required to start</p>
       </section>
 
       {/* ── Stats bar ── */}
@@ -309,7 +308,7 @@ export default function LandingPage() {
             className="inline-flex items-center gap-2 text-base font-700 px-10 py-4 rounded-xl transition-all hover:opacity-90"
             style={{ backgroundColor: '#050505', color: BRAND}}
           >
-            Talk to an Expert <ArrowRight size={17} />
+            Book Your Free Audit <ArrowRight size={17} />
           </Link>
         </div>
       </section>
