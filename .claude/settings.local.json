@@ -170,7 +170,9 @@
       "Bash(mkdir -p \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/app/api/qstash/review-request\")",
       "Bash(rm \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/lib/queue.ts\")",
       "Bash(rm \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/workers/sms-worker.ts\")",
-      "Bash(rmdir \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/workers\")"
+      "Bash(rmdir \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/workers\")",
+      "Bash(git branch *)",
+      "Bash(git remote *)"
     ]
   }
 }
