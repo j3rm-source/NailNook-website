@@ -6,7 +6,6 @@ import '@/styles/marketing.css'
 const SPECIALISTS = [
   {name:'Stephanie',role:'Owner / Nail Tech',spec:'Nail Tech',phone:'928-486-3524',badge:'Owner',bg:'fce4ec',fg:'e91e8c'},
   {name:'Raquel',role:'Nail Technician',spec:'Nail Tech',phone:'928-846-1087',badge:'',bg:'f9a8c9',fg:'c2185b'},
-  {name:'Jessica',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-3735',badge:'',bg:'fce4ec',fg:'e91e8c'},
   {name:'Katie',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-5323',badge:'',bg:'f9a8c9',fg:'c2185b'},
   {name:'Selena',role:'Nail Technician',spec:'Nail Tech',phone:'928-662-8250',badge:'',bg:'fce4ec',fg:'e91e8c'},
   {name:'Shannon',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-6965',badge:'',bg:'f9a8c9',fg:'c2185b'},
@@ -14,7 +13,7 @@ const SPECIALISTS = [
   {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b'},
   {name:'Kathy',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-706-6177',badge:'',bg:'fce4ec',fg:'e91e8c'},
   {name:'Kendall',role:'Restoration Med Spa',spec:'Restoration Med Spa',phone:'928-706-1575',badge:'',bg:'fce4ec',fg:'e91e8c'},
-  {name:'Laura',role:'Masus',spec:'Masus',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b'},
+  {name:'Lara',role:'Masus',spec:'Masus',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b'},
   {name:'Shelby',role:'Waxing Specialist',spec:'Waxer',phone:'951-532-6685',badge:'',bg:'fce4ec',fg:'e91e8c'},
   {name:'Ashly',role:'Eyelash Specialist',spec:'Eyelashes',phone:'928-302-0949',badge:'',bg:'f9a8c9',fg:'c2185b'},
 ]
@@ -185,7 +184,7 @@ export default function TeamPage() {
       <div className="page-hero">
         <span className="lbl-plain" style={{animation:'mktFadeUp .7s ease both'}}>Meet the Artists</span>
         <h1 className="pg-title" style={{animation:'mktFadeUp .7s .15s ease both'}}>Our Nail Specialists</h1>
-        <p className="pg-sub" style={{animation:'mktFadeUp .7s .3s ease both'}}>14 passionate artists dedicated to making your nails a work of art. Each with their own signature style, specialty, and love for the craft.</p>
+        <p className="pg-sub" style={{animation:'mktFadeUp .7s .3s ease both'}}>12 passionate artists dedicated to making your nails a work of art. Each with their own signature style, specialty, and love for the craft.</p>
       </div>
 
       {/* INTRO */}
