@@ -4,18 +4,20 @@ import Link from 'next/link'
 import '@/styles/marketing.css'
 
 const SPECIALISTS = [
-  {name:'Stephanie',role:'Owner / Nail Tech',spec:'Nail Tech',phone:'928-486-3524',badge:'Owner',bg:'fce4ec',fg:'e91e8c'},
-  {name:'Raquel',role:'Nail Technician',spec:'Nail Tech',phone:'928-846-1087',badge:'',bg:'f9a8c9',fg:'c2185b'},
-  {name:'Katie',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-5323',badge:'',bg:'f9a8c9',fg:'c2185b'},
-  {name:'Selena',role:'Nail Technician',spec:'Nail Tech',phone:'928-662-8250',badge:'',bg:'fce4ec',fg:'e91e8c'},
-  {name:'Shannon',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-6965',badge:'',bg:'f9a8c9',fg:'c2185b'},
-  {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'480-241-9972',badge:'',bg:'fce4ec',fg:'e91e8c'},
-  {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b'},
-  {name:'Kathy',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-706-6177',badge:'',bg:'fce4ec',fg:'e91e8c'},
-  {name:'Kendall',role:'Restoration Med Spa',spec:'Restoration Med Spa',phone:'928-706-1575',badge:'',bg:'fce4ec',fg:'e91e8c'},
-  {name:'Lara',role:'Masus',spec:'Masus',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b'},
-  {name:'Shelby',role:'Waxing Specialist',spec:'Waxer',phone:'951-532-6685',badge:'',bg:'fce4ec',fg:'e91e8c'},
-  {name:'Ashly',role:'Eyelash Specialist',spec:'Eyelashes',phone:'928-302-0949',badge:'',bg:'f9a8c9',fg:'c2185b'},
+  {name:'Stephanie',role:'Owner / Nail Tech',spec:'Nail Tech',phone:'928-486-3524',badge:'Owner',bg:'fce4ec',fg:'e91e8c',photo:'',photos:[]},
+  {name:'Raquel',role:'Nail Technician',spec:'Nail Tech',phone:'928-846-1087',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',photos:[]},
+  {name:'Katie',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-5323',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',photos:[]},
+  {name:'Selena',role:'Nail Technician',spec:'Nail Tech',phone:'928-662-8250',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',photos:[]},
+  {name:'Shannon',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-6965',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',photos:[]},
+  {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'480-241-9972',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',photos:[]},
+  {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',photos:[]},
+  {name:'Kathy',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-706-6177',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',photos:[]},
+  {name:'Kendall',role:'Restoration Med Spa',spec:'Restoration Med Spa',phone:'928-706-1575',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',photos:[]},
+  {name:'Lara',role:'Masus',spec:'Masus',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',photos:[]},
+  {name:'Shelby',role:'Waxing Specialist',spec:'Waxer',phone:'951-532-6685',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',photos:[]},
+  {name:'Ashly',role:'Eyelash Specialist',spec:'Eyelashes',phone:'928-302-0949',badge:'',bg:'f9a8c9',fg:'c2185b',
+    photo:'/team/ashly/headshot.jpg',
+    photos:['/team/ashly/work-1.jpg','/team/ashly/work-2.jpg','/team/ashly/work-3.jpg','/team/ashly/work-4.jpg','/team/ashly/work-5.jpg','/team/ashly/work-1.jpg']},
 ]
 
 const PHOTOS = [
@@ -200,11 +202,12 @@ export default function TeamPage() {
           {SPECIALISTS.map((sp, si) => {
             const galImgs = Array.from({length: 6}, (_, i) => PHOTOS[(si * 6 + i) % PHOTOS.length])
             const baseIdx = si * 6
+            const displayImgs = sp.photos.length ? sp.photos : galImgs
             return (
               <div key={sp.name} className="sc rv" style={{transitionDelay: `${si * 0.06}s`}}>
                 <div className="sc-top">
                   <img
-                    src={`https://ui-avatars.com/api/?name=${encodeURIComponent(sp.name)}&background=${sp.bg}&color=${sp.fg}&size=400&bold=true`}
+                    src={sp.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(sp.name)}&background=${sp.bg}&color=${sp.fg}&size=400&bold=true`}
                     alt={sp.name}
                     loading="lazy"
                   />
@@ -215,7 +218,7 @@ export default function TeamPage() {
                   <span className="sc-role">{sp.spec}</span>
                   <a className="sc-phone" href={`tel:${sp.phone.replace(/\D/g,'')}`}>{sp.phone}</a>
                   <div className="sc-gal">
-                    {galImgs.map((u, i) => (
+                    {displayImgs.map((u, i) => (
                       <img
                         key={i}
                         src={u}

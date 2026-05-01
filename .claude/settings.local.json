@@ -173,7 +173,14 @@
       "Bash(rmdir \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/hvac-saas/src/workers\")",
       "Bash(git branch *)",
       "Bash(git remote *)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001)",
+      "Bash(mv Ashly/* .)",
+      "Bash(rmdir Ashly)",
+      "Bash(mv \"Copy of Ashley Joy - 2.jpeg\" headshot.jpg)",
+      "Bash(mv \"IMG_8905.JPG\" work-1.jpg)",
+      "Bash(mv \"IMG_8906.JPG\" work-2.jpg)",
+      "Bash(mv \"IMG_8352.jpeg\" work-3.jpg)",
+      "Bash(mv \"3F4DF815-7F66-4CA7-88A7-6B7F17C7A209.JPG\" work-4.jpg)"
     ]
   }
 }
