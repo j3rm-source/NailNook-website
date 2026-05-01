@@ -235,7 +235,9 @@
       "Bash(mv IMG_0806.jpg work-1.jpg)",
       "Bash(mv IMG_1664.jpg work-2.jpg)",
       "Bash(mv IMG_2383.jpg work-3.jpg)",
-      "Bash(mv IMG_3445.jpg work-4.jpg)"
+      "Bash(mv IMG_3445.jpg work-4.jpg)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Id 2180 -Force)"
     ]
   }
 }
