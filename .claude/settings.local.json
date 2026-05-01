@@ -202,7 +202,8 @@
       "Bash(mv IMG_1300.jpg work-1.jpg)",
       "Bash(mv IMG_1060.jpg work-2.jpg)",
       "Bash(mv IMG_2892.jpg work-3.jpg)",
-      "Bash(mv IMG_1015.jpg work-4.jpg)"
+      "Bash(mv IMG_1015.jpg work-4.jpg)",
+      "PowerShell(Stop-Process -Id 22040 -Force)"
     ]
   }
 }
