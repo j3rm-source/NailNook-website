@@ -10,7 +10,7 @@ const SPECIALISTS = [
   {name:'Selena',role:'Nail Technician',spec:'Nail Tech',phone:'928-662-8250',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
   {name:'Shannon',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-6965',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/shannon/headshot.jpg',imgPos:'',photos:['/team/shannon/work-1.jpg','/team/shannon/work-2.jpg','/team/shannon/work-3.jpg','/team/shannon/work-4.jpg','/team/shannon/work-5.jpg','/team/shannon/work-6.jpg']},
   {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'480-241-9972',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
-  {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/ricci/headshot.jpg',imgPos:'center 25%',photos:['/team/ricci/work-1.jpg','/team/ricci/work-2.jpg','/team/ricci/work-3.jpg','/team/ricci/work-4.jpg','/team/ricci/work-5.jpg','/team/ricci/work-6.jpg']},
+  {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/ricci/work-1.jpg',imgPos:'center 20%',photos:['/team/ricci/work-2.jpg','/team/ricci/work-3.jpg','/team/ricci/work-4.jpg','/team/ricci/work-5.jpg','/team/ricci/work-6.jpg','/team/ricci/work-6.jpg']},
   {name:'Kathy',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-706-6177',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
   {name:'Kendall',role:'Restoration Med Spa',spec:'Restoration Med Spa',phone:'928-706-1575',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
   {name:'Lara',role:'Masus',spec:'Masus',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',imgPos:'',photos:[]},
