@@ -237,7 +237,16 @@
       "Bash(mv IMG_2383.jpg work-3.jpg)",
       "Bash(mv IMG_3445.jpg work-4.jpg)",
       "PowerShell(Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue)",
-      "PowerShell(Stop-Process -Id 2180 -Force)"
+      "PowerShell(Stop-Process -Id 2180 -Force)",
+      "Bash(mkdir -p ricci)",
+      "Bash(unzip -o \"Ricci.zip\" -d ricci/)",
+      "Bash(mv \"Ricci \"/* .)",
+      "Bash(rmdir \"Ricci \")",
+      "Bash(mv IMG_0049.jpeg headshot.jpg)",
+      "Bash(mv IMG_0054.JPG work-1.jpg)",
+      "Bash(mv IMG_5428.jpeg work-2.jpg)",
+      "Bash(mv IMG_5429.jpeg work-3.jpg)",
+      "Bash(mv IMG_5430.jpeg work-4.jpg)"
     ]
   }
 }
