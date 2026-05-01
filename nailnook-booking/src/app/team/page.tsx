@@ -4,19 +4,19 @@ import Link from 'next/link'
 import '@/styles/marketing.css'
 
 const SPECIALISTS = [
-  {name:'Stephanie',role:'Owner / Nail Tech',spec:'Nail Tech',phone:'928-486-3524',badge:'Owner',bg:'fce4ec',fg:'e91e8c',photo:'',photos:[]},
-  {name:'Raquel',role:'Nail Technician',spec:'Nail Tech',phone:'928-846-1087',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/raquel/headshot.jpg',photos:['/team/raquel/work-1.jpg','/team/raquel/work-2.jpg','/team/raquel/work-3.jpg','/team/raquel/work-4.jpg','/team/raquel/work-5.jpg','/team/raquel/work-6.jpg']},
-  {name:'Katie',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-5323',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',photos:[]},
-  {name:'Selena',role:'Nail Technician',spec:'Nail Tech',phone:'928-662-8250',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',photos:[]},
-  {name:'Shannon',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-6965',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',photos:[]},
-  {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'480-241-9972',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',photos:[]},
-  {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',photos:[]},
-  {name:'Kathy',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-706-6177',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',photos:[]},
-  {name:'Kendall',role:'Restoration Med Spa',spec:'Restoration Med Spa',phone:'928-706-1575',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',photos:[]},
-  {name:'Lara',role:'Masus',spec:'Masus',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',photos:[]},
-  {name:'Shelby',role:'Waxing Specialist',spec:'Waxer',phone:'951-532-6685',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',photos:[]},
+  {name:'Stephanie',role:'Owner / Nail Tech',spec:'Nail Tech',phone:'928-486-3524',badge:'Owner',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
+  {name:'Raquel',role:'Nail Technician',spec:'Nail Tech',phone:'928-846-1087',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/raquel/headshot.jpg',imgPos:'center 20%',photos:['/team/raquel/work-1.jpg','/team/raquel/work-2.jpg','/team/raquel/work-3.jpg','/team/raquel/work-4.jpg','/team/raquel/work-5.jpg','/team/raquel/work-6.jpg']},
+  {name:'Katie',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-5323',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',imgPos:'',photos:[]},
+  {name:'Selena',role:'Nail Technician',spec:'Nail Tech',phone:'928-662-8250',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
+  {name:'Shannon',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-6965',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',imgPos:'',photos:[]},
+  {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'480-241-9972',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
+  {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',imgPos:'',photos:[]},
+  {name:'Kathy',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-706-6177',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
+  {name:'Kendall',role:'Restoration Med Spa',spec:'Restoration Med Spa',phone:'928-706-1575',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
+  {name:'Lara',role:'Masus',spec:'Masus',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',imgPos:'',photos:[]},
+  {name:'Shelby',role:'Waxing Specialist',spec:'Waxer',phone:'951-532-6685',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
   {name:'Ashly',role:'Eyelash Specialist',spec:'Eyelashes',phone:'928-302-0949',badge:'',bg:'f9a8c9',fg:'c2185b',
-    photo:'/team/ashly/headshot.jpg',
+    photo:'/team/ashly/headshot.jpg',imgPos:'',
     photos:['/team/ashly/work-1.jpg','/team/ashly/work-2.jpg','/team/ashly/work-3.jpg','/team/ashly/work-4.jpg','/team/ashly/work-5.jpg','/team/ashly/work-1.jpg']},
 ]
 
@@ -208,6 +208,7 @@ export default function TeamPage() {
                     src={sp.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(sp.name)}&background=${sp.bg}&color=${sp.fg}&size=400&bold=true`}
                     alt={sp.name}
                     loading="lazy"
+                    style={sp.imgPos ? {objectPosition: sp.imgPos} : undefined}
                   />
                   {sp.badge && <span className="sc-badge">{sp.badge}</span>}
                 </div>
