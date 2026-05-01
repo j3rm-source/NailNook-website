@@ -203,7 +203,16 @@
       "Bash(mv IMG_1060.jpg work-2.jpg)",
       "Bash(mv IMG_2892.jpg work-3.jpg)",
       "Bash(mv IMG_1015.jpg work-4.jpg)",
-      "PowerShell(Stop-Process -Id 22040 -Force)"
+      "PowerShell(Stop-Process -Id 22040 -Force)",
+      "Bash(mkdir -p shannon)",
+      "Bash(unzip -o \"Shannon-20260501T034646Z-3-001.zip\" -d shannon/)",
+      "Bash(mv Shannon/* .)",
+      "Bash(rmdir Shannon)",
+      "Bash(mv IMG_1647.JPG headshot.jpg)",
+      "Bash(mv IMG_2332.PNG work-1.jpg)",
+      "Bash(mv IMG_2334.PNG work-2.jpg)",
+      "Bash(mv IMG_2335.PNG work-3.jpg)",
+      "Bash(mv IMG_2336.PNG work-4.jpg)"
     ]
   }
 }
