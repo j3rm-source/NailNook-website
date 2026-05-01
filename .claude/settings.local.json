@@ -187,7 +187,14 @@
       "PowerShell(Get-Process -Id 11872)",
       "PowerShell(Get-Process -Id 11872 -ErrorAction SilentlyContinue)",
       "PowerShell(Get-NetTCPConnection -LocalPort 3000 -State Listen | Select-Object -ExpandProperty OwningProcess | ForEach-Object { Get-Process -Id $_ })",
-      "PowerShell(Stop-Process -Id 11872 -Force)"
+      "PowerShell(Stop-Process -Id 11872 -Force)",
+      "Bash(mkdir -p raquel)",
+      "Bash(unzip -o \"Raquel 2-20260501T032827Z-3-001.zip\" -d raquel/)",
+      "Bash(magick --version)",
+      "Bash(ffmpeg -version)",
+      "PowerShell(Get-Command magick -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command ffmpeg -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command convert -ErrorAction SilentlyContinue)"
     ]
   }
 }
