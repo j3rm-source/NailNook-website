@@ -6,7 +6,7 @@ import '@/styles/marketing.css'
 const SPECIALISTS = [
   {name:'Stephanie',role:'Owner / Nail Tech',spec:'Nail Tech',phone:'928-486-3524',badge:'Owner',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
   {name:'Raquel',role:'Nail Technician',spec:'Nail Tech',phone:'928-846-1087',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/raquel/headshot.jpg',imgPos:'center 35%',photos:['/team/raquel/work-1.jpg','/team/raquel/work-2.jpg','/team/raquel/work-3.jpg','/team/raquel/work-4.jpg','/team/raquel/work-5.jpg','/team/raquel/work-6.jpg']},
-  {name:'Katie',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-5323',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',imgPos:'',photos:[]},
+  {name:'Katie',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-5323',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',imgPos:'',photos:['/team/katie/work-1.jpg','/team/katie/work-2.jpg','/team/katie/work-3.jpg','/team/katie/work-4.jpg','/team/katie/work-5.jpg','/team/katie/work-5.jpg']},
   {name:'Selena',role:'Nail Technician',spec:'Nail Tech',phone:'928-662-8250',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
   {name:'Shannon',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-6965',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/shannon/headshot.jpg',imgPos:'',photos:['/team/shannon/work-1.jpg','/team/shannon/work-2.jpg','/team/shannon/work-3.jpg','/team/shannon/work-4.jpg','/team/shannon/work-5.jpg','/team/shannon/work-6.jpg']},
   {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'480-241-9972',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},

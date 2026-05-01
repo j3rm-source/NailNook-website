@@ -226,7 +226,16 @@
       "Bash(mv /tmp/shelby_fix/Shelby/IMG_4116.jpeg shelby/headshot.jpg)",
       "Bash(rm shelby/work-6.jpg)",
       "Bash(unzip -o \"Shelby.zip\" \"Shelby/IMG_4115.jpeg\" -d /tmp/shelby_fix2/)",
-      "Bash(mv /tmp/shelby_fix2/Shelby/IMG_4115.jpeg shelby/work-6.jpg)"
+      "Bash(mv /tmp/shelby_fix2/Shelby/IMG_4115.jpeg shelby/work-6.jpg)",
+      "Bash(mkdir -p katie)",
+      "Bash(unzip -o \"Katie.zip\" -d katie/)",
+      "Bash(mv Katie/* .)",
+      "Bash(rmdir Katie)",
+      "Bash(rm \"79926310512__17FAEA30-4455-4627-AA44-9F57CA134914.jpg\")",
+      "Bash(mv IMG_0806.jpg work-1.jpg)",
+      "Bash(mv IMG_1664.jpg work-2.jpg)",
+      "Bash(mv IMG_2383.jpg work-3.jpg)",
+      "Bash(mv IMG_3445.jpg work-4.jpg)"
     ]
   }
 }
