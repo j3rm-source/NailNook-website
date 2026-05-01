@@ -180,7 +180,13 @@
       "Bash(mv \"IMG_8905.JPG\" work-1.jpg)",
       "Bash(mv \"IMG_8906.JPG\" work-2.jpg)",
       "Bash(mv \"IMG_8352.jpeg\" work-3.jpg)",
-      "Bash(mv \"3F4DF815-7F66-4CA7-88A7-6B7F17C7A209.JPG\" work-4.jpg)"
+      "Bash(mv \"3F4DF815-7F66-4CA7-88A7-6B7F17C7A209.JPG\" work-4.jpg)",
+      "Bash(findstr :3000)",
+      "Bash(findstr LISTENING)",
+      "Bash(tasklist /FI \"PID eq 11872\" /FO LIST)",
+      "PowerShell(Get-Process -Id 11872)",
+      "PowerShell(Get-Process -Id 11872 -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3000 -State Listen | Select-Object -ExpandProperty OwningProcess | ForEach-Object { Get-Process -Id $_ })"
     ]
   }
 }
