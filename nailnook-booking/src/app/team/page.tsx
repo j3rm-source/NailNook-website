@@ -68,13 +68,12 @@ export default function TeamPage() {
     document.querySelectorAll('.rv').forEach(el => ro.observe(el))
 
     // ---- LIGHTBOX ----
-    const allImgs = SPECIALISTS.flatMap((_, si) =>
-      Array.from({length: 6}, (__, i) => PHOTOS[(si * 6 + i) % PHOTOS.length])
-    )
+    let lbxImgs: string[] = []
     let lbxIdx = 0
-    function lbxOpen(i: number) {
+    function lbxOpen(imgs: string[], i: number) {
+      lbxImgs = imgs
       lbxIdx = i
-      ;(document.getElementById('lbx-img') as HTMLImageElement).src = allImgs[i]
+      ;(document.getElementById('lbx-img') as HTMLImageElement).src = lbxImgs[i]
       document.getElementById('lbx')!.classList.add('on')
       document.body.style.overflow = 'hidden'
     }
@@ -83,8 +82,8 @@ export default function TeamPage() {
       document.body.style.overflow = ''
     }
     function lbxNav(d: number) {
-      lbxIdx = (lbxIdx + d + allImgs.length) % allImgs.length
-      ;(document.getElementById('lbx-img') as HTMLImageElement).src = allImgs[lbxIdx]
+      lbxIdx = (lbxIdx + d + lbxImgs.length) % lbxImgs.length
+      ;(document.getElementById('lbx-img') as HTMLImageElement).src = lbxImgs[lbxIdx]
     }
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') lbxClose()
@@ -201,7 +200,6 @@ export default function TeamPage() {
         <div className="spec-grid">
           {SPECIALISTS.map((sp, si) => {
             const galImgs = Array.from({length: 6}, (_, i) => PHOTOS[(si * 6 + i) % PHOTOS.length])
-            const baseIdx = si * 6
             const displayImgs = sp.photos.length ? sp.photos : galImgs
             return (
               <div key={sp.name} className="sc rv" style={{transitionDelay: `${si * 0.06}s`}}>
@@ -224,7 +222,7 @@ export default function TeamPage() {
                         src={u}
                         alt={`Work sample ${i + 1}`}
                         loading="lazy"
-                        onClick={(e) => { e.stopPropagation(); (window as any).__lbxOpenTeam?.(baseIdx + i) }}
+                        onClick={(e) => { e.stopPropagation(); (window as any).__lbxOpenTeam?.(displayImgs, i) }}
                       />
                     ))}
                   </div>
