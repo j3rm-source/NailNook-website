@@ -194,7 +194,15 @@
       "Bash(ffmpeg -version)",
       "PowerShell(Get-Command magick -ErrorAction SilentlyContinue)",
       "PowerShell(Get-Command ffmpeg -ErrorAction SilentlyContinue)",
-      "PowerShell(Get-Command convert -ErrorAction SilentlyContinue)"
+      "PowerShell(Get-Command convert -ErrorAction SilentlyContinue)",
+      "Bash(mv \"Raquel 2\"/* .)",
+      "Bash(rmdir \"Raquel 2\")",
+      "Bash(npm root *)",
+      "Bash(rm IMG_2631.jpg)",
+      "Bash(mv IMG_1300.jpg work-1.jpg)",
+      "Bash(mv IMG_1060.jpg work-2.jpg)",
+      "Bash(mv IMG_2892.jpg work-3.jpg)",
+      "Bash(mv IMG_1015.jpg work-4.jpg)"
     ]
   }
 }
