@@ -186,7 +186,8 @@
       "Bash(tasklist /FI \"PID eq 11872\" /FO LIST)",
       "PowerShell(Get-Process -Id 11872)",
       "PowerShell(Get-Process -Id 11872 -ErrorAction SilentlyContinue)",
-      "PowerShell(Get-NetTCPConnection -LocalPort 3000 -State Listen | Select-Object -ExpandProperty OwningProcess | ForEach-Object { Get-Process -Id $_ })"
+      "PowerShell(Get-NetTCPConnection -LocalPort 3000 -State Listen | Select-Object -ExpandProperty OwningProcess | ForEach-Object { Get-Process -Id $_ })",
+      "PowerShell(Stop-Process -Id 11872 -Force)"
     ]
   }
 }
