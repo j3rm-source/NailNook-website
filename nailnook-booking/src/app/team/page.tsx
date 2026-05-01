@@ -14,7 +14,7 @@ const SPECIALISTS = [
   {name:'Kathy',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-706-6177',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
   {name:'Kendall',role:'Restoration Med Spa',spec:'Restoration Med Spa',phone:'928-706-1575',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
   {name:'Lara',role:'Masus',spec:'Masus',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',imgPos:'',photos:[]},
-  {name:'Shelby',role:'Waxing Specialist',spec:'Waxer',phone:'951-532-6685',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
+  {name:'Shelby',role:'Waxing Specialist',spec:'Waxer',phone:'951-532-6685',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'/team/shelby/headshot.jpg',imgPos:'',photos:['/team/shelby/work-1.jpg','/team/shelby/work-2.jpg','/team/shelby/work-3.jpg','/team/shelby/work-4.jpg','/team/shelby/work-5.jpg','/team/shelby/work-6.jpg']},
   {name:'Ashly',role:'Eyelash Specialist',spec:'Eyelashes',phone:'928-302-0949',badge:'',bg:'f9a8c9',fg:'c2185b',
     photo:'/team/ashly/headshot.jpg',imgPos:'',
     photos:['/team/ashly/work-1.jpg','/team/ashly/work-2.jpg','/team/ashly/work-3.jpg','/team/ashly/work-4.jpg','/team/ashly/work-5.jpg','/team/ashly/work-1.jpg']},

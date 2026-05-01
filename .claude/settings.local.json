@@ -212,7 +212,16 @@
       "Bash(mv IMG_2332.PNG work-1.jpg)",
       "Bash(mv IMG_2334.PNG work-2.jpg)",
       "Bash(mv IMG_2335.PNG work-3.jpg)",
-      "Bash(mv IMG_2336.PNG work-4.jpg)"
+      "Bash(mv IMG_2336.PNG work-4.jpg)",
+      "Bash(mkdir -p shelby)",
+      "Bash(unzip -o \"Shelby.zip\" -d shelby/)",
+      "Bash(mv Shelby/* .)",
+      "Bash(rmdir Shelby)",
+      "Bash(mv IMG_4117.jpg headshot.jpg)",
+      "Bash(mv IMG_4108.jpeg work-1.jpg)",
+      "Bash(mv IMG_4109.jpeg work-2.jpg)",
+      "Bash(mv IMG_4110.jpeg work-3.jpg)",
+      "Bash(mv IMG_4111.jpeg work-4.jpg)"
     ]
   }
 }
