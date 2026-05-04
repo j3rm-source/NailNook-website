@@ -12,7 +12,7 @@ export default function GeneralSettingsClient({ tenant, profile, saveGeneralSett
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault()
     setSaving(true)
     await saveGeneralSettings(new FormData(e.currentTarget))
@@ -56,6 +56,28 @@ export default function GeneralSettingsClient({ tenant, profile, saveGeneralSett
           <input defaultValue={tenant.twilio_number} disabled className="input opacity-50 cursor-not-allowed font-mono" />
         </div>
       )}
+      <div>
+        <label className="label">Google Review Link</label>
+        <input
+          name="google_review_link"
+          defaultValue={tenant?.google_review_link ?? ''}
+          className="input"
+          placeholder="https://g.page/r/YOUR_ID/review"
+          type="url"
+        />
+        <p className="text-xs text-slate-600 mt-1">Paste your Google Maps review URL — sent automatically 2 hours after a job is marked complete.</p>
+      </div>
+      <div>
+        <label className="label">Cal.com Booking Link</label>
+        <input
+          name="calcom_link"
+          defaultValue={tenant?.calcom_link ?? ''}
+          className="input"
+          placeholder="https://cal.com/yourname/30min"
+          type="url"
+        />
+        <p className="text-xs text-slate-600 mt-1">Your Cal.com scheduling link — embedded in your public website and sent to new leads.</p>
+      </div>
       <div className="flex items-center gap-3 pt-1">
         <button type="submit" disabled={saving} className="btn-primary">
           {saving ? 'Saving...' : 'Save Changes'}

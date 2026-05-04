@@ -39,7 +39,7 @@ export const PLAN_NAMES: Record<1 | 2 | 3, string> = {
 }
 
 export const PLAN_DESCRIPTIONS: Record<1 | 2 | 3, string> = {
-  1: 'Website, CRM & Booking — $900 setup + $200/mo',
-  2: 'AI Receptionist, SMS & SEO — $1,000 setup + $500/mo',
-  3: 'Full Revenue System — $4,000 setup + $1,000/mo',
+  1: 'Website, CRM & Booking — $448.50 today + $197/mo',
+  2: 'AI Receptionist, SMS & SEO — $748.50 today + $597/mo',
+  3: 'Full Revenue System — $2,000 today + $997/mo',
 }

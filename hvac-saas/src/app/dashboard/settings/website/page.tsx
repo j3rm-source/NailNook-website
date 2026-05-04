@@ -22,9 +22,12 @@ export default async function WebsiteSettingsPage() {
     'use server'
 
     const supabaseAdmin = await createAdminClient()
-    const { data: { user: u } } = await (await createClient()).auth.getUser()
-    const { data: p } = await (await createClient())
-      .from('user_profiles').select('tenant_id').eq('id', u!.id).single()
+    const userClient = await createClient()
+    const { data: { user: u } } = await userClient.auth.getUser()
+    if (!u) return
+    const { data: p } = await userClient
+      .from('user_profiles').select('tenant_id').eq('id', u.id).single()
+    if (!p) return
 
     const servicesRaw = formData.get('services') as string
     const services = servicesRaw
@@ -39,10 +42,14 @@ export default async function WebsiteSettingsPage() {
         primary_color: formData.get('primary_color') as string || '#2563eb',
         about_text: formData.get('about_text') as string || null,
         google_review_link: formData.get('google_review_link') as string || null,
-        website_slug: (formData.get('website_slug') as string || '').toLowerCase().replace(/[^a-z0-9-]/g, '-'),
+        website_slug: (formData.get('website_slug') as string || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9-]/g, '-')
+          .replace(/-{2,}/g, '-')
+          .replace(/^-+|-+$/g, ''),
         services,
       })
-      .eq('id', p!.tenant_id)
+      .eq('id', p.tenant_id)
 
     revalidatePath('/dashboard/settings/website')
     revalidatePath('/dashboard/website')

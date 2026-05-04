@@ -1,18 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createAdminClient } from '@/lib/supabase/server'
+import { createClient, createAdminClient } from '@/lib/supabase/server'
 import { generateBlandScript } from '@/lib/bland-script'
 import type { Tenant } from '@/lib/types'
 
 export async function POST(request: NextRequest) {
-  const { callerPhone, tenantId } = await request.json() as {
-    callerPhone: string
-    tenantId: string
+  // Auth — derive tenantId from session, never trust the request body
+  const supabaseUser = await createClient()
+  const { data: { user } } = await supabaseUser.auth.getUser()
+  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  const { data: profile } = await supabaseUser
+    .from('user_profiles').select('tenant_id').eq('id', user.id).single()
+  if (!profile) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  const { callerPhone } = await request.json() as { callerPhone: string }
+
+  if (!callerPhone) {
+    return NextResponse.json({ error: 'callerPhone is required' }, { status: 400 })
   }
 
-  if (!callerPhone || !tenantId) {
-    return NextResponse.json({ error: 'callerPhone and tenantId are required' }, { status: 400 })
+  // Basic E.164 validation: +<country code><number>, 8–15 digits total
+  if (!/^\+[1-9]\d{7,14}$/.test(callerPhone)) {
+    return NextResponse.json({ error: 'callerPhone must be in E.164 format (e.g. +15551234567)' }, { status: 400 })
   }
 
+  const tenantId = profile.tenant_id
   const supabase = await createAdminClient()
 
   const { data: tenant } = await supabase
@@ -36,12 +48,12 @@ export async function POST(request: NextRequest) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: process.env.BLAND_AI_API_KEY!,
+      Authorization: `Bearer ${process.env.BLAND_AI_API_KEY}`,
     },
     body: JSON.stringify({
       phone_number: callerPhone,
       task: script,
-      voice: 'maya',
+      voice: tenant.ai_voice ?? 'maya',
       reduce_latency: true,
       record: true,
       webhook: `${appUrl}/api/bland/webhook?tenant_id=${tenantId}`,

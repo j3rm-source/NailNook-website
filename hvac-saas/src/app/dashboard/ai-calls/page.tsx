@@ -3,6 +3,10 @@ import { createClient } from '@/lib/supabase/server'
 import { formatDateTime, formatPhone } from '@/lib/utils'
 import { Phone, Clock, MessageSquare } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { getPlanFeatures } from '@/lib/types'
+import TriggerCallButton from './_components/trigger-call-button'
+import ActivationGuide from './_components/activation-guide'
+import CallAudioPlayer from './_components/call-audio-player'
 
 export const metadata: Metadata = { title: 'AI Calls' }
 
@@ -19,18 +23,34 @@ export default async function AiCallsPage() {
   const { data: profile } = await supabase
     .from('user_profiles').select('tenant_id').eq('id', user!.id).single()
 
-  const { data: calls } = await supabase
-    .from('ai_calls')
-    .select('*, contact:contacts(first_name, last_name)')
-    .eq('tenant_id', profile!.tenant_id)
-    .order('created_at', { ascending: false })
+  const [{ data: calls }, { data: tenant }] = await Promise.all([
+    supabase
+      .from('ai_calls')
+      .select('*, contact:contacts(first_name, last_name, lead_score)')
+      .eq('tenant_id', profile!.tenant_id)
+      .order('created_at', { ascending: false }),
+    supabase
+      .from('tenants')
+      .select('plan_tier, twilio_number')
+      .eq('id', profile!.tenant_id)
+      .single(),
+  ])
+
+  const features = getPlanFeatures((tenant?.plan_tier ?? 1) as 1 | 2 | 3)
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div>
-        <h1 className="text-2xl font-700 text-white">AI Receptionist Calls</h1>
-        <p className="text-slate-400 text-sm mt-0.5">{calls?.length ?? 0} calls handled by your AI receptionist</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-700 text-white">AI Receptionist Calls</h1>
+          <p className="text-slate-400 text-sm mt-0.5">{calls?.length ?? 0} calls handled by your AI receptionist</p>
+        </div>
+        {features.hasAIReceptionist && <TriggerCallButton />}
       </div>
+
+      {features.hasAIReceptionist && tenant?.twilio_number && (
+        <ActivationGuide twilioNumber={tenant.twilio_number} />
+      )}
 
       <div className="space-y-3">
         {!calls?.length && (
@@ -64,17 +84,28 @@ export default async function AiCallsPage() {
                     )}
                   </div>
                 </div>
+                {call.contact?.lead_score != null && (
+                  <span className={cn('badge text-xs font-600 tabular-nums',
+                    call.contact.lead_score >= 7 ? 'badge-green' :
+                    call.contact.lead_score >= 4 ? 'badge-orange' : 'badge-red'
+                  )}>
+                    {call.contact.lead_score}/10
+                  </span>
+                )}
                 <span className={cn('badge', outcome.cls)}>{outcome.label}</span>
               </summary>
 
-              {call.transcript && (
-                <div className="mt-4 pt-4 border-t border-slate-700/50">
-                  <p className="text-xs font-600 uppercase tracking-wide text-slate-500 mb-2 flex items-center gap-1.5">
-                    <MessageSquare size={11} /> Transcript
-                  </p>
-                  <p className="text-sm text-slate-400 leading-relaxed whitespace-pre-wrap">{call.transcript}</p>
-                </div>
-              )}
+              <div className="mt-4 pt-4 border-t border-slate-700/50 space-y-4">
+                <CallAudioPlayer callId={call.bland_call_id} />
+                {call.transcript && (
+                  <div>
+                    <p className="text-xs font-600 uppercase tracking-wide text-slate-500 mb-2 flex items-center gap-1.5">
+                      <MessageSquare size={11} /> Transcript
+                    </p>
+                    <p className="text-sm text-slate-400 leading-relaxed whitespace-pre-wrap">{call.transcript}</p>
+                  </div>
+                )}
+              </div>
             </details>
           )
         })}

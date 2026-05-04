@@ -1,21 +1,20 @@
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
-import { getPlanFeatures } from '@/lib/types'
-import { CreditCard, CheckCircle2, ArrowRight, Zap } from 'lucide-react'
-import Link from 'next/link'
+import { CreditCard, CheckCircle2, Zap } from 'lucide-react'
+import UpgradeButton from './_components/upgrade-button'
 
 export const metadata: Metadata = { title: 'Billing' }
 
 const PLAN_INFO = {
-  1: { name: 'Starter', price: '$49/mo', color: 'text-blue-400', badge: 'badge-blue' },
-  2: { name: 'Growth',  price: '$99/mo', color: 'text-orange-400', badge: 'badge-orange' },
-  3: { name: 'Pro',     price: '$199/mo', color: 'text-purple-400', badge: 'bg-purple-500/15 text-purple-300 border border-purple-500/30 badge' },
+  1: { name: 'Foundation',       price: '$197/mo', color: 'text-blue-400',   badge: 'badge-blue' },
+  2: { name: 'Growth System',    price: '$497/mo', color: 'text-orange-400', badge: 'badge-orange' },
+  3: { name: 'Revenue Partner',  price: '$997/mo', color: 'text-purple-400', badge: 'bg-purple-500/15 text-purple-300 border border-purple-500/30 badge' },
 } as const
 
 const PLAN_FEATURES: Record<1 | 2 | 3, string[]> = {
-  1: ['Website + booking page', 'Basic CRM', 'Jobs pipeline', 'Cal.com booking'],
-  2: ['Everything in Starter', 'AI phone receptionist', 'SMS follow-up sequences', 'SMS inbox', 'Google ranking tools'],
-  3: ['Everything in Growth', 'Analytics dashboard', 'Lead gen tracking', 'Ongoing optimization reports'],
+  1: ['Professional website + booking page', 'CRM & contacts', 'Jobs pipeline', 'Cal.com booking widget'],
+  2: ['Everything in Foundation', 'AI phone receptionist', 'SMS follow-up sequences', 'SMS inbox', 'Google SEO management'],
+  3: ['Everything in Growth System', 'Analytics dashboard', 'Lead gen tracking', 'Paid ads management', 'Monthly performance report'],
 }
 
 export default async function BillingPage() {
@@ -73,18 +72,16 @@ export default async function BillingPage() {
         </form>
       </div>
 
-      {/* Upgrade prompts */}
+      {/* Upgrade prompts — open Stripe portal so plan change modifies existing subscription */}
       {tier < 3 && (
         <div className="space-y-3">
           <h2 className="text-xs font-600 uppercase tracking-widest text-slate-500">Upgrade your plan</h2>
 
           {tier === 1 && (
             <div className="card border-orange-500/30 bg-orange-500/5 space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-600 text-orange-300">Growth Plan — $99/mo</p>
-                  <p className="text-sm text-slate-400 mt-0.5">AI receptionist, SMS follow-ups, and more</p>
-                </div>
+              <div>
+                <p className="font-600 text-orange-300">Growth System — $497/mo</p>
+                <p className="text-sm text-slate-400 mt-0.5">AI receptionist, SMS follow-ups, and more</p>
               </div>
               <ul className="space-y-1.5">
                 {PLAN_FEATURES[2].slice(1).map(f => (
@@ -94,16 +91,17 @@ export default async function BillingPage() {
                   </li>
                 ))}
               </ul>
-              <Link href="/signup/plan" className="btn-accent w-full flex items-center justify-center gap-2">
-                Upgrade to Growth <ArrowRight size={14} />
-              </Link>
+              <UpgradeButton
+                label="Upgrade to Growth System"
+                className="btn-accent w-full py-2.5 rounded-xl font-600 text-sm"
+              />
             </div>
           )}
 
           {tier <= 2 && (
             <div className="card border-purple-500/30 bg-purple-500/5 space-y-3">
               <div>
-                <p className="font-600 text-purple-300">Pro Plan — $199/mo</p>
+                <p className="font-600 text-purple-300">Revenue Partner — $997/mo</p>
                 <p className="text-sm text-slate-400 mt-0.5">Analytics, lead tracking, ongoing optimization</p>
               </div>
               <ul className="space-y-1.5">
@@ -114,9 +112,10 @@ export default async function BillingPage() {
                   </li>
                 ))}
               </ul>
-              <Link href="/signup/plan" className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-600 text-sm bg-purple-600 text-white hover:bg-purple-500 transition-colors">
-                Upgrade to Pro <ArrowRight size={14} />
-              </Link>
+              <UpgradeButton
+                label="Upgrade to Revenue Partner"
+                className="w-full py-2.5 rounded-xl font-600 text-sm bg-purple-600 text-white hover:bg-purple-500 transition-colors"
+              />
             </div>
           )}
         </div>

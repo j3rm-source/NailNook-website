@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { Phone, MessageSquare, Globe, BarChart3, CheckCircle2, ArrowRight, Bot, Users, Briefcase } from 'lucide-react'
 import RoiCalculator from './_components/roi-calculator'
 
+export const dynamic = 'force-static'
+
 const BRAND = 'var(--brand-500)'
 
 const PLANS = [

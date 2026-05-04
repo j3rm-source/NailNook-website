@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { headers } from 'next/headers'
 import { stripe } from '@/lib/stripe'
 import { createAdminClient } from '@/lib/supabase/server'
+import { sendWelcomeEmail } from '@/lib/email'
 import type Stripe from 'stripe'
 
 const DEFAULT_SMS_TEMPLATES = [
@@ -46,7 +47,10 @@ export async function POST(request: NextRequest) {
     case 'checkout.session.completed': {
       const session = event.data.object as Stripe.Checkout.Session
       const userId = session.metadata?.user_id
-      const planTier = Number(session.metadata?.plan_tier) as 1 | 2 | 3
+      const rawTier = Number(session.metadata?.plan_tier)
+      const planTier: 1 | 2 | 3 = ([1, 2, 3] as const).includes(rawTier as 1 | 2 | 3)
+        ? (rawTier as 1 | 2 | 3)
+        : 1
       const fullName = session.metadata?.full_name ?? ''
       const customerId = session.customer as string
       const subscriptionId = session.subscription as string
@@ -68,8 +72,9 @@ export async function POST(request: NextRequest) {
         .single()
 
       if (tenantError || !tenant) {
-        console.error('Failed to create tenant:', tenantError)
-        break
+        console.error('Failed to create tenant for user', userId, tenantError)
+        // Return 500 so Stripe retries the webhook
+        return NextResponse.json({ error: 'Tenant creation failed' }, { status: 500 })
       }
 
       // 2. Create user profile
@@ -87,16 +92,26 @@ export async function POST(request: NextRequest) {
         DEFAULT_SMS_TEMPLATES.map((t) => ({ ...t, tenant_id: tenant.id }))
       )
 
+      // 4. Send welcome email
+      if (authUser?.user?.email) {
+        await sendWelcomeEmail({
+          to: authUser.user.email,
+          name: fullName,
+        })
+      }
+
       break
     }
 
     case 'customer.subscription.updated': {
       const sub = event.data.object as Stripe.Subscription
+      const rawTier = Number(sub.metadata?.plan_tier)
+      const validTier = ([1, 2, 3] as const).includes(rawTier as 1 | 2 | 3) ? (rawTier as 1 | 2 | 3) : undefined
       await supabase
         .from('tenants')
         .update({
           stripe_subscription_status: sub.status,
-          plan_tier: Number(sub.metadata?.plan_tier) as 1 | 2 | 3,
+          ...(validTier !== undefined && { plan_tier: validTier }),
         })
         .eq('stripe_subscription_id', sub.id)
       break

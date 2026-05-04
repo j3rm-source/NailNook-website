@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
   })
   if (!isValid) return NextResponse.json({ error: 'Invalid signature' }, { status: 401 })
 
-  const { tenantId, to, body } = JSON.parse(rawBody) as {
+  const { tenantId, contactId, to, body } = JSON.parse(rawBody) as {
     tenantId: string
     contactId: string
     to: string
@@ -37,5 +37,15 @@ export async function POST(req: NextRequest) {
   }
 
   await twilioClient.messages.create({ from: tenant.twilio_number, to, body })
+
+  // Mark contact as 'contacted' once the first SMS actually fires
+  if (contactId) {
+    await supabase
+      .from('contacts')
+      .update({ status: 'contacted' })
+      .eq('id', contactId)
+      .eq('status', 'new')
+  }
+
   return NextResponse.json({ success: true })
 }

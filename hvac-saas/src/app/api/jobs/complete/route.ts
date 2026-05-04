@@ -1,13 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createAdminClient } from '@/lib/supabase/server'
+import { createClient, createAdminClient } from '@/lib/supabase/server'
 import { publishDelayed } from '@/lib/qstash'
 
 export async function PATCH(request: NextRequest) {
-  const { jobId } = await request.json() as { jobId: string }
+  const supabaseUser = await createClient()
+  const { data: { user } } = await supabaseUser.auth.getUser()
+  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  if (!jobId) {
-    return NextResponse.json({ error: 'jobId required' }, { status: 400 })
-  }
+  const { data: profile } = await supabaseUser
+    .from('user_profiles').select('tenant_id').eq('id', user.id).single()
+  if (!profile) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  const { jobId } = await request.json() as { jobId: string }
+  if (!jobId) return NextResponse.json({ error: 'jobId required' }, { status: 400 })
 
   const supabase = await createAdminClient()
 
@@ -15,6 +20,7 @@ export async function PATCH(request: NextRequest) {
     .from('jobs')
     .update({ status: 'completed', completed_at: new Date().toISOString() })
     .eq('id', jobId)
+    .eq('tenant_id', profile.tenant_id)
     .select('id, tenant_id, contact_id')
     .single()
 

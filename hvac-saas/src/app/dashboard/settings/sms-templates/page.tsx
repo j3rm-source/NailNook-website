@@ -22,9 +22,12 @@ export default async function SmsTemplatesPage() {
     'use server'
 
     const supabaseAdmin = await createAdminClient()
-    const { data: { user: u } } = await (await createClient()).auth.getUser()
-    const { data: p } = await (await createClient())
-      .from('user_profiles').select('tenant_id').eq('id', u!.id).single()
+    const userClient = await createClient()
+    const { data: { user: u } } = await userClient.auth.getUser()
+    if (!u) return
+    const { data: p } = await userClient
+      .from('user_profiles').select('tenant_id').eq('id', u.id).single()
+    if (!p) return
 
     const positions = [0, 1, 2] as const
     for (const pos of positions) {
@@ -34,7 +37,7 @@ export default async function SmsTemplatesPage() {
       await supabaseAdmin
         .from('sms_templates')
         .upsert(
-          { tenant_id: p!.tenant_id, sequence_position: pos, body, delay_hours: pos === 0 ? 0 : pos === 1 ? 24 : 72 },
+          { tenant_id: p.tenant_id, sequence_position: pos, body, delay_hours: pos === 0 ? 0 : pos === 1 ? 24 : 72 },
           { onConflict: 'tenant_id,sequence_position' }
         )
     }

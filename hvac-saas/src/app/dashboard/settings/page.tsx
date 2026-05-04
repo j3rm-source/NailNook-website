@@ -16,7 +16,7 @@ export default async function SettingsPage() {
 
   const { data: tenant } = await supabase
     .from('tenants')
-    .select('business_name, area_code, twilio_number')
+    .select('business_name, area_code, twilio_number, google_review_link, calcom_link')
     .eq('id', profile!.tenant_id)
     .single()
 
@@ -24,22 +24,27 @@ export default async function SettingsPage() {
     'use server'
 
     const supabaseAdmin = await createAdminClient()
-    const { data: { user: u } } = await (await createClient()).auth.getUser()
-    const { data: p } = await (await createClient())
-      .from('user_profiles').select('tenant_id').eq('id', u!.id).single()
+    const userClient = await createClient()
+    const { data: { user: u } } = await userClient.auth.getUser()
+    if (!u) return
+    const { data: p } = await userClient
+      .from('user_profiles').select('tenant_id').eq('id', u.id).single()
+    if (!p) return
 
     await supabaseAdmin
       .from('tenants')
       .update({
         business_name: formData.get('business_name') as string,
         area_code: formData.get('area_code') as string || null,
+        google_review_link: formData.get('google_review_link') as string || null,
+        calcom_link: formData.get('calcom_link') as string || null,
       })
-      .eq('id', p!.tenant_id)
+      .eq('id', p.tenant_id)
 
     await supabaseAdmin
       .from('user_profiles')
       .update({ full_name: formData.get('full_name') as string || null })
-      .eq('id', u!.id)
+      .eq('id', u.id)
 
     revalidatePath('/dashboard/settings')
   }

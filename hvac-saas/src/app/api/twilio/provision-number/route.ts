@@ -32,6 +32,8 @@ export async function POST(request: NextRequest) {
     phoneNumber: available[0].phoneNumber,
     voiceUrl: `${appUrl}/api/twilio/voice`,
     voiceMethod: 'POST',
+    smsUrl: `${appUrl}/api/twilio/sms`,
+    smsMethod: 'POST',
   })
 
   await admin.from('tenants')

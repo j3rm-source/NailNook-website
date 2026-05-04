@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { MessageSquare, Info } from 'lucide-react'
+import { MessageSquare, Info, Eye } from 'lucide-react'
 import type { SmsTemplate } from '@/lib/types'
 
 interface Props {
@@ -10,22 +10,42 @@ interface Props {
 }
 
 const SEQUENCE_INFO = [
-  { pos: 0, label: 'Immediate (t+0)',  desc: 'Sent right after a new lead comes in.' },
-  { pos: 1, label: '24-Hour Follow-up', desc: 'Sent 24 hours later if they haven\'t booked.' },
+  { pos: 0, label: 'Immediate (t+0)',   desc: 'Sent right after a new lead comes in.' },
+  { pos: 1, label: '24-Hour Follow-up', desc: "Sent 24 hours later if they haven't booked." },
   { pos: 2, label: '72-Hour Follow-up', desc: 'Final follow-up 72 hours after the first message.' },
 ]
 
 const VARS = ['{first_name}', '{business_name}', '{booking_link}', '{issue_type}']
 
+const SAMPLE: Record<string, string> = {
+  '{first_name}':    'John',
+  '{business_name}': 'Apex HVAC',
+  '{booking_link}':  'https://tradedesk.io/book/apex-hvac',
+  '{issue_type}':    'AC repair',
+}
+
+function renderPreview(body: string) {
+  return Object.entries(SAMPLE).reduce(
+    (text, [key, val]) => text.replaceAll(key, val),
+    body
+  )
+}
+
 export default function SmsTemplatesClient({ templates, saveTemplates }: Props) {
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [previews, setPreviews] = useState<Record<number, string>>(() =>
+    Object.fromEntries(SEQUENCE_INFO.map(({ pos }) => [
+      pos,
+      templates.find(t => t.sequence_position === pos)?.body ?? '',
+    ]))
+  )
   const formRef = useRef<HTMLFormElement>(null)
 
   const getTemplate = (pos: number) =>
     templates.find(t => t.sequence_position === pos)?.body ?? ''
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault()
     if (!formRef.current) return
     setSaving(true)
@@ -36,15 +56,17 @@ export default function SmsTemplatesClient({ templates, saveTemplates }: Props) 
     setTimeout(() => setSaved(false), 3000)
   }
 
-  function insertVar(textareaId: string, variable: string) {
+  function insertVar(textareaId: string, variable: string, pos: number) {
     const el = document.getElementById(textareaId) as HTMLTextAreaElement | null
     if (!el) return
     const start = el.selectionStart
     const end = el.selectionEnd
     const val = el.value
-    el.value = val.slice(0, start) + variable + val.slice(end)
+    const next = val.slice(0, start) + variable + val.slice(end)
+    el.value = next
     el.focus()
     el.setSelectionRange(start + variable.length, start + variable.length)
+    setPreviews(p => ({ ...p, [pos]: next }))
   }
 
   return (
@@ -76,6 +98,8 @@ export default function SmsTemplatesClient({ templates, saveTemplates }: Props) 
       <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
         {SEQUENCE_INFO.map(({ pos, label, desc }) => {
           const textareaId = `template_${pos}`
+          const preview = renderPreview(previews[pos] ?? '')
+
           return (
             <div key={pos} className="card space-y-3">
               <div className="flex items-start gap-3">
@@ -94,7 +118,7 @@ export default function SmsTemplatesClient({ templates, saveTemplates }: Props) 
                   <button
                     key={v}
                     type="button"
-                    onClick={() => insertVar(textareaId, v)}
+                    onClick={() => insertVar(textareaId, v, pos)}
                     className="text-xs px-2 py-1 rounded-lg bg-slate-700/60 text-slate-400 hover:text-slate-200 hover:bg-slate-700 transition-colors border border-slate-600/50"
                   >
                     {v}
@@ -107,9 +131,23 @@ export default function SmsTemplatesClient({ templates, saveTemplates }: Props) 
                 name={textareaId}
                 defaultValue={getTemplate(pos)}
                 rows={4}
+                onChange={e => setPreviews(p => ({ ...p, [pos]: e.target.value }))}
                 className="input resize-none"
                 placeholder={`Write your ${label.toLowerCase()} message...`}
               />
+
+              {/* Live preview */}
+              {previews[pos] && (
+                <div className="rounded-xl bg-slate-800/60 border border-slate-700/60 p-3">
+                  <p className="text-xs font-600 uppercase tracking-wide text-slate-500 mb-2 flex items-center gap-1.5">
+                    <Eye size={11} /> Preview (sample data)
+                  </p>
+                  <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">
+                    {preview || <span className="text-slate-600 italic">Start typing to see preview…</span>}
+                  </p>
+                  <p className="text-xs text-slate-600 mt-2">{preview.length} characters · ~{Math.ceil(preview.length / 160)} SMS segment{Math.ceil(preview.length / 160) !== 1 ? 's' : ''}</p>
+                </div>
+              )}
             </div>
           )
         })}

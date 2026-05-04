@@ -4,8 +4,25 @@ import { createAdminClient } from '@/lib/supabase/server'
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData()
-  const callerPhone = formData.get('From') as string
-  const toNumber = formData.get('To') as string
+
+  // Validate Twilio signature
+  const params: Record<string, string> = {}
+  formData.forEach((value, key) => { params[key] = value.toString() })
+
+  const twilioSignature = request.headers.get('x-twilio-signature') ?? ''
+  const url = `${process.env.NEXT_PUBLIC_APP_URL}/api/twilio/voice`
+  const isValid = twilio.validateRequest(
+    process.env.TWILIO_AUTH_TOKEN!,
+    twilioSignature,
+    url,
+    params
+  )
+  if (!isValid) {
+    return new NextResponse('Forbidden', { status: 403 })
+  }
+
+  const callerPhone = params['From']
+  const toNumber = params['To']
 
   const supabase = await createAdminClient()
 

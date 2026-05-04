@@ -5,14 +5,16 @@ import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard, Users, Briefcase, CalendarCheck,
   MessageSquare, Phone, BarChart3, Settings,
-  CreditCard, Globe
+  CreditCard, Globe, Bell, Bot, UserPlus
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getPlanFeatures, type PlanTier } from '@/lib/types'
 
 const SETTINGS_ITEMS = [
-  { label: 'Settings', href: '/dashboard/settings', icon: Settings },
-  { label: 'Billing', href: '/dashboard/settings/billing', icon: CreditCard },
+  { label: 'Settings',        href: '/dashboard/settings',                 icon: Settings },
+  { label: 'AI Receptionist', href: '/dashboard/settings/ai-receptionist', icon: Bot },
+  { label: 'Team',            href: '/dashboard/settings/team',            icon: UserPlus },
+  { label: 'Billing',         href: '/dashboard/settings/billing',         icon: CreditCard },
 ]
 
 const PLAN_LABELS: Record<PlanTier, { label: string; color: string }> = {
@@ -31,57 +33,15 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
   const features = getPlanFeatures(planTier)
 
   const navItems = [
-    {
-      label: 'Overview',
-      href: '/dashboard',
-      icon: LayoutDashboard,
-      always: true,
-    },
-    {
-      label: 'Contacts',
-      href: '/dashboard/contacts',
-      icon: Users,
-      always: true,
-    },
-    {
-      label: 'Jobs',
-      href: '/dashboard/jobs',
-      icon: Briefcase,
-      always: true,
-    },
-    {
-      label: 'Bookings',
-      href: '/dashboard/bookings',
-      icon: CalendarCheck,
-      always: true,
-    },
-    {
-      label: 'SMS Inbox',
-      href: '/dashboard/sms',
-      icon: MessageSquare,
-      show: features.hasSMSFollowups,
-      badge: 'Plan 2',
-    },
-    {
-      label: 'AI Calls',
-      href: '/dashboard/ai-calls',
-      icon: Phone,
-      show: features.hasAIReceptionist,
-      badge: 'Plan 2',
-    },
-    {
-      label: 'Website',
-      href: '/dashboard/website',
-      icon: Globe,
-      always: true,
-    },
-    {
-      label: 'Analytics',
-      href: '/dashboard/analytics',
-      icon: BarChart3,
-      show: features.hasAnalytics,
-      badge: 'Plan 3',
-    },
+    { label: 'Overview',  href: '/dashboard',               icon: LayoutDashboard, always: true },
+    { label: 'Contacts',  href: '/dashboard/contacts',      icon: Users,           always: true },
+    { label: 'Jobs',      href: '/dashboard/jobs',          icon: Briefcase,       always: true },
+    { label: 'Bookings',  href: '/dashboard/bookings',      icon: CalendarCheck,   always: true },
+    { label: 'SMS Inbox', href: '/dashboard/sms',           icon: MessageSquare,   show: features.hasSMSFollowups,   badge: 'Plan 2' },
+    { label: 'AI Calls',  href: '/dashboard/ai-calls',      icon: Phone,           show: features.hasAIReceptionist, badge: 'Plan 2' },
+    { label: 'Activity',  href: '/dashboard/notifications', icon: Bell,            always: true },
+    { label: 'Website',   href: '/dashboard/website',       icon: Globe,           always: true },
+    { label: 'Analytics', href: '/dashboard/analytics',     icon: BarChart3,       show: features.hasAnalytics,      badge: 'Plan 3' },
   ]
 
   const planInfo = PLAN_LABELS[planTier]
@@ -109,7 +69,6 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
 
         {navItems.map((item) => {
           if (!item.always && !item.show) {
-            // Show locked item with upgrade nudge
             return (
               <Link
                 key={item.href}
@@ -132,9 +91,7 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
             <Link
               key={item.href}
               href={item.href}
-              className={cn(
-                isActive ? 'sidebar-link-active' : 'sidebar-link'
-              )}
+              className={cn(isActive ? 'sidebar-link-active' : 'sidebar-link')}
             >
               <item.icon size={17} />
               {item.label}
@@ -161,7 +118,6 @@ export default function DashboardSidebar({ businessName, planTier }: SidebarProp
         })}
       </nav>
 
-      {/* Upgrade CTA for Plan 1 */}
       {planTier === 1 && (
         <div className="p-3" style={{ borderTop: '1px solid #111' }}>
           <Link

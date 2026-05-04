@@ -15,7 +15,13 @@ export interface Tenant {
   twilio_number: string | null
   area_code: string | null
   google_review_link: string | null
+  calcom_link: string | null
   website_slug: string | null
+  // AI receptionist config
+  ai_voice: string
+  ai_greeting: string | null
+  ai_call_hours: string | null
+  ai_transfer_number: string | null
   // Website customization
   primary_color: string
   logo_url: string | null
@@ -49,6 +55,7 @@ export interface Contact {
   notes: string | null
   address: string | null
   issue_type: string | null
+  lead_score: number | null
 }
 
 export type JobStatus = 'new' | 'quoted' | 'scheduled' | 'in_progress' | 'completed' | 'cancelled'
@@ -78,7 +85,7 @@ export interface Booking {
   created_at: string
   starts_at: string
   ends_at: string
-  status: 'upcoming' | 'completed' | 'cancelled'
+  status: 'upcoming' | 'completed' | 'cancelled' | 'no_show'
 }
 
 export interface SmsTemplate {
@@ -93,7 +100,7 @@ export interface SmsSequence {
   id: string
   tenant_id: string
   contact_id: string
-  bullmq_job_ids: string[]
+  qstash_message_ids: string[]
   status: 'active' | 'cancelled' | 'completed'
   created_at: string
 }

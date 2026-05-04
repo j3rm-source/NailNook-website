@@ -9,25 +9,40 @@ export const metadata: Metadata = { title: 'Dashboard' }
 async function getDashboardStats(tenantId: string) {
   const supabase = await createClient()
 
-  const [contacts, jobs, bookings, aiCalls] = await Promise.all([
-    supabase.from('contacts').select('id, status, created_at').eq('tenant_id', tenantId),
-    supabase.from('jobs').select('id, status, quoted_amount, invoice_amount').eq('tenant_id', tenantId),
-    supabase.from('bookings').select('id, status').eq('tenant_id', tenantId),
-    supabase.from('ai_calls').select('id, outcome').eq('tenant_id', tenantId),
+  const [
+    { count: totalContacts },
+    { count: newLeads },
+    { count: totalJobs },
+    { count: completedJobs },
+    { data: pipelineData },
+    { count: totalBookings },
+    { count: totalCalls },
+    { count: bookedFromCalls },
+    { count: totalSmsSequences },
+  ] = await Promise.all([
+    supabase.from('contacts').select('*', { count: 'exact', head: true }).eq('tenant_id', tenantId),
+    supabase.from('contacts').select('*', { count: 'exact', head: true }).eq('tenant_id', tenantId).eq('status', 'new'),
+    supabase.from('jobs').select('*', { count: 'exact', head: true }).eq('tenant_id', tenantId),
+    supabase.from('jobs').select('*', { count: 'exact', head: true }).eq('tenant_id', tenantId).eq('status', 'completed'),
+    supabase.from('jobs').select('quoted_amount').eq('tenant_id', tenantId),
+    supabase.from('bookings').select('*', { count: 'exact', head: true }).eq('tenant_id', tenantId),
+    supabase.from('ai_calls').select('*', { count: 'exact', head: true }).eq('tenant_id', tenantId),
+    supabase.from('ai_calls').select('*', { count: 'exact', head: true }).eq('tenant_id', tenantId).eq('outcome', 'booked'),
+    supabase.from('sms_sequences').select('*', { count: 'exact', head: true }).eq('tenant_id', tenantId),
   ])
 
-  const totalContacts = contacts.data?.length ?? 0
-  const newLeads = contacts.data?.filter(c => c.status === 'new').length ?? 0
-  const totalJobs = jobs.data?.length ?? 0
-  const completedJobs = jobs.data?.filter(j => j.status === 'completed').length ?? 0
-  const pipelineValue = jobs.data?.reduce((sum, j) => sum + (j.quoted_amount ?? 0), 0) ?? 0
-  const totalBookings = bookings.data?.length ?? 0
-  const totalCalls = aiCalls.data?.length ?? 0
-  const bookedFromCalls = aiCalls.data?.filter(c => c.outcome === 'booked').length ?? 0
+  const pipelineValue = pipelineData?.reduce((sum, j) => sum + (j.quoted_amount ?? 0), 0) ?? 0
 
   return {
-    totalContacts, newLeads, totalJobs, completedJobs,
-    pipelineValue, totalBookings, totalCalls, bookedFromCalls,
+    totalContacts: totalContacts ?? 0,
+    newLeads: newLeads ?? 0,
+    totalJobs: totalJobs ?? 0,
+    completedJobs: completedJobs ?? 0,
+    pipelineValue,
+    totalBookings: totalBookings ?? 0,
+    totalCalls: totalCalls ?? 0,
+    bookedFromCalls: bookedFromCalls ?? 0,
+    totalSmsSequences: totalSmsSequences ?? 0,
   }
 }
 
@@ -87,9 +102,9 @@ export default async function DashboardPage() {
       bg: 'bg-cyan-500/10',
     },
     {
-      label: 'SMS Sent',
-      value: '—',
-      sub: 'Connect SMS to track',
+      label: 'SMS Sequences',
+      value: stats.totalSmsSequences,
+      sub: 'Follow-up sequences sent',
       icon: MessageSquare,
       color: 'text-slate-400',
       bg: 'bg-slate-500/10',

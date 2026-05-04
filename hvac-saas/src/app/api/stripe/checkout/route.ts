@@ -2,10 +2,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { stripe, PLAN_PRICE_IDS, PLAN_SETUP_FEE_IDS } from '@/lib/stripe'
 
-function firstOfNextMonthUnix(): number {
-  const now = new Date()
-  const first = new Date(now.getFullYear(), now.getMonth() + 1, 1)
-  return Math.floor(first.getTime() / 1000)
+// Returns the 1st of the month that is at least 30 days from now.
+// Ensures the monthly subscription never starts sooner than 30 days after signup.
+function firstBillingAnchorUnix(): number {
+  const thirtyDaysOut = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+  const anchor = new Date(thirtyDaysOut.getFullYear(), thirtyDaysOut.getMonth() + 1, 1)
+  return Math.floor(anchor.getTime() / 1000)
 }
 
 export async function POST(request: NextRequest) {
@@ -27,12 +29,17 @@ export async function POST(request: NextRequest) {
   const setupFeeId = PLAN_SETUP_FEE_IDS[plan]
   const appUrl = process.env.NEXT_PUBLIC_APP_URL!
 
+  if (!priceId) {
+    return NextResponse.json({ error: `STRIPE_PRICE_PLAN${plan} is not configured` }, { status: 500 })
+  }
+
+  const lineItems: { price: string; quantity: 1 }[] = [{ price: priceId, quantity: 1 }]
+  if (setupFeeId) lineItems.push({ price: setupFeeId, quantity: 1 })
+
   const session = await stripe.checkout.sessions.create({
     mode: 'subscription',
     payment_method_types: ['card'],
-    line_items: [
-      { price: priceId, quantity: 1 },
-    ],
+    line_items: lineItems,
     customer_email: user.email,
     metadata: {
       user_id: user.id,
@@ -43,8 +50,7 @@ export async function POST(request: NextRequest) {
     cancel_url: `${appUrl}/signup/plan?cancelled=true`,
     subscription_data: {
       metadata: { user_id: user.id, plan_tier: String(plan) },
-      add_invoice_items: [{ price: setupFeeId }],
-      billing_cycle_anchor: firstOfNextMonthUnix(),
+      billing_cycle_anchor: firstBillingAnchorUnix(),
       proration_behavior: 'none',
     },
   })

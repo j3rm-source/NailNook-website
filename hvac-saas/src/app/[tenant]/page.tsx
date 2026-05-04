@@ -4,6 +4,9 @@ import { Phone, Wrench, Calendar, Star, CheckCircle2 } from 'lucide-react'
 import type { Metadata } from 'next'
 import ContactForm from './_components/contact-form'
 
+// Cache tenant websites for 5 minutes — changes to settings propagate within 5 min
+export const revalidate = 300
+
 interface Props {
   params: Promise<{ tenant: string }>
 }
