@@ -78,39 +78,46 @@ export default function HomePage() {
   useEffect(() => {
     // ---- GALLERY SLIDESHOW ----
     const imgs = [
-      '/gallery/IMG_1017.JPEG', // chrome opal almond nails
+      // Frame 0 — hair leads (mobile shows slot 0 only)
+      '/gallery/IMG_1035.JPEG', // wavy brown highlights
       '/gallery/IMG_1018.JPEG', // blue ombre glitter coffin
       '/gallery/IMG_1019.JPEG', // silver holographic glitter
-      '/gallery/IMG_1046.JPEG', // teal wave French tip
-      '/gallery/IMG_1025.JPEG', // classic red almond
-      '/gallery/IMG_1052.JPEG', // red with gold gem accent
+      // Frame 1 — lash leads
+      '/gallery/IMG_1058.JPEG', // colored lash extensions
       '/gallery/IMG_1020.JPEG', // white nude glitter
-      '/gallery/IMG_1016.JPEG', // blue/purple floral art
       '/gallery/IMG_1021.JPEG', // Christmas plaid & gems
+      // Frame 2 — nails
       '/gallery/IMG_1023.JPEG', // teal + leopard print
       '/gallery/IMG_1026.JPEG', // dark green tortoiseshell
       '/gallery/IMG_1028.JPEG', // colorful tie-dye festival
+      // Frame 3 — hair leads
+      '/gallery/IMG_1036.JPEG', // brown balayage
       '/gallery/IMG_1029.JPEG', // purple marble geode
       '/gallery/IMG_1030.JPEG', // black/white celestial stiletto
+      // Frame 4 — lash leads
+      '/gallery/IMG_1060.JPEG', // lash before & after
       '/gallery/IMG_1031.JPEG', // Halloween green/purple ghost
       '/gallery/IMG_1032.JPEG', // purple celestial moon
+      // Frame 5 — nails
       '/gallery/IMG_1033.JPEG', // Halloween red/black drip
       '/gallery/IMG_1034.JPEG', // checkerboard + flames
-      '/gallery/IMG_1040.JPEG', // neon yellow 3D floral
+      '/gallery/IMG_1016.JPEG', // blue/purple floral art
+      // Frame 6 — hair leads
+      '/gallery/IMG_1037.JPEG', // silver/ash highlights
       '/gallery/IMG_1041.JPEG', // colorful abstract art
       '/gallery/IMG_1042.JPEG', // patriotic red/white/blue
-      '/gallery/IMG_1048.JPEG', // black/green drip with gems
-      '/gallery/IMG_1049.JPEG', // Jessica lace floral (@NAILZBYJESSICAA)
-      '/gallery/IMG_1051.JPEG', // grey/black glitter hearts
-      '/gallery/IMG_1058.JPEG', // colored lash extensions
+      // Frame 7 — lash leads
       '/gallery/IMG_1061.JPEG', // lash extensions (green eye)
-      '/gallery/IMG_1062.JPEG', // lash extensions (both eyes)
-      '/gallery/IMG_1060.JPEG', // lash before & after
-      '/gallery/IMG_1059.JPEG', // brow lamination before & after
-      '/gallery/IMG_1035.JPEG', // wavy brown highlights
-      '/gallery/IMG_1036.JPEG', // brown balayage
-      '/gallery/IMG_1037.JPEG', // silver/ash highlights
+      '/gallery/IMG_1048.JPEG', // black/green drip with gems
+      '/gallery/IMG_1049.JPEG', // lace floral
+      // Frame 8 — nails
+      '/gallery/IMG_1051.JPEG', // grey/black glitter hearts
+      '/gallery/IMG_1052.JPEG', // red with gold gem accent
+      '/gallery/IMG_1045.JPEG', // straight black hair extensions
+      // Frame 9 — hair leads
       '/gallery/IMG_1038.JPEG', // blonde waves
+      '/gallery/IMG_1043.PNG',  // dark blonde balayage
+      '/gallery/IMG_1056.JPEG', // LED light therapy
     ]
     const slidesEl = document.getElementById('slides') as HTMLElement | null
     const dotsEl = document.getElementById('ssDots') as HTMLElement | null
@@ -425,13 +432,13 @@ export default function HomePage() {
         <div className="svc-grid">
           {[
             {href:'/services#manicure',img:'/gallery/IMG_1020.JPEG',alt:'Manicure',name:'Manicure',desc:'Classic, gel, and spa manicures. Perfectly shaped and polished every time.',from:'From $25',cls:'rv'},
-            {href:'/services#pedicure',img:'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=600&h=450&fit=crop&auto=format',alt:'Pedicure',name:'Pedicure',desc:'Relaxing pedicure treatments from classic to luxurious spa experiences.',from:'From $35',cls:'rv d1'},
+            {href:'/services#pedicure',img:'/gallery/IMG_1056.JPEG',alt:'Pedicure',name:'Pedicure',desc:'Relaxing pedicure treatments from classic to luxurious spa experiences.',from:'From $35',cls:'rv d1'},
             {href:'/services#acrylic',img:'/gallery/IMG_1017.JPEG',alt:'Acrylic Nails',name:'Acrylic Nails',desc:'Long-lasting acrylic extensions for a glamorous, durable finish.',from:'From $55',cls:'rv d2'},
             {href:'/services#gel',img:'/gallery/IMG_1018.JPEG',alt:'Gel Extensions',name:'Gel Extensions',desc:'Lightweight, flexible gel extensions with a natural look and feel.',from:'From $65',cls:'rv d3'},
             {href:'/services#lashes',img:'/gallery/IMG_1061.JPEG',alt:'Eyelash Extensions',name:'Eyelash Extensions',desc:'Lush, full lash extensions for a wide-awake look that lasts weeks.',from:'From $75',cls:'rv d4'},
             {href:'/services#art',img:'/gallery/IMG_1030.JPEG',alt:'Nail Art',name:'Nail Art',desc:'Custom designs, gems, chrome, ombre, and hand-painted artwork.',from:'From $5',cls:'rv d5'},
-            {href:'/services#waxing',img:'https://images.unsplash.com/photo-1560869713-7d0a29430803?w=600&h=450&fit=crop&auto=format',alt:'Waxing',name:'Waxing',desc:'Smooth, precise waxing for eyebrows, lips, face, and more.',from:'From $10',cls:'rv'},
-            {href:'/services#permmakeup',img:'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=450&fit=crop&auto=format',alt:'Permanent Makeup',name:'Permanent Makeup',desc:'Flawless brows, liner, and lips that look perfect every single morning.',from:'From $150',cls:'rv d1'},
+            {href:'/services#waxing',img:'/gallery/IMG_1059.JPEG',alt:'Waxing',name:'Waxing',desc:'Smooth, precise waxing for eyebrows, lips, face, and more.',from:'From $10',cls:'rv'},
+            {href:'/services#permmakeup',img:'/gallery/IMG_1060.JPEG',alt:'Permanent Makeup',name:'Permanent Makeup',desc:'Flawless brows, liner, and lips that look perfect every single morning.',from:'From $150',cls:'rv d1'},
             {href:'/services#botox',img:'/gallery/IMG_1054.JPEG',alt:'Botox',name:'Botox',desc:'Smooth fine lines and refresh your look with expert cosmetic injections.',from:'Call for pricing',cls:'rv d2'},
             {href:'/services#massage',img:'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=450&fit=crop&auto=format',alt:'Massage',name:'Massage',desc:'Relaxing therapeutic massage to melt away tension from head to toe.',from:'From $60',cls:'rv d3'},
           ].map(s => (
@@ -451,8 +458,7 @@ export default function HomePage() {
       {/* GALLERY */}
       <section className="sec">
         <div className="sec-hdr c">
-          <span className="lbl-plain">Our Work</span>
-          <h2 className="sec-title">Nail Art Gallery</h2>
+          <h2 className="sec-title">Art Gallery</h2>
           <p className="sec-sub">A glimpse of what our specialists create every single day.</p>
         </div>
         <div className="slideshow" id="slideshow">
@@ -466,7 +472,6 @@ export default function HomePage() {
       {/* TEAM TEASER */}
       <section className="sec sec-alt">
         <div className="sec-hdr c">
-          <span className="lbl-plain">The Artists</span>
           <h2 className="sec-title">Meet Our Team</h2>
         </div>
         <div className="team-group rv">
@@ -482,7 +487,7 @@ export default function HomePage() {
         <div className="sec-hdr c">
           <span className="lbl-plain">Client Love</span>
           <h2 className="sec-title">Serving Havasu for 9+ Years</h2>
-          <p className="sec-sub">Don&apos;t take our word for it — here&apos;s what your neighbors are saying.</p>
+          <p className="sec-sub">Don&apos;t take our word for it — 100+ five-star reviews from your neighbors.</p>
         </div>
         <div className="rev-wrap">
           <button className="rev-btn rev-prev" onClick={() => revNav(-1)} aria-label="Previous review">‹</button>

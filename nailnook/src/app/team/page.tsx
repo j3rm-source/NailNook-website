@@ -4,17 +4,14 @@ import Link from 'next/link'
 import '@/styles/marketing.css'
 
 const SPECIALISTS = [
-  {name:'Stephanie',role:'Owner / Nail Tech',spec:'Nail Tech',phone:'928-486-3524',badge:'Owner',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:['/team/stephanie/work-1.jpg','/team/stephanie/work-2.png','/team/stephanie/work-3.jpg','/team/stephanie/work-4.jpg','/team/stephanie/work-5.jpg','/team/stephanie/work-6.png','/team/stephanie/work-7.jpg']},
-  {name:'Raquel',role:'Nail Technician',spec:'Nail Tech',phone:'928-846-1087',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/raquel/headshot.jpg',imgPos:'center 35%',photos:['/team/raquel/work-1.jpg','/team/raquel/work-2.jpg','/team/raquel/work-3.jpg','/team/raquel/work-4.jpg','/team/raquel/work-5.jpg','/team/raquel/work-6.jpg']},
-  {name:'Katie',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-5323',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'',imgPos:'',photos:['/team/katie/work-1.jpg','/team/katie/work-2.jpg','/team/katie/work-3.jpg','/team/katie/work-4.jpg','/team/katie/work-5.jpg','/team/katie/work-5.jpg']},
+  {name:'Stephanie',role:'Owner / Nail Tech',spec:'Nail Tech',phone:'928-486-3524',badge:'Owner',bg:'fce4ec',fg:'e91e8c',photo:'/team/stephanie/headshot.jpg',imgPos:'center 25%',photos:['/team/stephanie/work-1.jpg','/team/stephanie/work-2.png','/team/stephanie/work-3.jpg','/team/stephanie/work-4.jpg','/team/stephanie/work-5.jpg','/team/stephanie/work-7.jpg']},
+  {name:'Raquel',role:'Nail Technician',spec:'Nail Tech',phone:'928-846-1087',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/raquel/headshot.jpg',imgPos:'center 35%',photos:['/team/raquel/work-9.png','/team/raquel/work-4.jpg','/team/raquel/work-5.jpg','/team/raquel/work-6.jpg','/team/raquel/work-7.png','/team/raquel/work-8.png','/team/raquel/work-1.jpg'],showCount:6},
+  {name:'Kattie',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-5323',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/katie/headshot.jpg',imgPos:'center 20%',photos:['/team/katie/work-1.jpg','/team/katie/work-2.jpg','/team/katie/work-3.jpg','/team/katie/work-4.jpg','/team/katie/work-5.jpg','/team/katie/work-5.jpg']},
   {name:'Shannon',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-6965',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/shannon/headshot.jpg',imgPos:'',photos:['/team/shannon/work-1.jpg','/team/shannon/work-2.jpg','/team/shannon/work-3.jpg','/team/shannon/work-4.jpg','/team/shannon/work-5.jpg','/team/shannon/work-6.jpg']},
-  {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'480-241-9972',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
   {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/ricci/work-1.jpg',imgPos:'center 20%',photos:['/team/ricci/work-2.jpg','/team/ricci/work-3.jpg','/team/ricci/work-4.jpg','/team/ricci/work-5.jpg','/team/ricci/work-6.jpg','/team/ricci/headshot.jpg']},
-  {name:'Kathy',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-706-6177',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
-  {name:'Kendall',role:'Restoration Med Spa',spec:'Restoration Med Spa',phone:'928-706-1575',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'',imgPos:'',photos:[]},
-  {name:'Lara',role:'Massage Therapist',spec:'Massage',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/lara/headshot.jpg',imgPos:'center 20%',photos:['/team/lara/work-1.jpg','/team/lara/work-2.png','/team/lara/work-3.png','/team/lara/video-1.mp4','/team/lara/video-2.mp4','/team/lara/video-3.mp4','/team/lara/video-4.mp4']},
-  {name:'Shelby',role:'Waxing Specialist',spec:'Waxer',phone:'951-532-6685',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'/team/shelby/headshot.jpg',imgPos:'center 10%',photos:['/team/shelby/work-5.jpg','/team/shelby/work-6.jpg','/team/shelby/work-1.jpg','/team/shelby/work-2.jpg','/team/shelby/work-3.jpg','/team/shelby/work-4.jpg']},
-  {name:'Ashly',role:'Eyelash Specialist',spec:'Eyelashes',phone:'928-302-0949',badge:'',bg:'f9a8c9',fg:'c2185b',
+  {name:'Lara',role:'Massage Therapist',spec:'Massage',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/lara/headshot.jpg',imgPos:'center 20%',photos:['/team/lara/before-after.jpg','/team/lara/video-1.mp4','/team/lara/video-2.mp4','/team/lara/video-3.mp4','/team/lara/video-4.mp4']},
+  {name:'Shelby',role:'Waxing Specialist',spec:'Wax Tech',phone:'928-487-1831',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'/team/shelby/headshot.jpg',imgPos:'center 10%',photos:['/team/shelby/work-5.jpg','/team/shelby/work-6.jpg','/team/shelby/work-1.jpg','/team/shelby/work-2.jpg','/team/shelby/work-3.jpg','/team/shelby/work-4.jpg']},
+  {name:'Ashley',role:'Eyelash Specialist',spec:'Eyelashes',phone:'928-302-0949',badge:'',bg:'f9a8c9',fg:'c2185b',
     photo:'/team/ashly/headshot.jpg',imgPos:'',
     photos:['/team/ashly/work-1.jpg','/team/ashly/work-2.jpg','/team/ashly/work-3.jpg','/team/ashly/work-4.jpg','/team/ashly/work-5.jpg','/team/ashly/work-1.jpg']},
 ]
@@ -201,7 +198,7 @@ export default function TeamPage() {
       {/* PAGE HERO */}
       <div className="page-hero">
         <span className="lbl-plain" style={{animation:'mktFadeUp .7s ease both'}}>Meet the Artists</span>
-        <h1 className="pg-title" style={{animation:'mktFadeUp .7s .15s ease both'}}>Our Nail Specialists</h1>
+        <h1 className="pg-title" style={{animation:'mktFadeUp .7s .15s ease both'}}>Our Specialists</h1>
         <p className="pg-sub" style={{animation:'mktFadeUp .7s .3s ease both'}}>11 passionate artists dedicated to making your nails a work of art. Each with their own signature style, specialty, and love for the craft.</p>
       </div>
 
@@ -234,7 +231,7 @@ export default function TeamPage() {
                   <span className="sc-role">{sp.spec}</span>
                   <a className="sc-phone" href={`tel:${sp.phone.replace(/\D/g,'')}`}>{sp.phone}</a>
                   <div className="sc-gal">
-                    {displayImgs.map((u, i) => {
+                    {displayImgs.slice(0, (sp as any).showCount ?? displayImgs.length).map((u, i) => {
                       const isVideo = /\.(mp4|mov|webm)$/i.test(u)
                       return isVideo ? (
                         <video
@@ -329,7 +326,7 @@ export default function TeamPage() {
         <button className="lbx-x">✕</button>
         <button className="lbx-nav lbx-prev" onClick={(e) => { e.stopPropagation(); (window as any).__lbxNavTeam?.(-1) }}>‹</button>
         <img id="lbx-img" src="data:," alt="Work sample"/>
-        <video id="lbx-vid" src="" controls autoPlay loop muted playsInline style={{display:'none',maxHeight:'90vh',maxWidth:'90vw',borderRadius:'8px'}} onClick={(e) => e.stopPropagation()}/>
+        <video id="lbx-vid" controls autoPlay loop muted playsInline style={{display:'none',maxHeight:'90vh',maxWidth:'90vw',borderRadius:'8px'}} onClick={(e) => e.stopPropagation()}/>
         <button className="lbx-nav lbx-next" onClick={(e) => { e.stopPropagation(); (window as any).__lbxNavTeam?.(1) }}>›</button>
       </div>
     </div>
