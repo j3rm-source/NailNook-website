@@ -116,13 +116,11 @@ export default function ServicesPage() {
 
       {/* PAGE HERO */}
       <div className="page-hero">
-        <span className="lbl" style={{animation:'mktFadeUp .7s ease both'}}>Full Service Menu</span>
         <h1 className="pg-title" style={{animation:'mktFadeUp .7s .15s ease both'}}>Services & <em>Pricing</em></h1>
-        <p className="pg-sub" style={{animation:'mktFadeUp .7s .3s ease both'}}>Everything you need for stunning nails, all under one roof. Transparent pricing, expert care.</p>
+        <p className="pg-sub" style={{animation:'mktFadeUp .7s .3s ease both'}}>Everything you need for stunning nails, all under one roof, with expert care.</p>
         <div className="pg-stats" style={{animation:'mktFadeUp .7s .45s ease both'}}>
-          <div className="pg-stat"><b>14</b><span>Specialists</span></div>
           <div className="pg-stat"><b>10</b><span>Services</span></div>
-          <div className="pg-stat"><b>500+</b><span>5-star reviews</span></div>
+          <div className="pg-stat"><b>100+</b><span>5-star reviews</span></div>
         </div>
       </div>
 
@@ -137,7 +135,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="manicure">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="/gallery/IMG_1020.JPEG" alt="Manicure" loading="lazy"/>
+            <img src="/gallery/IMG_1025.JPEG" alt="Manicure" loading="lazy"/>
             <span className="svc-img-label">Manicure</span>
           </div>
           <div>
@@ -212,7 +210,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="gel">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="/gallery/IMG_1018.JPEG" alt="Gel Extensions" loading="lazy"/>
+            <img src="/gallery/IMG_1046.JPEG" alt="Gel Extensions" loading="lazy"/>
             <span className="svc-img-label">Gel Extensions</span>
           </div>
           <div>
@@ -237,7 +235,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="art">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="/gallery/IMG_1030.JPEG" alt="Nail Art" loading="lazy"/>
+            <img src="/gallery/IMG_1041.JPEG" alt="Nail Art" loading="lazy"/>
             <span className="svc-img-label">Nail Art</span>
           </div>
           <div>
@@ -291,7 +289,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="lashes">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="/gallery/IMG_1061.JPEG" alt="Eyelash Extensions" loading="lazy"/>
+            <img src="/gallery/IMG_1062.JPEG" alt="Eyelash Extensions" loading="lazy"/>
             <span className="svc-img-label">Eyelash Extensions</span>
           </div>
           <div>
@@ -318,7 +316,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="permmakeup">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&h=500&fit=crop&auto=format" alt="Permanent Makeup" loading="lazy"/>
+            <img src="/gallery/IMG_1059.JPEG" alt="Permanent Makeup" loading="lazy"/>
             <span className="svc-img-label">Permanent Makeup</span>
           </div>
           <div>
@@ -344,7 +342,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="botox">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="/gallery/IMG_1054.JPEG" alt="Botox" loading="lazy"/>
+            <img src="/gallery/IMG_1054.JPEG" alt="Restoration Med Spa" loading="lazy"/>
             <span className="svc-img-label">Botox</span>
           </div>
           <div>

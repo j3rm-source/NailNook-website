@@ -199,7 +199,7 @@ export default function TeamPage() {
       <div className="page-hero">
         <span className="lbl-plain" style={{animation:'mktFadeUp .7s ease both'}}>Meet the Artists</span>
         <h1 className="pg-title" style={{animation:'mktFadeUp .7s .15s ease both'}}>Our Specialists</h1>
-        <p className="pg-sub" style={{animation:'mktFadeUp .7s .3s ease both'}}>11 passionate artists dedicated to making your nails a work of art. Each with their own signature style, specialty, and love for the craft.</p>
+        <p className="pg-sub" style={{animation:'mktFadeUp .7s .3s ease both'}}>Our passionate artists dedicated to making your nails a work of art. Each with their own signature style, specialty, and love for the craft.</p>
       </div>
 
       {/* INTRO */}
