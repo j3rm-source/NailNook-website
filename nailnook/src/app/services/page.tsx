@@ -55,15 +55,61 @@ export default function ServicesPage() {
       d.className = 'mu'; d.textContent = t
       m.appendChild(d); m.scrollTop = 9999
     }
+    const TEAM_SVC: [string, string][] = [
+      ['Stephanie','Owner / Nail Tech'],
+      ['Raquel','Nail Tech'],
+      ['Kattie','Nail Tech'],
+      ['Shannon','Nail Tech'],
+      ['Ricci','Hair Specialist'],
+      ['Lara','Massage Therapist'],
+      ['Shelby','Waxing Specialist'],
+      ['Ashley','Eyelash Specialist'],
+    ]
+
     function resetQrs() {
       const el = document.getElementById('qrs')
-      if (el) el.innerHTML = '<button class="qr" onclick="window.__qrSvc(\'book\')">Book Appointment</button><button class="qr" onclick="window.__qrSvc(\'prices\')">Pricing Info</button><button class="qr" onclick="window.__qrSvc(\'hrs\')">Hours & Location</button>'
+      if (el) el.innerHTML = '<button class="qr" onclick="window.__qrSvc(\'book\')">Book Appointment</button><button class="qr" onclick="window.__qrSvc(\'hrs\')">Hours & Location</button>'
+    }
+    function setQrsSvc(html: string) {
+      const el = document.getElementById('qrs')
+      if (el) el.innerHTML = html
+    }
+    function startBookingSvc() {
+      botMsg("Are you ready to book, need a little help choosing, or would you like to pick a specific team member?")
+      setQrsSvc('<button class="qr" onclick="window.__svcReady()">I\'m ready to book</button><button class="qr" onclick="window.__svcHelp()">I need help choosing</button><button class="qr" onclick="window.__svcTeamPicker()">Choose a team member</button>')
+    }
+    function svcReady() {
+      usrMsg("I'm ready to book"); setQrsSvc('')
+      setTimeout(() => {
+        botMsg("Would you like me to walk you through it, or fill out the form yourself?")
+        setQrsSvc('<button class="qr" onclick="window.__svcForm()">Take me to the form</button><button class="qr" onclick="window.__svcTeamPicker()">Choose a team member first</button>')
+      }, 450)
+    }
+    function svcHelp() {
+      usrMsg("I need help choosing"); setQrsSvc('')
+      setTimeout(() => {
+        botMsg("No problem! Scroll up to browse our services, or head to the <a href='/team'>team page</a> to find the right specialist. Ready to book when you are!")
+        setQrsSvc('<button class="qr" onclick="window.__svcReady()">I\'m ready to book</button>')
+      }, 450)
+    }
+    function svcTeamPicker() {
+      usrMsg("Choose a team member"); setQrsSvc('')
+      setTimeout(() => {
+        botMsg("Who would you like to book with? I'll take you to the booking form.")
+        setQrsSvc(TEAM_SVC.map(([name, role]) => `<button class="qr" onclick="window.__svcPickSpec('${name}')">${name} — ${role}</button>`).join(''))
+      }, 450)
+    }
+    function svcPickSpec(name: string) {
+      usrMsg(name); setQrsSvc('')
+      setTimeout(() => { botMsg(`Head to our <a href="/book">booking form</a> and select ${name} as your specialist — we'll take care of the rest!`); resetQrs() }, 450)
+    }
+    function svcForm() {
+      usrMsg("Take me to the form"); setQrsSvc('')
+      setTimeout(() => { botMsg('Head over to our <a href="/book">booking page</a> to get started!'); resetQrs() }, 450)
     }
     function qr(t: string) {
-      const el = document.getElementById('qrs')
-      if (el) el.innerHTML = ''
-      if (t === 'book') { usrMsg('Book an appointment'); setTimeout(() => { botMsg('Head over to our <a href="/book">booking page</a>, or call us at <a href="tel:9288556425">(928) 855-6425</a>.'); resetQrs() }, 500) }
-      else if (t === 'prices') { usrMsg('Pricing info'); setTimeout(() => { botMsg('Mani from $25 · Pedi from $35 · Acrylic from $55 · Gel from $65 · Dip from $45 · Art from $5 · Waxing from $10. Scroll up to see full menus!'); resetQrs() }, 500) }
+      setQrsSvc('')
+      if (t === 'book') { usrMsg('Book an appointment'); setTimeout(startBookingSvc, 500) }
       else if (t === 'hrs') { usrMsg('Hours & Location'); setTimeout(() => { botMsg('2120 McCulloch Blvd N, Suite 103, Lake Havasu City, AZ<br>Mon–Sat: 9 AM – 7 PM · Sun: 10 AM – 5 PM<br><a href="tel:9288556425">(928) 855-6425</a>'); resetQrs() }, 500) }
     }
     function sendMsg() {
@@ -75,6 +121,11 @@ export default function ServicesPage() {
 
     resetQrs()
     ;(window as any).__qrSvc = qr
+    ;(window as any).__svcReady = svcReady
+    ;(window as any).__svcHelp = svcHelp
+    ;(window as any).__svcTeamPicker = svcTeamPicker
+    ;(window as any).__svcPickSpec = svcPickSpec
+    ;(window as any).__svcForm = svcForm
     ;(window as any).__toggleChatSvc = toggleChat
     ;(window as any).__closeChatSvc = closeChat
     ;(window as any).__sendMsgSvc = sendMsg
@@ -83,7 +134,7 @@ export default function ServicesPage() {
       clearTimeout(chatTimer)
       ro.disconnect()
       sio.disconnect()
-      ;['__qrSvc','__toggleChatSvc','__closeChatSvc','__sendMsgSvc'].forEach(k => delete (window as any)[k])
+      ;['__qrSvc','__svcReady','__svcHelp','__svcTeamPicker','__svcPickSpec','__svcForm','__toggleChatSvc','__closeChatSvc','__sendMsgSvc'].forEach(k => delete (window as any)[k])
     }
   }, [])
 
@@ -116,7 +167,7 @@ export default function ServicesPage() {
 
       {/* PAGE HERO */}
       <div className="page-hero">
-        <h1 className="pg-title" style={{animation:'mktFadeUp .7s .15s ease both'}}>Services & <em>Pricing</em></h1>
+        <h1 className="pg-title" style={{animation:'mktFadeUp .7s .15s ease both'}}>Our <em>Services</em></h1>
         <p className="pg-sub" style={{animation:'mktFadeUp .7s .3s ease both'}}>Everything you need for stunning nails, all under one roof, with expert care.</p>
         <div className="pg-stats" style={{animation:'mktFadeUp .7s .45s ease both'}}>
           <div className="pg-stat"><b>10</b><span>Services</span></div>
@@ -142,16 +193,6 @@ export default function ServicesPage() {
             <span className="svc-icon-big">01</span>
             <h2 className="svc-title">Manicure</h2>
             <p className="svc-desc">Our manicure services range from a classic shape-and-polish to a full spa experience. All manicures include nail shaping, cuticle care, hand massage, and your choice of polish. Gel options provide up to 3 weeks of chip-free color.</p>
-            <table className="price-table">
-              <thead><tr><th>Service</th><th>Price</th></tr></thead>
-              <tbody>
-                <tr><td>Classic Manicure</td><td>$25</td></tr>
-                <tr className="pop"><td>Gel Manicure</td><td>$40</td></tr>
-                <tr><td>Spa Manicure</td><td>$45</td></tr>
-                <tr><td>Gel Removal</td><td>$10</td></tr>
-              </tbody>
-            </table>
-            <p className="price-note">Prices may vary based on nail length and condition.</p>
           </div>
         </div>
       </div>
@@ -167,16 +208,6 @@ export default function ServicesPage() {
             <span className="svc-icon-big">02</span>
             <h2 className="svc-title">Pedicure</h2>
             <p className="svc-desc">Treat your feet to the care they deserve. Our pedicure services include foot soak, callus removal, nail shaping, cuticle care, exfoliation, hydrating massage, and polish. Upgrade to a deluxe or spa pedicure for a truly luxurious experience.</p>
-            <table className="price-table">
-              <thead><tr><th>Service</th><th>Price</th></tr></thead>
-              <tbody>
-                <tr><td>Classic Pedicure</td><td>$35</td></tr>
-                <tr><td>Gel Pedicure</td><td>$50</td></tr>
-                <tr className="pop"><td>Spa Pedicure</td><td>$55</td></tr>
-                <tr><td>Deluxe Pedicure</td><td>$65</td></tr>
-              </tbody>
-            </table>
-            <p className="price-note">Add-ons available: paraffin wax +$10, callus peel +$8.</p>
           </div>
         </div>
       </div>
@@ -192,16 +223,6 @@ export default function ServicesPage() {
             <span className="svc-icon-big">03</span>
             <h2 className="svc-title">Acrylic Nails</h2>
             <p className="svc-desc">Acrylic nails offer durability and versatility in one. Whether you want natural-looking extensions or dramatic stilettos, our technicians sculpt to your exact specifications. Includes shaping, filing, and your choice of gel color or polish.</p>
-            <table className="price-table">
-              <thead><tr><th>Service</th><th>Price</th></tr></thead>
-              <tbody>
-                <tr className="pop"><td>Full Set</td><td>$55</td></tr>
-                <tr><td>Full Set with Tips</td><td>$65</td></tr>
-                <tr><td>Fill-In</td><td>$35</td></tr>
-                <tr><td>Acrylic Removal</td><td>$15</td></tr>
-              </tbody>
-            </table>
-            <p className="price-note">Nail art, chrome, or complex shapes may incur additional charges.</p>
           </div>
         </div>
       </div>
@@ -217,16 +238,6 @@ export default function ServicesPage() {
             <span className="svc-icon-big">04</span>
             <h2 className="svc-title">Gel Extensions</h2>
             <p className="svc-desc">Gel extensions are the lightweight, flexible alternative to acrylics. They feel more natural and are gentler on your natural nails. Perfect for those who want length and durability without the heaviness of traditional acrylics.</p>
-            <table className="price-table">
-              <thead><tr><th>Service</th><th>Price</th></tr></thead>
-              <tbody>
-                <tr className="pop"><td>Full Set</td><td>$65</td></tr>
-                <tr><td>Refill</td><td>$45</td></tr>
-                <tr><td>Builder Gel Full Set</td><td>$70</td></tr>
-                <tr><td>Gel Extension Removal</td><td>$15</td></tr>
-              </tbody>
-            </table>
-            <p className="price-note">Includes gel color polish. Nail art add-ons available.</p>
           </div>
         </div>
       </div>
@@ -242,18 +253,6 @@ export default function ServicesPage() {
             <span className="svc-icon-big">05</span>
             <h2 className="svc-title">Nail Art</h2>
             <p className="svc-desc">Bring your vision to life with custom nail art. From simple geometric accents to intricate hand-painted florals, chrome powder, rhinestone embellishments, and 3D designs — our artists love a creative challenge.</p>
-            <table className="price-table">
-              <thead><tr><th>Design Type</th><th>Price</th></tr></thead>
-              <tbody>
-                <tr><td>Simple Design (per nail)</td><td>$5+</td></tr>
-                <tr><td>Complex Art (per nail)</td><td>$15+</td></tr>
-                <tr><td>Full Set Nail Art</td><td>$25+</td></tr>
-                <tr><td>Chrome / Mirror Powder</td><td>$10+</td></tr>
-                <tr><td>Rhinestones / Gems</td><td>$5+</td></tr>
-                <tr><td>3D Nail Art</td><td>$20+</td></tr>
-              </tbody>
-            </table>
-            <p className="price-note">Pricing varies by complexity. Consult your specialist for a quote.</p>
           </div>
         </div>
       </div>
@@ -269,18 +268,6 @@ export default function ServicesPage() {
             <span className="svc-icon-big">06</span>
             <h2 className="svc-title">Waxing</h2>
             <p className="svc-desc">Our waxing services deliver smooth, precise results using premium wax formulas gentle on sensitive skin. Perfect for quick touchups or a full facial wax before a big event. All waxing includes soothing aftercare.</p>
-            <table className="price-table">
-              <thead><tr><th>Area</th><th>Price</th></tr></thead>
-              <tbody>
-                <tr><td>Eyebrow Wax</td><td>$15</td></tr>
-                <tr><td>Lip Wax</td><td>$10</td></tr>
-                <tr><td>Chin Wax</td><td>$10</td></tr>
-                <tr><td>Full Face Wax</td><td>$35</td></tr>
-                <tr><td>Underarm Wax</td><td>$25</td></tr>
-                <tr><td>Eyebrow Tint</td><td>$15</td></tr>
-              </tbody>
-            </table>
-            <p className="price-note">All waxing includes soothing aftercare lotion.</p>
           </div>
         </div>
       </div>
@@ -296,18 +283,6 @@ export default function ServicesPage() {
             <span className="svc-icon-big">07</span>
             <h2 className="svc-title">Eyelash Extensions</h2>
             <p className="svc-desc">Wake up every morning with full, gorgeous lashes. Our lash artists apply individual extensions for a look that ranges from natural and wispy to bold and dramatic. Long-lasting, lightweight, and completely customized to your eye shape.</p>
-            <table className="price-table">
-              <thead><tr><th>Service</th><th>Price</th></tr></thead>
-              <tbody>
-                <tr className="pop"><td>Classic Full Set</td><td>$75</td></tr>
-                <tr><td>Volume Full Set</td><td>$100</td></tr>
-                <tr><td>Mega Volume Set</td><td>$125</td></tr>
-                <tr><td>Classic Fill</td><td>$45</td></tr>
-                <tr><td>Volume Fill</td><td>$60</td></tr>
-                <tr><td>Lash Removal</td><td>$20</td></tr>
-              </tbody>
-            </table>
-            <p className="price-note">Fills recommended every 2–3 weeks to maintain fullness.</p>
           </div>
         </div>
       </div>
@@ -323,16 +298,6 @@ export default function ServicesPage() {
             <span className="svc-icon-big">08</span>
             <h2 className="svc-title">Permanent Makeup</h2>
             <p className="svc-desc">Skip the daily routine with semi-permanent makeup that looks flawless around the clock. From microbladed brows to defined lip color and eyeliner, our technicians use precision pigmentation techniques to enhance your natural features.</p>
-            <table className="price-table">
-              <thead><tr><th>Service</th><th>Price</th></tr></thead>
-              <tbody>
-                <tr className="pop"><td>Microblading (Brows)</td><td>$200</td></tr>
-                <tr><td>Powder / Ombre Brows</td><td>$200</td></tr>
-                <tr><td>Permanent Eyeliner</td><td>$150</td></tr>
-                <tr><td>Lip Blush</td><td>$200</td></tr>
-                <tr><td>Touch-Up (within 8 weeks)</td><td>$75</td></tr>
-              </tbody>
-            </table>
             <p className="price-note">A touch-up session 6–8 weeks after your initial appointment is recommended for best results.</p>
           </div>
         </div>
@@ -349,16 +314,7 @@ export default function ServicesPage() {
             <span className="svc-icon-big">09</span>
             <h2 className="svc-title">Botox</h2>
             <p className="svc-desc">Refresh your look with expertly administered cosmetic injections. Whether you want to soften forehead lines, crow&apos;s feet, or frown lines, our injector creates natural-looking results tailored to your face — never frozen, always you.</p>
-            <table className="price-table">
-              <thead><tr><th>Area</th><th>Price</th></tr></thead>
-              <tbody>
-                <tr><td>Forehead Lines</td><td>Call for pricing</td></tr>
-                <tr><td>Crow&apos;s Feet</td><td>Call for pricing</td></tr>
-                <tr><td>Frown Lines (11s)</td><td>Call for pricing</td></tr>
-                <tr className="pop"><td>Full Face Consult</td><td>Free</td></tr>
-              </tbody>
-            </table>
-            <p className="price-note">Pricing based on units used. Free consultation available — call (928) 855-6425.</p>
+            <p className="price-note">Free consultation available.</p>
           </div>
         </div>
       </div>
@@ -374,16 +330,6 @@ export default function ServicesPage() {
             <span className="svc-icon-big">10</span>
             <h2 className="svc-title">Massage</h2>
             <p className="svc-desc">Unwind completely with a therapeutic massage designed to ease tension, improve circulation, and restore balance. From a quick relaxation session to a deep tissue treatment, our massage therapists customize every session to your needs.</p>
-            <table className="price-table">
-              <thead><tr><th>Service</th><th>Price</th></tr></thead>
-              <tbody>
-                <tr><td>30-Minute Relaxation</td><td>$45</td></tr>
-                <tr className="pop"><td>60-Minute Relaxation</td><td>$75</td></tr>
-                <tr><td>90-Minute Relaxation</td><td>$110</td></tr>
-                <tr><td>60-Minute Deep Tissue</td><td>$85</td></tr>
-                <tr><td>Hot Stone Add-On</td><td>$20</td></tr>
-              </tbody>
-            </table>
             <p className="price-note">Book in advance — massage appointments fill quickly.</p>
           </div>
         </div>
@@ -443,7 +389,7 @@ export default function ServicesPage() {
             <button className="cx" onClick={() => (window as any).__closeChatSvc?.()}>✕</button>
           </div>
           <div className="cmsgs" id="cmsgs">
-            <div className="mb">Hi there. Have questions about a service or pricing? I&apos;m happy to help.</div>
+            <div className="mb">Hi there. Have questions about a service or want to book? I&apos;m happy to help.</div>
           </div>
           <div className="qrs" id="qrs"/>
           <div className="c-inp-area">

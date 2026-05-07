@@ -17,11 +17,35 @@ const SERVICES = [
   'Other / Not Sure',
 ]
 
+type Specialist = { name: string; role: string }
+
+const NAIL_TECHS: Specialist[] = [
+  { name: 'Stephanie', role: 'Owner / Nail Tech' },
+  { name: 'Raquel',    role: 'Nail Technician' },
+  { name: 'Kattie',   role: 'Nail Technician' },
+  { name: 'Shannon',  role: 'Nail Technician' },
+]
+
+const SERVICE_SPECIALISTS: Record<string, Specialist[]> = {
+  'Manicure':          NAIL_TECHS,
+  'Pedicure':          NAIL_TECHS,
+  'Acrylic Nails':     NAIL_TECHS,
+  'Gel Extensions':    NAIL_TECHS,
+  'Nail Art':          NAIL_TECHS,
+  'Waxing':            [{ name: 'Shelby',    role: 'Waxing Specialist' }],
+  'Eyelash Extensions':[{ name: 'Ashley',    role: 'Eyelash Specialist' }],
+  'Permanent Makeup':  [{ name: 'Stephanie', role: 'Owner / Nail Tech' }],
+  'Botox':             [{ name: 'Stephanie', role: 'Owner / Nail Tech' }],
+  'Massage':           [{ name: 'Lara',      role: 'Massage Therapist' }],
+  'Other / Not Sure':  [],
+}
+
 type FormState = {
   name: string
   phone: string
   email: string
   service: string
+  specialist: string
   preferredTime: string
   message: string
 }
@@ -31,14 +55,14 @@ type Errors = Partial<Record<keyof FormState | 'submit', string>>
 export default function BookPage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [form, setForm] = useState<FormState>({
-    name: '', phone: '', email: '', service: '', preferredTime: '', message: '',
+    name: '', phone: '', email: '', service: '', specialist: '', preferredTime: '', message: '',
   })
   const [errors, setErrors] = useState<Errors>({})
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
   function setField(key: keyof FormState, val: string) {
-    setForm(f => ({ ...f, [key]: val }))
+    setForm(f => ({ ...f, [key]: val, ...(key === 'service' ? { specialist: '' } : {}) }))
     if (errors[key]) setErrors(e => { const n = { ...e }; delete n[key]; return n })
   }
 
@@ -63,7 +87,7 @@ export default function BookPage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, specialist: form.specialist || 'First Available' }),
       })
       if (res.ok) {
         setSubmitted(true)
@@ -171,6 +195,33 @@ export default function BookPage() {
                 </select>
                 {errors.service && <span className="form-error">{errors.service}</span>}
               </div>
+
+              {form.service && (
+                <div className="form-group">
+                  <label className="form-label">Book Your Specialist</label>
+                  <div className="spec-grid">
+                    <button
+                      type="button"
+                      className={`spec-card${form.specialist === 'First Available' ? ' selected' : ''}`}
+                      onClick={() => setField('specialist', 'First Available')}
+                    >
+                      <span className="spec-name">First Available</span>
+                      <span className="spec-role">Next open slot</span>
+                    </button>
+                    {(SERVICE_SPECIALISTS[form.service] ?? []).map(s => (
+                      <button
+                        key={s.name}
+                        type="button"
+                        className={`spec-card${form.specialist === s.name ? ' selected' : ''}`}
+                        onClick={() => setField('specialist', s.name)}
+                      >
+                        <span className="spec-name">{s.name}</span>
+                        <span className="spec-role">{s.role}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="form-group">
                 <label className="form-label" htmlFor="cf-time">Preferred Date &amp; Time</label>

@@ -62,10 +62,30 @@ export function buildCancellationStaffSMS(
 }
 
 export function buildReminderCustomerSMS(
-  customerName: string,
+  _customerName: string,
   serviceName: string,
   staffName: string,
   time: string
 ): string {
   return `Reminder: You have ${serviceName} with ${staffName} tomorrow at ${time}. Reply CANCEL to cancel.`
+}
+
+export function buildInquiryConfirmationCustomerSMS(name: string, service: string): string {
+  return `Hi ${name}! Thanks for reaching out to The Nail Nook. We received your ${service} request and will be in touch shortly to confirm your appointment. See you soon!`
+}
+
+export function buildInquiryNotificationSpecialistSMS(
+  customerName: string,
+  service: string,
+  preferredTime: string,
+  customerPhone: string
+): string {
+  return `📍 New booking request – Nail Nook\nClient: ${customerName}\nService: ${service}\nPreferred time: ${preferredTime}\nPhone: ${customerPhone}\nGive them a call to confirm!`
+}
+
+export function normalizePhone(phone: string): string | null {
+  const digits = phone.replace(/\D/g, '')
+  if (digits.length === 10) return `+1${digits}`
+  if (digits.length === 11 && digits.startsWith('1')) return `+${digits}`
+  return null
 }

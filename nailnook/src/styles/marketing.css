@@ -232,6 +232,12 @@
 .mkt .contact-success h2 { font-family: var(--fd); font-size: 2.2rem; color: var(--ch); margin-bottom: 14px; }
 .mkt .contact-success p { color: var(--chl); line-height: 1.75; font-size: 1.05rem; margin-bottom: 36px; }
 @media (max-width: 540px) { .mkt .form-row { grid-template-columns: 1fr; } }
+.mkt .spec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 10px; }
+.mkt .spec-card { background: #fff; border: 1.5px solid var(--bd); border-radius: var(--r); padding: 14px 12px; cursor: pointer; text-align: center; transition: border-color var(--tr), box-shadow var(--tr), background var(--tr); }
+.mkt .spec-card:hover { border-color: var(--pp); box-shadow: 0 0 0 3px rgba(233,30,140,.08); }
+.mkt .spec-card.selected { border-color: var(--pp); background: #fff0f7; box-shadow: 0 0 0 3px rgba(233,30,140,.12); }
+.mkt .spec-name { display: block; font-weight: 700; font-size: .9rem; color: var(--ch); margin-bottom: 3px; }
+.mkt .spec-role { display: block; font-size: .77rem; color: var(--chl); }
 
 /* MAP */
 .mkt .map-wrap { padding: 0; }

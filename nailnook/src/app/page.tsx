@@ -245,7 +245,7 @@ export default function HomePage() {
     }
     function resetQrs() {
       const el = document.getElementById('qrs')
-      if (el) el.innerHTML = '<button class="qr" onclick="window.__qr(\'book\')">Book Appointment</button><button class="qr" onclick="window.__qr(\'svc\')">Services & Pricing</button><button class="qr" onclick="window.__qr(\'hrs\')">Hours & Location</button><button class="qr" onclick="window.__qr(\'team\')">Our Team</button>'
+      if (el) el.innerHTML = '<button class="qr" onclick="window.__qr(\'book\')">Book Appointment</button><button class="qr" onclick="window.__qr(\'svc\')">Our Services</button><button class="qr" onclick="window.__qr(\'hrs\')">Hours & Location</button><button class="qr" onclick="window.__qr(\'team\')">Our Team</button>'
     }
     function setQrs(html: string) {
       const el = document.getElementById('qrs')
@@ -259,14 +259,14 @@ export default function HomePage() {
       {k:['walkin','walk-in','walk in'],a:"Walk-ins welcome when we have openings. Appointments recommended on weekends."},
       {k:['cancel','reschedul'],a:"Free cancellations up to 24 hours before. Call <a href='tel:9288556425'>(928) 855-6425</a>."},
       {k:['pay','payment','cash','card'],a:"We accept cash, all major cards, Apple Pay, and Google Pay."},
-      {k:['manicure','mani'],a:"Manicures: Classic $25 · Gel $40 · Spa $45 · Gel Removal $10"},
-      {k:['pedicure','pedi'],a:"Pedicures: Classic $35 · Gel $50 · Spa $55 · Deluxe $65"},
-      {k:['acrylic','full set'],a:"Acrylic: Full Set $55 · w/Tips $65 · Fill-In $35 · Removal $15"},
-      {k:['gel extension','builder gel'],a:"Gel Extensions: Full Set $65 · Refill $45 · Builder Gel $70 · Removal $15"},
-      {k:['dip'],a:"Dip Powder from $45. Chip-resistant, lasts 3–4 weeks."},
-      {k:['nail art','design','chrome','ombre'],a:"Nail Art from $5. Custom designs, chrome, ombre, gems, 3D art."},
-      {k:['wax','eyebrow','lip'],a:"Waxing: Eyebrow $15 · Lip $10 · Full Face $35"},
-      {k:['price','cost','how much','pricing'],a:"Mani from $25 · Pedi from $35 · Acrylic from $55 · Gel from $65 · Dip from $45 · Art from $5 · Waxing from $10<br><a href='/services'>Full menu →</a>"},
+      {k:['manicure','mani'],a:"We offer classic, gel, and spa manicures. <a href='/services#manicure'>See details →</a>"},
+      {k:['pedicure','pedi'],a:"We offer classic, gel, spa, and deluxe pedicures. <a href='/services#pedicure'>See details →</a>"},
+      {k:['acrylic','full set'],a:"We do acrylic full sets, fill-ins, and removal. <a href='/services#acrylic'>See details →</a>"},
+      {k:['gel extension','builder gel'],a:"We offer gel extensions, refills, and builder gel sets. <a href='/services#gel'>See details →</a>"},
+      {k:['dip'],a:"Dip powder nails are chip-resistant and last 3–4 weeks. <a href='/services#dip'>See details →</a>"},
+      {k:['nail art','design','chrome','ombre'],a:"Custom nail art: chrome, ombre, gems, 3D, and hand-painted designs. <a href='/services#art'>See details →</a>"},
+      {k:['wax','eyebrow','lip'],a:"We offer eyebrow, lip, chin, full face, and underarm waxing. <a href='/services#waxing'>See details →</a>"},
+      {k:['price','cost','how much','pricing'],a:"For current pricing please call us at <a href='tel:9288556425'>(928) 855-6425</a> or <a href='/services'>view our services page</a>."},
       {k:['team','staff','specialist'],a:"We have 14 passionate nail specialists.<br><a href='/team'>Meet the team →</a>"},
       {k:['hi','hello','hey'],a:"Hi there, welcome to Nail Nook! How can I help?"},
       {k:['thank','thanks'],a:"You're very welcome! Anything else?"},
@@ -277,26 +277,71 @@ export default function HomePage() {
     const SERVICES = ['Manicure','Pedicure','Acrylic Nails','Gel Extensions','Dip Powder','Nail Art','Waxing']
 
     function startBooking() {
-      botMsg("I can book your appointment two ways — which do you prefer?")
-      setQrs('<button class="qr" onclick="window.__bookPath(\'chat\')">Book with me here</button><button class="qr" onclick="window.__bookPath(\'self\')">I\'ll fill the form myself</button>')
+      botMsg("Are you ready to book, need a little help choosing, or would you like to pick a specific team member?")
+      setQrs('<button class="qr" onclick="window.__readyToBook()">I\'m ready to book</button><button class="qr" onclick="window.__needHelp()">I need help choosing</button><button class="qr" onclick="window.__showTeamPicker()">Choose a team member</button>')
+    }
+    function readyToBook() {
+      usrMsg("I'm ready to book"); setQrs('')
+      setTimeout(() => {
+        botMsg("Would you like me to walk you through it right here, or fill out the booking form yourself?")
+        setQrs('<button class="qr" onclick="window.__bookPath(\'chat\')">Walk me through it</button><button class="qr" onclick="window.__bookPath(\'self\')">Take me to the form</button>')
+      }, 450)
+    }
+    function needHelp() {
+      usrMsg("I need help choosing"); setQrs('')
+      setTimeout(() => {
+        botMsg("No problem! We offer nails, lashes, hair, waxing, massage, and more. Want me to walk you through booking once you're ready?")
+        setQrs('<button class="qr" onclick="window.__readyToBook()">Yes, let\'s book</button><button class="qr" onclick="window.__viewServices()">View services</button>')
+      }, 450)
+    }
+    function viewServices() {
+      usrMsg("View services"); setQrs('')
+      setTimeout(() => { botMsg("Check out everything we offer on our <a href='/services'>services page</a>."); resetQrs() }, 450)
+    }
+    function showTeamPicker() {
+      usrMsg("Choose a team member"); setQrs('')
+      setTimeout(() => {
+        botMsg("Who would you like to book with?")
+        const TEAM: [string, string][] = [
+          ['Stephanie','Owner / Nail Tech'],
+          ['Raquel','Nail Tech'],
+          ['Kattie','Nail Tech'],
+          ['Shannon','Nail Tech'],
+          ['Ricci','Hair Specialist'],
+          ['Lara','Massage Therapist'],
+          ['Shelby','Waxing Specialist'],
+          ['Ashley','Eyelash Specialist'],
+        ]
+        setQrs(TEAM.map(([name, role]) => `<button class="qr" onclick="window.__pickSpecialist('${name}','${role}')">${name} — ${role}</button>`).join(''))
+      }, 450)
+    }
+    function pickSpecialist(name: string, role: string) {
+      usrMsg(`${name} — ${role}`); bookData.specialist = name; bookState = 'name'; setQrs('')
+      setTimeout(() => botMsg(`Great choice! Let's get you booked with ${name}. What's your <b>name</b>?`), 450)
     }
     function bookPath(p: string) {
       setQrs('')
       if (p === 'self') {
-        usrMsg("I'll do it myself")
+        usrMsg("Take me to the form")
         setTimeout(() => { botMsg("Head over to our <a href='/book'>booking page</a>."); resetQrs() }, 450)
       } else {
-        usrMsg("Book me here")
+        usrMsg("Walk me through it")
         bookState = 'name'; bookData = {}
         setTimeout(() => botMsg("Great! What's your <b>name</b>?"), 450)
       }
     }
     function pickService(s: string) {
-      usrMsg(s); bookData.service = s; bookState = 'specialist'; setQrs('')
-      setTimeout(() => {
-        botMsg("Great choice! Preferred specialist?")
-        setQrs('<button class="qr" onclick="window.__noSpecPref()">No preference</button>')
-      }, 400)
+      usrMsg(s); bookData.service = s; setQrs('')
+      if (bookData.specialist) {
+        bookState = 'date'
+        setTimeout(() => botMsg("When would you like to come in? (e.g. 'Saturday 2pm')"), 400)
+      } else {
+        bookState = 'specialist'
+        setTimeout(() => {
+          botMsg("Any preferred specialist?")
+          setQrs('<button class="qr" onclick="window.__showTeamPicker()">Choose a specialist</button><button class="qr" onclick="window.__noSpecPref()">No preference</button>')
+        }, 400)
+      }
     }
     function noSpecPref() {
       usrMsg("No preference"); bookData.specialist = 'No Preference'; bookState = 'date'; setQrs('')
@@ -304,10 +349,25 @@ export default function HomePage() {
     }
     function confirmBooking() {
       usrMsg("Confirm & Send"); setQrs('')
-      setTimeout(() => {
-        botMsg(`Request sent! We'll call you at <b>${bookData.phone}</b> within a few hours to confirm. See you at Nail Nook!`)
-        bookState = null; bookData = {}; resetQrs()
-      }, 600)
+      fetch('/api/chat-booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customerName: bookData.name,
+          customerPhone: bookData.phone,
+          service: bookData.service,
+          specialist: bookData.specialist || 'No Preference',
+          preferredTime: bookData.preferredTime || '',
+        }),
+      })
+        .then(() => {
+          botMsg(`You're all set! We just texted <b>${bookData.phone}</b> a confirmation. We'll be in touch to lock in your time. See you at Nail Nook!`)
+          bookState = null; bookData = {}; resetQrs()
+        })
+        .catch(() => {
+          botMsg(`Request received! We'll call you at <b>${bookData.phone}</b> to confirm. See you at Nail Nook!`)
+          bookState = null; bookData = {}; resetQrs()
+        })
     }
     function cancelBooking() {
       usrMsg("Cancel"); bookState = null; bookData = {}
@@ -329,7 +389,7 @@ export default function HomePage() {
         bookData.specialist = t; bookState = 'date'
         setTimeout(() => botMsg("When would you like to come in?"), 400)
       } else if (bookState === 'date') {
-        bookData.notes = 'Preferred time: ' + t; bookState = 'confirm'
+        bookData.preferredTime = t; bookData.notes = 'Preferred time: ' + t; bookState = 'confirm'
         setTimeout(() => {
           botMsg(`Here's your request:<br><br><b>Name:</b> ${bookData.name}<br><b>Phone:</b> ${bookData.phone}<br><b>Service:</b> ${bookData.service}<br><b>Specialist:</b> ${bookData.specialist || 'No Preference'}<br><b>Time:</b> ${t}<br><br>Ready to send?`)
           setQrs('<button class="qr" onclick="window.__confirmBooking()">Confirm & Send</button><button class="qr" onclick="window.__cancelBooking()">Cancel</button>')
@@ -339,7 +399,7 @@ export default function HomePage() {
     function qr(t: string) {
       setQrs('')
       if (t === 'book') { usrMsg('Book an appointment'); setTimeout(startBooking, 450) }
-      else if (t === 'svc') { usrMsg('Services & Pricing'); setTimeout(() => { botMsg(KB.find(k=>k.k.includes('price'))!.a); resetQrs() }, 450) }
+      else if (t === 'svc') { usrMsg('Our Services'); setTimeout(() => { botMsg("We offer nails, lashes, hair, waxing, massage, and more. <a href='/services'>View all services →</a>"); resetQrs() }, 450) }
       else if (t === 'team') { usrMsg('Our Team'); setTimeout(() => { botMsg(KB.find(k=>k.k.includes('team'))!.a); resetQrs() }, 450) }
       else if (t === 'hrs') { usrMsg('Hours & Location'); setTimeout(() => { botMsg("Mon–Sat: 9 AM – 7 PM<br>Sunday: 10 AM – 5 PM<br><br>2120 McCulloch Blvd N, Suite 103<br>Lake Havasu City, AZ 86403<br><a href='tel:9288556425'>(928) 855-6425</a>"); resetQrs() }, 450) }
     }
@@ -359,6 +419,11 @@ export default function HomePage() {
 
     resetQrs()
     ;(window as any).__qr = qr
+    ;(window as any).__readyToBook = readyToBook
+    ;(window as any).__needHelp = needHelp
+    ;(window as any).__viewServices = viewServices
+    ;(window as any).__showTeamPicker = showTeamPicker
+    ;(window as any).__pickSpecialist = pickSpecialist
     ;(window as any).__bookPath = bookPath
     ;(window as any).__pickService = pickService
     ;(window as any).__noSpecPref = noSpecPref
@@ -374,7 +439,7 @@ export default function HomePage() {
       document.removeEventListener('keydown', handleKeyDown)
       window.removeEventListener('scroll', handleScroll)
       ro.disconnect()
-      ;['__ssNav','__lbxClose','__lbxNav','__qr','__bookPath','__pickService','__noSpecPref','__confirmBooking','__cancelBooking','__toggleChat','__closeChat','__sendMsg'].forEach(k => delete (window as any)[k])
+      ;['__ssNav','__lbxClose','__lbxNav','__qr','__readyToBook','__needHelp','__viewServices','__showTeamPicker','__pickSpecialist','__bookPath','__pickService','__noSpecPref','__confirmBooking','__cancelBooking','__toggleChat','__closeChat','__sendMsg'].forEach(k => delete (window as any)[k])
     }
   }, [])
 
@@ -431,16 +496,16 @@ export default function HomePage() {
         </div>
         <div className="svc-grid">
           {[
-            {href:'/services#manicure',img:'/gallery/IMG_1020.JPEG',alt:'Manicure',name:'Manicure',desc:'Classic, gel, and spa manicures. Perfectly shaped and polished every time.',from:'From $25',cls:'rv'},
-            {href:'/services#pedicure',img:'/gallery/IMG_1056.JPEG',alt:'Pedicure',name:'Pedicure',desc:'Relaxing pedicure treatments from classic to luxurious spa experiences.',from:'From $35',cls:'rv d1'},
-            {href:'/services#acrylic',img:'/gallery/IMG_1017.JPEG',alt:'Acrylic Nails',name:'Acrylic Nails',desc:'Long-lasting acrylic extensions for a glamorous, durable finish.',from:'From $55',cls:'rv d2'},
-            {href:'/services#gel',img:'/gallery/IMG_1018.JPEG',alt:'Gel Extensions',name:'Gel Extensions',desc:'Lightweight, flexible gel extensions with a natural look and feel.',from:'From $65',cls:'rv d3'},
-            {href:'/services#lashes',img:'/gallery/IMG_1061.JPEG',alt:'Eyelash Extensions',name:'Eyelash Extensions',desc:'Lush, full lash extensions for a wide-awake look that lasts weeks.',from:'From $75',cls:'rv d4'},
-            {href:'/services#art',img:'/gallery/IMG_1030.JPEG',alt:'Nail Art',name:'Nail Art',desc:'Custom designs, gems, chrome, ombre, and hand-painted artwork.',from:'From $5',cls:'rv d5'},
-            {href:'/services#waxing',img:'/gallery/IMG_1059.JPEG',alt:'Waxing',name:'Waxing',desc:'Smooth, precise waxing for eyebrows, lips, face, and more.',from:'From $10',cls:'rv'},
-            {href:'/services#permmakeup',img:'/gallery/IMG_1060.JPEG',alt:'Permanent Makeup',name:'Permanent Makeup',desc:'Flawless brows, liner, and lips that look perfect every single morning.',from:'From $150',cls:'rv d1'},
-            {href:'/services#botox',img:'/gallery/IMG_1054.JPEG',alt:'Botox',name:'Botox',desc:'Smooth fine lines and refresh your look with expert cosmetic injections.',from:'Call for pricing',cls:'rv d2'},
-            {href:'/services#massage',img:'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=450&fit=crop&auto=format',alt:'Massage',name:'Massage',desc:'Relaxing therapeutic massage to melt away tension from head to toe.',from:'From $60',cls:'rv d3'},
+            {href:'/services#manicure',img:'/gallery/IMG_1020.JPEG',alt:'Manicure',name:'Manicure',desc:'Classic, gel, and spa manicures. Perfectly shaped and polished every time.',cls:'rv'},
+            {href:'/services#pedicure',img:'/gallery/IMG_1056.JPEG',alt:'Pedicure',name:'Pedicure',desc:'Relaxing pedicure treatments from classic to luxurious spa experiences.',cls:'rv d1'},
+            {href:'/services#acrylic',img:'/gallery/IMG_1017.JPEG',alt:'Acrylic Nails',name:'Acrylic Nails',desc:'Long-lasting acrylic extensions for a glamorous, durable finish.',cls:'rv d2'},
+            {href:'/services#gel',img:'/gallery/IMG_1018.JPEG',alt:'Gel Extensions',name:'Gel Extensions',desc:'Lightweight, flexible gel extensions with a natural look and feel.',cls:'rv d3'},
+            {href:'/services#lashes',img:'/gallery/IMG_1061.JPEG',alt:'Eyelash Extensions',name:'Eyelash Extensions',desc:'Lush, full lash extensions for a wide-awake look that lasts weeks.',cls:'rv d4'},
+            {href:'/services#art',img:'/gallery/IMG_1030.JPEG',alt:'Nail Art',name:'Nail Art',desc:'Custom designs, gems, chrome, ombre, and hand-painted artwork.',cls:'rv d5'},
+            {href:'/services#waxing',img:'/gallery/IMG_1059.JPEG',alt:'Waxing',name:'Waxing',desc:'Smooth, precise waxing for eyebrows, lips, face, and more.',cls:'rv'},
+            {href:'/services#permmakeup',img:'/gallery/IMG_1060.JPEG',alt:'Permanent Makeup',name:'Permanent Makeup',desc:'Flawless brows, liner, and lips that look perfect every single morning.',cls:'rv d1'},
+            {href:'/services#botox',img:'/gallery/IMG_1054.JPEG',alt:'Botox',name:'Botox',desc:'Smooth fine lines and refresh your look with expert cosmetic injections.',cls:'rv d2'},
+            {href:'/services#massage',img:'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=450&fit=crop&auto=format',alt:'Massage',name:'Massage',desc:'Relaxing therapeutic massage to melt away tension from head to toe.',cls:'rv d3'},
           ].map(s => (
             <Link key={s.name} href={s.href} className={`svc-card ${s.cls}`}>
               <img className="svc-img" src={s.img} alt={s.alt} loading="lazy"/>
@@ -448,7 +513,7 @@ export default function HomePage() {
                 <span className="svc-icon"/>
                 <h3>{s.name}</h3>
                 <p>{s.desc}</p>
-                <span className="svc-more">{s.from} →</span>
+                <span className="svc-more">Learn more →</span>
               </div>
             </Link>
           ))}
