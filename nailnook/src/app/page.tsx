@@ -534,20 +534,7 @@ export default function HomePage() {
         <div className="ss-dots" id="ssDots"/>
       </section>
 
-      {/* TEAM TEASER */}
-      <section className="sec sec-alt">
-        <div className="sec-hdr c">
-          <h2 className="sec-title">Meet Our Team</h2>
-        </div>
-        <div className="team-group rv">
-          <Link href="/team">
-            <img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=1400&h=800&fit=crop&auto=format" alt="The Nail Nook team" loading="lazy"/>
-          </Link>
-        </div>
-        <div className="team-cta"><Link href="/team" className="btn btn-p">Meet Our Specialists</Link></div>
-      </section>
-
-      {/* REVIEWS */}
+{/* REVIEWS */}
       <section className="sec">
         <div className="sec-hdr c">
           <span className="lbl-plain">Client Love</span>

@@ -50,7 +50,7 @@
 /* HERO */
 .mkt .hero { position: relative; height: 100svh; min-height: 580px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .mkt .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 15% 60%,rgba(249,168,201,.45) 0%,transparent 50%),radial-gradient(ellipse at 85% 20%,rgba(252,228,236,.6) 0%,transparent 50%),radial-gradient(ellipse at 55% 85%,rgba(233,30,140,.07) 0%,transparent 40%),#fff5f9; }
-.mkt .hero-img { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1600&h=900&fit=crop&auto=format') center/cover no-repeat; opacity: .12; transform: scale(1.05); }
+.mkt .hero-img { position: absolute; inset: 0; background: url('/team/katie/work-4.jpg') center/cover no-repeat; opacity: .32; transform: scale(1.05); }
 .mkt .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 20px; max-width: 680px; }
 .mkt .eyebrow { font-size: .75rem; letter-spacing: .22em; text-transform: uppercase; color: var(--pa); font-weight: 700; margin-bottom: 18px; display: block; animation: mktFadeUp .8s ease both; }
 .mkt .hero h1 { font-family: var(--fd); font-size: clamp(2.6rem,7vw,5rem); font-weight: 700; line-height: 1.08; color: var(--ch); margin-bottom: 22px; animation: mktFadeUp .8s .15s ease both; }
