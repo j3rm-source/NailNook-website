@@ -106,7 +106,7 @@ export default function BookPage() {
       {/* NAV */}
       <nav className="nav">
         <Link href="/" className="logo">
-          <img src="/logo.png" alt="The Nail Nook & More" className="nav-logo-img"/>
+          <img src="/the nail nook logo.png" alt="The Nail Nook & More" className="nav-logo-img"/>
         </Link>
         <ul className="nav-links">
           <li><Link href="/">Home</Link></li>

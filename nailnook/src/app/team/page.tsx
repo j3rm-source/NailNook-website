@@ -174,7 +174,7 @@ export default function TeamPage() {
     <div className="mkt">
       {/* NAV */}
       <nav className="nav">
-        <Link href="/" className="logo"><img src="/logo.png" alt="The Nail Nook & More" className="nav-logo-img"/></Link>
+        <Link href="/" className="logo"><img src="/the nail nook logo.png" alt="The Nail Nook & More" className="nav-logo-img"/></Link>
         <ul className="nav-links">
           <li><Link href="/">Home</Link></li>
           <li><Link href="/services">Services</Link></li>
