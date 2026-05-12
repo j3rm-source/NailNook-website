@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createAdminClient } from '@/lib/supabase'
+import { createAdminClient, isSupabaseConfigured } from '@/lib/supabase'
 import {
   sendSMS,
   buildBookingConfirmationStaffSMS,
@@ -7,13 +7,9 @@ import {
 } from '@/lib/twilio'
 import { formatDateLong, formatTime } from '@/lib/utils'
 
-const supabaseConfigured = () =>
-  !!process.env.NEXT_PUBLIC_SUPABASE_URL &&
-  !process.env.NEXT_PUBLIC_SUPABASE_URL.includes('placeholder')
-
 // GET /api/bookings — admin: all bookings; ?staffId=X for staff view
 export async function GET(request: NextRequest) {
-  if (!supabaseConfigured()) return NextResponse.json([])
+  if (!isSupabaseConfigured()) return NextResponse.json([])
   const { searchParams } = new URL(request.url)
   const staffId = searchParams.get('staffId')
   const status = searchParams.get('status')
@@ -37,10 +33,59 @@ export async function GET(request: NextRequest) {
   return NextResponse.json(data)
 }
 
+// When staffId is 'any', pick a random available staff member for the requested date/time
+async function resolveAnyStaff(
+  admin: ReturnType<typeof createAdminClient>,
+  bookingDate: string,
+  bookingTime: string
+): Promise<string | null> {
+  const dayOfWeek = new Date(bookingDate + 'T12:00:00').getDay()
+
+  const { data: staffList } = await admin
+    .from('staff')
+    .select('id')
+    .eq('role', 'staff')
+
+  if (!staffList || staffList.length === 0) return null
+
+  // Shuffle for fairness
+  const shuffled = [...staffList].sort(() => Math.random() - 0.5)
+
+  for (const s of shuffled) {
+    const { data: avail } = await admin
+      .from('availability')
+      .select('*')
+      .eq('staff_id', s.id)
+
+    const specific = avail?.find((a) => a.specific_date === bookingDate)
+    const recurring = avail?.find((a) => a.day_of_week === dayOfWeek && !a.specific_date)
+    const rule = specific ?? recurring
+
+    if (!rule || !rule.is_available) continue
+
+    const startTime = rule.start_time.substring(0, 5)
+    const endTime = rule.end_time.substring(0, 5)
+    if (bookingTime < startTime || bookingTime >= endTime) continue
+
+    // Check this slot isn't already booked
+    const { data: existing } = await admin
+      .from('bookings')
+      .select('id')
+      .eq('staff_id', s.id)
+      .eq('booking_date', bookingDate)
+      .eq('booking_time', bookingTime)
+      .neq('status', 'cancelled')
+      .maybeSingle()
+
+    if (!existing) return s.id
+  }
+
+  return null
+}
+
 // POST /api/bookings — create a booking and fire SMS
 export async function POST(request: NextRequest) {
-  if (!supabaseConfigured()) {
-    // Demo mode — return a fake confirmed booking
+  if (!isSupabaseConfigured()) {
     const body = await request.json()
     return NextResponse.json({
       id: `demo-${Date.now()}`,
@@ -73,30 +118,37 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    // Normalize to E.164 (+1XXXXXXXXXX)
     const normalizedPhone = customerPhone.replace(/\D/g, '').replace(/^1?(\d{10})$/, '+1$1')
-
     const admin = createAdminClient()
+
+    // Resolve 'any' to a real staff member
+    let resolvedStaffId = staffId
+    if (staffId === 'any') {
+      const picked = await resolveAnyStaff(admin, bookingDate, bookingTime)
+      if (!picked) {
+        return NextResponse.json({ error: 'No staff available at this time' }, { status: 409 })
+      }
+      resolvedStaffId = picked
+    }
 
     // Check slot is still available
     const { data: existing } = await admin
       .from('bookings')
       .select('id')
-      .eq('staff_id', staffId)
+      .eq('staff_id', resolvedStaffId)
       .eq('booking_date', bookingDate)
       .eq('booking_time', bookingTime)
       .neq('status', 'cancelled')
-      .single()
+      .maybeSingle()
 
     if (existing) {
       return NextResponse.json({ error: 'This time slot is no longer available' }, { status: 409 })
     }
 
-    // Create booking
     const { data: booking, error } = await admin
       .from('bookings')
       .insert({
-        staff_id: staffId,
+        staff_id: resolvedStaffId,
         service_id: serviceId,
         customer_name: customerName,
         customer_phone: normalizedPhone,
@@ -115,26 +167,22 @@ export async function POST(request: NextRequest) {
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
-    // Fire SMS notifications (non-blocking)
+    // Fire SMS notifications (non-blocking, swallow errors so booking always succeeds)
     const dateFormatted = formatDateLong(bookingDate)
     const timeFormatted = formatTime(bookingTime)
+    const serviceName = booking.service?.name ?? 'your service'
+    const staffName = booking.staff?.name ?? 'your specialist'
 
     if (booking.staff?.phone) {
       sendSMS(
         booking.staff.phone,
-        buildBookingConfirmationStaffSMS(customerName, booking.service.name, dateFormatted, timeFormatted)
+        buildBookingConfirmationStaffSMS(customerName, serviceName, dateFormatted, timeFormatted)
       ).catch(console.error)
     }
 
     sendSMS(
       normalizedPhone,
-      buildBookingConfirmationCustomerSMS(
-        customerName,
-        booking.service.name,
-        booking.staff.name,
-        dateFormatted,
-        timeFormatted
-      )
+      buildBookingConfirmationCustomerSMS(customerName, serviceName, staffName, dateFormatted, timeFormatted)
     ).catch(console.error)
 
     return NextResponse.json(booking, { status: 201 })

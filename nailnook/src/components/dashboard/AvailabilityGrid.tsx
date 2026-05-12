@@ -17,6 +17,7 @@ export function AvailabilityGrid({ staffId }: AvailabilityGridProps) {
   const [slots, setSlots] = useState<Set<SlotKey>>(new Set())
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
 
   const timeLabels = generateDayTimeLabels()
 
@@ -75,6 +76,7 @@ export function AvailabilityGrid({ staffId }: AvailabilityGridProps) {
 
   async function save() {
     setSaving(true)
+    setSaveError(null)
     try {
       // Build availability rows from the current slot grid
       const slotRows: Array<{
@@ -110,9 +112,10 @@ export function AvailabilityGrid({ staffId }: AvailabilityGridProps) {
                 continue
               }
             }
-            // End of a run
+            // End of a run — compute end time with proper hour rollover
             const [eh, em] = prev.split(':').map(Number)
-            const endTime = `${String(eh).padStart(2, '0')}:${String(em + 30).padStart(2, '0')}`
+            const totalMins = eh * 60 + em + 30
+            const endTime = `${String(Math.floor(totalMins / 60)).padStart(2, '0')}:${String(totalMins % 60).padStart(2, '0')}`
             slotRows.push({
               specific_date: dateStr,
               start_time: start,
@@ -124,14 +127,19 @@ export function AvailabilityGrid({ staffId }: AvailabilityGridProps) {
         }
       })
 
-      await fetch('/api/availability', {
+      const res = await fetch('/api/availability', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ staffId, slots: slotRows }),
       })
-      setSaved(true)
-    } catch (e) {
-      console.error(e)
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        setSaveError(data.error ?? 'Failed to save availability')
+      } else {
+        setSaved(true)
+      }
+    } catch {
+      setSaveError('Network error — please try again')
     } finally {
       setSaving(false)
     }
@@ -224,6 +232,7 @@ export function AvailabilityGrid({ staffId }: AvailabilityGridProps) {
           Save Availability
         </Button>
         {saved && <span className="text-sm text-green-600 font-medium">✓ Saved</span>}
+        {saveError && <span className="text-sm text-red-500">{saveError}</span>}
         <div className="ml-auto flex items-center gap-3 text-xs text-gray-500">
           <span className="flex items-center gap-1.5">
             <span className="h-3 w-3 rounded bg-green-400 inline-block" /> Available

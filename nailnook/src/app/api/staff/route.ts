@@ -1,23 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createAdminClient } from '@/lib/supabase'
-import { hashPin } from '@/lib/auth'
+import { createAdminClient, isSupabaseConfigured } from '@/lib/supabase'
+import { hashPin, requireAdmin } from '@/lib/auth'
 
 const SEED_STAFF = [
   { id: 'seed-staff-1', name: 'Sarah Johnson', color: '#4ECDC4', photo_url: null, role: 'staff' },
   { id: 'seed-staff-2', name: 'Mike Davis', color: '#45B7D1', photo_url: null, role: 'staff' },
 ]
 
-const supabaseConfigured = () =>
-  !!process.env.NEXT_PUBLIC_SUPABASE_URL && !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY &&
-  !process.env.NEXT_PUBLIC_SUPABASE_URL.includes('your-project')
-
 // GET /api/staff — public, returns non-sensitive fields only
 export async function GET() {
-  if (!supabaseConfigured()) return NextResponse.json(SEED_STAFF)
+  if (!isSupabaseConfigured()) return NextResponse.json(SEED_STAFF)
 
   const { data, error } = await createAdminClient()
     .from('staff')
-    .select('id, name, color, photo_url, role')
+    .select('id, name, color, photo_url, role, phone')
     .order('name')
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
@@ -26,6 +22,9 @@ export async function GET() {
 
 // POST /api/staff — admin only
 export async function POST(request: NextRequest) {
+  if (!requireAdmin(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
   try {
     const body = await request.json()
     const { name, pin, phone, color, role } = body

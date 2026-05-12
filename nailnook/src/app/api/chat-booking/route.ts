@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { sendSMS, buildInquiryConfirmationCustomerSMS, buildInquiryNotificationSpecialistSMS, normalizePhone } from '@/lib/twilio'
 import { createAdminClient } from '@/lib/supabase'
 
-const OWNER_PHONE = '+19284863524'
+const OWNER_PHONE = process.env.OWNER_PHONE || '+19284863524'
 
 async function getSpecialistPhone(specialistName: string): Promise<string | null> {
   if (!specialistName || specialistName === 'No Preference') return null

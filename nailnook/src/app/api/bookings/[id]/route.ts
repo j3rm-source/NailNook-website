@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase'
+import { requireAdmin } from '@/lib/auth'
 import {
   sendSMS,
   buildCancellationCustomerSMS,
@@ -7,8 +8,11 @@ import {
 } from '@/lib/twilio'
 import { formatDateLong, formatTime } from '@/lib/utils'
 
-// PUT /api/bookings/[id] — update status (mainly cancellation)
+// PUT /api/bookings/[id] — update status (mainly cancellation), admin only
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  if (!requireAdmin(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
   try {
     const { id } = await params
     const body = await request.json()

@@ -8,6 +8,7 @@ import { BookingsTable } from '@/components/admin/BookingsTable'
 import { ServicesManager } from '@/components/admin/ServicesManager'
 import { StaffManager } from '@/components/admin/StaffManager'
 import { Button } from '@/components/ui/Button'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 
 type AdminTab = 'bookings' | 'services' | 'staff'
 
@@ -114,29 +115,31 @@ export default function AdminPage() {
         </div>
 
         {/* Tab content */}
-        <div>
-          {tab === 'bookings' && (
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="font-semibold text-gray-900 text-lg">All Bookings</h2>
-                <Button variant="secondary" size="sm" onClick={loadAll}>Refresh</Button>
+        <ErrorBoundary>
+          <div>
+            {tab === 'bookings' && (
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="font-semibold text-gray-900 text-lg">All Bookings</h2>
+                  <Button variant="secondary" size="sm" onClick={loadAll}>Refresh</Button>
+                </div>
+                {loading ? (
+                  <div className="text-center py-12 text-gray-400">Loading…</div>
+                ) : (
+                  <BookingsTable bookings={bookings} onCancel={cancelBooking} />
+                )}
               </div>
-              {loading ? (
-                <div className="text-center py-12 text-gray-400">Loading…</div>
-              ) : (
-                <BookingsTable bookings={bookings} onCancel={cancelBooking} />
-              )}
-            </div>
-          )}
+            )}
 
-          {tab === 'services' && (
-            <ServicesManager services={services} onRefresh={loadAll} />
-          )}
+            {tab === 'services' && (
+              <ServicesManager services={services} onRefresh={loadAll} />
+            )}
 
-          {tab === 'staff' && (
-            <StaffManager staff={staff} onRefresh={loadAll} />
-          )}
-        </div>
+            {tab === 'staff' && (
+              <StaffManager staff={staff} onRefresh={loadAll} />
+            )}
+          </div>
+        </ErrorBoundary>
       </main>
     </div>
   )

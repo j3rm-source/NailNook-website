@@ -1,7 +1,6 @@
 export interface Staff {
   id: string
   name: string
-  pin_hash: string
   phone: string | null
   color: string
   photo_url: string | null

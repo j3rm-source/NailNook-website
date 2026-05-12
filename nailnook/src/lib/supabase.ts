@@ -1,7 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
 
-// Use placeholder values so the module doesn't throw at import time
-// when env vars aren't set. API routes guard with supabaseConfigured().
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key'
 
@@ -18,4 +16,12 @@ export function createAdminClient() {
       persistSession: false,
     },
   })
+}
+
+export function isSupabaseConfigured(): boolean {
+  return (
+    !!process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    !process.env.NEXT_PUBLIC_SUPABASE_URL.includes('placeholder') &&
+    !process.env.NEXT_PUBLIC_SUPABASE_URL.includes('your-project')
+  )
 }

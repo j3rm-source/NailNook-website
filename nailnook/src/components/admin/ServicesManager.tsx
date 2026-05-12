@@ -26,6 +26,7 @@ export function ServicesManager({ services, onRefresh }: ServicesManagerProps) {
   const [editing, setEditing] = useState<Service | null>(null)
   const [form, setForm] = useState<ServiceForm>(EMPTY_FORM)
   const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
 
   function openCreate() {
     setEditing(null)
@@ -46,6 +47,7 @@ export function ServicesManager({ services, onRefresh }: ServicesManagerProps) {
 
   async function handleSave() {
     setSaving(true)
+    setSaveError(null)
     try {
       const body = {
         name: form.name,
@@ -54,21 +56,22 @@ export function ServicesManager({ services, onRefresh }: ServicesManagerProps) {
         description: form.description || null,
       }
 
-      if (editing) {
-        await fetch(`/api/services/${editing.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        })
-      } else {
-        await fetch('/api/services', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        })
+      const url = editing ? `/api/services/${editing.id}` : '/api/services'
+      const method = editing ? 'PUT' : 'POST'
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        setSaveError(data.error ?? 'Failed to save')
+        return
       }
       setModalOpen(false)
       onRefresh()
+    } catch {
+      setSaveError('Network error — please try again')
     } finally {
       setSaving(false)
     }
@@ -76,8 +79,8 @@ export function ServicesManager({ services, onRefresh }: ServicesManagerProps) {
 
   async function handleDelete(id: string) {
     if (!confirm('Delete this service? It will be hidden from new bookings.')) return
-    await fetch(`/api/services/${id}`, { method: 'DELETE' })
-    onRefresh()
+    const res = await fetch(`/api/services/${id}`, { method: 'DELETE' })
+    if (res.ok) onRefresh()
   }
 
   return (
@@ -159,6 +162,7 @@ export function ServicesManager({ services, onRefresh }: ServicesManagerProps) {
             onChange={(e) => setForm({ ...form, description: e.target.value })}
             rows={2}
           />
+          {saveError && <p className="text-sm text-red-500">{saveError}</p>}
           <div className="flex gap-3 pt-2">
             <Button variant="secondary" className="flex-1" onClick={() => setModalOpen(false)}>
               Cancel

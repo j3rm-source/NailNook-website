@@ -21,8 +21,11 @@ export function CustomerFormStep({ initial, onSubmit, submitting }: CustomerForm
     const newErrors: Partial<CustomerInfo> = {}
     if (!form.name.trim()) newErrors.name = 'Name is required'
     if (!form.phone.trim()) newErrors.phone = 'Phone number is required'
-    else if (!/^\+?[\d\s\-().]{7,15}$/.test(form.phone))
-      newErrors.phone = 'Enter a valid phone number'
+    else {
+      const digits = form.phone.replace(/\D/g, '')
+      if (digits.length < 10 || digits.length > 11)
+        newErrors.phone = 'Enter a valid US phone number (10 digits)'
+    }
     if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       newErrors.email = 'Enter a valid email'
     setErrors(newErrors)

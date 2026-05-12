@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createAdminClient } from '@/lib/supabase'
-import { supabase } from '@/lib/supabase'
+import { createAdminClient, isSupabaseConfigured } from '@/lib/supabase'
+import { requireAdmin } from '@/lib/auth'
 
 const SEED_SERVICES = [
   { id: 'seed-svc-1', name: 'Haircut', price: 45, duration_minutes: 45, description: 'Professional haircut and styling tailored to your look.', active: true, created_at: new Date().toISOString() },
@@ -8,13 +8,9 @@ const SEED_SERVICES = [
   { id: 'seed-svc-3', name: 'Blowout', price: 35, duration_minutes: 30, description: 'Blowout and styling for a polished finish.', active: true, created_at: new Date().toISOString() },
 ]
 
-const supabaseConfigured = () =>
-  !!process.env.NEXT_PUBLIC_SUPABASE_URL && !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY &&
-  !process.env.NEXT_PUBLIC_SUPABASE_URL.includes('your-project')
-
 // GET /api/services — public, returns active services
 export async function GET() {
-  if (!supabaseConfigured()) return NextResponse.json(SEED_SERVICES)
+  if (!isSupabaseConfigured()) return NextResponse.json(SEED_SERVICES)
 
   const { data, error } = await createAdminClient()
     .from('services')
@@ -28,6 +24,9 @@ export async function GET() {
 
 // POST /api/services — admin only
 export async function POST(request: NextRequest) {
+  if (!requireAdmin(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
   try {
     const body = await request.json()
     const { name, price, duration_minutes, description } = body

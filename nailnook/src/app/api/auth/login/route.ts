@@ -1,12 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createAdminClient } from '@/lib/supabase'
+import { createAdminClient, isSupabaseConfigured } from '@/lib/supabase'
 import { verifyPin, buildSessionCookieValue, COOKIE_NAME } from '@/lib/auth'
 
-const supabaseConfigured = () =>
-  !!process.env.NEXT_PUBLIC_SUPABASE_URL &&
-  !process.env.NEXT_PUBLIC_SUPABASE_URL.includes('placeholder')
+// Simple in-memory rate limiter (per process; resets on server restart)
+const loginAttempts = new Map<string, { count: number; resetAt: number }>()
 
-// Seed staff for demo mode (no Supabase)
+function checkRateLimit(key: string): boolean {
+  const now = Date.now()
+  const entry = loginAttempts.get(key)
+  if (entry) {
+    if (now > entry.resetAt) {
+      loginAttempts.set(key, { count: 1, resetAt: now + 15 * 60 * 1000 })
+      return true
+    }
+    if (entry.count >= 10) return false
+    entry.count++
+    return true
+  }
+  loginAttempts.set(key, { count: 1, resetAt: now + 15 * 60 * 1000 })
+  return true
+}
+
 const SEED_USERS = [
   { id: 'seed-staff-1', name: 'Sarah Johnson', pin: '1234', role: 'staff' as const },
   { id: 'seed-staff-2', name: 'Mike Davis',    pin: '5678', role: 'staff' as const },
@@ -21,10 +35,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Name and PIN are required' }, { status: 400 })
     }
 
+    const rateLimitKey = `login:${name.trim().toLowerCase()}`
+    if (!checkRateLimit(rateLimitKey)) {
+      return NextResponse.json({ error: 'Too many attempts — try again in 15 minutes' }, { status: 429 })
+    }
+
     let staffId: string, staffName: string, role: string
 
-    if (!supabaseConfigured()) {
-      // Demo mode — match against seed users
+    if (!isSupabaseConfigured()) {
       const match = SEED_USERS.find(
         (u) => u.name.toLowerCase() === name.trim().toLowerCase() && u.pin === String(pin)
       )
@@ -35,7 +53,6 @@ export async function POST(request: NextRequest) {
       staffName = match.name
       role = match.role
     } else {
-      // Supabase mode
       const supabase = createAdminClient()
       const { data: staffList, error } = await supabase
         .from('staff')

@@ -1,22 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase'
-import { hashPin } from '@/lib/auth'
+import { hashPin, requireAdmin } from '@/lib/auth'
 
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  if (!requireAdmin(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
   try {
     const { id } = await params
     const body = await request.json()
-    const admin = createAdminClient()
 
-    // If PIN is being updated, hash it
+    // Whitelist allowed fields
+    const update: Record<string, unknown> = {}
+    if (body.name !== undefined) update.name = body.name
+    if (body.phone !== undefined) update.phone = body.phone || null
+    if (body.color !== undefined) update.color = body.color
+    if (body.role !== undefined) update.role = body.role
+
+    // Hash PIN if being updated
     if (body.pin) {
-      body.pin_hash = await hashPin(String(body.pin))
-      delete body.pin
+      update.pin_hash = await hashPin(String(body.pin))
     }
 
+    const admin = createAdminClient()
     const { data, error } = await admin
       .from('staff')
-      .update(body)
+      .update(update)
       .eq('id', id)
       .select('id, name, color, photo_url, role, phone')
       .single()
@@ -28,7 +37,10 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
   }
 }
 
-export async function DELETE(_: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  if (!requireAdmin(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
   try {
     const { id } = await params
     const admin = createAdminClient()

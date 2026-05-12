@@ -28,6 +28,7 @@ export function StaffManager({ staff, onRefresh }: StaffManagerProps) {
   const [editing, setEditing] = useState<Staff | null>(null)
   const [form, setForm] = useState<StaffForm>(EMPTY_FORM)
   const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
 
   function openCreate() {
     setEditing(null)
@@ -43,6 +44,7 @@ export function StaffManager({ staff, onRefresh }: StaffManagerProps) {
 
   async function handleSave() {
     setSaving(true)
+    setSaveError(null)
     try {
       const body: Record<string, unknown> = {
         name: form.name,
@@ -52,23 +54,27 @@ export function StaffManager({ staff, onRefresh }: StaffManagerProps) {
       }
       if (form.pin) body.pin = form.pin
 
-      if (editing) {
-        await fetch(`/api/staff/${editing.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        })
-      } else {
-        if (!form.pin) return
-        body.pin = form.pin
-        await fetch('/api/staff', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        })
+      if (!editing && !form.pin) {
+        setSaveError('PIN is required for new staff')
+        return
+      }
+
+      const url = editing ? `/api/staff/${editing.id}` : '/api/staff'
+      const method = editing ? 'PUT' : 'POST'
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        setSaveError(data.error ?? 'Failed to save')
+        return
       }
       setModalOpen(false)
       onRefresh()
+    } catch {
+      setSaveError('Network error — please try again')
     } finally {
       setSaving(false)
     }
@@ -76,8 +82,8 @@ export function StaffManager({ staff, onRefresh }: StaffManagerProps) {
 
   async function handleDelete(id: string) {
     if (!confirm('Remove this staff member? All their bookings will remain.')) return
-    await fetch(`/api/staff/${id}`, { method: 'DELETE' })
-    onRefresh()
+    const res = await fetch(`/api/staff/${id}`, { method: 'DELETE' })
+    if (res.ok) onRefresh()
   }
 
   return (
@@ -186,6 +192,7 @@ export function StaffManager({ staff, onRefresh }: StaffManagerProps) {
             </div>
           </div>
 
+          {saveError && <p className="text-sm text-red-500">{saveError}</p>}
           <div className="flex gap-3 pt-2">
             <Button variant="secondary" className="flex-1" onClick={() => setModalOpen(false)}>
               Cancel
