@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sendSMS, buildInquiryConfirmationCustomerSMS, buildInquiryNotificationSpecialistSMS, normalizePhone } from '@/lib/twilio'
 import { createAdminClient } from '@/lib/supabase'
+import { sendOwnerChatBookingEmail } from '@/lib/resend'
 
 const OWNER_PHONE = process.env.OWNER_PHONE || '+19284863524'
 
@@ -62,6 +63,14 @@ export async function POST(req: NextRequest) {
       console.error('[chat-booking] Owner SMS error:', err)
     }
   }
+
+  sendOwnerChatBookingEmail({
+    customerName,
+    customerPhone,
+    serviceName: service,
+    specialistName: specialist || 'No Preference',
+    preferredTime,
+  }).catch(console.error)
 
   return NextResponse.json({ success: true })
 }

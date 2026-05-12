@@ -6,6 +6,7 @@ import {
   buildBookingConfirmationCustomerSMS,
 } from '@/lib/twilio'
 import { formatDateLong, formatTime } from '@/lib/utils'
+import { sendOwnerBookingEmail } from '@/lib/resend'
 
 // GET /api/bookings — admin: all bookings; ?staffId=X for staff view
 export async function GET(request: NextRequest) {
@@ -184,6 +185,17 @@ export async function POST(request: NextRequest) {
       normalizedPhone,
       buildBookingConfirmationCustomerSMS(customerName, serviceName, staffName, dateFormatted, timeFormatted)
     ).catch(console.error)
+
+    sendOwnerBookingEmail({
+      customerName,
+      customerPhone,
+      customerEmail,
+      serviceName,
+      staffName,
+      date: dateFormatted,
+      time: timeFormatted,
+      note: customerNote,
+    }).catch(console.error)
 
     return NextResponse.json(booking, { status: 201 })
   } catch {
