@@ -542,47 +542,6 @@
   .notes-textarea:focus { border-color: var(--teal); }
   .notes-textarea::placeholder { color: #333; }
 
-  .notes-rendered {
-    flex: 1;
-    min-height: 160px;
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 12px;
-    padding: 14px 16px;
-    cursor: text;
-    transition: border-color .15s;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .notes-rendered:hover { border-color: var(--border2); }
-
-  .notes-kv {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .notes-kv-key {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--teal);
-  }
-  .notes-kv-val {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.4;
-  }
-  .notes-plain-line {
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.6;
-    white-space: pre-wrap;
-  }
-
   .autosave-hint {
     font-size: 11px;
     color: #2a2a2a;
@@ -735,13 +694,11 @@
 
       <div class="notes-section">
         <div class="notes-label">Notes</div>
-        <div class="notes-rendered" id="notesRendered" onclick="focusNotes('notesTextarea','notesRendered')" style="display:none"></div>
         <textarea
           class="notes-textarea"
           id="notesTextarea"
           placeholder="Type notes here… they save automatically."
           oninput="onNotesInput()"
-          onblur="blurNotes('notesTextarea','notesRendered')"
         ></textarea>
         <div class="autosave-hint" id="autosaveHint">Saved</div>
       </div>
@@ -774,13 +731,11 @@
 
       <div class="notes-section">
         <div class="notes-label">Notes</div>
-        <div class="notes-rendered" id="todayNotesRendered" onclick="focusNotes('todayNotesTextarea','todayNotesRendered')" style="display:none"></div>
         <textarea
           class="notes-textarea"
           id="todayNotesTextarea"
           placeholder="Type notes here… they save automatically."
           oninput="onTodayNotesInput()"
-          onblur="blurNotes('todayNotesTextarea','todayNotesRendered')"
         ></textarea>
         <div class="autosave-hint" id="todayAutosaveHint">Saved</div>
       </div>
@@ -848,40 +803,13 @@
     return noDigits.length === 0 || PHONE_LABELS.test(noDigits);
   }
 
-  function isProfileBlock(lines) {
-    // A profile block: every line matches "KEY: value" and has NAME: or PHONE:
-    const kvLines = lines.filter(Boolean);
-    if (kvLines.length < 2) return false;
-    const allKV = kvLines.every(l => /^[^:]+:\s*.+$/.test(l));
-    const hasNameOrPhone = kvLines.some(l => /^(name|phone)\s*:/i.test(l));
-    return allKV && hasNameOrPhone;
-  }
-
-  function parseProfileBlock(lines, defaultStatus) {
-    let name = '', phone = '', noteLines = [];
-    for (const line of lines.filter(Boolean)) {
-      const m = line.match(/^([^:]+):\s*(.+)$/);
-      if (!m) { noteLines.push(line); continue; }
-      const key = m[1].trim().toLowerCase();
-      const val = m[2].trim();
-      if (key === 'name') { name = val; }
-      else if (key === 'phone') { phone = extractPhone(val) || val; noteLines.push(line); }
-      else { noteLines.push(line); }
-    }
+  function makeContact(name, phone, defaultStatus) {
     if (!name) name = phone ? formatPhone(phone) : '';
-    const notes = noteLines.join('\n');
-    return [makeContact(name, extractPhone(phone) || '', defaultStatus, notes)];
-  }
-
-  function makeContact(name, phone, defaultStatus, notes = '') {
-    if (!name) name = phone ? formatPhone(phone) : '';
-    return { id: crypto.randomUUID(), name, phone, status: defaultStatus, notes, addedAt: Date.now() };
+    return { id: crypto.randomUUID(), name, phone, status: defaultStatus, notes: '', addedAt: Date.now() };
   }
 
   function parseLines(raw, defaultStatus = 'uncalled') {
     const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
-
-    if (isProfileBlock(lines)) return parseProfileBlock(lines, defaultStatus);
     const results = [];
     let i = 0;
 
@@ -1266,10 +1194,7 @@
     });
 
     const notesEl = document.getElementById('notesTextarea');
-    if (document.activeElement !== notesEl) {
-      notesEl.value = c.notes || '';
-      applyNotesRender('notesTextarea', 'notesRendered');
-    }
+    if (document.activeElement !== notesEl) notesEl.value = c.notes || '';
 
     document.getElementById('btnPrev').disabled = state.contacts.length <= 1;
     document.getElementById('btnNext').disabled = state.contacts.length <= 1;
@@ -1312,10 +1237,7 @@
     document.getElementById('btnTodayConfirmed').classList.toggle('active', c.status === 'confirmed');
 
     const notesEl = document.getElementById('todayNotesTextarea');
-    if (document.activeElement !== notesEl) {
-      notesEl.value = c.notes || '';
-      applyNotesRender('todayNotesTextarea', 'todayNotesRendered');
-    }
+    if (document.activeElement !== notesEl) notesEl.value = c.notes || '';
 
     document.getElementById('btnTodayPrev').disabled = state.todayCalls.length <= 1;
     document.getElementById('btnTodayNext').disabled = state.todayCalls.length <= 1;
@@ -1353,46 +1275,6 @@
   document.getElementById('importTodayInput').addEventListener('paste', () => {
     setTimeout(loadTodayCalls, 50);
   });
-
-  // ── NOTES RENDER ───────────────────────────────────────
-  function renderNotes(text) {
-    if (!text) return '<span style="color:#333;font-size:14px">Click to add notes…</span>';
-    const lines = text.split('\n');
-    let html = '';
-    for (const line of lines) {
-      const m = line.match(/^([^:]+):\s*(.+)$/);
-      if (m) {
-        html += `<div class="notes-kv"><div class="notes-kv-key">${esc(m[1])}</div><div class="notes-kv-val">${esc(m[2])}</div></div>`;
-      } else {
-        html += `<div class="notes-plain-line">${esc(line) || '&nbsp;'}</div>`;
-      }
-    }
-    return html;
-  }
-
-  function focusNotes(textareaId, renderedId) {
-    document.getElementById(renderedId).style.display = 'none';
-    const ta = document.getElementById(textareaId);
-    ta.style.display = '';
-    ta.focus();
-  }
-
-  function blurNotes(textareaId, renderedId) {
-    const ta = document.getElementById(textareaId);
-    const rendered = document.getElementById(renderedId);
-    rendered.innerHTML = renderNotes(ta.value);
-    rendered.style.display = 'flex';
-    ta.style.display = 'none';
-  }
-
-  function applyNotesRender(textareaId, renderedId) {
-    const ta = document.getElementById(textareaId);
-    if (document.activeElement === ta) return;
-    const rendered = document.getElementById(renderedId);
-    rendered.innerHTML = renderNotes(ta.value);
-    rendered.style.display = 'flex';
-    ta.style.display = 'none';
-  }
 
   // ── EXPORT / IMPORT ────────────────────────────────────
   function exportData() {
