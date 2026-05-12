@@ -337,3 +337,7 @@
   .mkt .svc-section:nth-child(even) .svc-inner { direction: rtl; }
   .mkt .svc-section:nth-child(even) .svc-inner > * { direction: ltr; }
 }
+.mkt .btn-specialist { padding: 8px 18px; font-size: 0.8rem; }
+@media (min-width: 768px) {
+  .mkt .btn-specialist { padding: 5px 12px; font-size: 0.68rem; }
+}

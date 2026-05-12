@@ -8,13 +8,13 @@ const SPECIALISTS = [
   {name:'Raquel',role:'Nail Technician',spec:'Nail Tech',phone:'928-846-1087',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/raquel/headshot.jpg',imgPos:'center 35%',photos:['/team/raquel/work-9.png','/team/raquel/work-4.jpg','/team/raquel/work-5.jpg','/team/raquel/work-6.jpg','/team/raquel/work-7.png','/team/raquel/work-8.png','/team/raquel/work-1.jpg'],showCount:6},
   {name:'Kattie',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-5323',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/katie/headshot.jpg',imgPos:'center 20%',photos:['/team/katie/work-1.jpg','/team/katie/work-2.jpg','/team/katie/work-3.jpg','/team/katie/work-4.jpg','/team/katie/work-5.jpg','/team/katie/work-5.jpg']},
   {name:'Shannon',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-6965',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/shannon/headshot.jpg',imgPos:'',photos:['/team/shannon/work-1.jpg','/team/shannon/work-2.jpg','/team/shannon/work-3.jpg','/team/shannon/work-4.jpg','/team/shannon/work-5.jpg','/team/shannon/work-6.jpg']},
-  {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/ricci/work-1.jpg',imgPos:'center 20%',photos:['/team/ricci/work-2.jpg','/team/ricci/work-3.jpg','/team/ricci/work-4.jpg','/team/ricci/work-5.jpg','/team/ricci/work-6.jpg','/team/ricci/headshot.jpg']},
+  {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/ricci/work-1.jpg',imgPos:'center 20%',photos:['/team/ricci/work-2.jpg','/team/ricci/work-3.jpg','/team/ricci/work-4.jpg','/team/ricci/work-5.jpg','/team/ricci/work-6.jpg','/team/ricci/headshot.jpg'],bookingLink:'https://manegirlricci.glossgenius.com'},
   {name:'Lara',role:'Massage Therapist',spec:'Massage',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/lara/headshot.jpg',imgPos:'center 20%',photos:['/team/lara/before-after.jpg','/team/lara/video-1.mp4','/team/lara/video-2.mp4','/team/lara/video-3.mp4','/team/lara/video-4.mp4']},
-  {name:'Shelby',role:'Waxing Specialist',spec:'Wax Tech',phone:'928-487-1831',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'/team/shelby/headshot.jpg',imgPos:'center 10%',photos:['/team/shelby/work-5.jpg','/team/shelby/work-6.jpg','/team/shelby/work-1.jpg','/team/shelby/work-2.jpg','/team/shelby/work-3.jpg','/team/shelby/work-4.jpg']},
+  {name:'Shelby',role:'Waxing Specialist',spec:'Wax Tech',phone:'928-487-1831',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'/team/shelby/headshot.jpg',imgPos:'center 10%',photos:['/team/shelby/work-5.jpg','/team/shelby/work-6.jpg','/team/shelby/work-1.jpg','/team/shelby/work-2.jpg','/team/shelby/work-3.jpg','/team/shelby/work-4.jpg'],bookingLink:'https://square.site/book/3WBG6E55P47D7/skincare-by-shelby-lake-havasu-city-az'},
   {name:'Ashley',role:'Eyelash Specialist',spec:'Eyelashes',phone:'928-302-0949',badge:'',bg:'f9a8c9',fg:'c2185b',
     photo:'/team/ashly/headshot.jpg',imgPos:'',
     photos:['/team/ashly/work-1.jpg','/team/ashly/work-2.jpg','/team/ashly/work-3.jpg','/team/ashly/work-4.jpg','/team/ashly/work-5.jpg','/team/ashly/work-1.jpg']},
-  {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/rita/IMG_2929.PNG',imgPos:'center 20%',photos:['/team/rita/IMG_2928.PNG','/team/rita/11176.JPG','/team/rita/11185.JPG','/team/rita/11563.JPG','/team/rita/11654.JPG','/team/rita/11806.JPG']},
+  {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/rita/727255724516679206.png',imgPos:'center 20%',photos:['/team/rita/IMG_2929.PNG','/team/rita/IMG_2928.PNG','/team/rita/11176.JPG','/team/rita/11185.JPG','/team/rita/11563.JPG','/team/rita/11654.JPG','/team/rita/11806.JPG'],showCount:6},
 ]
 
 const PHOTOS = [
@@ -231,6 +231,7 @@ export default function TeamPage() {
                   <h3>{sp.name}</h3>
                   <span className="sc-role">{sp.spec}</span>
                   <a className="sc-phone" href={`tel:${sp.phone.replace(/\D/g,'')}`}>{sp.phone}</a>
+                  {(sp as any).bookingLink && <div style={{textAlign:'center',marginTop:'12px'}}><a className="btn btn-p btn-specialist" href={(sp as any).bookingLink} target="_blank" rel="noopener noreferrer">Book with {sp.name}</a></div>}
                   <div className="sc-gal">
                     {displayImgs.slice(0, (sp as any).showCount ?? displayImgs.length).map((u, i) => {
                       const isVideo = /\.(mp4|mov|webm)$/i.test(u)
@@ -290,9 +291,9 @@ export default function TeamPage() {
         <div className="f-bottom">
           <p className="f-copy">© 2024 Nail Nook and More · Lake Havasu City, AZ</p>
           <div className="socials">
-            <a href="#" className="soc" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a>
-            <a href="#" className="soc" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-            <a href="#" className="soc" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M15 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M15 3c0 2.8 2.2 5 5 5"/></svg></a>
+            <a href="https://www.instagram.com/nailnook_lhc" target="_blank" rel="noopener noreferrer" className="soc" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://www.facebook.com/p/The-Nail-Nook-and-More-LHC-100045411619485/" target="_blank" rel="noopener noreferrer" className="soc" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            
           </div>
         </div>
       </footer>
