@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoatMedia — Build First. Advertise Second.</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #7CFC00;
+    --green-dim: #5bc400;
+    --bg: #080808;
+    --bg2: #101010;
+    --bg3: #141414;
+    --text: #f0f0f0;
+    --muted: #888;
+    --border: #222;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(8,8,8,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  .nav-logo span { color: var(--green); }
+
+  .nav-dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: background 0.2s;
+    border: none;
+  }
+
+  .nav-dot.active { background: var(--green); }
+
+  /* SLIDES */
+  section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 40px 60px;
+    position: relative;
+  }
+
+  section:nth-child(even) { background: var(--bg2); }
+
+  .slide-inner {
+    max-width: 860px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* SLIDE NUMBER */
+  .slide-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  /* TYPOGRAPHY */
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--green);
+    letter-spacing: 0.3px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #bbb;
+    max-width: 640px;
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+
+  .accent { color: var(--green); }
+
+  .big-stat {
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 900;
+    color: var(--green);
+    line-height: 1;
+    letter-spacing: -3px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  /* COMPARISON */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .compare-col {
+    border-radius: 12px;
+    padding: 28px;
+    border: 1px solid var(--border);
+  }
+
+  .compare-col.bad {
+    background: rgba(255,60,60,0.06);
+    border-color: rgba(255,60,60,0.2);
+  }
+
+  .compare-col.good {
+    background: rgba(124,252,0,0.05);
+    border-color: rgba(124,252,0,0.2);
+  }
+
+  .compare-col h3 { margin-bottom: 16px; }
+  .compare-col.bad h3 { color: #ff5555; }
+
+  .compare-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .compare-list li {
+    font-size: 0.95rem;
+    color: #bbb;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .compare-list li .icon { flex-shrink: 0; margin-top: 2px; }
+
+  /* DIVIDER */
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: var(--green);
+    border-radius: 2px;
+    margin: 24px 0;
+  }
+
+  /* PILL */
+  .pill {
+    display: inline-block;
+    background: rgba(124,252,0,0.1);
+    color: var(--green);
+    border: 1px solid rgba(124,252,0,0.3);
+    border-radius: 100px;
+    padding: 5px 16px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .stat-box {
+    text-align: center;
+    padding: 24px 16px;
+    background: var(--bg3);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  .stat-box .big-stat { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 6px; }
+  .stat-box p { font-size: 0.85rem; margin: 0; color: var(--muted); max-width: none; }
+
+  /* PROCESS STEPS */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 32px;
+  }
+
+  .step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #000;
+    font-weight: 900;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-body h3 { color: var(--text); margin-bottom: 4px; font-size: 1rem; }
+  .step-body p { font-size: 0.9rem; margin: 0; color: var(--muted); max-width: none; }
+
+  /* PRICING */
+  .price-box {
+    background: var(--bg3);
+    border: 1px solid rgba(124,252,0,0.3);
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 480px;
+    margin-top: 32px;
+  }
+
+  .price-tag {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    color: var(--green);
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .price-tag small {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0;
+  }
+
+  .price-includes {
+    list-style: none;
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .price-includes li {
+    display: flex;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: #ccc;
+    align-items: center;
+  }
+
+  .price-includes li::before {
+    content: "✓";
+    color: var(--green);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* CTA BUTTON */
+  .btn {
+    display: inline-block;
+    background: var(--green);
+    color: #000;
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 16px 36px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 28px;
+    letter-spacing: -0.3px;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  .btn:hover { background: #8fff00; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  /* QUOTE BLOCK */
+  .quote-block {
+    border-left: 3px solid var(--green);
+    padding: 20px 28px;
+    background: var(--bg3);
+    border-radius: 0 12px 12px 0;
+    margin: 32px 0;
+  }
+
+  .quote-block p {
+    font-size: 1.25rem;
+    color: #e0e0e0;
+    font-style: italic;
+    line-height: 1.5;
+    max-width: none;
+    margin: 0;
+  }
+
+  /* COVER SPECIFIC */
+  #slide-1 {
+    text-align: center;
+    flex-direction: column;
+  }
+
+  #slide-1 .slide-inner { text-align: center; }
+  #slide-1 p { margin: 0 auto 16px; }
+
+  .goat-logo {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 32px;
+    display: block;
+  }
+
+  .fire-emoji {
+    font-size: clamp(3rem, 8vw, 5rem);
+    display: block;
+    margin-bottom: 20px;
+    line-height: 1;
+  }
+
+  /* SCROLL HINT */
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, var(--muted), transparent);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    nav { padding: 16px 20px; }
+    section { padding: 90px 20px 60px; }
+    .compare { grid-template-columns: 1fr; }
+    .price-box { padding: 28px 20px; }
+    .nav-dots { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Goat<span>Media</span></span>
+  <div class="nav-dots" id="navDots"></div>
+</nav>
+
+<!-- SLIDE 1: COVER -->
+<section id="slide-1">
+  <div class="slide-inner">
+    <span class="goat-logo">GoatMedia.ai</span>
+    <h1>Before You Run<br>a Single Ad<span class="accent">.</span></h1>
+    <div class="divider" style="margin: 24px auto;"></div>
+    <p>Why local businesses that skip this one step<br>end up burning their entire ad budget with nothing to show.</p>
+  </div>
+  <span class="scroll-hint">Scroll</span>
+</section>
+
+<!-- SLIDE 2: THE PROBLEM -->
+<section id="slide-2">
+  <div class="slide-inner">
+    <span class="slide-num">01 — The Problem</span>
+    <h2>You're Paying to<br>Send People <span class="accent">Nowhere.</span></h2>
+    <div class="divider"></div>
+    <p>Every dollar you spend on Facebook Ads, Google Ads, or any paid traffic sends a potential customer somewhere.</p>
+    <p>If that somewhere isn't a professional website — you just paid to make someone leave.</p>
+
+    <div class="quote-block">
+      <p>"We ran $2,000 in Facebook Ads and got nothing." — Every business owner who skipped their website.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: THE REALITY (STATS) -->
+<section id="slide-3">
+  <div class="slide-inner">
+    <span class="slide-num">02 — The Reality</span>
+    <h2>Your Customers<br>Are Googling You <span class="accent">Right Now.</span></h2>
+    <div class="divider"></div>
+    <p>Whether you're running ads or not — people look you up before they call.</p>
+
+    <div class="stats-row">
+      <div class="stat-box">
+        <span class="big-stat">75%</span>
+        <p>of people judge a business's credibility by its website</p>
+      </div>
+      <div class="stat-box">
+        <span class="big-stat">97%</span>
+        <p>of consumers search online to find a local business</p>
+      </div>
+      <div class="stat-box">
+        <span class="big-stat">$0</span>
+        <p>in conversions if they can't find you or don't trust what they see</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: THE ANALOGY -->
+<section id="slide-4">
+  <div class="slide-inner">
+    <span class="slide-num">03 — Think About It</span>
+    <h2>The Most Expensive<br>Mistake in <span class="accent">Advertising.</span></h2>
+    <div class="divider"></div>
+
+    <div class="quote-block">
+      <p>Running paid ads without a website is like airing a TV commercial with no phone number, no address, and no storefront.</p>
+    </div>
+
+    <p>You're paying for attention. But attention without a destination is just wasted money.</p>
+    <p>Your ad does the hard part — it gets someone to stop scrolling. Then there's nothing there to close them.</p>
+  </div>
+</section>
+
+<!-- SLIDE 5: WHAT A WEBSITE DOES -->
+<section id="slide-5">
+  <div class="slide-inner">
+    <span class="slide-num">04 — What You're Missing</span>
+    <h2>What a Website<br>Does <span class="accent">For You.</span></h2>
+    <div class="divider"></div>
+
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">🕐</span>
+        <h3>Works 24/7</h3>
+        <p style="font-size:0.9rem; margin:0;">Captures leads at 2am when you're asleep. Your website never clocks out.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🤝</span>
+        <h3>Builds Trust Instantly</h3>
+        <p style="font-size:0.9rem; margin:0;">Reviews, photos, services — a prospect knows you're legit before they even call.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎯</span>
+        <h3>Gives Ads a Landing Spot</h3>
+        <p style="font-size:0.9rem; margin:0;">Ad traffic needs somewhere to convert. A website turns clicks into calls.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📈</span>
+        <h3>Gets You Found Organically</h3>
+        <p style="font-size:0.9rem; margin:0;">Google indexes your site. Free traffic on top of your paid campaigns.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6: WITH VS WITHOUT -->
+<section id="slide-6">
+  <div class="slide-inner">
+    <span class="slide-num">05 — Side by Side</span>
+    <h2>Ads With vs.<br>Without a <span class="accent">Website.</span></h2>
+    <div class="divider"></div>
+
+    <div class="compare">
+      <div class="compare-col bad">
+        <h3>❌ No Website</h3>
+        <ul class="compare-list">
+          <li><span class="icon">—</span> Ads send traffic to a Facebook page or nothing</li>
+          <li><span class="icon">—</span> Prospect can't verify you're legit</li>
+          <li><span class="icon">—</span> No way to capture leads after hours</li>
+          <li><span class="icon">—</span> Competitor with a site wins the job</li>
+          <li><span class="icon">—</span> You pay for clicks that go nowhere</li>
+          <li><span class="icon">—</span> Can't track what's working</li>
+        </ul>
+      </div>
+      <div class="compare-col good">
+        <h3>✅ With a Website</h3>
+        <ul class="compare-list">
+          <li><span class="icon">+</span> Ads land on a page built to convert</li>
+          <li><span class="icon">+</span> Instant trust — reviews, photos, services</li>
+          <li><span class="icon">+</span> Lead form captures contacts 24/7</li>
+          <li><span class="icon">+</span> You look more professional than any competitor</li>
+          <li><span class="icon">+</span> Every click has a chance to become revenue</li>
+          <li><span class="icon">+</span> See exactly where leads come from</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7: WHAT GOATMEDIA BUILDS -->
+<section id="slide-7">
+  <div class="slide-inner">
+    <span class="slide-num">06 — The Solution</span>
+    <h2>What <span class="accent">GoatMedia</span><br>Builds For You.</h2>
+    <div class="divider"></div>
+    <p>We don't do templates that look like everyone else. We build fast, clean, conversion-focused sites made for local service businesses.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Professional Design</h3>
+          <p>Built to match your brand — not a cookie-cutter theme. Looks good on every screen.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Lead Capture Built In</h3>
+          <p>Contact forms, click-to-call buttons, and booking integrations so no lead slips through.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Speed & SEO Ready</h3>
+          <p>Fast-loading sites rank better and convert better. We optimize both from day one.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Ad-Ready Landing Pages</h3>
+          <p>Built to work with your future ad campaigns. When you're ready to scale, the foundation is already there.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8: PRICING -->
+<section id="slide-8">
+  <div class="slide-inner">
+    <span class="slide-num">07 — Your Investment</span>
+    <h2>One-Time Build.<br><span class="accent">Yours Forever.</span></h2>
+    <div class="divider"></div>
+    <p>One setup fee gets your site built and live. Then $97/mo keeps it hosted, managed, and running on Go High Level — so you never have to touch it.</p>
+
+    <div class="price-box">
+      <div class="price-tag">$500 <small>setup</small></div>
+      <p style="font-size:0.95rem; color:var(--muted); margin: 8px 0 4px;">then <strong style="color:var(--green);">$97/mo</strong> — hosted & managed on Go High Level</p>
+      <p style="font-size:0.85rem; color:var(--muted); margin: 0;">Website live in 5–7 business days</p>
+      <ul class="price-includes">
+        <li>Custom designed for your business</li>
+        <li>Mobile responsive on all devices</li>
+        <li>Contact form + click-to-call</li>
+        <li>Google-ready (SEO basics included)</li>
+        <li>Fast hosting setup</li>
+        <li>You own it — no lock-in</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 9: CTA -->
+<section id="slide-9">
+  <div class="slide-inner" style="text-align:center;">
+    <span class="pill">Ready to build</span>
+    <h2>Stop Burning Ad Budget.<br><span class="accent">Build the Foundation First.</span></h2>
+    <div class="divider" style="margin: 24px auto;"></div>
+    <p style="margin: 0 auto 8px;">Your competitors already have websites. Every day without one is another day they win the job you should have gotten.</p>
+    <p style="margin: 0 auto;">Let us build yours — fast, clean, and ready to convert.</p>
+    <a href="https://goatmedia.ai" class="btn" target="_blank">See Our Work at GoatMedia.ai →</a>
+  </div>
+</section>
+
+<script>
+  const slides = document.querySelectorAll('section');
+  const dotsContainer = document.getElementById('navDots');
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.addEventListener('click', () => {
+      slides[i].scrollIntoView({ behavior: 'smooth' });
+    });
+    dotsContainer.appendChild(dot);
+  });
+
+  // Update active dot on scroll
+  const dots = dotsContainer.querySelectorAll('.nav-dot');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = Array.from(slides).indexOf(entry.target);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { threshold: 0.5 });
+
+  slides.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

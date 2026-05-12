@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node server.js)",
+      "Bash(start \"\" \"http://localhost:3000\")",
+      "Bash(start \"\" \"http://localhost:3000/booking.html\")",
+      "Bash(npm run *)",
+      "Bash(start \"\" \"http://localhost:3001\")",
+      "Bash(unzip -o rita.zip -d rita)"
+    ]
+  }
+}

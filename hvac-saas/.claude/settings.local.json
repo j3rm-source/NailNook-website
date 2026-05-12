@@ -29,7 +29,9 @@
       "Bash(where.exe ffmpeg *)",
       "Bash(winget install *)",
       "Bash(/c/Users/jerem/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.1-full_build/bin/ffmpeg.exe -i '/c/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/nailnook/public/team/stephanie-extracted/Stephanie/489535B3-0632-45B3-A81E-F462962E3802.HEIC' '/c/Users/jerem/OneDrive/Documents/New folder/.claude/.claude/nailnook/public/team/stephanie/work-7.jpg' -y)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(git -C \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude\" stash pop)",
+      "Bash(git -C \"c:/Users/jerem/OneDrive/Documents/New folder/.claude/.claude\" push origin master --force)"
     ]
   }
 }

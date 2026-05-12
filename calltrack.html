@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallTrack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #050505;
+    --surface:  #111111;
+    --surface2: #1a1a1a;
+    --border:   #222222;
+    --border2:  #2e2e2e;
+    --text:     #e8e8e8;
+    --muted:    #6b7280;
+    --teal:     #00d4b8;
+    --teal-dim: rgba(0,212,184,.12);
+    --orange:   #f97316;
+    --orange-dim: rgba(249,115,22,.12);
+    --yellow:   #eab308;
+    --yellow-dim: rgba(234,179,8,.12);
+    --green:    #22c55e;
+    --green-dim: rgba(34,197,94,.12);
+    --red:      #ef4444;
+    --blue:     #3b82f6;
+    --blue-dim: rgba(59,130,246,.12);
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .topbar h1 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: var(--teal);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .progress-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .progress-bar-track {
+    flex: 1;
+    height: 6px;
+    background: var(--border2);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 99px;
+    transition: width .3s ease;
+  }
+
+  .progress-label {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .stats-chips {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .chip {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 99px;
+    border: 1px solid;
+  }
+  .chip-na  { color: var(--muted);   border-color: var(--border2);          background: var(--surface2); }
+  .chip-fu  { color: var(--yellow);  border-color: rgba(234,179,8,.3);      background: var(--yellow-dim); }
+  .chip-bk  { color: var(--green);   border-color: rgba(34,197,94,.3);      background: var(--green-dim); }
+  .chip-uc  { color: var(--orange);  border-color: rgba(249,115,22,.3);     background: var(--orange-dim); }
+  .chip-cf  { color: var(--teal);    border-color: rgba(0,212,184,.3);      background: var(--teal-dim); }
+
+  .topbar-sep {
+    width: 1px;
+    height: 20px;
+    background: var(--border2);
+    flex-shrink: 0;
+  }
+
+  .btn-new-session {
+    background: transparent;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .15s;
+    white-space: nowrap;
+  }
+  .btn-new-session:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── MAIN LAYOUT ── */
+  .main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ── LEFT PANEL ── */
+  .left {
+    width: 280px;
+    flex-shrink: 0;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── TAB BAR ── */
+  .tab-bar {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 10px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all .15s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--teal); border-bottom-color: var(--teal); }
+
+  .contact-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px 0;
+  }
+
+  .contact-list::-webkit-scrollbar { width: 4px; }
+  .contact-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px 8px 16px;
+    cursor: pointer;
+    transition: background .1s;
+    border-left: 2px solid transparent;
+    position: relative;
+  }
+  .contact-item:hover { background: var(--surface2); }
+  .contact-item.active {
+    background: var(--teal-dim);
+    border-left-color: var(--teal);
+  }
+
+  .btn-delete-contact {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all .12s;
+    padding: 0;
+  }
+  .contact-item:hover .btn-delete-contact { display: flex; }
+  .btn-delete-contact:hover { background: rgba(239,68,68,.15); color: var(--red); }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-uncalled     { background: transparent; border: 1.5px solid var(--muted); }
+  .dot-no_answer    { background: var(--muted); }
+  .dot-follow_up    { background: var(--yellow); }
+  .dot-booked       { background: var(--green); }
+  .dot-unconfirmed  { background: var(--orange); }
+  .dot-confirmed    { background: var(--teal); }
+
+  .contact-item-name {
+    font-size: 13px;
+    font-weight: 500;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .contact-item-name.muted { color: var(--muted); }
+
+  .contact-item-phone {
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .section-label {
+    padding: 10px 16px 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-label.green  { color: var(--green); }
+  .section-label.green::after  { background: rgba(34,197,94,.2); }
+  .section-label.orange { color: var(--orange); }
+  .section-label.orange::after { background: rgba(249,115,22,.2); }
+
+  /* ── IMPORT PANEL ── */
+  .import-panel {
+    border-top: 1px solid var(--border);
+    padding: 12px 14px;
+    flex-shrink: 0;
+  }
+
+  .import-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .import-textarea {
+    width: 100%;
+    height: 72px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+    padding: 8px 10px;
+    resize: none;
+    outline: none;
+    transition: border-color .15s;
+  }
+  .import-textarea:focus { border-color: var(--teal); }
+  .import-textarea::placeholder { color: var(--muted); }
+
+  .btn-load {
+    width: 100%;
+    margin-top: 6px;
+    background: var(--teal);
+    color: #050505;
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    padding: 7px;
+    cursor: pointer;
+    transition: opacity .15s;
+  }
+  .btn-load:hover { opacity: .85; }
+
+  /* ── RIGHT PANEL ── */
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  .empty-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    gap: 10px;
+    text-align: center;
+    padding: 40px;
+  }
+
+  .empty-icon { font-size: 48px; opacity: .3; }
+  .empty-state h2 { font-size: 16px; font-weight: 600; }
+  .empty-state p  { font-size: 13px; max-width: 280px; line-height: 1.6; }
+
+  .contact-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 32px;
+    gap: 20px;
+    overflow-y: auto;
+  }
+
+  .contact-panel::-webkit-scrollbar { width: 4px; }
+  .contact-panel::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  .contact-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .contact-name-block h2 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .contact-name-block .phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    color: var(--teal);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    transition: opacity .15s;
+  }
+  .contact-name-block .phone-link:hover { opacity: .75; }
+
+  .phone-icon { font-size: 18px; }
+
+  .status-badge {
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+  .status-badge.uncalled     { color: var(--muted);   border-color: var(--border2);          background: var(--surface2); }
+  .status-badge.no_answer    { color: var(--muted);   border-color: var(--border2);          background: var(--surface2); }
+  .status-badge.follow_up    { color: var(--yellow);  border-color: rgba(234,179,8,.3);      background: var(--yellow-dim); }
+  .status-badge.booked       { color: var(--green);   border-color: rgba(34,197,94,.3);      background: var(--green-dim); }
+  .status-badge.unconfirmed  { color: var(--orange);  border-color: rgba(249,115,22,.3);     background: var(--orange-dim); }
+  .status-badge.confirmed    { color: var(--teal);    border-color: rgba(0,212,184,.3);      background: var(--teal-dim); }
+
+  .status-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn-status {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid;
+    transition: all .15s;
+    text-align: center;
+  }
+
+  .btn-status.no_answer {
+    color: var(--muted);
+    border-color: var(--border2);
+    background: var(--surface);
+  }
+  .btn-status.no_answer:hover,
+  .btn-status.no_answer.active {
+    color: var(--text);
+    border-color: var(--muted);
+    background: var(--surface2);
+  }
+
+  .btn-status.follow_up {
+    color: var(--yellow);
+    border-color: rgba(234,179,8,.25);
+    background: transparent;
+  }
+  .btn-status.follow_up:hover,
+  .btn-status.follow_up.active {
+    background: var(--yellow-dim);
+    border-color: var(--yellow);
+  }
+
+  .btn-status.booked {
+    color: var(--green);
+    border-color: rgba(34,197,94,.25);
+    background: transparent;
+  }
+  .btn-status.booked:hover,
+  .btn-status.booked.active {
+    background: var(--green-dim);
+    border-color: var(--green);
+  }
+
+  .btn-status.active {
+    box-shadow: 0 0 0 1px currentColor inset;
+  }
+
+  /* Today's call status buttons */
+  .btn-today-status {
+    flex: 1;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid;
+    transition: all .15s;
+    text-align: center;
+  }
+
+  .btn-today-status.unconfirmed {
+    color: var(--orange);
+    border-color: rgba(249,115,22,.25);
+    background: transparent;
+  }
+  .btn-today-status.unconfirmed:hover,
+  .btn-today-status.unconfirmed.active {
+    background: var(--orange-dim);
+    border-color: var(--orange);
+    box-shadow: 0 0 0 1px var(--orange) inset;
+  }
+
+  .btn-today-status.confirmed {
+    color: var(--teal);
+    border-color: rgba(0,212,184,.25);
+    background: transparent;
+  }
+  .btn-today-status.confirmed:hover,
+  .btn-today-status.confirmed.active {
+    background: var(--teal-dim);
+    border-color: var(--teal);
+    box-shadow: 0 0 0 1px var(--teal) inset;
+  }
+
+  .notes-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .notes-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .notes-textarea {
+    flex: 1;
+    min-height: 160px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 14px 16px;
+    resize: none;
+    outline: none;
+    transition: border-color .15s;
+  }
+  .notes-textarea:focus { border-color: var(--teal); }
+  .notes-textarea::placeholder { color: #333; }
+
+  .autosave-hint {
+    font-size: 11px;
+    color: #2a2a2a;
+    transition: color .3s;
+    height: 14px;
+  }
+  .autosave-hint.visible { color: var(--muted); }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 4px;
+  }
+
+  .btn-nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border2);
+    background: var(--surface);
+    color: var(--text);
+    transition: all .15s;
+  }
+  .btn-nav:hover { border-color: var(--teal); color: var(--teal); }
+  .btn-nav:disabled { opacity: .3; cursor: default; }
+  .btn-nav:disabled:hover { border-color: var(--border2); color: var(--text); }
+
+  .btn-nav-next {
+    background: var(--teal-dim);
+    border-color: rgba(0,212,184,.3);
+    color: var(--teal);
+  }
+  .btn-nav-next:hover { background: rgba(0,212,184,.2); border-color: var(--teal); }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 -32px;
+  }
+
+  .import-hint {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    padding: 16px 8px;
+    line-height: 1.6;
+  }
+
+  /* Today's Calls panel header label */
+  .panel-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <h1>CallTrack</h1>
+  <div class="progress-wrap">
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <span class="progress-label" id="progressLabel">0 / 0 called</span>
+  </div>
+  <div class="stats-chips" id="statsChips"></div>
+  <div class="topbar-sep" id="todaySep" style="display:none"></div>
+  <div class="stats-chips" id="todayChips"></div>
+  <button class="btn-new-session" onclick="newSession()">New Session</button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LEFT PANEL -->
+  <div class="left">
+    <!-- TABS -->
+    <div class="tab-bar">
+      <button class="tab-btn active" id="tabContacts" onclick="switchTab('contacts')">Contacts</button>
+      <button class="tab-btn" id="tabToday" onclick="switchTab('today')">Today's Calls</button>
+    </div>
+
+    <div class="contact-list" id="contactList">
+      <div class="import-hint">Paste contacts below to get started</div>
+    </div>
+
+    <!-- IMPORT (contacts) -->
+    <div class="import-panel" id="importPanelContacts">
+      <div class="import-label">Add Contacts</div>
+      <textarea
+        class="import-textarea"
+        id="importInput"
+        placeholder="One per line:&#10;John Smith 555-867-5309&#10;(555) 555-1234&#10;Jane Doe 5554445566"
+      ></textarea>
+      <button class="btn-load" onclick="loadContacts()">Load Contacts</button>
+    </div>
+
+    <!-- IMPORT (today's calls) -->
+    <div class="import-panel" id="importPanelToday" style="display:none">
+      <div class="import-label">Add to Today's Calls</div>
+      <textarea
+        class="import-textarea"
+        id="importTodayInput"
+        placeholder="One per line:&#10;John Smith 555-867-5309&#10;(555) 555-1234"
+      ></textarea>
+      <button class="btn-load" onclick="loadTodayCalls()">Add Calls</button>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right" id="rightPanel">
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">📞</div>
+      <h2>Ready to dial</h2>
+      <p>Paste your contact list on the left and click Load, then select someone to start calling.</p>
+    </div>
+
+    <!-- CONTACTS DETAIL PANEL -->
+    <div class="contact-panel" id="contactPanel" style="display:none">
+      <div class="contact-header">
+        <div class="contact-name-block">
+          <h2 id="panelName"></h2>
+          <a id="panelPhone" class="phone-link" href="#"><span class="phone-icon">📞</span><span id="panelPhoneText"></span></a>
+        </div>
+        <div class="status-badge uncalled" id="panelStatusBadge">Uncalled</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="status-buttons">
+        <button class="btn-status no_answer" onclick="setStatus('no_answer')">☎ No Answer</button>
+        <button class="btn-status follow_up" onclick="setStatus('follow_up')">🔁 Follow Up</button>
+        <button class="btn-status booked"    onclick="setStatus('booked')">✓ Booked</button>
+      </div>
+
+      <div class="notes-section">
+        <div class="notes-label">Notes</div>
+        <textarea
+          class="notes-textarea"
+          id="notesTextarea"
+          placeholder="Type notes here… they save automatically."
+          oninput="onNotesInput()"
+        ></textarea>
+        <div class="autosave-hint" id="autosaveHint">Saved</div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-nav" id="btnPrev" onclick="navigate(-1)">&#8592; Prev</button>
+        <button class="btn-nav btn-nav-next" id="btnNext" onclick="navigate(1)">Next &#8594;</button>
+      </div>
+    </div>
+
+    <!-- TODAY'S CALLS DETAIL PANEL -->
+    <div class="contact-panel" id="todayPanel" style="display:none">
+      <div class="contact-header">
+        <div class="contact-name-block">
+          <h2 id="todayPanelName"></h2>
+          <a id="todayPanelPhone" class="phone-link" href="#"><span class="phone-icon">📞</span><span id="todayPanelPhoneText"></span></a>
+        </div>
+        <div class="status-badge unconfirmed" id="todayPanelBadge">Unconfirmed</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div class="panel-section-title">Confirmation Status</div>
+        <div class="status-buttons">
+          <button class="btn-today-status unconfirmed" id="btnTodayUnconfirmed" onclick="setTodayStatus('unconfirmed')">✗ Unconfirmed</button>
+          <button class="btn-today-status confirmed"   id="btnTodayConfirmed"   onclick="setTodayStatus('confirmed')">✓ Confirmed</button>
+        </div>
+      </div>
+
+      <div class="notes-section">
+        <div class="notes-label">Notes</div>
+        <textarea
+          class="notes-textarea"
+          id="todayNotesTextarea"
+          placeholder="Type notes here… they save automatically."
+          oninput="onTodayNotesInput()"
+        ></textarea>
+        <div class="autosave-hint" id="todayAutosaveHint">Saved</div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-nav" id="btnTodayPrev" onclick="navigateToday(-1)">&#8592; Prev</button>
+        <button class="btn-nav btn-nav-next" id="btnTodayNext" onclick="navigateToday(1)">Next &#8594;</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  // ── STATE ──────────────────────────────────────────────
+  const STORAGE_KEY = 'dialing_session_v2';
+  let state = {
+    contacts: [],
+    activeId: null,
+    activeTab: 'contacts',
+    todayCalls: [],
+    activeTodayId: null
+  };
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        state = { ...state, ...parsed };
+      }
+    } catch(e) {}
+    render();
+  }
+
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  // ── PARSING ────────────────────────────────────────────
+  const PHONE_LABELS = /^(mobile|cell|home|work|office|fax|other|phone|tel|m|h|w|c)$/i;
+
+  function extractPhone(line) {
+    const m = line.match(/[\d\s\-().+]{10,}/);
+    if (m) {
+      let p = m[0].replace(/\D/g, '');
+      if (p.length === 11 && p.startsWith('1')) p = p.slice(1);
+      if (p.length === 10) return p;
+    }
+    const digits = (line.match(/\d/g) || []).join('');
+    if (digits.length >= 10) return digits.slice(-10);
+    return '';
+  }
+
+  function extractName(line, phone) {
+    if (!phone) return line.trim();
+    const m = line.match(/[\d\s\-().+]{10,}/);
+    let name = m ? line.replace(m[0], '') : line;
+    return name.replace(/[,;:]/g, '').trim();
+  }
+
+  function isPhoneOnlyLine(line) {
+    const noDigits = line.replace(/[\d\s\-().+]/g, '').trim();
+    return noDigits.length === 0 || PHONE_LABELS.test(noDigits);
+  }
+
+  function makeContact(name, phone, defaultStatus) {
+    if (!name) name = phone ? formatPhone(phone) : '';
+    return { id: crypto.randomUUID(), name, phone, status: defaultStatus, notes: '', addedAt: Date.now() };
+  }
+
+  function parseLines(raw, defaultStatus = 'uncalled') {
+    const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+    const results = [];
+    let i = 0;
+
+    while (i < lines.length) {
+      const line = lines[i];
+      const phone = extractPhone(line);
+      const name  = extractName(line, phone);
+      const hasName = name.length > 1 && /[a-zA-Z]/.test(name);
+
+      if (phone && hasName) {
+        // Complete entry on one line
+        results.push(makeContact(name, phone, defaultStatus));
+        i++;
+      } else if (hasName && !phone) {
+        // Name only — look ahead up to 3 lines for a phone number,
+        // skipping label-only lines (Mobile, Home, etc.)
+        let foundPhone = '';
+        let advance = 1;
+        for (let j = i + 1; j < lines.length && j <= i + 3; j++) {
+          const nextLine = lines[j];
+          const nextPhone = extractPhone(nextLine);
+          const nextName  = extractName(nextLine, nextPhone);
+          const nextHasRealName = nextName.length > 2 && /[a-zA-Z]{2,}/.test(nextName) && !PHONE_LABELS.test(nextName);
+
+          if (nextHasRealName && !nextPhone) break; // next line is a new name, stop
+          if (nextPhone) { foundPhone = nextPhone; advance = j - i + 1; break; }
+          // label-only line (Mobile, etc.) — skip it and keep looking
+        }
+        results.push(makeContact(name, foundPhone, defaultStatus));
+        i += advance;
+      } else if (phone && !hasName) {
+        // Phone only — attach to previous name-only entry if it has no phone
+        if (results.length && !results[results.length - 1].phone) {
+          results[results.length - 1].phone = phone;
+        } else {
+          results.push(makeContact(formatPhone(phone), phone, defaultStatus));
+        }
+        i++;
+      } else {
+        i++; // skip label-only / empty lines
+      }
+    }
+
+    return results.filter(c => c.phone || c.name);
+  }
+
+  function formatPhone(digits) {
+    if (!digits) return '';
+    const d = digits.replace(/\D/g, '');
+    if (d.length === 10) return `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
+    return digits;
+  }
+
+  // ── TAB SWITCHING ──────────────────────────────────────
+  function switchTab(tab) {
+    state.activeTab = tab;
+    save();
+    render();
+  }
+
+  // ── LOAD CONTACTS ──────────────────────────────────────
+  function loadContacts() {
+    const raw = document.getElementById('importInput').value;
+    if (!raw.trim()) return;
+    const parsed = parseLines(raw, 'uncalled');
+    if (!parsed.length) return;
+    state.contacts = [...state.contacts, ...parsed];
+    if (!state.activeId && state.contacts.length) state.activeId = state.contacts[0].id;
+    document.getElementById('importInput').value = '';
+    save();
+    render();
+  }
+
+  // ── LOAD TODAY'S CALLS ─────────────────────────────────
+  function loadTodayCalls() {
+    const raw = document.getElementById('importTodayInput').value;
+    if (!raw.trim()) return;
+    const parsed = parseLines(raw, 'unconfirmed');
+    if (!parsed.length) return;
+    state.todayCalls = [...state.todayCalls, ...parsed];
+    if (!state.activeTodayId && state.todayCalls.length) state.activeTodayId = state.todayCalls[0].id;
+    document.getElementById('importTodayInput').value = '';
+    save();
+    render();
+  }
+
+  // ── NEW SESSION ────────────────────────────────────────
+  function newSession() {
+    if (!confirm('Start a new session? Uncalled and No Answer contacts will be cleared. Follow Up and Booked contacts are kept.')) return;
+    const keep = state.contacts.filter(c => c.status === 'follow_up' || c.status === 'booked');
+    const keepIds = new Set(keep.map(c => c.id));
+    state.contacts = keep;
+    if (!keepIds.has(state.activeId)) state.activeId = keep.length ? keep[0].id : null;
+    state.todayCalls = [];
+    state.activeTodayId = null;
+    save();
+    render();
+  }
+
+  // ── SET ACTIVE ─────────────────────────────────────────
+  function setActive(id) {
+    state.activeId = id;
+    save();
+    render();
+  }
+
+  function setActiveTodayCall(id) {
+    state.activeTodayId = id;
+    save();
+    render();
+  }
+
+  // ── SET STATUS ─────────────────────────────────────────
+  function setStatus(status) {
+    const c = getActive();
+    if (!c) return;
+    c.status = c.status === status ? 'uncalled' : status;
+    save();
+    render();
+  }
+
+  function setTodayStatus(status) {
+    const c = getActiveToday();
+    if (!c) return;
+    c.status = status;
+    save();
+    render();
+  }
+
+  // ── NOTES ──────────────────────────────────────────────
+  let notesDebounce = null;
+  function onNotesInput() {
+    clearTimeout(notesDebounce);
+    const hint = document.getElementById('autosaveHint');
+    hint.textContent = 'Saving…';
+    hint.classList.remove('visible');
+    notesDebounce = setTimeout(() => {
+      const c = getActive();
+      if (c) { c.notes = document.getElementById('notesTextarea').value; save(); }
+      hint.textContent = 'Saved';
+      hint.classList.add('visible');
+      setTimeout(() => hint.classList.remove('visible'), 1500);
+    }, 300);
+  }
+
+  let todayNotesDebounce = null;
+  function onTodayNotesInput() {
+    clearTimeout(todayNotesDebounce);
+    const hint = document.getElementById('todayAutosaveHint');
+    hint.textContent = 'Saving…';
+    hint.classList.remove('visible');
+    todayNotesDebounce = setTimeout(() => {
+      const c = getActiveToday();
+      if (c) { c.notes = document.getElementById('todayNotesTextarea').value; save(); }
+      hint.textContent = 'Saved';
+      hint.classList.add('visible');
+      setTimeout(() => hint.classList.remove('visible'), 1500);
+    }, 300);
+  }
+
+  // ── NAVIGATE ───────────────────────────────────────────
+  function navigate(dir) {
+    const contacts = state.contacts;
+    if (!contacts.length) return;
+    const idx = contacts.findIndex(c => c.id === state.activeId);
+    let next = idx + dir;
+    if (next < 0) next = contacts.length - 1;
+    if (next >= contacts.length) next = 0;
+    setActive(contacts[next].id);
+  }
+
+  function navigateToday(dir) {
+    const calls = state.todayCalls;
+    if (!calls.length) return;
+    const idx = calls.findIndex(c => c.id === state.activeTodayId);
+    let next = idx + dir;
+    if (next < 0) next = calls.length - 1;
+    if (next >= calls.length) next = 0;
+    setActiveTodayCall(calls[next].id);
+  }
+
+  function getActive() {
+    return state.contacts.find(c => c.id === state.activeId) || null;
+  }
+
+  function getActiveToday() {
+    return state.todayCalls.find(c => c.id === state.activeTodayId) || null;
+  }
+
+  // ── RENDER ─────────────────────────────────────────────
+  function render() {
+    renderTopbar();
+    renderTabs();
+    if (state.activeTab === 'contacts') {
+      renderContactList();
+      renderContactPanel();
+    } else {
+      renderTodayList();
+      renderTodayPanel();
+    }
+  }
+
+  function renderTopbar() {
+    const total  = state.contacts.length;
+    const called = state.contacts.filter(c => c.status !== 'uncalled').length;
+    const naCount = state.contacts.filter(c => c.status === 'no_answer').length;
+    const fuCount = state.contacts.filter(c => c.status === 'follow_up').length;
+    const bkCount = state.contacts.filter(c => c.status === 'booked').length;
+
+    const pct = total ? (called / total) * 100 : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = `${called} / ${total} called`;
+
+    const chips = document.getElementById('statsChips');
+    chips.innerHTML = '';
+    if (total) {
+      if (naCount) chips.innerHTML += `<span class="chip chip-na">${naCount} no answer</span>`;
+      if (fuCount) chips.innerHTML += `<span class="chip chip-fu">${fuCount} follow up</span>`;
+      if (bkCount) chips.innerHTML += `<span class="chip chip-bk">${bkCount} booked</span>`;
+    }
+
+    const ucCount = state.todayCalls.filter(c => c.status === 'unconfirmed').length;
+    const cfCount = state.todayCalls.filter(c => c.status === 'confirmed').length;
+    const todayChips = document.getElementById('todayChips');
+    const sep = document.getElementById('todaySep');
+    todayChips.innerHTML = '';
+    if (state.todayCalls.length) {
+      sep.style.display = '';
+      if (ucCount) todayChips.innerHTML += `<span class="chip chip-uc">${ucCount} unconfirmed</span>`;
+      if (cfCount) todayChips.innerHTML += `<span class="chip chip-cf">${cfCount} confirmed</span>`;
+    } else {
+      sep.style.display = 'none';
+    }
+  }
+
+  function renderTabs() {
+    document.getElementById('tabContacts').classList.toggle('active', state.activeTab === 'contacts');
+    document.getElementById('tabToday').classList.toggle('active', state.activeTab === 'today');
+    document.getElementById('importPanelContacts').style.display = state.activeTab === 'contacts' ? '' : 'none';
+    document.getElementById('importPanelToday').style.display    = state.activeTab === 'today'    ? '' : 'none';
+  }
+
+  function contactItemHTML(c, activeId) {
+    const isActive    = c.id === activeId;
+    const displayName = c.name || formatPhone(c.phone);
+    const showPhone   = c.name && c.phone && c.name !== formatPhone(c.phone);
+    return `
+      <div class="contact-item${isActive ? ' active' : ''}" onclick="setActive('${c.id}')">
+        <div class="dot dot-${c.status}"></div>
+        <div class="contact-item-name${c.status === 'no_answer' ? ' muted' : ''}">${esc(displayName)}</div>
+        ${showPhone ? `<div class="contact-item-phone">${formatPhone(c.phone)}</div>` : ''}
+        <button class="btn-delete-contact" onclick="event.stopPropagation();deleteContact('${c.id}')" title="Delete">&#215;</button>
+      </div>`;
+  }
+
+  function renderContactList() {
+    const list     = document.getElementById('contactList');
+    const contacts = state.contacts;
+
+    if (!contacts.length) {
+      list.innerHTML = '<div class="import-hint">Paste contacts below to get started</div>';
+      return;
+    }
+
+    const active    = contacts.filter(c => c.status === 'uncalled');
+    const followUp  = contacts.filter(c => c.status === 'follow_up');
+    const noAnswer  = contacts.filter(c => c.status === 'no_answer');
+    const booked    = contacts.filter(c => c.status === 'booked');
+    let html = '';
+
+    for (const c of active) html += contactItemHTML(c, state.activeId);
+
+    if (followUp.length) {
+      html += `<div class="section-label" style="color:var(--yellow)">Follow Up</div>`;
+      for (const c of followUp) html += contactItemHTML(c, state.activeId);
+    }
+
+    if (noAnswer.length) {
+      html += `<div class="section-label">No Answer</div>`;
+      for (const c of noAnswer) html += contactItemHTML(c, state.activeId);
+    }
+
+    if (booked.length) {
+      html += `<div class="section-label green">Booked</div>`;
+      for (const c of booked) html += contactItemHTML(c, state.activeId);
+    }
+
+    list.innerHTML = html;
+  }
+
+  function deleteContact(id) {
+    state.contacts = state.contacts.filter(c => c.id !== id);
+    if (state.activeId === id) {
+      state.activeId = state.contacts.length ? state.contacts[0].id : null;
+    }
+    save();
+    render();
+  }
+
+  function renderTodayList() {
+    const list = document.getElementById('contactList');
+    const calls = state.todayCalls;
+
+    if (!calls.length) {
+      list.innerHTML = '<div class="import-hint">Add today\'s scheduled calls below</div>';
+      return;
+    }
+
+    const unconfirmed = calls.filter(c => c.status === 'unconfirmed');
+    const confirmed   = calls.filter(c => c.status === 'confirmed');
+    let html = '';
+
+    if (unconfirmed.length) {
+      html += `<div class="section-label">Unconfirmed</div>`;
+      for (const c of unconfirmed) {
+        const isActive = c.id === state.activeTodayId;
+        const displayName = c.name || formatPhone(c.phone);
+        const showPhone = c.name && c.phone && c.name !== formatPhone(c.phone);
+        html += `
+          <div class="contact-item${isActive ? ' active' : ''}" onclick="setActiveTodayCall('${c.id}')">
+            <div class="dot dot-unconfirmed"></div>
+            <div class="contact-item-name">${esc(displayName)}</div>
+            ${showPhone ? `<div class="contact-item-phone">${formatPhone(c.phone)}</div>` : ''}
+          </div>`;
+      }
+    }
+
+    if (confirmed.length) {
+      html += `<div class="section-label">Confirmed</div>`;
+      for (const c of confirmed) {
+        const isActive = c.id === state.activeTodayId;
+        const displayName = c.name || formatPhone(c.phone);
+        const showPhone = c.name && c.phone && c.name !== formatPhone(c.phone);
+        html += `
+          <div class="contact-item${isActive ? ' active' : ''}" onclick="setActiveTodayCall('${c.id}')">
+            <div class="dot dot-confirmed"></div>
+            <div class="contact-item-name">${esc(displayName)}</div>
+            ${showPhone ? `<div class="contact-item-phone">${formatPhone(c.phone)}</div>` : ''}
+          </div>`;
+      }
+    }
+
+    list.innerHTML = html;
+  }
+
+  function renderContactPanel() {
+    const c = getActive();
+    const empty  = document.getElementById('emptyState');
+    const panel  = document.getElementById('contactPanel');
+    const tPanel = document.getElementById('todayPanel');
+
+    tPanel.style.display = 'none';
+
+    if (!c) {
+      empty.style.display = 'flex';
+      panel.style.display = 'none';
+      return;
+    }
+
+    empty.style.display = 'none';
+    panel.style.display = 'flex';
+
+    document.getElementById('panelName').textContent = c.name || formatPhone(c.phone);
+
+    const phoneEl   = document.getElementById('panelPhone');
+    const phoneText = document.getElementById('panelPhoneText');
+    if (c.phone) {
+      phoneEl.href = `tel:+1${c.phone}`;
+      phoneText.textContent = formatPhone(c.phone);
+      phoneEl.style.display = 'inline-flex';
+    } else {
+      phoneEl.style.display = 'none';
+    }
+
+    const badge = document.getElementById('panelStatusBadge');
+    const statusLabels = { uncalled: 'Uncalled', no_answer: 'No Answer', follow_up: 'Follow Up', booked: 'Booked' };
+    badge.textContent = statusLabels[c.status] || 'Uncalled';
+    badge.className = `status-badge ${c.status}`;
+
+    document.querySelectorAll('.btn-status').forEach(btn => {
+      btn.classList.toggle('active', btn.classList.contains(c.status));
+    });
+
+    const notesEl = document.getElementById('notesTextarea');
+    if (document.activeElement !== notesEl) notesEl.value = c.notes || '';
+
+    document.getElementById('btnPrev').disabled = state.contacts.length <= 1;
+    document.getElementById('btnNext').disabled = state.contacts.length <= 1;
+  }
+
+  function renderTodayPanel() {
+    const c = getActiveToday();
+    const empty  = document.getElementById('emptyState');
+    const panel  = document.getElementById('contactPanel');
+    const tPanel = document.getElementById('todayPanel');
+
+    panel.style.display = 'none';
+
+    if (!c) {
+      empty.style.display = 'flex';
+      tPanel.style.display = 'none';
+      return;
+    }
+
+    empty.style.display = 'none';
+    tPanel.style.display = 'flex';
+
+    document.getElementById('todayPanelName').textContent = c.name || formatPhone(c.phone);
+
+    const phoneEl   = document.getElementById('todayPanelPhone');
+    const phoneText = document.getElementById('todayPanelPhoneText');
+    if (c.phone) {
+      phoneEl.href = `tel:+1${c.phone}`;
+      phoneText.textContent = formatPhone(c.phone);
+      phoneEl.style.display = 'inline-flex';
+    } else {
+      phoneEl.style.display = 'none';
+    }
+
+    const badge = document.getElementById('todayPanelBadge');
+    badge.textContent = c.status === 'confirmed' ? 'Confirmed' : 'Unconfirmed';
+    badge.className = `status-badge ${c.status}`;
+
+    document.getElementById('btnTodayUnconfirmed').classList.toggle('active', c.status === 'unconfirmed');
+    document.getElementById('btnTodayConfirmed').classList.toggle('active', c.status === 'confirmed');
+
+    const notesEl = document.getElementById('todayNotesTextarea');
+    if (document.activeElement !== notesEl) notesEl.value = c.notes || '';
+
+    document.getElementById('btnTodayPrev').disabled = state.todayCalls.length <= 1;
+    document.getElementById('btnTodayNext').disabled = state.todayCalls.length <= 1;
+  }
+
+  function esc(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── KEYBOARD SHORTCUTS ─────────────────────────────────
+  document.addEventListener('keydown', e => {
+    const tag = document.activeElement.tagName;
+    if (tag === 'TEXTAREA' || tag === 'INPUT') return;
+
+    if (state.activeTab === 'contacts') {
+      if (e.key === 'ArrowRight' || e.key === 'n') navigate(1);
+      if (e.key === 'ArrowLeft'  || e.key === 'p') navigate(-1);
+      if (e.key === '1') setStatus('no_answer');
+      if (e.key === '2') setStatus('follow_up');
+      if (e.key === '3') setStatus('booked');
+    } else {
+      if (e.key === 'ArrowRight' || e.key === 'n') navigateToday(1);
+      if (e.key === 'ArrowLeft'  || e.key === 'p') navigateToday(-1);
+      if (e.key === '1') setTodayStatus('unconfirmed');
+      if (e.key === '2') setTodayStatus('confirmed');
+    }
+  });
+
+  // ── AUTO-LOAD ON PASTE ────────────────────────────────
+  document.getElementById('importInput').addEventListener('paste', () => {
+    setTimeout(loadContacts, 50);
+  });
+  document.getElementById('importTodayInput').addEventListener('paste', () => {
+    setTimeout(loadTodayCalls, 50);
+  });
+
+  // ── BOOT ───────────────────────────────────────────────
+  load();
+</script>
+</body>
+</html>

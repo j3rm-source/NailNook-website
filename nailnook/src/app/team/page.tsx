@@ -14,6 +14,7 @@ const SPECIALISTS = [
   {name:'Ashley',role:'Eyelash Specialist',spec:'Eyelashes',phone:'928-302-0949',badge:'',bg:'f9a8c9',fg:'c2185b',
     photo:'/team/ashly/headshot.jpg',imgPos:'',
     photos:['/team/ashly/work-1.jpg','/team/ashly/work-2.jpg','/team/ashly/work-3.jpg','/team/ashly/work-4.jpg','/team/ashly/work-5.jpg','/team/ashly/work-1.jpg']},
+  {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/rita/IMG_2929.PNG',imgPos:'center 20%',photos:['/team/rita/IMG_2928.PNG','/team/rita/11176.JPG','/team/rita/11185.JPG','/team/rita/11563.JPG','/team/rita/11654.JPG','/team/rita/11806.JPG']},
 ]
 
 const PHOTOS = [
