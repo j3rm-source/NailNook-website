@@ -246,9 +246,8 @@ export default function TeamPage() {
                           key={i}
                           src={u}
                           muted
-                          autoPlay
-                          loop
                           playsInline
+                          preload="metadata"
                           style={{objectFit:'cover',cursor:'pointer'}}
                           onClick={(e) => { e.stopPropagation(); (window as any).__lbxOpenTeam?.(displayImgs, i) }}
                         />
