@@ -68,7 +68,9 @@
   .chip-uc { color: var(--orange);  border-color: rgba(249,115,22,.3);      background: var(--orange-dim); }
   .chip-cf { color: var(--teal);    border-color: rgba(0,212,184,.3);       background: var(--teal-dim); }
   .chip-td { color: var(--blue);    border-color: rgba(59,130,246,.3);      background: var(--blue-dim); }
-  .chip-ns { color: var(--red);     border-color: rgba(239,68,68,.3);       background: var(--red-dim); }
+  .chip-ns   { color: var(--red);    border-color: rgba(239,68,68,.3);      background: var(--red-dim); }
+  .chip-cl   { color: var(--green);  border-color: rgba(34,197,94,.3);      background: var(--green-dim); }
+  .chip-bkfu { color: var(--yellow); border-color: rgba(234,179,8,.3);      background: var(--yellow-dim); }
   .topbar-sep { width: 1px; height: 20px; background: var(--border2); flex-shrink: 0; }
   .btn-new-session { background: transparent; border: 1px solid var(--border2); color: var(--muted); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 8px; cursor: pointer; transition: all .15s; white-space: nowrap; }
   .btn-new-session:hover { border-color: var(--red); color: var(--red); }
@@ -112,10 +114,12 @@
   .dot-no_answer        { background: var(--muted); }
   .dot-follow_up        { background: var(--yellow); }
   .dot-follow_up_long   { background: var(--purple); }
-  .dot-unconfirmed { background: var(--orange); }
-  .dot-confirmed   { background: var(--teal); }
-  .dot-today       { background: var(--blue); }
-  .dot-noshow      { background: var(--red); }
+  .dot-unconfirmed  { background: var(--orange); }
+  .dot-confirmed    { background: var(--teal); }
+  .dot-today        { background: var(--blue); }
+  .dot-noshow       { background: var(--red); }
+  .dot-closed       { background: var(--green); }
+  .dot-bk_follow_up { background: var(--yellow); }
 
   .contact-item-name { font-size: 13px; font-weight: 500; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .contact-item-name.muted { color: var(--muted); }
@@ -159,6 +163,8 @@
   .section-toggle-label.orange { color: var(--orange); }
   .section-toggle-label.teal   { color: var(--teal); }
   .section-toggle-label.red    { color: var(--red); }
+  .section-toggle-label.green  { color: var(--green); }
+  .section-toggle-label.yellow { color: var(--yellow); }
   .section-toggle-count { font-size: 10px; color: var(--muted); flex-shrink: 0; }
   .section-toggle-line { flex: 1; height: 1px; background: var(--border); }
   .section-toggle-arrow { font-size: 9px; color: var(--muted); transition: transform .15s; flex-shrink: 0; }
@@ -197,8 +203,10 @@
   .status-badge.follow_up_long { color: var(--purple);  border-color: rgba(168,85,247,.3);     background: var(--purple-dim); }
   .status-badge.unconfirmed { color: var(--orange);  border-color: rgba(249,115,22,.3);     background: var(--orange-dim); }
   .status-badge.confirmed   { color: var(--teal);    border-color: rgba(0,212,184,.3);      background: var(--teal-dim); }
-  .status-badge.today       { color: var(--blue);    border-color: rgba(59,130,246,.3);     background: var(--blue-dim); }
-  .status-badge.noshow      { color: var(--red);     border-color: rgba(239,68,68,.3);      background: var(--red-dim); }
+  .status-badge.today        { color: var(--blue);   border-color: rgba(59,130,246,.3);     background: var(--blue-dim); }
+  .status-badge.noshow       { color: var(--red);    border-color: rgba(239,68,68,.3);      background: var(--red-dim); }
+  .status-badge.closed       { color: var(--green);  border-color: rgba(34,197,94,.3);      background: var(--green-dim); }
+  .status-badge.bk_follow_up { color: var(--yellow); border-color: rgba(234,179,8,.3);      background: var(--yellow-dim); }
 
   .status-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
   .btn-status { flex: 1; min-width: 120px; padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1.5px solid; transition: all .15s; text-align: center; }
@@ -226,6 +234,12 @@
 
   .btn-status.noshow { color: var(--red); border-color: rgba(239,68,68,.25); background: transparent; }
   .btn-status.noshow:hover, .btn-status.noshow.active { background: var(--red-dim); border-color: var(--red); box-shadow: 0 0 0 1px var(--red) inset; }
+
+  .btn-status.closed { color: var(--green); border-color: rgba(34,197,94,.25); background: transparent; }
+  .btn-status.closed:hover, .btn-status.closed.active { background: var(--green-dim); border-color: var(--green); box-shadow: 0 0 0 1px var(--green) inset; }
+
+  .btn-status.bk_follow_up { color: var(--yellow); border-color: rgba(234,179,8,.25); background: transparent; }
+  .btn-status.bk_follow_up:hover, .btn-status.bk_follow_up.active { background: var(--yellow-dim); border-color: var(--yellow); box-shadow: 0 0 0 1px var(--yellow) inset; }
 
   .btn-status.active { box-shadow: 0 0 0 1px currentColor inset; }
 
@@ -393,11 +407,18 @@
         <div class="status-badge unconfirmed" id="bookedPanelBadge">Unconfirmed</div>
       </div>
       <div class="divider"></div>
-      <div class="status-buttons">
+      <!-- Standard buttons (shown for non-confirmed statuses) -->
+      <div class="status-buttons" id="bookedBtnsStandard">
         <button class="btn-status today"       onclick="setBookedStatus('today')">📅 Today's Call</button>
         <button class="btn-status unconfirmed" onclick="setBookedStatus('unconfirmed')">✗ Unconfirmed</button>
         <button class="btn-status confirmed"   onclick="setBookedStatus('confirmed')">✓ Confirmed</button>
         <button class="btn-status noshow"      onclick="setBookedStatus('noshow')">✗ No Show</button>
+      </div>
+      <!-- Outcome buttons (shown only when confirmed) -->
+      <div class="status-buttons" id="bookedBtnsConfirmed" style="display:none">
+        <button class="btn-status closed"       onclick="setBookedStatus('closed')">✓ Closed</button>
+        <button class="btn-status noshow"       onclick="setBookedStatus('noshow')">✗ No Show</button>
+        <button class="btn-status bk_follow_up" onclick="setBookedStatus('bk_follow_up')">🔁 Follow Up</button>
       </div>
       <div class="notes-section">
         <div class="notes-label">Notes</div>
@@ -439,7 +460,7 @@
     activeTab: 'contacts',
     bookedCalls: [],
     activeBookedId: null,
-    bookedSectionsOpen:   { today: false, unconfirmed: false, confirmed: false, noshow: false },
+    bookedSectionsOpen:   { today: false, unconfirmed: false, confirmed: false, noshow: false, closed: false, bk_follow_up: false },
     contactSectionsOpen:  { uncalled: true, follow_up: true, follow_up_long: true, no_answer: true }
   };
 
@@ -876,6 +897,8 @@
     const ucCount = state.bookedCalls.filter(c => c.status === 'unconfirmed').length;
     const cfCount = state.bookedCalls.filter(c => c.status === 'confirmed').length;
     const nsCount = state.bookedCalls.filter(c => c.status === 'noshow').length;
+    const clCount = state.bookedCalls.filter(c => c.status === 'closed').length;
+    const bfCount = state.bookedCalls.filter(c => c.status === 'bk_follow_up').length;
     const bookedChips = document.getElementById('bookedChips');
     const sep = document.getElementById('bookedSep');
     bookedChips.innerHTML = '';
@@ -885,6 +908,8 @@
       if (ucCount) bookedChips.innerHTML += `<span class="chip chip-uc">${ucCount} unconfirmed</span>`;
       if (cfCount) bookedChips.innerHTML += `<span class="chip chip-cf">${cfCount} confirmed</span>`;
       if (nsCount) bookedChips.innerHTML += `<span class="chip chip-ns">${nsCount} no show</span>`;
+      if (bfCount) bookedChips.innerHTML += `<span class="chip chip-bkfu">${bfCount} follow up</span>`;
+      if (clCount) bookedChips.innerHTML += `<span class="chip chip-cl">${clCount} closed</span>`;
     } else {
       sep.style.display = 'none';
     }
@@ -981,10 +1006,12 @@
     }
 
     const SECTIONS = [
-      { key: 'today',       label: "Today's Calls", color: 'blue'   },
-      { key: 'unconfirmed', label: 'Unconfirmed',   color: 'orange' },
-      { key: 'confirmed',   label: 'Confirmed',     color: 'teal'   },
-      { key: 'noshow',      label: 'No Shows',      color: 'red'    },
+      { key: 'today',        label: "Today's Calls", color: 'blue'   },
+      { key: 'unconfirmed',  label: 'Unconfirmed',   color: 'orange' },
+      { key: 'confirmed',    label: 'Confirmed',     color: 'teal'   },
+      { key: 'noshow',       label: 'No Shows',      color: 'red'    },
+      { key: 'bk_follow_up', label: 'Follow Up',     color: 'yellow' },
+      { key: 'closed',       label: 'Closed',        color: 'green'  },
     ];
 
     let html = '';
@@ -1096,10 +1123,14 @@
       phoneEl.style.display = 'none';
     }
 
-    const statusLabels = { today: "Today's Call", unconfirmed: 'Unconfirmed', confirmed: 'Confirmed', noshow: 'No Show' };
+    const statusLabels = { today: "Today's Call", unconfirmed: 'Unconfirmed', confirmed: 'Confirmed', noshow: 'No Show', closed: 'Closed', bk_follow_up: 'Follow Up' };
     const badge = document.getElementById('bookedPanelBadge');
     badge.textContent = statusLabels[c.status] || 'Unconfirmed';
     badge.className   = `status-badge ${c.status}`;
+
+    const isConfirmed = c.status === 'confirmed';
+    document.getElementById('bookedBtnsStandard').style.display  = isConfirmed ? 'none' : '';
+    document.getElementById('bookedBtnsConfirmed').style.display = isConfirmed ? ''     : 'none';
 
     document.querySelectorAll('#bookedPanel .btn-status').forEach(btn => {
       btn.classList.toggle('active', btn.classList.contains(c.status));
