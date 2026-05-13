@@ -483,7 +483,7 @@ export default function HomePage() {
           <p className="hero-sub">Lake Havasu&apos;s favorite self-care stop — because you deserve more than just a quick polish.</p>
           <div className="hero-btns">
             <Link href="/book" className="btn btn-p">Book Appointment</Link>
-            <Link href="/services" className="btn btn-s">View Services</Link>
+            <Link href="/team" className="btn btn-s">Our Team</Link>
           </div>
         </div>
         <div className="scroll-cue"><span>Scroll</span><div className="scroll-line"/></div>
