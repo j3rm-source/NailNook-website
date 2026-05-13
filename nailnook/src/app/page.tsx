@@ -506,7 +506,7 @@ export default function HomePage() {
             {href:'/services#art',img:'/gallery/IMG_1030.JPEG',alt:'Nail Art',name:'Nail Art',desc:'Custom designs, gems, chrome, ombre, and hand-painted artwork.',cls:'rv d5'},
             {href:'/services#waxing',img:'/gallery/IMG_1059.JPEG',alt:'Waxing',name:'Waxing',desc:'Smooth, precise waxing for eyebrows, lips, face, and more.',cls:'rv'},
             {href:'/services#permmakeup',img:'/gallery/IMG_1060.JPEG',alt:'Permanent Makeup',name:'Permanent Makeup',desc:'Flawless brows, liner, and lips that look perfect every single morning.',cls:'rv d1'},
-            {href:'/services#botox',img:'https://images.unsplash.com/photo-1567516364473-233c4b6fcfbe?w=600&h=450&fit=crop&auto=format',alt:'Botox',name:'Botox',desc:'Smooth fine lines and refresh your look with expert cosmetic injections.',cls:'rv d2'},
+            {href:'/services#botox',img:'https://images.unsplash.com/photo-1778295092211-38e1172e03f7?w=600&h=450&fit=crop&auto=format',alt:'Botox',name:'Botox',desc:'Smooth fine lines and refresh your look with expert cosmetic injections.',cls:'rv d2'},
             {href:'/services#massage',img:'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=450&fit=crop&auto=format',alt:'Massage',name:'Massage',desc:'Relaxing therapeutic massage to melt away tension from head to toe.',cls:'rv d3'},
           ].map(s => (
             <Link key={s.name} href={s.href} className={`svc-card ${s.cls}`}>

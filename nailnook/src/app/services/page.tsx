@@ -308,7 +308,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="botox">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="https://images.unsplash.com/photo-1746708810803-722593e53772?w=700&h=500&fit=crop&auto=format" alt="Botox" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1731355771418-f10ab62c9f86?w=700&h=500&fit=crop&auto=format" alt="Botox" loading="lazy"/>
             <span className="svc-img-label">Botox</span>
           </div>
           <div>
