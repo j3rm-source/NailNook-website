@@ -92,10 +92,10 @@ export default function BookPage() {
       if (res.ok) {
         setSubmitted(true)
       } else {
-        setErrors({ submit: 'Something went wrong. Please call us at (928) 855-6425.' })
+        setErrors({ submit: 'Something went wrong. Please call us at (928) 486-3524.' })
       }
     } catch {
-      setErrors({ submit: 'Something went wrong. Please call us at (928) 855-6425.' })
+      setErrors({ submit: 'Something went wrong. Please call us at (928) 486-3524.' })
     } finally {
       setSubmitting(false)
     }
@@ -275,7 +275,7 @@ export default function BookPage() {
             <div className="f-hrs"><p>Mon – Sat: 9 AM – 7 PM<br/>Sunday: 10 AM – 5 PM</p></div>
             <br/>
             <h4>Contact</h4>
-            <div className="f-hrs"><p><a href="tel:9288556425" style={{color:'rgba(255,255,255,.7)'}}>(928) 855-6425</a><br/>2120 McCulloch Blvd N, Ste 103<br/>Lake Havasu City, AZ 86403</p></div>
+            <div className="f-hrs"><p><a href="tel:9284863524" style={{color:'rgba(255,255,255,.7)'}}>(928) 486-3524</a><br/>2120 McCulloch Blvd N, Ste 103<br/>Lake Havasu City, AZ 86403</p></div>
           </div>
         </div>
         <div className="f-bottom">

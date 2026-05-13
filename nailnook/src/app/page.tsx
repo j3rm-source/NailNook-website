@@ -256,9 +256,9 @@ export default function HomePage() {
     const KB = [
       {k:['hour','open','close','time','when','today'],a:"Our hours:<br>Mon–Sat: 9 AM – 7 PM<br>Sunday: 10 AM – 5 PM"},
       {k:['address','location','where','map','havasu'],a:"2120 McCulloch Blvd N, Suite 103<br>Lake Havasu City, AZ 86403<br>Free parking out front."},
-      {k:['phone','call','number','contact'],a:"Call us at <a href='tel:9288556425'>(928) 855-6425</a>."},
+      {k:['phone','call','number','contact'],a:"Call us at <a href='tel:9284863524'>(928) 486-3524</a>."},
       {k:['walkin','walk-in','walk in'],a:"Walk-ins welcome when we have openings. Appointments recommended on weekends."},
-      {k:['cancel','reschedul'],a:"Free cancellations up to 24 hours before. Call <a href='tel:9288556425'>(928) 855-6425</a>."},
+      {k:['cancel','reschedul'],a:"Free cancellations up to 24 hours before. Call <a href='tel:9284863524'>(928) 486-3524</a>."},
       {k:['pay','payment','cash','card'],a:"We accept cash, all major cards, Apple Pay, and Google Pay."},
       {k:['manicure','mani'],a:"We offer classic, gel, and spa manicures. <a href='/services#manicure'>See details →</a>"},
       {k:['pedicure','pedi'],a:"We offer classic, gel, spa, and deluxe pedicures. <a href='/services#pedicure'>See details →</a>"},
@@ -267,7 +267,7 @@ export default function HomePage() {
       {k:['dip'],a:"Dip powder nails are chip-resistant and last 3–4 weeks. <a href='/services#dip'>See details →</a>"},
       {k:['nail art','design','chrome','ombre'],a:"Custom nail art: chrome, ombre, gems, 3D, and hand-painted designs. <a href='/services#art'>See details →</a>"},
       {k:['wax','eyebrow','lip'],a:"We offer eyebrow, lip, chin, full face, and underarm waxing. <a href='/services#waxing'>See details →</a>"},
-      {k:['price','cost','how much','pricing'],a:"For current pricing please call us at <a href='tel:9288556425'>(928) 855-6425</a> or <a href='/services'>view our services page</a>."},
+      {k:['price','cost','how much','pricing'],a:"For current pricing please call us at <a href='tel:9284863524'>(928) 486-3524</a> or <a href='/services'>view our services page</a>."},
       {k:['team','staff','specialist'],a:"We have 14 passionate nail specialists.<br><a href='/team'>Meet the team →</a>"},
       {k:['hi','hello','hey'],a:"Hi there, welcome to Nail Nook! How can I help?"},
       {k:['thank','thanks'],a:"You're very welcome! Anything else?"},
@@ -402,7 +402,7 @@ export default function HomePage() {
       if (t === 'book') { usrMsg('Book an appointment'); setTimeout(startBooking, 450) }
       else if (t === 'svc') { usrMsg('Our Services'); setTimeout(() => { botMsg("We offer nails, lashes, hair, waxing, massage, and more. <a href='/services'>View all services →</a>"); resetQrs() }, 450) }
       else if (t === 'team') { usrMsg('Our Team'); setTimeout(() => { botMsg(KB.find(k=>k.k.includes('team'))!.a); resetQrs() }, 450) }
-      else if (t === 'hrs') { usrMsg('Hours & Location'); setTimeout(() => { botMsg("Mon–Sat: 9 AM – 7 PM<br>Sunday: 10 AM – 5 PM<br><br>2120 McCulloch Blvd N, Suite 103<br>Lake Havasu City, AZ 86403<br><a href='tel:9288556425'>(928) 855-6425</a>"); resetQrs() }, 450) }
+      else if (t === 'hrs') { usrMsg('Hours & Location'); setTimeout(() => { botMsg("Mon–Sat: 9 AM – 7 PM<br>Sunday: 10 AM – 5 PM<br><br>2120 McCulloch Blvd N, Suite 103<br>Lake Havasu City, AZ 86403<br><a href='tel:9284863524'>(928) 486-3524</a>"); resetQrs() }, 450) }
     }
     function sendMsg() {
       const inp = document.getElementById('cinp') as HTMLInputElement
@@ -413,7 +413,7 @@ export default function HomePage() {
         const lc = t.toLowerCase()
         if (/\b(book|appointment|schedule)\b/.test(lc)) { startBooking(); return }
         for (const e of KB) { if (e.k.some(k => lc.includes(k))) { botMsg(e.a); resetQrs(); return } }
-        botMsg("I'm not sure on that one. Call <a href='tel:9288556425'>(928) 855-6425</a> or I can book your appointment here.")
+        botMsg("I'm not sure on that one. Call <a href='tel:9284863524'>(928) 486-3524</a> or I can book your appointment here.")
         resetQrs()
       }, 500)
     }
@@ -603,7 +603,7 @@ export default function HomePage() {
             <div className="f-hrs"><p>Mon – Sat: 9 AM – 7 PM<br/>Sunday: 10 AM – 5 PM</p></div>
             <br/>
             <h4>Contact</h4>
-            <div className="f-hrs"><p><a href="tel:9288556425" style={{color:'rgba(255,255,255,.7)'}}>(928) 855-6425</a><br/>2120 McCulloch Blvd N, Ste 103<br/>Lake Havasu City, AZ 86403</p></div>
+            <div className="f-hrs"><p><a href="tel:9284863524" style={{color:'rgba(255,255,255,.7)'}}>(928) 486-3524</a><br/>2120 McCulloch Blvd N, Ste 103<br/>Lake Havasu City, AZ 86403</p></div>
           </div>
         </div>
         <div className="f-bottom">

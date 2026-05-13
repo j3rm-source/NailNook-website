@@ -146,15 +146,15 @@ export default function TeamPage() {
     function qr(t: string) {
       const el = document.getElementById('qrs')
       if (el) el.innerHTML = ''
-      if (t === 'book') { usrMsg('Book an appointment'); setTimeout(() => { botMsg('Head over to our <a href="/book">booking page</a> or call <a href="tel:9288556425">(928) 855-6425</a>.'); resetQrs() }, 500) }
+      if (t === 'book') { usrMsg('Book an appointment'); setTimeout(() => { botMsg('Head over to our <a href="/book">booking page</a> or call <a href="tel:9284863524">(928) 486-3524</a>.'); resetQrs() }, 500) }
       else if (t === 'svc') { usrMsg('View Services'); setTimeout(() => { botMsg('See our full menu on the <a href="/services">services page</a>.'); resetQrs() }, 500) }
-      else if (t === 'hrs') { usrMsg('Hours & Location'); setTimeout(() => { botMsg('2120 McCulloch Blvd N, Suite 103, Lake Havasu City, AZ<br>Mon–Sat: 9 AM – 7 PM · Sun: 10 AM – 5 PM<br><a href="tel:9288556425">(928) 855-6425</a>'); resetQrs() }, 500) }
+      else if (t === 'hrs') { usrMsg('Hours & Location'); setTimeout(() => { botMsg('2120 McCulloch Blvd N, Suite 103, Lake Havasu City, AZ<br>Mon–Sat: 9 AM – 7 PM · Sun: 10 AM – 5 PM<br><a href="tel:9284863524">(928) 486-3524</a>'); resetQrs() }, 500) }
     }
     function sendMsg() {
       const inp = document.getElementById('cinp') as HTMLInputElement
       const t = inp?.value.trim(); if (!t) return
       usrMsg(t); inp.value = ''
-      setTimeout(() => { botMsg("For fastest service call <a href='tel:9288556425'>(928) 855-6425</a>"); resetQrs() }, 700)
+      setTimeout(() => { botMsg("For fastest service call <a href='tel:9284863524'>(928) 486-3524</a>"); resetQrs() }, 700)
     }
 
     resetQrs()
@@ -291,7 +291,7 @@ export default function TeamPage() {
             <div className="f-hrs"><p>Mon – Sat: 9 AM – 7 PM<br/>Sunday: 10 AM – 5 PM</p></div>
             <br/>
             <h4>Contact</h4>
-            <div className="f-hrs"><p><a href="tel:9288556425" style={{color:'rgba(255,255,255,.7)'}}>(928) 855-6425</a><br/>2120 McCulloch Blvd N, Ste 103<br/>Lake Havasu City, AZ 86403</p></div>
+            <div className="f-hrs"><p><a href="tel:9284863524" style={{color:'rgba(255,255,255,.7)'}}>(928) 486-3524</a><br/>2120 McCulloch Blvd N, Ste 103<br/>Lake Havasu City, AZ 86403</p></div>
           </div>
         </div>
         <div className="f-bottom">
