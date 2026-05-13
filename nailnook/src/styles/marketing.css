@@ -28,7 +28,7 @@
 /* NAV */
 .mkt .nav { position: sticky; top: 0; z-index: 900; background: rgba(255,255,255,.96); backdrop-filter: blur(14px); border-bottom: 1px solid var(--bd); padding: 0 5vw; height: 68px; display: flex; align-items: center; justify-content: space-between; }
 .mkt .logo { display: flex; align-items: center; gap: 9px; font-family: var(--fd); font-size: 1.35rem; font-weight: 700; color: var(--ch); }
-.mkt .nav-logo-img { height: 86px; width: auto; object-fit: contain; mix-blend-mode: multiply; }
+.mkt .nav-logo-img { height: 82px; width: auto; object-fit: contain; mix-blend-mode: multiply; }
 .mkt .logo svg { width: 26px; height: 26px; flex-shrink: 0; }
 .mkt .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
 .mkt .nav-links a { font-size: .88rem; letter-spacing: .06em; text-transform: uppercase; color: var(--chl); position: relative; transition: color var(--tr); }
