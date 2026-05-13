@@ -113,7 +113,7 @@ export default function TeamPage() {
     // ---- CHATBOT ----
     let chatOpen = false
     const chatTimer = setTimeout(() => {
-      if (!chatOpen) {
+      if (!chatOpen && !sessionStorage.getItem('chatDismissed')) {
         document.getElementById('cwin')?.classList.add('on')
         chatOpen = true
       }
@@ -124,6 +124,7 @@ export default function TeamPage() {
     }
     function closeChat() {
       chatOpen = false
+      sessionStorage.setItem('chatDismissed', '1')
       document.getElementById('cwin')?.classList.remove('on')
     }
     function botMsg(t: string) {
@@ -231,7 +232,12 @@ export default function TeamPage() {
                   <h3>{sp.name}</h3>
                   <span className="sc-role">{sp.spec}</span>
                   <a className="sc-phone" href={`tel:${sp.phone.replace(/\D/g,'')}`}>{sp.phone}</a>
-                  {(sp as any).bookingLink && <div style={{textAlign:'center',marginTop:'12px'}}><a className="btn btn-p btn-specialist" href={(sp as any).bookingLink} target="_blank" rel="noopener noreferrer">Book with {sp.name}</a></div>}
+                  <div style={{display:'flex',justifyContent:'center',marginTop:'12px'}}>
+                    {(sp as any).bookingLink
+                      ? <a className="btn btn-p btn-specialist" href={(sp as any).bookingLink} target="_blank" rel="noopener noreferrer">Book with {sp.name}</a>
+                      : <Link className="btn btn-p btn-specialist" href="/book">Book Now</Link>
+                    }
+                  </div>
                   <div className="sc-gal">
                     {displayImgs.slice(0, (sp as any).showCount ?? displayImgs.length).map((u, i) => {
                       const isVideo = /\.(mp4|mov|webm)$/i.test(u)

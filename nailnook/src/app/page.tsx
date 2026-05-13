@@ -213,7 +213,7 @@ export default function HomePage() {
     // ---- CHATBOT ----
     let chatOpen = false
     const chatTimer = setTimeout(() => {
-      if (!chatOpen) {
+      if (!chatOpen && !sessionStorage.getItem('chatDismissed')) {
         document.getElementById('cwin')?.classList.add('on')
         chatOpen = true
         const ndot = document.querySelector('.ndot') as HTMLElement | null
@@ -229,6 +229,7 @@ export default function HomePage() {
     }
     function closeChat() {
       chatOpen = false
+      sessionStorage.setItem('chatDismissed', '1')
       document.getElementById('cwin')?.classList.remove('on')
     }
     function botMsg(t: string) {

@@ -30,7 +30,7 @@ export default function ServicesPage() {
     // ---- CHATBOT ----
     let chatOpen = false
     const chatTimer = setTimeout(() => {
-      if (!chatOpen) {
+      if (!chatOpen && !sessionStorage.getItem('chatDismissed')) {
         document.getElementById('cwin')?.classList.add('on')
         chatOpen = true
       }
@@ -41,6 +41,7 @@ export default function ServicesPage() {
     }
     function closeChat() {
       chatOpen = false
+      sessionStorage.setItem('chatDismissed', '1')
       document.getElementById('cwin')?.classList.remove('on')
     }
     function botMsg(t: string) {
@@ -339,9 +340,10 @@ export default function ServicesPage() {
       <div className="booking-strip" id="contact">
         <h2>Ready to Book?</h2>
         <p>Call us directly or use our online booking. We&apos;ll match you with the perfect specialist for your service.</p>
-        <Link href="/book" className="btn-w">Book an Appointment</Link>
-        &nbsp;&nbsp;
-        <a href="tel:9288556425" className="btn-w">Call (928) 855-6425</a>
+        <div style={{display:'flex',gap:'14px',justifyContent:'center',flexWrap:'wrap'}}>
+          <Link href="/book" className="btn-w">Book an Appointment</Link>
+          <a href="tel:9288556425" className="btn-w">Call (928) 855-6425</a>
+        </div>
       </div>
 
       {/* FOOTER */}
