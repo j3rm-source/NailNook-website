@@ -262,7 +262,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="waxing">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="https://images.unsplash.com/photo-1677091508049-d8ae041b1582?w=700&h=500&fit=crop&auto=format" alt="Waxing Services" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1519415387722-a1c3bbef716c?w=700&h=500&fit=crop&auto=format" alt="Waxing Services" loading="lazy"/>
             <span className="svc-img-label">Waxing</span>
           </div>
           <div>
@@ -308,7 +308,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="botox">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="/gallery/IMG_1054.JPEG" alt="Restoration Med Spa" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1778517436057-4ed5f9fe95bd?w=700&h=500&fit=crop&auto=format" alt="Botox" loading="lazy"/>
             <span className="svc-img-label">Botox</span>
           </div>
           <div>
