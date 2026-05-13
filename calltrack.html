@@ -407,6 +407,17 @@
   </div>
 </div>
 
+<!-- TRASH ZONE -->
+<div class="trash-zone" id="trashZone"
+     title="Delete contact"
+     onclick="deleteActive()"
+     ondragover="onDragOver(event)"
+     ondragenter="document.getElementById('trashZone').classList.add('drag-over')"
+     ondragleave="document.getElementById('trashZone').classList.remove('drag-over')"
+     ondrop="onDropTrash(event)">
+  🗑
+</div>
+
 <script>
   // ── STATE ──────────────────────────────────────────────
   const STORAGE_KEY = 'dialing_session_v3';
@@ -779,6 +790,33 @@
     state.bookedSectionsOpen[status] = true;
     save();
     render();
+  }
+
+  function onDropTrash(e) {
+    e.preventDefault();
+    document.getElementById('trashZone').classList.remove('drag-over');
+    if (!dragId) return;
+    if (dragList === 'contacts') {
+      state.contacts = state.contacts.filter(c => c.id !== dragId);
+      if (state.activeId === dragId) state.activeId = state.contacts.length ? state.contacts[0].id : null;
+    } else if (dragList === 'booked') {
+      state.bookedCalls = state.bookedCalls.filter(c => c.id !== dragId);
+      if (state.activeBookedId === dragId) state.activeBookedId = state.bookedCalls.length ? state.bookedCalls[0].id : null;
+    }
+    save();
+    render();
+  }
+
+  function deleteActive() {
+    if (state.activeTab === 'contacts' && state.activeId) {
+      state.contacts = state.contacts.filter(c => c.id !== state.activeId);
+      state.activeId = state.contacts.length ? state.contacts[0].id : null;
+      save(); render();
+    } else if (state.activeTab === 'booked' && state.activeBookedId) {
+      state.bookedCalls = state.bookedCalls.filter(c => c.id !== state.activeBookedId);
+      state.activeBookedId = state.bookedCalls.length ? state.bookedCalls[0].id : null;
+      save(); render();
+    }
   }
 
   // ── RENDER ─────────────────────────────────────────────
