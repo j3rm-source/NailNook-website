@@ -10,24 +10,25 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg:       #050505;
-    --surface:  #111111;
-    --surface2: #1a1a1a;
-    --border:   #222222;
-    --border2:  #2e2e2e;
-    --text:     #e8e8e8;
-    --muted:    #6b7280;
-    --teal:     #00d4b8;
-    --teal-dim: rgba(0,212,184,.12);
-    --orange:   #f97316;
+    --bg:         #050505;
+    --surface:    #111111;
+    --surface2:   #1a1a1a;
+    --border:     #222222;
+    --border2:    #2e2e2e;
+    --text:       #e8e8e8;
+    --muted:      #6b7280;
+    --teal:       #00d4b8;
+    --teal-dim:   rgba(0,212,184,.12);
+    --orange:     #f97316;
     --orange-dim: rgba(249,115,22,.12);
-    --yellow:   #eab308;
+    --yellow:     #eab308;
     --yellow-dim: rgba(234,179,8,.12);
-    --green:    #22c55e;
-    --green-dim: rgba(34,197,94,.12);
-    --red:      #ef4444;
-    --blue:     #3b82f6;
-    --blue-dim: rgba(59,130,246,.12);
+    --green:      #22c55e;
+    --green-dim:  rgba(34,197,94,.12);
+    --red:        #ef4444;
+    --red-dim:    rgba(239,68,68,.12);
+    --blue:       #3b82f6;
+    --blue-dim:   rgba(59,130,246,.12);
   }
 
   html, body { height: 100%; }
@@ -52,599 +53,196 @@
     border-bottom: 1px solid var(--border);
     flex-shrink: 0;
   }
-
-  .topbar h1 {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: .04em;
-    color: var(--teal);
-    text-transform: uppercase;
-    flex-shrink: 0;
-  }
-
-  .progress-wrap {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
-  }
-
-  .progress-bar-track {
-    flex: 1;
-    height: 6px;
-    background: var(--border2);
-    border-radius: 99px;
-    overflow: hidden;
-  }
-
-  .progress-bar-fill {
-    height: 100%;
-    background: var(--teal);
-    border-radius: 99px;
-    transition: width .3s ease;
-  }
-
-  .progress-label {
-    font-size: 12px;
-    color: var(--muted);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .stats-chips {
-    display: flex;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-
-  .chip {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 99px;
-    border: 1px solid;
-  }
-  .chip-na  { color: var(--muted);   border-color: var(--border2);          background: var(--surface2); }
-  .chip-fu  { color: var(--yellow);  border-color: rgba(234,179,8,.3);      background: var(--yellow-dim); }
-  .chip-bk  { color: var(--green);   border-color: rgba(34,197,94,.3);      background: var(--green-dim); }
-  .chip-uc  { color: var(--orange);  border-color: rgba(249,115,22,.3);     background: var(--orange-dim); }
-  .chip-cf  { color: var(--teal);    border-color: rgba(0,212,184,.3);      background: var(--teal-dim); }
-
-  .topbar-sep {
-    width: 1px;
-    height: 20px;
-    background: var(--border2);
-    flex-shrink: 0;
-  }
-
-  .btn-new-session {
-    background: transparent;
-    border: 1px solid var(--border2);
-    color: var(--muted);
-    font-size: 12px;
-    font-weight: 500;
-    padding: 5px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all .15s;
-    white-space: nowrap;
-  }
+  .topbar h1 { font-size: 15px; font-weight: 700; letter-spacing: .04em; color: var(--teal); text-transform: uppercase; flex-shrink: 0; }
+  .progress-wrap { flex: 1; display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .progress-bar-track { flex: 1; height: 6px; background: var(--border2); border-radius: 99px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--teal); border-radius: 99px; transition: width .3s ease; }
+  .progress-label { font-size: 12px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+  .stats-chips { display: flex; gap: 6px; flex-shrink: 0; }
+  .chip { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 99px; border: 1px solid; }
+  .chip-na { color: var(--muted);   border-color: var(--border2);           background: var(--surface2); }
+  .chip-fu { color: var(--yellow);  border-color: rgba(234,179,8,.3);       background: var(--yellow-dim); }
+  .chip-uc { color: var(--orange);  border-color: rgba(249,115,22,.3);      background: var(--orange-dim); }
+  .chip-cf { color: var(--teal);    border-color: rgba(0,212,184,.3);       background: var(--teal-dim); }
+  .chip-td { color: var(--blue);    border-color: rgba(59,130,246,.3);      background: var(--blue-dim); }
+  .chip-ns { color: var(--red);     border-color: rgba(239,68,68,.3);       background: var(--red-dim); }
+  .topbar-sep { width: 1px; height: 20px; background: var(--border2); flex-shrink: 0; }
+  .btn-new-session { background: transparent; border: 1px solid var(--border2); color: var(--muted); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 8px; cursor: pointer; transition: all .15s; white-space: nowrap; }
   .btn-new-session:hover { border-color: var(--red); color: var(--red); }
-
-  .btn-io {
-    background: transparent;
-    border: 1px solid var(--border2);
-    color: var(--muted);
-    font-size: 12px;
-    font-weight: 500;
-    padding: 5px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all .15s;
-    white-space: nowrap;
-  }
+  .btn-io { background: transparent; border: 1px solid var(--border2); color: var(--muted); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 8px; cursor: pointer; transition: all .15s; white-space: nowrap; }
   .btn-io:hover { border-color: var(--teal); color: var(--teal); }
 
   /* ── MAIN LAYOUT ── */
-  .main {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-  }
+  .main { display: flex; flex: 1; overflow: hidden; }
 
   /* ── LEFT PANEL ── */
-  .left {
-    width: 280px;
-    flex-shrink: 0;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
+  .left { width: 280px; flex-shrink: 0; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
 
   /* ── TAB BAR ── */
-  .tab-bar {
-    display: flex;
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-
-  .tab-btn {
-    flex: 1;
-    padding: 10px 8px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: var(--muted);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: all .15s;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-  }
+  .tab-bar { display: flex; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .tab-btn { flex: 1; padding: 10px 8px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: transparent; border: none; cursor: pointer; transition: all .15s; border-bottom: 2px solid transparent; margin-bottom: -1px; }
   .tab-btn:hover { color: var(--text); }
   .tab-btn.active { color: var(--teal); border-bottom-color: var(--teal); }
 
-  .contact-list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 6px 0;
-  }
-
+  .contact-list { flex: 1; overflow-y: auto; padding: 6px 0; }
   .contact-list::-webkit-scrollbar { width: 4px; }
   .contact-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px 8px 16px;
-    cursor: pointer;
-    transition: background .1s;
-    border-left: 2px solid transparent;
-    position: relative;
-  }
-  .contact-item:hover { background: var(--surface2); }
-  .contact-item.active {
-    background: var(--teal-dim);
-    border-left-color: var(--teal);
-  }
+  /* ── DRAG/DROP SECTIONS ── */
+  .contact-section { border-radius: 4px; transition: background .1s, outline .1s; }
+  .contact-section.drag-over { background: rgba(0,212,184,.05); outline: 1px dashed rgba(0,212,184,.3); outline-offset: -2px; }
 
-  .btn-delete-contact {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
-    border: none;
-    background: transparent;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all .12s;
-    padding: 0;
-  }
+  /* ── CONTACT ITEMS ── */
+  .contact-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 16px; cursor: pointer; transition: background .1s; border-left: 2px solid transparent; position: relative; user-select: none; }
+  .contact-item:hover { background: var(--surface2); }
+  .contact-item.active { background: var(--teal-dim); border-left-color: var(--teal); }
+  .contact-item[draggable="true"] { cursor: grab; }
+  .contact-item[draggable="true"]:active { cursor: grabbing; }
+  .contact-item.dragging { opacity: 0.3; pointer-events: none; }
+
+  .btn-delete-contact { display: none; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 4px; border: none; background: transparent; color: var(--muted); font-size: 14px; line-height: 1; cursor: pointer; flex-shrink: 0; transition: all .12s; padding: 0; }
   .contact-item:hover .btn-delete-contact { display: flex; }
   .btn-delete-contact:hover { background: rgba(239,68,68,.15); color: var(--red); }
 
-  .dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .dot-uncalled     { background: transparent; border: 1.5px solid var(--muted); }
-  .dot-no_answer    { background: var(--muted); }
-  .dot-follow_up    { background: var(--yellow); }
-  .dot-booked       { background: var(--green); }
-  .dot-unconfirmed  { background: var(--orange); }
-  .dot-confirmed    { background: var(--teal); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .dot-uncalled    { background: transparent; border: 1.5px solid var(--muted); }
+  .dot-no_answer   { background: var(--muted); }
+  .dot-follow_up   { background: var(--yellow); }
+  .dot-unconfirmed { background: var(--orange); }
+  .dot-confirmed   { background: var(--teal); }
+  .dot-today       { background: var(--blue); }
+  .dot-noshow      { background: var(--red); }
 
-  .contact-item-name {
-    font-size: 13px;
-    font-weight: 500;
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+  .contact-item-name { font-size: 13px; font-weight: 500; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .contact-item-name.muted { color: var(--muted); }
+  .contact-item-phone { font-size: 11px; color: var(--muted); white-space: nowrap; }
 
-  .contact-item-phone {
+  /* ── SECTION LABELS (contacts tab) ── */
+  .section-label { padding: 10px 16px 4px; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-label.yellow { color: var(--yellow); }
+  .section-label.yellow::after { background: rgba(234,179,8,.2); }
+
+  /* ── BOOKED DROP ZONE in contacts ── */
+  .booked-drop-target {
+    margin: 8px 12px 4px;
+    border-radius: 8px;
+    border: 1px dashed rgba(34,197,94,.25);
+    padding: 7px 10px;
+    color: rgba(34,197,94,.4);
     font-size: 11px;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-
-  .section-label {
-    padding: 10px 16px 4px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-  .section-label.green  { color: var(--green); }
-  .section-label.green::after  { background: rgba(34,197,94,.2); }
-  .section-label.orange { color: var(--orange); }
-  .section-label.orange::after { background: rgba(249,115,22,.2); }
-
-  /* ── IMPORT PANEL ── */
-  .import-panel {
-    border-top: 1px solid var(--border);
-    padding: 12px 14px;
-    flex-shrink: 0;
-  }
-
-  .import-label {
-    font-size: 10px;
     font-weight: 600;
     letter-spacing: .06em;
     text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 6px;
+    text-align: center;
+    transition: all .15s;
+    cursor: default;
+  }
+  .booked-drop-target.drag-over {
+    background: rgba(34,197,94,.08);
+    border-color: rgba(34,197,94,.5);
+    color: var(--green);
+    outline: none;
   }
 
-  .import-textarea {
-    width: 100%;
-    height: 72px;
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 12px;
-    padding: 8px 10px;
-    resize: none;
-    outline: none;
-    transition: border-color .15s;
-  }
+  /* ── COLLAPSIBLE SECTION TOGGLES (booked tab) ── */
+  .section-toggle { display: flex; align-items: center; gap: 8px; padding: 10px 16px 8px; cursor: pointer; user-select: none; transition: background .1s; }
+  .section-toggle:hover { background: var(--surface2); }
+  .section-toggle-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; flex-shrink: 0; }
+  .section-toggle-label.blue   { color: var(--blue); }
+  .section-toggle-label.orange { color: var(--orange); }
+  .section-toggle-label.teal   { color: var(--teal); }
+  .section-toggle-label.red    { color: var(--red); }
+  .section-toggle-count { font-size: 10px; color: var(--muted); flex-shrink: 0; }
+  .section-toggle-line { flex: 1; height: 1px; background: var(--border); }
+  .section-toggle-arrow { font-size: 9px; color: var(--muted); transition: transform .15s; flex-shrink: 0; }
+  .section-toggle-arrow.open { transform: rotate(90deg); }
+
+  /* ── IMPORT PANEL ── */
+  .import-panel { border-top: 1px solid var(--border); padding: 12px 14px; flex-shrink: 0; }
+  .import-label { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .import-textarea { width: 100%; height: 72px; background: var(--surface2); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 12px; padding: 8px 10px; resize: none; outline: none; transition: border-color .15s; }
   .import-textarea:focus { border-color: var(--teal); }
   .import-textarea::placeholder { color: var(--muted); }
-
-  .btn-load {
-    width: 100%;
-    margin-top: 6px;
-    background: var(--teal);
-    color: #050505;
-    font-size: 12px;
-    font-weight: 700;
-    border: none;
-    border-radius: 8px;
-    padding: 7px;
-    cursor: pointer;
-    transition: opacity .15s;
-  }
+  .btn-load { width: 100%; margin-top: 6px; background: var(--teal); color: #050505; font-size: 12px; font-weight: 700; border: none; border-radius: 8px; padding: 7px; cursor: pointer; transition: opacity .15s; }
   .btn-load:hover { opacity: .85; }
 
   /* ── RIGHT PANEL ── */
-  .right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background: var(--bg);
-  }
-
-  .empty-state {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    gap: 10px;
-    text-align: center;
-    padding: 40px;
-  }
-
+  .right { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); }
+  .empty-state { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); gap: 10px; text-align: center; padding: 40px; }
   .empty-icon { font-size: 48px; opacity: .3; }
   .empty-state h2 { font-size: 16px; font-weight: 600; }
   .empty-state p  { font-size: 13px; max-width: 280px; line-height: 1.6; }
 
-  .contact-panel {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 28px 32px;
-    gap: 20px;
-    overflow-y: auto;
-  }
-
+  .contact-panel { flex: 1; display: flex; flex-direction: column; padding: 28px 32px; gap: 20px; overflow-y: auto; }
   .contact-panel::-webkit-scrollbar { width: 4px; }
   .contact-panel::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 
-  .contact-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-  }
-
-  .contact-name-block h2 {
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
-  .contact-name-block .phone-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 8px;
-    color: var(--teal);
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: .01em;
-    transition: opacity .15s;
-  }
+  .contact-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .contact-name-block h2 { font-size: 26px; font-weight: 700; line-height: 1.2; }
+  .contact-name-block .phone-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; color: var(--teal); text-decoration: none; font-size: 20px; font-weight: 600; letter-spacing: .01em; transition: opacity .15s; }
   .contact-name-block .phone-link:hover { opacity: .75; }
-
   .phone-icon { font-size: 18px; }
 
-  .status-badge {
-    padding: 4px 12px;
-    border-radius: 99px;
-    font-size: 12px;
-    font-weight: 600;
-    border: 1px solid;
-    white-space: nowrap;
-  }
-  .status-badge.uncalled     { color: var(--muted);   border-color: var(--border2);          background: var(--surface2); }
-  .status-badge.no_answer    { color: var(--muted);   border-color: var(--border2);          background: var(--surface2); }
-  .status-badge.follow_up    { color: var(--yellow);  border-color: rgba(234,179,8,.3);      background: var(--yellow-dim); }
-  .status-badge.booked       { color: var(--green);   border-color: rgba(34,197,94,.3);      background: var(--green-dim); }
-  .status-badge.unconfirmed  { color: var(--orange);  border-color: rgba(249,115,22,.3);     background: var(--orange-dim); }
-  .status-badge.confirmed    { color: var(--teal);    border-color: rgba(0,212,184,.3);      background: var(--teal-dim); }
+  .status-badge { padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: 600; border: 1px solid; white-space: nowrap; }
+  .status-badge.uncalled    { color: var(--muted);   border-color: var(--border2);          background: var(--surface2); }
+  .status-badge.no_answer   { color: var(--muted);   border-color: var(--border2);          background: var(--surface2); }
+  .status-badge.follow_up   { color: var(--yellow);  border-color: rgba(234,179,8,.3);      background: var(--yellow-dim); }
+  .status-badge.unconfirmed { color: var(--orange);  border-color: rgba(249,115,22,.3);     background: var(--orange-dim); }
+  .status-badge.confirmed   { color: var(--teal);    border-color: rgba(0,212,184,.3);      background: var(--teal-dim); }
+  .status-badge.today       { color: var(--blue);    border-color: rgba(59,130,246,.3);     background: var(--blue-dim); }
+  .status-badge.noshow      { color: var(--red);     border-color: rgba(239,68,68,.3);      background: var(--red-dim); }
 
-  .status-buttons {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
+  .status-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-status { flex: 1; min-width: 120px; padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1.5px solid; transition: all .15s; text-align: center; }
 
-  .btn-status {
-    flex: 1;
-    min-width: 120px;
-    padding: 10px 16px;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1.5px solid;
-    transition: all .15s;
-    text-align: center;
-  }
+  .btn-status.no_answer { color: var(--muted); border-color: var(--border2); background: var(--surface); }
+  .btn-status.no_answer:hover, .btn-status.no_answer.active { color: var(--text); border-color: var(--muted); background: var(--surface2); }
 
-  .btn-status.no_answer {
-    color: var(--muted);
-    border-color: var(--border2);
-    background: var(--surface);
-  }
-  .btn-status.no_answer:hover,
-  .btn-status.no_answer.active {
-    color: var(--text);
-    border-color: var(--muted);
-    background: var(--surface2);
-  }
+  .btn-status.follow_up { color: var(--yellow); border-color: rgba(234,179,8,.25); background: transparent; }
+  .btn-status.follow_up:hover, .btn-status.follow_up.active { background: var(--yellow-dim); border-color: var(--yellow); }
 
-  .btn-status.follow_up {
-    color: var(--yellow);
-    border-color: rgba(234,179,8,.25);
-    background: transparent;
-  }
-  .btn-status.follow_up:hover,
-  .btn-status.follow_up.active {
-    background: var(--yellow-dim);
-    border-color: var(--yellow);
-  }
+  .btn-status.booked { color: var(--green); border-color: rgba(34,197,94,.25); background: transparent; }
+  .btn-status.booked:hover, .btn-status.booked.active { background: var(--green-dim); border-color: var(--green); }
 
-  .btn-status.booked {
-    color: var(--green);
-    border-color: rgba(34,197,94,.25);
-    background: transparent;
-  }
-  .btn-status.booked:hover,
-  .btn-status.booked.active {
-    background: var(--green-dim);
-    border-color: var(--green);
-  }
+  .btn-status.today { color: var(--blue); border-color: rgba(59,130,246,.25); background: transparent; }
+  .btn-status.today:hover, .btn-status.today.active { background: var(--blue-dim); border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue) inset; }
 
-  .btn-status.active {
-    box-shadow: 0 0 0 1px currentColor inset;
-  }
+  .btn-status.unconfirmed { color: var(--orange); border-color: rgba(249,115,22,.25); background: transparent; }
+  .btn-status.unconfirmed:hover, .btn-status.unconfirmed.active { background: var(--orange-dim); border-color: var(--orange); box-shadow: 0 0 0 1px var(--orange) inset; }
 
-  /* Today's call status buttons */
-  .btn-today-status {
-    flex: 1;
-    padding: 10px 16px;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1.5px solid;
-    transition: all .15s;
-    text-align: center;
-  }
+  .btn-status.confirmed { color: var(--teal); border-color: rgba(0,212,184,.25); background: transparent; }
+  .btn-status.confirmed:hover, .btn-status.confirmed.active { background: var(--teal-dim); border-color: var(--teal); box-shadow: 0 0 0 1px var(--teal) inset; }
 
-  .btn-today-status.unconfirmed {
-    color: var(--orange);
-    border-color: rgba(249,115,22,.25);
-    background: transparent;
-  }
-  .btn-today-status.unconfirmed:hover,
-  .btn-today-status.unconfirmed.active {
-    background: var(--orange-dim);
-    border-color: var(--orange);
-    box-shadow: 0 0 0 1px var(--orange) inset;
-  }
+  .btn-status.noshow { color: var(--red); border-color: rgba(239,68,68,.25); background: transparent; }
+  .btn-status.noshow:hover, .btn-status.noshow.active { background: var(--red-dim); border-color: var(--red); box-shadow: 0 0 0 1px var(--red) inset; }
 
-  .btn-today-status.confirmed {
-    color: var(--teal);
-    border-color: rgba(0,212,184,.25);
-    background: transparent;
-  }
-  .btn-today-status.confirmed:hover,
-  .btn-today-status.confirmed.active {
-    background: var(--teal-dim);
-    border-color: var(--teal);
-    box-shadow: 0 0 0 1px var(--teal) inset;
-  }
+  .btn-status.active { box-shadow: 0 0 0 1px currentColor inset; }
 
-  .notes-section {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex: 1;
-  }
-
-  .notes-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .notes-textarea {
-    flex: 1;
-    min-height: 160px;
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 12px;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 14px;
-    line-height: 1.6;
-    padding: 14px 16px;
-    resize: none;
-    outline: none;
-    transition: border-color .15s;
-  }
+  .notes-section { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .notes-label { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+  .notes-textarea { flex: 1; min-height: 160px; background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; color: var(--text); font-family: inherit; font-size: 14px; line-height: 1.6; padding: 14px 16px; resize: none; outline: none; transition: border-color .15s; }
   .notes-textarea:focus { border-color: var(--teal); }
   .notes-textarea::placeholder { color: #333; }
+  .notes-rendered { flex: 1; min-height: 160px; background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; padding: 14px 16px; cursor: text; transition: border-color .15s; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+  .notes-kv { display: flex; flex-direction: column; gap: 2px; }
+  .notes-kv-key { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); }
+  .notes-kv-val { font-size: 15px; font-weight: 500; color: var(--text); line-height: 1.4; }
+  .notes-plain-line { font-size: 14px; color: var(--text); line-height: 1.6; white-space: pre-wrap; }
 
-  .notes-rendered {
-    flex: 1;
-    min-height: 160px;
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 12px;
-    padding: 14px 16px;
-    cursor: text;
-    transition: border-color .15s;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .notes-rendered:hover { border-color: var(--border2); }
-
-  .notes-kv {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .notes-kv-key {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--teal);
-  }
-  .notes-kv-val {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.4;
-  }
-  .notes-plain-line {
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.6;
-    white-space: pre-wrap;
-  }
-
-  .autosave-hint {
-    font-size: 11px;
-    color: #2a2a2a;
-    transition: color .3s;
-    height: 14px;
-  }
+  .autosave-hint { font-size: 11px; color: #2a2a2a; transition: color .3s; height: 14px; }
   .autosave-hint.visible { color: var(--muted); }
 
-  .nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    padding-top: 4px;
-  }
-
-  .btn-nav {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 9px 18px;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1px solid var(--border2);
-    background: var(--surface);
-    color: var(--text);
-    transition: all .15s;
-  }
+  .nav-buttons { display: flex; justify-content: space-between; gap: 12px; padding-top: 4px; }
+  .btn-nav { display: flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border2); background: var(--surface); color: var(--text); transition: all .15s; }
   .btn-nav:hover { border-color: var(--teal); color: var(--teal); }
   .btn-nav:disabled { opacity: .3; cursor: default; }
   .btn-nav:disabled:hover { border-color: var(--border2); color: var(--text); }
-
-  .btn-nav-next {
-    background: var(--teal-dim);
-    border-color: rgba(0,212,184,.3);
-    color: var(--teal);
-  }
+  .btn-nav-next { background: var(--teal-dim); border-color: rgba(0,212,184,.3); color: var(--teal); }
   .btn-nav-next:hover { background: rgba(0,212,184,.2); border-color: var(--teal); }
 
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 0 -32px;
-  }
-
-  .import-hint {
-    font-size: 11px;
-    color: var(--muted);
-    text-align: center;
-    padding: 16px 8px;
-    line-height: 1.6;
-  }
-
-  /* Today's Calls panel header label */
-  .panel-section-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
+  .divider { height: 1px; background: var(--border); margin: 0 -32px; }
+  .import-hint { font-size: 11px; color: var(--muted); text-align: center; padding: 16px 8px; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -659,8 +257,8 @@
     <span class="progress-label" id="progressLabel">0 / 0 called</span>
   </div>
   <div class="stats-chips" id="statsChips"></div>
-  <div class="topbar-sep" id="todaySep" style="display:none"></div>
-  <div class="stats-chips" id="todayChips"></div>
+  <div class="topbar-sep" id="bookedSep" style="display:none"></div>
+  <div class="stats-chips" id="bookedChips"></div>
   <button class="btn-io" onclick="exportData()">Export</button>
   <button class="btn-io" onclick="document.getElementById('importFileInput').click()">Import</button>
   <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="importData(event)">
@@ -672,10 +270,9 @@
 
   <!-- LEFT PANEL -->
   <div class="left">
-    <!-- TABS -->
     <div class="tab-bar">
       <button class="tab-btn active" id="tabContacts" onclick="switchTab('contacts')">Contacts</button>
-      <button class="tab-btn" id="tabToday" onclick="switchTab('today')">Today's Calls</button>
+      <button class="tab-btn" id="tabBooked" onclick="switchTab('booked')">Booked Calls</button>
     </div>
 
     <div class="contact-list" id="contactList">
@@ -685,23 +282,19 @@
     <!-- IMPORT (contacts) -->
     <div class="import-panel" id="importPanelContacts">
       <div class="import-label">Add Contacts</div>
-      <textarea
-        class="import-textarea"
-        id="importInput"
+      <textarea class="import-textarea" id="importInput"
         placeholder="One per line:&#10;John Smith 555-867-5309&#10;(555) 555-1234&#10;Jane Doe 5554445566"
       ></textarea>
       <button class="btn-load" onclick="loadContacts()">Load Contacts</button>
     </div>
 
-    <!-- IMPORT (today's calls) -->
-    <div class="import-panel" id="importPanelToday" style="display:none">
-      <div class="import-label">Add to Today's Calls</div>
-      <textarea
-        class="import-textarea"
-        id="importTodayInput"
+    <!-- IMPORT (booked calls) -->
+    <div class="import-panel" id="importPanelBooked" style="display:none">
+      <div class="import-label">Add to Booked Calls</div>
+      <textarea class="import-textarea" id="importBookedInput"
         placeholder="One per line:&#10;John Smith 555-867-5309&#10;(555) 555-1234"
       ></textarea>
-      <button class="btn-load" onclick="loadTodayCalls()">Add Calls</button>
+      <button class="btn-load" onclick="loadBookedInput()">Add Calls</button>
     </div>
   </div>
 
@@ -724,94 +317,104 @@
         </div>
         <div class="status-badge uncalled" id="panelStatusBadge">Uncalled</div>
       </div>
-
       <div class="divider"></div>
-
       <div class="status-buttons">
         <button class="btn-status no_answer" onclick="setStatus('no_answer')">☎ No Answer</button>
         <button class="btn-status follow_up" onclick="setStatus('follow_up')">🔁 Follow Up</button>
         <button class="btn-status booked"    onclick="setStatus('booked')">✓ Booked</button>
       </div>
-
       <div class="notes-section">
         <div class="notes-label">Notes</div>
         <div class="notes-rendered" id="notesRendered" onclick="focusNotes('notesTextarea','notesRendered')" style="display:none"></div>
-        <textarea
-          class="notes-textarea"
-          id="notesTextarea"
+        <textarea class="notes-textarea" id="notesTextarea"
           placeholder="Type notes here… they save automatically."
           oninput="onNotesInput()"
           onblur="blurNotes('notesTextarea','notesRendered')"
         ></textarea>
         <div class="autosave-hint" id="autosaveHint">Saved</div>
       </div>
-
       <div class="nav-buttons">
         <button class="btn-nav" id="btnPrev" onclick="navigate(-1)">&#8592; Prev</button>
         <button class="btn-nav btn-nav-next" id="btnNext" onclick="navigate(1)">Next &#8594;</button>
       </div>
     </div>
 
-    <!-- TODAY'S CALLS DETAIL PANEL -->
-    <div class="contact-panel" id="todayPanel" style="display:none">
+    <!-- BOOKED CALLS DETAIL PANEL -->
+    <div class="contact-panel" id="bookedPanel" style="display:none">
       <div class="contact-header">
         <div class="contact-name-block">
-          <h2 id="todayPanelName"></h2>
-          <a id="todayPanelPhone" class="phone-link" href="#"><span class="phone-icon">📞</span><span id="todayPanelPhoneText"></span></a>
+          <h2 id="bookedPanelName"></h2>
+          <a id="bookedPanelPhone" class="phone-link" href="#"><span class="phone-icon">📞</span><span id="bookedPanelPhoneText"></span></a>
         </div>
-        <div class="status-badge unconfirmed" id="todayPanelBadge">Unconfirmed</div>
+        <div class="status-badge unconfirmed" id="bookedPanelBadge">Unconfirmed</div>
       </div>
-
       <div class="divider"></div>
-
-      <div style="display:flex; flex-direction:column; gap:8px;">
-        <div class="panel-section-title">Confirmation Status</div>
-        <div class="status-buttons">
-          <button class="btn-today-status unconfirmed" id="btnTodayUnconfirmed" onclick="setTodayStatus('unconfirmed')">✗ Unconfirmed</button>
-          <button class="btn-today-status confirmed"   id="btnTodayConfirmed"   onclick="setTodayStatus('confirmed')">✓ Confirmed</button>
-        </div>
+      <div class="status-buttons">
+        <button class="btn-status today"       onclick="setBookedStatus('today')">📅 Today's Call</button>
+        <button class="btn-status unconfirmed" onclick="setBookedStatus('unconfirmed')">✗ Unconfirmed</button>
+        <button class="btn-status confirmed"   onclick="setBookedStatus('confirmed')">✓ Confirmed</button>
+        <button class="btn-status noshow"      onclick="setBookedStatus('noshow')">✗ No Show</button>
       </div>
-
       <div class="notes-section">
         <div class="notes-label">Notes</div>
-        <div class="notes-rendered" id="todayNotesRendered" onclick="focusNotes('todayNotesTextarea','todayNotesRendered')" style="display:none"></div>
-        <textarea
-          class="notes-textarea"
-          id="todayNotesTextarea"
+        <div class="notes-rendered" id="bookedNotesRendered" onclick="focusNotes('bookedNotesTextarea','bookedNotesRendered')" style="display:none"></div>
+        <textarea class="notes-textarea" id="bookedNotesTextarea"
           placeholder="Type notes here… they save automatically."
-          oninput="onTodayNotesInput()"
-          onblur="blurNotes('todayNotesTextarea','todayNotesRendered')"
+          oninput="onBookedNotesInput()"
+          onblur="blurNotes('bookedNotesTextarea','bookedNotesRendered')"
         ></textarea>
-        <div class="autosave-hint" id="todayAutosaveHint">Saved</div>
+        <div class="autosave-hint" id="bookedAutosaveHint">Saved</div>
       </div>
-
       <div class="nav-buttons">
-        <button class="btn-nav" id="btnTodayPrev" onclick="navigateToday(-1)">&#8592; Prev</button>
-        <button class="btn-nav btn-nav-next" id="btnTodayNext" onclick="navigateToday(1)">Next &#8594;</button>
+        <button class="btn-nav" id="btnBookedPrev" onclick="navigateBooked(-1)">&#8592; Prev</button>
+        <button class="btn-nav btn-nav-next" id="btnBookedNext" onclick="navigateBooked(1)">Next &#8594;</button>
       </div>
     </div>
 
   </div>
-
 </div>
 
 <script>
   // ── STATE ──────────────────────────────────────────────
-  const STORAGE_KEY = 'dialing_session_v2';
-  let state = {
+  const STORAGE_KEY = 'dialing_session_v3';
+
+  const DEFAULT_STATE = {
     contacts: [],
     activeId: null,
     activeTab: 'contacts',
-    todayCalls: [],
-    activeTodayId: null
+    bookedCalls: [],
+    activeBookedId: null,
+    bookedSectionsOpen: { today: false, unconfirmed: false, confirmed: false, noshow: false }
   };
+
+  let state = JSON.parse(JSON.stringify(DEFAULT_STATE));
 
   function load() {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
+      let raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        // Migrate from v2
+        raw = localStorage.getItem('dialing_session_v2');
+        if (raw) {
+          const old = JSON.parse(raw);
+          state = {
+            ...JSON.parse(JSON.stringify(DEFAULT_STATE)),
+            contacts: (old.contacts || []).filter(c => c.status !== 'booked'),
+            activeId: old.activeId || null,
+            bookedCalls: [
+              ...(old.contacts || []).filter(c => c.status === 'booked').map(c => ({ ...c, status: 'unconfirmed' })),
+              ...(old.todayCalls || [])
+            ],
+          };
+          save();
+        }
+      } else {
         const parsed = JSON.parse(raw);
-        state = { ...state, ...parsed };
+        state = {
+          ...JSON.parse(JSON.stringify(DEFAULT_STATE)),
+          ...parsed,
+          bookedSectionsOpen: { ...DEFAULT_STATE.bookedSectionsOpen, ...(parsed.bookedSectionsOpen || {}) }
+        };
       }
     } catch(e) {}
     render();
@@ -843,13 +446,7 @@
     return name.replace(/[,;:]/g, '').trim();
   }
 
-  function isPhoneOnlyLine(line) {
-    const noDigits = line.replace(/[\d\s\-().+]/g, '').trim();
-    return noDigits.length === 0 || PHONE_LABELS.test(noDigits);
-  }
-
   function isProfileBlock(lines) {
-    // A profile block: every line matches "KEY: value" and has NAME: or PHONE:
     const kvLines = lines.filter(Boolean);
     if (kvLines.length < 2) return false;
     const allKV = kvLines.every(l => /^[^:]+:\s*.+$/.test(l));
@@ -869,8 +466,7 @@
       else { noteLines.push(line); }
     }
     if (!name) name = phone ? formatPhone(phone) : '';
-    const notes = noteLines.join('\n');
-    return [makeContact(name, extractPhone(phone) || '', defaultStatus, notes)];
+    return [makeContact(name, extractPhone(phone) || '', defaultStatus, noteLines.join('\n'))];
   }
 
   function makeContact(name, phone, defaultStatus, notes = '') {
@@ -880,24 +476,18 @@
 
   function parseLines(raw, defaultStatus = 'uncalled') {
     const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
-
     if (isProfileBlock(lines)) return parseProfileBlock(lines, defaultStatus);
     const results = [];
     let i = 0;
-
     while (i < lines.length) {
       const line = lines[i];
       const phone = extractPhone(line);
       const name  = extractName(line, phone);
       const hasName = name.length > 1 && /[a-zA-Z]/.test(name);
-
       if (phone && hasName) {
-        // Complete entry on one line
         results.push(makeContact(name, phone, defaultStatus));
         i++;
       } else if (hasName && !phone) {
-        // Name only — look ahead up to 3 lines for a phone number,
-        // skipping label-only lines (Mobile, Home, etc.)
         let foundPhone = '';
         let advance = 1;
         for (let j = i + 1; j < lines.length && j <= i + 3; j++) {
@@ -905,15 +495,12 @@
           const nextPhone = extractPhone(nextLine);
           const nextName  = extractName(nextLine, nextPhone);
           const nextHasRealName = nextName.length > 2 && /[a-zA-Z]{2,}/.test(nextName) && !PHONE_LABELS.test(nextName);
-
-          if (nextHasRealName && !nextPhone) break; // next line is a new name, stop
+          if (nextHasRealName && !nextPhone) break;
           if (nextPhone) { foundPhone = nextPhone; advance = j - i + 1; break; }
-          // label-only line (Mobile, etc.) — skip it and keep looking
         }
         results.push(makeContact(name, foundPhone, defaultStatus));
         i += advance;
       } else if (phone && !hasName) {
-        // Phone only — attach to previous name-only entry if it has no phone
         if (results.length && !results[results.length - 1].phone) {
           results[results.length - 1].phone = phone;
         } else {
@@ -921,10 +508,9 @@
         }
         i++;
       } else {
-        i++; // skip label-only / empty lines
+        i++;
       }
     }
-
     return results.filter(c => c.phone || c.name);
   }
 
@@ -955,28 +541,25 @@
     render();
   }
 
-  // ── LOAD TODAY'S CALLS ─────────────────────────────────
-  function loadTodayCalls() {
-    const raw = document.getElementById('importTodayInput').value;
+  // ── LOAD BOOKED INPUT ──────────────────────────────────
+  function loadBookedInput() {
+    const raw = document.getElementById('importBookedInput').value;
     if (!raw.trim()) return;
     const parsed = parseLines(raw, 'unconfirmed');
     if (!parsed.length) return;
-    state.todayCalls = [...state.todayCalls, ...parsed];
-    if (!state.activeTodayId && state.todayCalls.length) state.activeTodayId = state.todayCalls[0].id;
-    document.getElementById('importTodayInput').value = '';
+    state.bookedCalls = [...state.bookedCalls, ...parsed];
+    if (!state.activeBookedId && state.bookedCalls.length) state.activeBookedId = state.bookedCalls[0].id;
+    document.getElementById('importBookedInput').value = '';
     save();
     render();
   }
 
   // ── NEW SESSION ────────────────────────────────────────
   function newSession() {
-    if (!confirm('Start a new session? Uncalled and No Answer contacts will be cleared. Follow Up and Booked contacts are kept.')) return;
-    const keep = state.contacts.filter(c => c.status === 'follow_up' || c.status === 'booked');
-    const keepIds = new Set(keep.map(c => c.id));
+    if (!confirm('Start a new session? Uncalled and No Answer contacts will be cleared. Follow Up contacts are kept. Booked Calls are kept.')) return;
+    const keep = state.contacts.filter(c => c.status === 'follow_up');
     state.contacts = keep;
-    if (!keepIds.has(state.activeId)) state.activeId = keep.length ? keep[0].id : null;
-    state.todayCalls = [];
-    state.activeTodayId = null;
+    state.activeId = keep.length ? keep[0].id : null;
     save();
     render();
   }
@@ -988,8 +571,8 @@
     render();
   }
 
-  function setActiveTodayCall(id) {
-    state.activeTodayId = id;
+  function setActiveBooked(id) {
+    state.activeBookedId = id;
     save();
     render();
   }
@@ -998,15 +581,46 @@
   function setStatus(status) {
     const c = getActive();
     if (!c) return;
-    c.status = c.status === status ? 'uncalled' : status;
+    if (status === 'booked') {
+      moveToBooked(c.id);
+    } else {
+      c.status = c.status === status ? 'uncalled' : status;
+      save();
+      render();
+    }
+  }
+
+  function moveToBooked(contactId) {
+    const idx = state.contacts.findIndex(x => x.id === contactId);
+    if (idx === -1) return;
+    const c = state.contacts[idx];
+    state.bookedCalls.push({ ...c, status: 'unconfirmed' });
+    state.contacts.splice(idx, 1);
+    state.activeId = state.contacts.length
+      ? state.contacts[Math.min(idx, state.contacts.length - 1)].id
+      : null;
+    state.bookedSectionsOpen.unconfirmed = true;
     save();
     render();
   }
 
-  function setTodayStatus(status) {
-    const c = getActiveToday();
+  function setBookedStatus(status) {
+    const c = getActiveBooked();
     if (!c) return;
     c.status = status;
+    save();
+    render();
+  }
+
+  // ── TOGGLE BOOKED SECTION ──────────────────────────────
+  function toggleBookedSection(key) {
+    state.bookedSectionsOpen[key] = !state.bookedSectionsOpen[key];
+    // When opening a section, select first item if none selected in that section
+    if (state.bookedSectionsOpen[key]) {
+      const items = state.bookedCalls.filter(c => c.status === key);
+      const activeInSection = items.find(c => c.id === state.activeBookedId);
+      if (!activeInSection && items.length) state.activeBookedId = items[0].id;
+    }
     save();
     render();
   }
@@ -1027,15 +641,15 @@
     }, 300);
   }
 
-  let todayNotesDebounce = null;
-  function onTodayNotesInput() {
-    clearTimeout(todayNotesDebounce);
-    const hint = document.getElementById('todayAutosaveHint');
+  let bookedNotesDebounce = null;
+  function onBookedNotesInput() {
+    clearTimeout(bookedNotesDebounce);
+    const hint = document.getElementById('bookedAutosaveHint');
     hint.textContent = 'Saving…';
     hint.classList.remove('visible');
-    todayNotesDebounce = setTimeout(() => {
-      const c = getActiveToday();
-      if (c) { c.notes = document.getElementById('todayNotesTextarea').value; save(); }
+    bookedNotesDebounce = setTimeout(() => {
+      const c = getActiveBooked();
+      if (c) { c.notes = document.getElementById('bookedNotesTextarea').value; save(); }
       hint.textContent = 'Saved';
       hint.classList.add('visible');
       setTimeout(() => hint.classList.remove('visible'), 1500);
@@ -1053,22 +667,85 @@
     setActive(contacts[next].id);
   }
 
-  function navigateToday(dir) {
-    const calls = state.todayCalls;
+  function navigateBooked(dir) {
+    const calls = state.bookedCalls;
     if (!calls.length) return;
-    const idx = calls.findIndex(c => c.id === state.activeTodayId);
+    const idx = calls.findIndex(c => c.id === state.activeBookedId);
     let next = idx + dir;
     if (next < 0) next = calls.length - 1;
     if (next >= calls.length) next = 0;
-    setActiveTodayCall(calls[next].id);
+    setActiveBooked(calls[next].id);
   }
 
   function getActive() {
     return state.contacts.find(c => c.id === state.activeId) || null;
   }
+  function getActiveBooked() {
+    return state.bookedCalls.find(c => c.id === state.activeBookedId) || null;
+  }
 
-  function getActiveToday() {
-    return state.todayCalls.find(c => c.id === state.activeTodayId) || null;
+  // ── DRAG AND DROP ──────────────────────────────────────
+  let dragId   = null;
+  let dragList = null;
+
+  function onDragStart(e, id, list) {
+    dragId   = id;
+    dragList = list;
+    e.dataTransfer.effectAllowed = 'move';
+    setTimeout(() => {
+      const el = document.querySelector(`[data-drag-id="${id}"]`);
+      if (el) el.classList.add('dragging');
+    }, 0);
+  }
+
+  function onDragEnd() {
+    document.querySelectorAll('.dragging').forEach(el => el.classList.remove('dragging'));
+    document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    dragId   = null;
+    dragList = null;
+  }
+
+  function onDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  }
+
+  function onDragEnter(e) {
+    e.preventDefault();
+    e.currentTarget.classList.add('drag-over');
+  }
+
+  function onDragLeave(e) {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      e.currentTarget.classList.remove('drag-over');
+    }
+  }
+
+  function onDropContact(e, status) {
+    e.preventDefault();
+    e.currentTarget.classList.remove('drag-over');
+    if (!dragId || dragList !== 'contacts') return;
+    if (status === 'booked') {
+      moveToBooked(dragId);
+    } else {
+      const c = state.contacts.find(x => x.id === dragId);
+      if (c) { c.status = status; state.activeId = c.id; }
+      save();
+      render();
+    }
+  }
+
+  function onDropBooked(e, status) {
+    e.preventDefault();
+    e.currentTarget.classList.remove('drag-over');
+    if (!dragId || dragList !== 'booked') return;
+    const c = state.bookedCalls.find(x => x.id === dragId);
+    if (!c) return;
+    c.status = status;
+    state.activeBookedId = c.id;
+    state.bookedSectionsOpen[status] = true;
+    save();
+    render();
   }
 
   // ── RENDER ─────────────────────────────────────────────
@@ -1078,9 +755,11 @@
     if (state.activeTab === 'contacts') {
       renderContactList();
       renderContactPanel();
+      document.getElementById('bookedPanel').style.display = 'none';
     } else {
-      renderTodayList();
-      renderTodayPanel();
+      renderBookedList();
+      renderBookedPanel();
+      document.getElementById('contactPanel').style.display = 'none';
     }
   }
 
@@ -1089,7 +768,6 @@
     const called = state.contacts.filter(c => c.status !== 'uncalled').length;
     const naCount = state.contacts.filter(c => c.status === 'no_answer').length;
     const fuCount = state.contacts.filter(c => c.status === 'follow_up').length;
-    const bkCount = state.contacts.filter(c => c.status === 'booked').length;
 
     const pct = total ? (called / total) * 100 : 0;
     document.getElementById('progressFill').style.width = pct + '%';
@@ -1100,18 +778,21 @@
     if (total) {
       if (naCount) chips.innerHTML += `<span class="chip chip-na">${naCount} no answer</span>`;
       if (fuCount) chips.innerHTML += `<span class="chip chip-fu">${fuCount} follow up</span>`;
-      if (bkCount) chips.innerHTML += `<span class="chip chip-bk">${bkCount} booked</span>`;
     }
 
-    const ucCount = state.todayCalls.filter(c => c.status === 'unconfirmed').length;
-    const cfCount = state.todayCalls.filter(c => c.status === 'confirmed').length;
-    const todayChips = document.getElementById('todayChips');
-    const sep = document.getElementById('todaySep');
-    todayChips.innerHTML = '';
-    if (state.todayCalls.length) {
+    const tdCount = state.bookedCalls.filter(c => c.status === 'today').length;
+    const ucCount = state.bookedCalls.filter(c => c.status === 'unconfirmed').length;
+    const cfCount = state.bookedCalls.filter(c => c.status === 'confirmed').length;
+    const nsCount = state.bookedCalls.filter(c => c.status === 'noshow').length;
+    const bookedChips = document.getElementById('bookedChips');
+    const sep = document.getElementById('bookedSep');
+    bookedChips.innerHTML = '';
+    if (state.bookedCalls.length) {
       sep.style.display = '';
-      if (ucCount) todayChips.innerHTML += `<span class="chip chip-uc">${ucCount} unconfirmed</span>`;
-      if (cfCount) todayChips.innerHTML += `<span class="chip chip-cf">${cfCount} confirmed</span>`;
+      if (tdCount) bookedChips.innerHTML += `<span class="chip chip-td">${tdCount} today</span>`;
+      if (ucCount) bookedChips.innerHTML += `<span class="chip chip-uc">${ucCount} unconfirmed</span>`;
+      if (cfCount) bookedChips.innerHTML += `<span class="chip chip-cf">${cfCount} confirmed</span>`;
+      if (nsCount) bookedChips.innerHTML += `<span class="chip chip-ns">${nsCount} no show</span>`;
     } else {
       sep.style.display = 'none';
     }
@@ -1119,57 +800,127 @@
 
   function renderTabs() {
     document.getElementById('tabContacts').classList.toggle('active', state.activeTab === 'contacts');
-    document.getElementById('tabToday').classList.toggle('active', state.activeTab === 'today');
+    document.getElementById('tabBooked').classList.toggle('active', state.activeTab === 'booked');
     document.getElementById('importPanelContacts').style.display = state.activeTab === 'contacts' ? '' : 'none';
-    document.getElementById('importPanelToday').style.display    = state.activeTab === 'today'    ? '' : 'none';
+    document.getElementById('importPanelBooked').style.display   = state.activeTab === 'booked'   ? '' : 'none';
   }
 
-  function contactItemHTML(c, activeId) {
+  function contactItemHTML(c, activeId, list) {
     const isActive    = c.id === activeId;
     const displayName = c.name || formatPhone(c.phone);
     const showPhone   = c.name && c.phone && c.name !== formatPhone(c.phone);
+    const clickFn     = list === 'booked' ? `setActiveBooked('${c.id}')` : `setActive('${c.id}')`;
+    const deleteBtn   = list === 'contacts'
+      ? `<button class="btn-delete-contact" onclick="event.stopPropagation();deleteContact('${c.id}')" title="Delete">&#215;</button>`
+      : '';
     return `
-      <div class="contact-item${isActive ? ' active' : ''}" onclick="setActive('${c.id}')">
+      <div class="contact-item${isActive ? ' active' : ''}"
+           draggable="true"
+           data-drag-id="${c.id}"
+           ondragstart="onDragStart(event,'${c.id}','${list}')"
+           ondragend="onDragEnd()"
+           onclick="${clickFn}">
         <div class="dot dot-${c.status}"></div>
         <div class="contact-item-name${c.status === 'no_answer' ? ' muted' : ''}">${esc(displayName)}</div>
         ${showPhone ? `<div class="contact-item-phone">${formatPhone(c.phone)}</div>` : ''}
-        <button class="btn-delete-contact" onclick="event.stopPropagation();deleteContact('${c.id}')" title="Delete">&#215;</button>
+        ${deleteBtn}
       </div>`;
   }
 
   function renderContactList() {
-    const list     = document.getElementById('contactList');
+    const listEl   = document.getElementById('contactList');
     const contacts = state.contacts;
 
     if (!contacts.length) {
-      list.innerHTML = '<div class="import-hint">Paste contacts below to get started</div>';
+      listEl.innerHTML = '<div class="import-hint">Paste contacts below to get started</div>';
       return;
     }
 
-    const active    = contacts.filter(c => c.status === 'uncalled');
-    const followUp  = contacts.filter(c => c.status === 'follow_up');
-    const noAnswer  = contacts.filter(c => c.status === 'no_answer');
-    const booked    = contacts.filter(c => c.status === 'booked');
+    const uncalled = contacts.filter(c => c.status === 'uncalled');
+    const followUp = contacts.filter(c => c.status === 'follow_up');
+    const noAnswer = contacts.filter(c => c.status === 'no_answer');
+
     let html = '';
 
-    for (const c of active) html += contactItemHTML(c, state.activeId);
+    // Uncalled
+    html += `<div class="contact-section"
+      ondragover="onDragOver(event)"
+      ondragenter="onDragEnter(event)"
+      ondragleave="onDragLeave(event)"
+      ondrop="onDropContact(event,'uncalled')">
+      <div class="section-label">Uncalled</div>
+      ${uncalled.map(c => contactItemHTML(c, state.activeId, 'contacts')).join('')}
+    </div>`;
 
-    if (followUp.length) {
-      html += `<div class="section-label" style="color:var(--yellow)">Follow Up</div>`;
-      for (const c of followUp) html += contactItemHTML(c, state.activeId);
+    // Follow Up
+    html += `<div class="contact-section"
+      ondragover="onDragOver(event)"
+      ondragenter="onDragEnter(event)"
+      ondragleave="onDragLeave(event)"
+      ondrop="onDropContact(event,'follow_up')">
+      <div class="section-label yellow">Follow Up</div>
+      ${followUp.map(c => contactItemHTML(c, state.activeId, 'contacts')).join('')}
+    </div>`;
+
+    // No Answer
+    html += `<div class="contact-section"
+      ondragover="onDragOver(event)"
+      ondragenter="onDragEnter(event)"
+      ondragleave="onDragLeave(event)"
+      ondrop="onDropContact(event,'no_answer')">
+      <div class="section-label">No Answer</div>
+      ${noAnswer.map(c => contactItemHTML(c, state.activeId, 'contacts')).join('')}
+    </div>`;
+
+    // Booked drop zone
+    html += `<div class="booked-drop-target"
+      ondragover="onDragOver(event)"
+      ondragenter="this.classList.add('drag-over')"
+      ondragleave="if(!this.contains(event.relatedTarget))this.classList.remove('drag-over')"
+      ondrop="onDropContact(event,'booked')">
+      ＋ Drop here → Booked Calls
+    </div>`;
+
+    listEl.innerHTML = html;
+  }
+
+  function renderBookedList() {
+    const listEl = document.getElementById('contactList');
+    const calls  = state.bookedCalls;
+
+    if (!calls.length) {
+      listEl.innerHTML = '<div class="import-hint">Booked contacts appear here automatically, or add below</div>';
+      return;
     }
 
-    if (noAnswer.length) {
-      html += `<div class="section-label">No Answer</div>`;
-      for (const c of noAnswer) html += contactItemHTML(c, state.activeId);
+    const SECTIONS = [
+      { key: 'today',       label: "Today's Calls", color: 'blue'   },
+      { key: 'unconfirmed', label: 'Unconfirmed',   color: 'orange' },
+      { key: 'confirmed',   label: 'Confirmed',     color: 'teal'   },
+      { key: 'noshow',      label: 'No Shows',      color: 'red'    },
+    ];
+
+    let html = '';
+    for (const sec of SECTIONS) {
+      const items  = calls.filter(c => c.status === sec.key);
+      const isOpen = state.bookedSectionsOpen[sec.key];
+      html += `
+        <div class="contact-section"
+             ondragover="onDragOver(event)"
+             ondragenter="onDragEnter(event)"
+             ondragleave="onDragLeave(event)"
+             ondrop="onDropBooked(event,'${sec.key}')">
+          <div class="section-toggle" onclick="toggleBookedSection('${sec.key}')">
+            <span class="section-toggle-label ${sec.color}">${sec.label}</span>
+            <span class="section-toggle-count">${items.length}</span>
+            <div class="section-toggle-line"></div>
+            <span class="section-toggle-arrow${isOpen ? ' open' : ''}">&#9658;</span>
+          </div>
+          ${isOpen ? items.map(c => contactItemHTML(c, state.activeBookedId, 'booked')).join('') : ''}
+        </div>`;
     }
 
-    if (booked.length) {
-      html += `<div class="section-label green">Booked</div>`;
-      for (const c of booked) html += contactItemHTML(c, state.activeId);
-    }
-
-    list.innerHTML = html;
+    listEl.innerHTML = html;
   }
 
   function deleteContact(id) {
@@ -1181,59 +932,13 @@
     render();
   }
 
-  function renderTodayList() {
-    const list = document.getElementById('contactList');
-    const calls = state.todayCalls;
-
-    if (!calls.length) {
-      list.innerHTML = '<div class="import-hint">Add today\'s scheduled calls below</div>';
-      return;
-    }
-
-    const unconfirmed = calls.filter(c => c.status === 'unconfirmed');
-    const confirmed   = calls.filter(c => c.status === 'confirmed');
-    let html = '';
-
-    if (unconfirmed.length) {
-      html += `<div class="section-label">Unconfirmed</div>`;
-      for (const c of unconfirmed) {
-        const isActive = c.id === state.activeTodayId;
-        const displayName = c.name || formatPhone(c.phone);
-        const showPhone = c.name && c.phone && c.name !== formatPhone(c.phone);
-        html += `
-          <div class="contact-item${isActive ? ' active' : ''}" onclick="setActiveTodayCall('${c.id}')">
-            <div class="dot dot-unconfirmed"></div>
-            <div class="contact-item-name">${esc(displayName)}</div>
-            ${showPhone ? `<div class="contact-item-phone">${formatPhone(c.phone)}</div>` : ''}
-          </div>`;
-      }
-    }
-
-    if (confirmed.length) {
-      html += `<div class="section-label">Confirmed</div>`;
-      for (const c of confirmed) {
-        const isActive = c.id === state.activeTodayId;
-        const displayName = c.name || formatPhone(c.phone);
-        const showPhone = c.name && c.phone && c.name !== formatPhone(c.phone);
-        html += `
-          <div class="contact-item${isActive ? ' active' : ''}" onclick="setActiveTodayCall('${c.id}')">
-            <div class="dot dot-confirmed"></div>
-            <div class="contact-item-name">${esc(displayName)}</div>
-            ${showPhone ? `<div class="contact-item-phone">${formatPhone(c.phone)}</div>` : ''}
-          </div>`;
-      }
-    }
-
-    list.innerHTML = html;
-  }
-
   function renderContactPanel() {
-    const c = getActive();
+    const c      = getActive();
     const empty  = document.getElementById('emptyState');
     const panel  = document.getElementById('contactPanel');
-    const tPanel = document.getElementById('todayPanel');
+    const bPanel = document.getElementById('bookedPanel');
 
-    tPanel.style.display = 'none';
+    bPanel.style.display = 'none';
 
     if (!c) {
       empty.style.display = 'flex';
@@ -1256,12 +961,12 @@
       phoneEl.style.display = 'none';
     }
 
+    const statusLabels = { uncalled: 'Uncalled', no_answer: 'No Answer', follow_up: 'Follow Up' };
     const badge = document.getElementById('panelStatusBadge');
-    const statusLabels = { uncalled: 'Uncalled', no_answer: 'No Answer', follow_up: 'Follow Up', booked: 'Booked' };
     badge.textContent = statusLabels[c.status] || 'Uncalled';
-    badge.className = `status-badge ${c.status}`;
+    badge.className   = `status-badge ${c.status}`;
 
-    document.querySelectorAll('.btn-status').forEach(btn => {
+    document.querySelectorAll('#contactPanel .btn-status').forEach(btn => {
       btn.classList.toggle('active', btn.classList.contains(c.status));
     });
 
@@ -1275,27 +980,27 @@
     document.getElementById('btnNext').disabled = state.contacts.length <= 1;
   }
 
-  function renderTodayPanel() {
-    const c = getActiveToday();
+  function renderBookedPanel() {
+    const c      = getActiveBooked();
     const empty  = document.getElementById('emptyState');
     const panel  = document.getElementById('contactPanel');
-    const tPanel = document.getElementById('todayPanel');
+    const bPanel = document.getElementById('bookedPanel');
 
     panel.style.display = 'none';
 
     if (!c) {
       empty.style.display = 'flex';
-      tPanel.style.display = 'none';
+      bPanel.style.display = 'none';
       return;
     }
 
     empty.style.display = 'none';
-    tPanel.style.display = 'flex';
+    bPanel.style.display = 'flex';
 
-    document.getElementById('todayPanelName').textContent = c.name || formatPhone(c.phone);
+    document.getElementById('bookedPanelName').textContent = c.name || formatPhone(c.phone);
 
-    const phoneEl   = document.getElementById('todayPanelPhone');
-    const phoneText = document.getElementById('todayPanelPhoneText');
+    const phoneEl   = document.getElementById('bookedPanelPhone');
+    const phoneText = document.getElementById('bookedPanelPhoneText');
     if (c.phone) {
       phoneEl.href = `tel:+1${c.phone}`;
       phoneText.textContent = formatPhone(c.phone);
@@ -1304,21 +1009,23 @@
       phoneEl.style.display = 'none';
     }
 
-    const badge = document.getElementById('todayPanelBadge');
-    badge.textContent = c.status === 'confirmed' ? 'Confirmed' : 'Unconfirmed';
-    badge.className = `status-badge ${c.status}`;
+    const statusLabels = { today: "Today's Call", unconfirmed: 'Unconfirmed', confirmed: 'Confirmed', noshow: 'No Show' };
+    const badge = document.getElementById('bookedPanelBadge');
+    badge.textContent = statusLabels[c.status] || 'Unconfirmed';
+    badge.className   = `status-badge ${c.status}`;
 
-    document.getElementById('btnTodayUnconfirmed').classList.toggle('active', c.status === 'unconfirmed');
-    document.getElementById('btnTodayConfirmed').classList.toggle('active', c.status === 'confirmed');
+    document.querySelectorAll('#bookedPanel .btn-status').forEach(btn => {
+      btn.classList.toggle('active', btn.classList.contains(c.status));
+    });
 
-    const notesEl = document.getElementById('todayNotesTextarea');
+    const notesEl = document.getElementById('bookedNotesTextarea');
     if (document.activeElement !== notesEl) {
       notesEl.value = c.notes || '';
-      applyNotesRender('todayNotesTextarea', 'todayNotesRendered');
+      applyNotesRender('bookedNotesTextarea', 'bookedNotesRendered');
     }
 
-    document.getElementById('btnTodayPrev').disabled = state.todayCalls.length <= 1;
-    document.getElementById('btnTodayNext').disabled = state.todayCalls.length <= 1;
+    document.getElementById('btnBookedPrev').disabled = state.bookedCalls.length <= 1;
+    document.getElementById('btnBookedNext').disabled = state.bookedCalls.length <= 1;
   }
 
   function esc(str) {
@@ -1328,10 +1035,8 @@
   // ── KEYBOARD SHORTCUTS ─────────────────────────────────
   document.addEventListener('keydown', e => {
     if (e.ctrlKey && e.key === 's') { e.preventDefault(); exportData(); return; }
-
     const tag = document.activeElement.tagName;
     if (tag === 'TEXTAREA' || tag === 'INPUT') return;
-
     if (state.activeTab === 'contacts') {
       if (e.key === 'ArrowRight' || e.key === 'n') navigate(1);
       if (e.key === 'ArrowLeft'  || e.key === 'p') navigate(-1);
@@ -1339,10 +1044,12 @@
       if (e.key === '2') setStatus('follow_up');
       if (e.key === '3') setStatus('booked');
     } else {
-      if (e.key === 'ArrowRight' || e.key === 'n') navigateToday(1);
-      if (e.key === 'ArrowLeft'  || e.key === 'p') navigateToday(-1);
-      if (e.key === '1') setTodayStatus('unconfirmed');
-      if (e.key === '2') setTodayStatus('confirmed');
+      if (e.key === 'ArrowRight' || e.key === 'n') navigateBooked(1);
+      if (e.key === 'ArrowLeft'  || e.key === 'p') navigateBooked(-1);
+      if (e.key === '1') setBookedStatus('today');
+      if (e.key === '2') setBookedStatus('unconfirmed');
+      if (e.key === '3') setBookedStatus('confirmed');
+      if (e.key === '4') setBookedStatus('noshow');
     }
   });
 
@@ -1350,8 +1057,8 @@
   document.getElementById('importInput').addEventListener('paste', () => {
     setTimeout(loadContacts, 50);
   });
-  document.getElementById('importTodayInput').addEventListener('paste', () => {
-    setTimeout(loadTodayCalls, 50);
+  document.getElementById('importBookedInput').addEventListener('paste', () => {
+    setTimeout(loadBookedInput, 50);
   });
 
   // ── NOTES RENDER ───────────────────────────────────────
@@ -1378,9 +1085,9 @@
   }
 
   function blurNotes(textareaId, renderedId) {
-    const ta = document.getElementById(textareaId);
+    const ta       = document.getElementById(textareaId);
     const rendered = document.getElementById(renderedId);
-    rendered.innerHTML = renderNotes(ta.value);
+    rendered.innerHTML    = renderNotes(ta.value);
     rendered.style.display = 'flex';
     ta.style.display = 'none';
   }
@@ -1389,7 +1096,7 @@
     const ta = document.getElementById(textareaId);
     if (document.activeElement === ta) return;
     const rendered = document.getElementById(renderedId);
-    rendered.innerHTML = renderNotes(ta.value);
+    rendered.innerHTML    = renderNotes(ta.value);
     rendered.style.display = 'flex';
     ta.style.display = 'none';
   }
@@ -1399,7 +1106,7 @@
     const date = new Date().toISOString().slice(0, 10);
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
+    a.href     = URL.createObjectURL(blob);
     a.download = `calltrack-${date}.json`;
     a.click();
     URL.revokeObjectURL(a.href);
@@ -1414,7 +1121,11 @@
         const parsed = JSON.parse(ev.target.result);
         if (!parsed.contacts) throw new Error('Invalid file');
         if (!confirm('Replace current session with imported data?')) return;
-        state = { contacts: [], activeId: null, activeTab: 'contacts', todayCalls: [], activeTodayId: null, ...parsed };
+        state = {
+          ...JSON.parse(JSON.stringify(DEFAULT_STATE)),
+          ...parsed,
+          bookedSectionsOpen: { ...DEFAULT_STATE.bookedSectionsOpen, ...(parsed.bookedSectionsOpen || {}) }
+        };
         save();
         render();
       } catch(err) {
@@ -1425,9 +1136,8 @@
     e.target.value = '';
   }
 
-  // Warn before closing if there are contacts with data
   window.addEventListener('beforeunload', e => {
-    if (state.contacts.length || state.todayCalls.length) {
+    if (state.contacts.length || state.bookedCalls.length) {
       e.preventDefault();
       e.returnValue = '';
     }
