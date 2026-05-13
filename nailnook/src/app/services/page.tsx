@@ -187,7 +187,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="manicure">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="/gallery/IMG_1025.JPEG" alt="Manicure" loading="lazy"/>
+            <img src="/team/shannon/manicure.png" alt="Manicure" loading="lazy"/>
             <span className="svc-img-label">Manicure</span>
           </div>
           <div>
