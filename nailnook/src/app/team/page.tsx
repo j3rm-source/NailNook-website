@@ -232,9 +232,9 @@ export default function TeamPage() {
                   <h3>{sp.name}</h3>
                   <span className="sc-role">{sp.spec}</span>
                   <a className="sc-phone" href={`tel:${sp.phone.replace(/\D/g,'')}`}>{sp.phone}</a>
-                  <div style={{display:'flex',justifyContent:'center',marginTop:'12px'}}>
+                  <div style={{display:'flex',justifyContent:'center',marginTop:'12px',marginBottom:'12px'}}>
                     {(sp as any).bookingLink
-                      ? <a className="btn btn-p btn-specialist" href={(sp as any).bookingLink} target="_blank" rel="noopener noreferrer">Book with {sp.name}</a>
+                      ? <a className="btn btn-p btn-specialist" href={(sp as any).bookingLink} target="_blank" rel="noopener noreferrer">Book Now</a>
                       : <Link className="btn btn-p btn-specialist" href="/book">Book Now</Link>
                     }
                   </div>
