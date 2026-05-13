@@ -254,8 +254,8 @@ export default function HomePage() {
     }
 
     const KB = [
-      {k:['hour','open','close','time','when','today'],a:"Our hours:<br>Mon–Sat: 9 AM – 7 PM<br>Sunday: 10 AM – 5 PM"},
-      {k:['address','location','where','map','havasu'],a:"2120 McCulloch Blvd N, Suite 103<br>Lake Havasu City, AZ 86403<br>Free parking out front."},
+      {k:['hour','open','close','time','when','today'],a:"Our hours:<br>Mon–Sat: 9 AM – 7 PM<br>Sunday: Closed"},
+      {k:['address','location','where','map','havasu','direction'],a:"2120 McCulloch Blvd N, Suite 103<br>Lake Havasu City, AZ 86403<br>Free parking out front."},
       {k:['phone','call','number','contact'],a:"Call us at <a href='tel:9284863524'>(928) 486-3524</a>."},
       {k:['walkin','walk-in','walk in'],a:"Walk-ins welcome when we have openings. Appointments recommended on weekends."},
       {k:['cancel','reschedul'],a:"Free cancellations up to 24 hours before. Call <a href='tel:9284863524'>(928) 486-3524</a>."},
@@ -402,7 +402,7 @@ export default function HomePage() {
       if (t === 'book') { usrMsg('Book an appointment'); setTimeout(startBooking, 450) }
       else if (t === 'svc') { usrMsg('Our Services'); setTimeout(() => { botMsg("We offer nails, lashes, hair, waxing, massage, and more. <a href='/services'>View all services →</a>"); resetQrs() }, 450) }
       else if (t === 'team') { usrMsg('Our Team'); setTimeout(() => { botMsg(KB.find(k=>k.k.includes('team'))!.a); resetQrs() }, 450) }
-      else if (t === 'hrs') { usrMsg('Hours & Location'); setTimeout(() => { botMsg("Mon–Sat: 9 AM – 7 PM<br>Sunday: 10 AM – 5 PM<br><br>2120 McCulloch Blvd N, Suite 103<br>Lake Havasu City, AZ 86403<br><a href='tel:9284863524'>(928) 486-3524</a>"); resetQrs() }, 450) }
+      else if (t === 'hrs') { usrMsg('Hours & Location'); setTimeout(() => { botMsg("Mon–Sat: 9 AM – 7 PM<br>Sunday: Closed<br><br>2120 McCulloch Blvd N, Suite 103<br>Lake Havasu City, AZ 86403<br><a href='tel:9284863524'>(928) 486-3524</a>"); resetQrs() }, 450) }
     }
     function sendMsg() {
       const inp = document.getElementById('cinp') as HTMLInputElement
@@ -499,14 +499,14 @@ export default function HomePage() {
         <div className="svc-grid">
           {[
             {href:'/services#manicure',img:'/gallery/IMG_1020.JPEG',alt:'Manicure',name:'Manicure',desc:'Classic, gel, and spa manicures. Perfectly shaped and polished every time.',cls:'rv'},
-            {href:'/services#pedicure',img:'/gallery/IMG_1056.JPEG',alt:'Pedicure',name:'Pedicure',desc:'Relaxing pedicure treatments from classic to luxurious spa experiences.',cls:'rv d1'},
+            {href:'/services#pedicure',img:'https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=600&h=450&fit=crop&auto=format',alt:'Pedicure',name:'Pedicure',desc:'Relaxing pedicure treatments from classic to luxurious spa experiences.',cls:'rv d1'},
             {href:'/services#acrylic',img:'/gallery/IMG_1017.JPEG',alt:'Acrylic Nails',name:'Acrylic Nails',desc:'Long-lasting acrylic extensions for a glamorous, durable finish.',cls:'rv d2'},
             {href:'/services#gel',img:'/gallery/IMG_1018.JPEG',alt:'Gel Extensions',name:'Gel Extensions',desc:'Lightweight, flexible gel extensions with a natural look and feel.',cls:'rv d3'},
             {href:'/services#lashes',img:'/gallery/IMG_1061.JPEG',alt:'Eyelash Extensions',name:'Eyelash Extensions',desc:'Lush, full lash extensions for a wide-awake look that lasts weeks.',cls:'rv d4'},
             {href:'/services#art',img:'/gallery/IMG_1030.JPEG',alt:'Nail Art',name:'Nail Art',desc:'Custom designs, gems, chrome, ombre, and hand-painted artwork.',cls:'rv d5'},
             {href:'/services#waxing',img:'/gallery/IMG_1059.JPEG',alt:'Waxing',name:'Waxing',desc:'Smooth, precise waxing for eyebrows, lips, face, and more.',cls:'rv'},
             {href:'/services#permmakeup',img:'/gallery/IMG_1060.JPEG',alt:'Permanent Makeup',name:'Permanent Makeup',desc:'Flawless brows, liner, and lips that look perfect every single morning.',cls:'rv d1'},
-            {href:'/services#botox',img:'/gallery/IMG_1054.JPEG',alt:'Botox',name:'Botox',desc:'Smooth fine lines and refresh your look with expert cosmetic injections.',cls:'rv d2'},
+            {href:'/services#botox',img:'https://images.unsplash.com/photo-1651493711757-c2f5274360f0?w=600&h=450&fit=crop&auto=format',alt:'Botox',name:'Botox',desc:'Smooth fine lines and refresh your look with expert cosmetic injections.',cls:'rv d2'},
             {href:'/services#massage',img:'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=450&fit=crop&auto=format',alt:'Massage',name:'Massage',desc:'Relaxing therapeutic massage to melt away tension from head to toe.',cls:'rv d3'},
           ].map(s => (
             <Link key={s.name} href={s.href} className={`svc-card ${s.cls}`}>
@@ -600,7 +600,7 @@ export default function HomePage() {
           </div>
           <div>
             <h4>Hours</h4>
-            <div className="f-hrs"><p>Mon – Sat: 9 AM – 7 PM<br/>Sunday: 10 AM – 5 PM</p></div>
+            <div className="f-hrs"><p>Mon – Sat: 9 AM – 7 PM<br/>Sunday: Closed</p></div>
             <br/>
             <h4>Contact</h4>
             <div className="f-hrs"><p><a href="tel:9284863524" style={{color:'rgba(255,255,255,.7)'}}>(928) 486-3524</a><br/>2120 McCulloch Blvd N, Ste 103<br/>Lake Havasu City, AZ 86403</p></div>

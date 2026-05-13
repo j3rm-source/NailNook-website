@@ -272,7 +272,7 @@ export default function BookPage() {
           </div>
           <div>
             <h4>Hours</h4>
-            <div className="f-hrs"><p>Mon – Sat: 9 AM – 7 PM<br/>Sunday: 10 AM – 5 PM</p></div>
+            <div className="f-hrs"><p>Mon – Sat: 9 AM – 7 PM<br/>Sunday: Closed</p></div>
             <br/>
             <h4>Contact</h4>
             <div className="f-hrs"><p><a href="tel:9284863524" style={{color:'rgba(255,255,255,.7)'}}>(928) 486-3524</a><br/>2120 McCulloch Blvd N, Ste 103<br/>Lake Havasu City, AZ 86403</p></div>

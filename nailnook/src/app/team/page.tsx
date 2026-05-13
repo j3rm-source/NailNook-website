@@ -9,9 +9,9 @@ const SPECIALISTS = [
   {name:'Kattie',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-5323',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/katie/headshot.jpg',imgPos:'center 20%',photos:['/team/katie/work-1.jpg','/team/katie/work-2.jpg','/team/katie/work-3.jpg','/team/katie/work-4.jpg','/team/katie/work-5.jpg','/team/katie/work-5.jpg']},
   {name:'Shannon',role:'Nail Technician',spec:'Nail Tech',phone:'928-412-6965',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/shannon/headshot.jpg',imgPos:'',photos:['/team/shannon/work-1.jpg','/team/shannon/work-2.jpg','/team/shannon/work-3.jpg','/team/shannon/work-4.jpg','/team/shannon/work-5.jpg','/team/shannon/work-6.jpg']},
   {name:'Ricci',role:'Hair Specialist',spec:'Hair Specialist',phone:'928-542-1115',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/ricci/work-1.jpg',imgPos:'center 20%',photos:['/team/ricci/work-2.jpg','/team/ricci/work-3.jpg','/team/ricci/work-4.jpg','/team/ricci/work-5.jpg','/team/ricci/work-6.jpg','/team/ricci/headshot.jpg'],bookingLink:'https://manegirlricci.glossgenius.com'},
-  {name:'Lara',role:'Massage Therapist',spec:'Massage',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/lara/headshot.jpg',imgPos:'center 20%',photos:['/team/lara/before-after.jpg','/team/lara/video-1.mp4','/team/lara/video-2.mp4','/team/lara/video-3.mp4','/team/lara/video-4.mp4']},
+  {name:'Lara',role:'Massage Therapist',spec:'Masseuse',phone:'928-486-7756',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/lara/headshot.jpg',imgPos:'center 20%',photos:['/team/lara/before-after.jpg','/team/lara/video-1.mp4','/team/lara/video-2.mp4','/team/lara/video-3.mp4','/team/lara/video-4.mp4']},
   {name:'Shelby',role:'Waxing Specialist',spec:'Wax Tech',phone:'928-487-1831',badge:'',bg:'fce4ec',fg:'e91e8c',photo:'/team/shelby/headshot.jpg',imgPos:'center 10%',photos:['/team/shelby/work-5.jpg','/team/shelby/work-6.jpg','/team/shelby/work-1.jpg','/team/shelby/work-2.jpg','/team/shelby/work-3.jpg','/team/shelby/work-4.jpg'],bookingLink:'https://square.site/book/3WBG6E55P47D7/skincare-by-shelby-lake-havasu-city-az'},
-  {name:'Ashley',role:'Eyelash Specialist',spec:'Eyelashes',phone:'928-302-0949',badge:'',bg:'f9a8c9',fg:'c2185b',
+  {name:'Ashley',role:'Eyelash Specialist',spec:'Eyelash Tech and Permanent Makeup',phone:'928-302-0949',badge:'',bg:'f9a8c9',fg:'c2185b',
     photo:'/team/ashly/headshot.jpg',imgPos:'',
     photos:['/team/ashly/work-1.jpg','/team/ashly/work-2.jpg','/team/ashly/work-3.jpg','/team/ashly/work-4.jpg','/team/ashly/work-5.jpg','/team/ashly/work-1.jpg']},
   {name:'Rita',role:'Nail Technician',spec:'Nail Tech',phone:'',badge:'',bg:'f9a8c9',fg:'c2185b',photo:'/team/rita/727255724516679206.png',imgPos:'center 20%',photos:['/team/rita/IMG_2929.PNG','/team/rita/IMG_2928.PNG','/team/rita/11176.JPG','/team/rita/11185.JPG','/team/rita/11563.JPG','/team/rita/11654.JPG','/team/rita/11806.JPG'],showCount:6},
@@ -288,7 +288,7 @@ export default function TeamPage() {
           </div>
           <div>
             <h4>Hours</h4>
-            <div className="f-hrs"><p>Mon – Sat: 9 AM – 7 PM<br/>Sunday: 10 AM – 5 PM</p></div>
+            <div className="f-hrs"><p>Mon – Sat: 9 AM – 7 PM<br/>Sunday: Closed</p></div>
             <br/>
             <h4>Contact</h4>
             <div className="f-hrs"><p><a href="tel:9284863524" style={{color:'rgba(255,255,255,.7)'}}>(928) 486-3524</a><br/>2120 McCulloch Blvd N, Ste 103<br/>Lake Havasu City, AZ 86403</p></div>

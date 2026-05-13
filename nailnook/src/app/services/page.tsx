@@ -202,7 +202,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="pedicure">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=700&h=500&fit=crop&auto=format" alt="Pedicure" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=700&h=500&fit=crop&auto=format" alt="Pedicure" loading="lazy"/>
             <span className="svc-img-label">Pedicure</span>
           </div>
           <div>
@@ -262,7 +262,7 @@ export default function ServicesPage() {
       <div className="svc-section" id="waxing">
         <div className="svc-inner rv">
           <div className="svc-detail-img">
-            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&h=500&fit=crop&auto=format" alt="Waxing Services" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1677091508049-d8ae041b1582?w=700&h=500&fit=crop&auto=format" alt="Waxing Services" loading="lazy"/>
             <span className="svc-img-label">Waxing</span>
           </div>
           <div>
@@ -364,7 +364,7 @@ export default function ServicesPage() {
           </div>
           <div>
             <h4>Hours</h4>
-            <div className="f-hrs"><p>Mon – Sat: 9 AM – 7 PM<br/>Sunday: 10 AM – 5 PM</p></div>
+            <div className="f-hrs"><p>Mon – Sat: 9 AM – 7 PM<br/>Sunday: Closed</p></div>
             <br/>
             <h4>Contact</h4>
             <div className="f-hrs"><p><a href="tel:9284863524" style={{color:'rgba(255,255,255,.7)'}}>(928) 486-3524</a><br/>2120 McCulloch Blvd N, Ste 103<br/>Lake Havasu City, AZ 86403</p></div>
