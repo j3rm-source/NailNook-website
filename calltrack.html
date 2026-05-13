@@ -439,7 +439,8 @@
     activeTab: 'contacts',
     bookedCalls: [],
     activeBookedId: null,
-    bookedSectionsOpen: { today: false, unconfirmed: false, confirmed: false, noshow: false }
+    bookedSectionsOpen:   { today: false, unconfirmed: false, confirmed: false, noshow: false },
+    contactSectionsOpen:  { uncalled: true, follow_up: true, follow_up_long: true, no_answer: true }
   };
 
   let state = JSON.parse(JSON.stringify(DEFAULT_STATE));
@@ -468,7 +469,8 @@
         state = {
           ...JSON.parse(JSON.stringify(DEFAULT_STATE)),
           ...parsed,
-          bookedSectionsOpen: { ...DEFAULT_STATE.bookedSectionsOpen, ...(parsed.bookedSectionsOpen || {}) }
+          bookedSectionsOpen:  { ...DEFAULT_STATE.bookedSectionsOpen,  ...(parsed.bookedSectionsOpen  || {}) },
+          contactSectionsOpen: { ...DEFAULT_STATE.contactSectionsOpen, ...(parsed.contactSectionsOpen || {}) }
         };
       }
     } catch(e) {}
@@ -668,6 +670,12 @@
   }
 
   // ── TOGGLE BOOKED SECTION ──────────────────────────────
+  function toggleContactSection(key) {
+    state.contactSectionsOpen[key] = !state.contactSectionsOpen[key];
+    save();
+    render();
+  }
+
   function toggleBookedSection(key) {
     state.bookedSectionsOpen[key] = !state.bookedSectionsOpen[key];
     // When opening a section, select first item if none selected in that section
@@ -925,47 +933,31 @@
     const followUpLong = contacts.filter(c => c.status === 'follow_up_long');
     const noAnswer     = contacts.filter(c => c.status === 'no_answer');
 
+    const CONTACT_SECTIONS = [
+      { key: 'uncalled',       label: 'Uncalled',          color: '',       items: uncalled },
+      { key: 'follow_up',      label: 'Follow Up',         color: 'yellow', items: followUp },
+      { key: 'follow_up_long', label: 'Follow Up 1 Month+',color: 'purple', items: followUpLong },
+      { key: 'no_answer',      label: 'No Answer',         color: '',       items: noAnswer },
+    ];
+
     let html = '';
 
-    // Uncalled
-    html += `<div class="contact-section"
-      ondragover="onDragOver(event)"
-      ondragenter="onDragEnter(event)"
-      ondragleave="onDragLeave(event)"
-      ondrop="onDropContact(event,'uncalled')">
-      <div class="section-label">Uncalled</div>
-      ${uncalled.map(c => contactItemHTML(c, state.activeId, 'contacts')).join('')}
-    </div>`;
-
-    // Follow Up
-    html += `<div class="contact-section"
-      ondragover="onDragOver(event)"
-      ondragenter="onDragEnter(event)"
-      ondragleave="onDragLeave(event)"
-      ondrop="onDropContact(event,'follow_up')">
-      <div class="section-label yellow">Follow Up</div>
-      ${followUp.map(c => contactItemHTML(c, state.activeId, 'contacts')).join('')}
-    </div>`;
-
-    // Follow Up 1 Month+
-    html += `<div class="contact-section"
-      ondragover="onDragOver(event)"
-      ondragenter="onDragEnter(event)"
-      ondragleave="onDragLeave(event)"
-      ondrop="onDropContact(event,'follow_up_long')">
-      <div class="section-label purple">Follow Up 1 Month+</div>
-      ${followUpLong.map(c => contactItemHTML(c, state.activeId, 'contacts')).join('')}
-    </div>`;
-
-    // No Answer
-    html += `<div class="contact-section"
-      ondragover="onDragOver(event)"
-      ondragenter="onDragEnter(event)"
-      ondragleave="onDragLeave(event)"
-      ondrop="onDropContact(event,'no_answer')">
-      <div class="section-label">No Answer</div>
-      ${noAnswer.map(c => contactItemHTML(c, state.activeId, 'contacts')).join('')}
-    </div>`;
+    for (const sec of CONTACT_SECTIONS) {
+      const isOpen = state.contactSectionsOpen[sec.key];
+      html += `<div class="contact-section"
+        ondragover="onDragOver(event)"
+        ondragenter="onDragEnter(event)"
+        ondragleave="onDragLeave(event)"
+        ondrop="onDropContact(event,'${sec.key}')">
+        <div class="section-toggle" onclick="toggleContactSection('${sec.key}')">
+          <span class="section-toggle-label ${sec.color}">${sec.label}</span>
+          <span class="section-toggle-count">${sec.items.length}</span>
+          <div class="section-toggle-line"></div>
+          <span class="section-toggle-arrow${isOpen ? ' open' : ''}">&#9658;</span>
+        </div>
+        ${isOpen ? sec.items.map(c => contactItemHTML(c, state.activeId, 'contacts')).join('') : ''}
+      </div>`;
+    }
 
     // Booked drop zone
     html += `<div class="booked-drop-target"
