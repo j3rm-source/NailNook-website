@@ -4,12 +4,12 @@
 
 /* ── Variables ──────────────────────────────────────────── */
 :root {
-  --primary:   #00B4D8;
-  --primary-dk:#0096C7;
-  --accent:    #FF6B35;
-  --accent-dk: #E85D25;
+  --primary:   #FF6B35;
+  --primary-dk:#E85D25;
+  --accent:    #00B4D8;
+  --accent-dk: #0096C7;
   --dark:      #03045E;
-  --light:     #CAF0F8;
+  --light:     #FFF0EA;
   --bg:        #FFFFFF;
   --text:      #1A1A2A;
   --gray:      #6B7280;
@@ -66,11 +66,11 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
   white-space: nowrap;
 }
 .btn-primary {
-  background: var(--accent);
+  background: var(--primary);
   color: #fff;
 }
 .btn-primary:hover {
-  background: var(--accent-dk);
+  background: var(--primary-dk);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
 }
@@ -202,13 +202,13 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
 }
 .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
 .nav-links .nav-cta a {
-  background: var(--accent);
+  background: var(--primary);
   color: #fff;
   padding: 0.55rem 1.3rem;
   border-radius: 6px;
 }
 .nav-links .nav-cta a:hover {
-  background: var(--accent-dk);
+  background: var(--primary-dk);
 }
 
 .nav-hamburger {
@@ -270,9 +270,9 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(0, 180, 216, 0.22) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 80% 70%, rgba(255, 107, 53, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 50% at 50% 20%, rgba(0, 150, 199, 0.15) 0%, transparent 70%);
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(255, 107, 53, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 70%, rgba(0, 180, 216, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 20%, rgba(255, 140, 90, 0.15) 0%, transparent 70%);
   animation: gradientPulse 8s ease-in-out infinite alternate;
 }
 @keyframes gradientPulse {
@@ -548,13 +548,8 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
   width: 100%;
   aspect-ratio: 16/9;
   object-fit: cover;
-  background: linear-gradient(135deg, var(--dark) 0%, #051480 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3.5rem;
   min-height: 200px;
-  color: var(--primary);
+  display: block;
 }
 .service-card-body {
   padding: 2rem;
@@ -843,7 +838,7 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
    CTA BANNER
 ───────────────────────────────────────────────────────── */
 .cta-banner {
-  background: linear-gradient(135deg, var(--accent) 0%, #FF8C5A 50%, var(--accent-dk) 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #FF8C5A 50%, var(--primary-dk) 100%);
   padding: 5rem 0;
   position: relative;
   overflow: hidden;
@@ -881,7 +876,7 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
 }
 .btn-white {
   background: #fff;
-  color: var(--accent);
+  color: var(--primary);
   font-weight: 700;
 }
 .btn-white:hover {
