@@ -494,7 +494,7 @@ export default function HomePage() {
         <div className="sec-hdr">
           <span className="lbl-plain">What We Offer</span>
           <h2 className="sec-title">Our Services</h2>
-          <p className="sec-sub">From classic manicures to intricate nail art — crafted with precision and care.</p>
+          <p className="sec-sub">10+ services — from classic manicures to intricate nail art, crafted with precision and care.</p>
         </div>
         <div className="svc-grid">
           {[
