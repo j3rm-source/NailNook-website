@@ -7,7 +7,9 @@
       "Bash(npm run *)",
       "Bash(start \"\" \"http://localhost:3001\")",
       "Bash(unzip -o rita.zip -d rita)",
-      "WebSearch"
+      "WebSearch",
+      "Skill(googlemaps-scraper)",
+      "Skill(googlemaps-scraper:*)"
     ]
   }
 }
