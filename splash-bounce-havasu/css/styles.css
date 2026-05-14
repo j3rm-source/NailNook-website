@@ -8,7 +8,7 @@
   --primary-dk:#E85D25;
   --accent:    #00B4D8;
   --accent-dk: #0096C7;
-  --dark:      #03045E;
+  --dark:      #111827;
   --light:     #FFF0EA;
   --bg:        #FFFFFF;
   --text:      #1A1A2A;
@@ -152,14 +152,14 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(3, 4, 94, 0.96);
+  background: rgba(17, 24, 39, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 180, 216, 0.15);
+  border-bottom: 1px solid rgba(255, 107, 53, 0.2);
   transition: var(--transition);
 }
 .nav-header.scrolled {
-  box-shadow: 0 4px 24px rgba(3, 4, 94, 0.3);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 .nav-container {
   max-width: var(--container);
@@ -236,7 +236,7 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
     top: 68px;
     left: 0;
     right: 0;
-    background: rgba(3, 4, 94, 0.98);
+    background: rgba(17, 24, 39, 0.98);
     flex-direction: column;
     align-items: flex-start;
     padding: 1rem 1.5rem 1.5rem;
@@ -285,8 +285,8 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
 .hero-bubble {
   position: absolute;
   border-radius: 50%;
-  background: rgba(0, 180, 216, 0.10);
-  border: 1px solid rgba(0, 180, 216, 0.15);
+  background: rgba(255, 107, 53, 0.08);
+  border: 1px solid rgba(255, 107, 53, 0.15);
   animation: floatBubble linear infinite;
   pointer-events: none;
 }
@@ -322,9 +322,9 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(0, 180, 216, 0.12);
-  border: 1px solid rgba(0, 180, 216, 0.3);
-  color: var(--light);
+  background: rgba(255, 107, 53, 0.15);
+  border: 1px solid rgba(255, 107, 53, 0.35);
+  color: #FFD4C2;
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 0.75rem;
@@ -402,7 +402,7 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
 }
 .hero-form-card {
   background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(0, 180, 216, 0.25);
+  border: 1px solid rgba(255, 107, 53, 0.3);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: var(--radius-lg);
@@ -445,7 +445,7 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
 .hero-form select,
 .hero-form textarea {
   background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(0, 180, 216, 0.25);
+  border: 1px solid rgba(255, 107, 53, 0.25);
   border-radius: 6px;
   color: #fff;
   font-family: var(--font-body);
@@ -462,7 +462,7 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
 .hero-form select:focus,
 .hero-form textarea:focus {
   border-color: var(--primary);
-  background: rgba(0,180,216,0.08);
+  background: rgba(255,107,53,0.08);
 }
 .hero-form textarea { resize: none; }
 .hero-form input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) opacity(0.5); }
@@ -694,7 +694,7 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
    WHY CHOOSE US
 ───────────────────────────────────────────────────────── */
 .why-us {
-  background: linear-gradient(160deg, var(--dark) 0%, #051480 100%);
+  background: linear-gradient(160deg, #1a1a1a 0%, #2d1a10 100%);
   color: #fff;
 }
 .why-us .section-heading .tag {
