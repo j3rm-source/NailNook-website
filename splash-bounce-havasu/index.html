@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -27,7 +27,7 @@
   <header class="nav-header">
     <nav class="nav-container">
       <a href="#" class="nav-logo">
-        <span class="logo-icon">🏰</span>
+        <i class="fa-solid fa-house-chimney logo-icon"></i>
         Splash <span>&amp; Bounce</span> Havasu
       </a>
 
@@ -75,10 +75,10 @@
 
         <div class="hero-ctas">
           <a href="#services" class="btn btn-primary">
-            <i class="fa-solid fa-party-horn"></i>&nbsp; See Our Rentals
+            See Our Rentals
           </a>
           <a href="#contact" class="btn btn-outline">
-            Get a Free Quote
+            Learn More
           </a>
         </div>
 
@@ -98,12 +98,49 @@
         </div>
       </div>
 
-      <!-- Right: bouncing castle visual -->
-      <div class="hero-visual">
-        <div class="hero-ring"></div>
-        <div class="hero-ring"></div>
-        <div class="hero-ring"></div>
-        <span class="hero-castle" role="img" aria-label="Bouncy castle">🏰</span>
+      <!-- Right: booking inquiry form -->
+      <div class="hero-form-wrap" style="animation: slideUp 0.7s ease-out 0.3s both;">
+        <div class="hero-form-card">
+          <div class="hero-form-header">
+            <h3>Get a Free Quote</h3>
+            <p>Tell us about your event and we'll get back to you within a few hours.</p>
+          </div>
+          <form class="hero-form" onsubmit="return false;">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="hf-name">Your Name</label>
+                <input type="text" id="hf-name" placeholder="Jane Smith" autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="hf-phone">Phone Number</label>
+                <input type="tel" id="hf-phone" placeholder="(928) 555-0000" autocomplete="tel" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="hf-date">Event Date</label>
+                <input type="date" id="hf-date" />
+              </div>
+              <div class="form-group">
+                <label for="hf-unit">Rental Type</label>
+                <select id="hf-unit">
+                  <option value="">Select a unit...</option>
+                  <option value="classic">Classic Bounce House</option>
+                  <option value="splash">Splash &amp; Slide Combo</option>
+                  <option value="unsure">Not Sure Yet</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="hf-message">Anything else we should know?</label>
+              <textarea id="hf-message" rows="3" placeholder="Party size, location, special requests..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Request a Quote</button>
+          </form>
+          <p class="hero-form-note">
+            <i class="fa-solid fa-lock"></i> We never share your information. No spam.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -129,7 +166,7 @@
 
         <!-- Service 1: Classic Bounce -->
         <div class="service-card reveal reveal-delay-1">
-          <div class="service-card-img">🏰</div>
+          <div class="service-card-img"><i class="fa-solid fa-house-chimney"></i></div>
           <div class="service-card-body">
             <div class="service-card-tag">Most Popular</div>
             <h3>Classic Bounce House</h3>
@@ -149,7 +186,7 @@
 
         <!-- Service 2: Splash & Slide Combo -->
         <div class="service-card reveal reveal-delay-2">
-          <div class="service-card-img">🌊</div>
+          <div class="service-card-img"><i class="fa-solid fa-water"></i></div>
           <div class="service-card-body">
             <div class="service-card-tag">Beat the Heat</div>
             <h3>Splash &amp; Slide Combo</h3>
@@ -177,9 +214,9 @@
   <section class="section how-it-works" id="how-it-works">
     <div class="container">
       <div class="section-heading reveal">
-        <div class="tag">Super Simple</div>
+        <div class="tag">The Process</div>
         <h2>How It Works</h2>
-        <p>From booking to bounce in three easy steps.</p>
+        <p>Booking is straightforward — we handle all the heavy lifting so your event goes off without a hitch.</p>
       </div>
 
       <div class="steps-grid">
@@ -201,10 +238,10 @@
 
         <div class="step-card reveal reveal-delay-3">
           <div class="step-icon-wrap">
-            <i class="fa-solid fa-face-laugh-beam"></i>
+            <i class="fa-solid fa-circle-check"></i>
           </div>
           <h3>3. We Handle the Rest</h3>
-          <p>Our crew delivers, inflates, and secures everything before your guests arrive — then comes back to take it all down.</p>
+          <p>Our crew arrives early, delivers, inflates, and anchors everything before your guests show up — then returns to break it all down.</p>
         </div>
       </div>
     </div>
@@ -271,7 +308,7 @@
       <div class="gallery-grid reveal">
         <div class="gallery-item tall">
           <div class="gallery-placeholder">
-            🏰
+            <i class="fa-solid fa-house-chimney"></i>
             <span>Classic Bounce</span>
           </div>
           <div class="gallery-overlay">
@@ -280,8 +317,8 @@
         </div>
 
         <div class="gallery-item">
-          <div class="gallery-placeholder">
-            🌊
+          <div class="gallery-placeholder gp-blue">
+            <i class="fa-solid fa-water"></i>
             <span>Water Slide</span>
           </div>
           <div class="gallery-overlay">
@@ -290,8 +327,8 @@
         </div>
 
         <div class="gallery-item">
-          <div class="gallery-placeholder" style="background: linear-gradient(135deg, #FFF3E0, #FFB74D);">
-            🎉
+          <div class="gallery-placeholder gp-orange">
+            <i class="fa-solid fa-cake-candles"></i>
             <span>Birthday Party</span>
           </div>
           <div class="gallery-overlay">
@@ -300,9 +337,9 @@
         </div>
 
         <div class="gallery-item">
-          <div class="gallery-placeholder" style="background: linear-gradient(135deg, #E3F2FD, #64B5F6);">
-            ☀️
-            <span>Summer Fun</span>
+          <div class="gallery-placeholder gp-navy">
+            <i class="fa-solid fa-sun"></i>
+            <span>Summer Events</span>
           </div>
           <div class="gallery-overlay">
             <span class="gallery-overlay-label">Summer Pool Party</span>
@@ -310,9 +347,9 @@
         </div>
 
         <div class="gallery-item">
-          <div class="gallery-placeholder" style="background: linear-gradient(135deg, #F3E5F5, #CE93D8);">
-            🎊
-            <span>Backyard Event</span>
+          <div class="gallery-placeholder gp-teal">
+            <i class="fa-solid fa-tree"></i>
+            <span>Backyard Events</span>
           </div>
           <div class="gallery-overlay">
             <span class="gallery-overlay-label">Backyard Bash</span>
@@ -320,12 +357,12 @@
         </div>
 
         <div class="gallery-item">
-          <div class="gallery-placeholder" style="background: linear-gradient(135deg, #E8F5E9, #81C784);">
-            🤸
-            <span>Kids Jumping</span>
+          <div class="gallery-placeholder gp-dark">
+            <i class="fa-solid fa-users"></i>
+            <span>Group Events</span>
           </div>
           <div class="gallery-overlay">
-            <span class="gallery-overlay-label">Non-Stop Fun</span>
+            <span class="gallery-overlay-label">Corporate &amp; Group Events</span>
           </div>
         </div>
       </div>
@@ -343,7 +380,7 @@
   <section class="cta-banner">
     <div class="container">
       <div class="cta-inner reveal">
-        <h2>Ready to Bounce? 🎉</h2>
+        <h2>Ready to Reserve Your Date?</h2>
         <p>Book your unit today and let us take care of the rest. Dates fill up fast — especially on weekends!</p>
         <div class="cta-buttons">
           <a href="#contact" class="btn btn-white">Book Now</a>
@@ -362,7 +399,7 @@
         <!-- Brand -->
         <div class="footer-brand">
           <a href="#" class="nav-logo">
-            <span class="logo-icon">🏰</span>
+            <i class="fa-solid fa-house-chimney logo-icon"></i>
             Splash <span style="color:var(--accent)">&amp; Bounce</span> Havasu
           </a>
           <p>
