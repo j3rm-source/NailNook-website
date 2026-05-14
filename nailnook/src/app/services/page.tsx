@@ -178,7 +178,7 @@ export default function ServicesPage() {
 
       {/* PILL NAV */}
       <div className="svc-pills">
-        {[['#manicure','Manicure'],['#pedicure','Pedicure'],['#acrylic','Acrylic'],['#gel','Gel Extensions'],['#art','Nail Art'],['#waxing','Waxing'],['#lashes','Lash Extensions'],['#permmakeup','Perm. Makeup'],['#botox','Botox'],['#massage','Massage'],['#hair','Hair Treatment']].map(([href,label]) => (
+        {[['#manicure','Manicure'],['#pedicure','Pedicure'],['#acrylic','Acrylic'],['#gel','Gel Extensions'],['#art','Nail Art'],['#hair','Hair Treatment'],['#waxing','Waxing'],['#lashes','Lash Extensions'],['#permmakeup','Perm. Makeup'],['#botox','Botox'],['#massage','Massage']].map(([href,label]) => (
           <a key={href} href={href} className="pill">{label}</a>
         ))}
       </div>
@@ -258,6 +258,22 @@ export default function ServicesPage() {
         </div>
       </div>
 
+      {/* HAIR TREATMENT */}
+      <div className="svc-section" id="hair">
+        <div className="svc-inner rv">
+          <div className="svc-detail-img">
+            <img src="/team/ricci/work-2.jpg" alt="Hair Treatment" loading="lazy"/>
+            <span className="svc-img-label">Hair Treatment</span>
+          </div>
+          <div>
+            <span className="svc-icon-big">06</span>
+            <h2 className="svc-title">Hair Treatment</h2>
+            <p className="svc-desc">From vibrant color and sun-kissed highlights to balayage, cuts, and blowouts — our hair specialists deliver salon-quality results tailored to your hair type and vision. Whether you&apos;re looking for a subtle refresh or a bold transformation, we&apos;ve got you covered.</p>
+            <p className="price-note">Book a consultation to discuss your color goals.</p>
+          </div>
+        </div>
+      </div>
+
       {/* WAXING */}
       <div className="svc-section" id="waxing">
         <div className="svc-inner rv">
@@ -266,7 +282,7 @@ export default function ServicesPage() {
             <span className="svc-img-label">Waxing</span>
           </div>
           <div>
-            <span className="svc-icon-big">06</span>
+            <span className="svc-icon-big">07</span>
             <h2 className="svc-title">Waxing</h2>
             <p className="svc-desc">Our waxing services deliver smooth, precise results using premium wax formulas gentle on sensitive skin. Perfect for quick touchups or a full facial wax before a big event. All waxing includes soothing aftercare.</p>
           </div>
@@ -281,7 +297,7 @@ export default function ServicesPage() {
             <span className="svc-img-label">Eyelash Extensions</span>
           </div>
           <div>
-            <span className="svc-icon-big">07</span>
+            <span className="svc-icon-big">08</span>
             <h2 className="svc-title">Eyelash Extensions</h2>
             <p className="svc-desc">Wake up every morning with full, gorgeous lashes. Our lash artists apply individual extensions for a look that ranges from natural and wispy to bold and dramatic. Long-lasting, lightweight, and completely customized to your eye shape.</p>
           </div>
@@ -296,7 +312,7 @@ export default function ServicesPage() {
             <span className="svc-img-label">Permanent Makeup</span>
           </div>
           <div>
-            <span className="svc-icon-big">08</span>
+            <span className="svc-icon-big">09</span>
             <h2 className="svc-title">Permanent Makeup</h2>
             <p className="svc-desc">Skip the daily routine with semi-permanent makeup that looks flawless around the clock. From microbladed brows to defined lip color and eyeliner, our technicians use precision pigmentation techniques to enhance your natural features.</p>
             <p className="price-note">A touch-up session 6–8 weeks after your initial appointment is recommended for best results.</p>
@@ -312,7 +328,7 @@ export default function ServicesPage() {
             <span className="svc-img-label">Botox</span>
           </div>
           <div>
-            <span className="svc-icon-big">09</span>
+            <span className="svc-icon-big">10</span>
             <h2 className="svc-title">Botox</h2>
             <p className="svc-desc">Refresh your look with expertly administered cosmetic injections. Whether you want to soften forehead lines, crow&apos;s feet, or frown lines, our injector creates natural-looking results tailored to your face — never frozen, always you.</p>
             <p className="price-note">Free consultation available.</p>
@@ -328,26 +344,10 @@ export default function ServicesPage() {
             <span className="svc-img-label">Massage</span>
           </div>
           <div>
-            <span className="svc-icon-big">10</span>
+            <span className="svc-icon-big">11</span>
             <h2 className="svc-title">Massage</h2>
             <p className="svc-desc">Unwind completely with a therapeutic massage designed to ease tension, improve circulation, and restore balance. From a quick relaxation session to a deep tissue treatment, our massage therapists customize every session to your needs.</p>
             <p className="price-note">Book in advance — massage appointments fill quickly.</p>
-          </div>
-        </div>
-      </div>
-
-      {/* HAIR TREATMENT */}
-      <div className="svc-section" id="hair">
-        <div className="svc-inner rv">
-          <div className="svc-detail-img">
-            <img src="/team/ricci/work-2.jpg" alt="Hair Treatment" loading="lazy"/>
-            <span className="svc-img-label">Hair Treatment</span>
-          </div>
-          <div>
-            <span className="svc-icon-big">11</span>
-            <h2 className="svc-title">Hair Treatment</h2>
-            <p className="svc-desc">From vibrant color and sun-kissed highlights to balayage, cuts, and blowouts — our hair specialists deliver salon-quality results tailored to your hair type and vision. Whether you&apos;re looking for a subtle refresh or a bold transformation, we&apos;ve got you covered.</p>
-            <p className="price-note">Book a consultation to discuss your color goals.</p>
           </div>
         </div>
       </div>

@@ -502,13 +502,13 @@ export default function HomePage() {
             {href:'/services#pedicure',img:'https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=600&h=450&fit=crop&auto=format',alt:'Pedicure',name:'Pedicure',desc:'Relaxing pedicure treatments from classic to luxurious spa experiences.',cls:'rv d1'},
             {href:'/services#acrylic',img:'/gallery/IMG_1017.JPEG',alt:'Acrylic Nails',name:'Acrylic Nails',desc:'Long-lasting acrylic extensions for a glamorous, durable finish.',cls:'rv d2'},
             {href:'/services#gel',img:'/gallery/IMG_1018.JPEG',alt:'Gel Extensions',name:'Gel Extensions',desc:'Lightweight, flexible gel extensions with a natural look and feel.',cls:'rv d3'},
-            {href:'/services#lashes',img:'/gallery/IMG_1061.JPEG',alt:'Eyelash Extensions',name:'Eyelash Extensions',desc:'Lush, full lash extensions for a wide-awake look that lasts weeks.',cls:'rv d4'},
-            {href:'/services#art',img:'/gallery/IMG_1030.JPEG',alt:'Nail Art',name:'Nail Art',desc:'Custom designs, gems, chrome, ombre, and hand-painted artwork.',cls:'rv d5'},
-            {href:'/services#waxing',img:'/gallery/IMG_1059.JPEG',alt:'Waxing',name:'Waxing',desc:'Smooth, precise waxing for eyebrows, lips, face, and more.',cls:'rv'},
-            {href:'/services#permmakeup',img:'/gallery/IMG_1060.JPEG',alt:'Permanent Makeup',name:'Permanent Makeup',desc:'Flawless brows, liner, and lips that look perfect every single morning.',cls:'rv d1'},
-            {href:'/services#botox',img:'https://images.unsplash.com/photo-1731355771418-f10ab62c9f86?w=600&h=450&fit=crop&auto=format',alt:'Botox',name:'Botox',desc:'Smooth fine lines and refresh your look with expert cosmetic injections.',cls:'rv d2'},
-            {href:'/services#massage',img:'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=450&fit=crop&auto=format',alt:'Massage',name:'Massage',desc:'Relaxing therapeutic massage to melt away tension from head to toe.',cls:'rv d3'},
             {href:'/services#hair',img:'/team/ricci/work-2.jpg',alt:'Hair Treatment',name:'Hair Treatment',desc:'Color, highlights, balayage, cuts, and styling by our expert hair specialists.',cls:'rv d4'},
+            {href:'/services#lashes',img:'/gallery/IMG_1061.JPEG',alt:'Eyelash Extensions',name:'Eyelash Extensions',desc:'Lush, full lash extensions for a wide-awake look that lasts weeks.',cls:'rv d5'},
+            {href:'/services#art',img:'/gallery/IMG_1030.JPEG',alt:'Nail Art',name:'Nail Art',desc:'Custom designs, gems, chrome, ombre, and hand-painted artwork.',cls:'rv'},
+            {href:'/services#waxing',img:'/gallery/IMG_1059.JPEG',alt:'Waxing',name:'Waxing',desc:'Smooth, precise waxing for eyebrows, lips, face, and more.',cls:'rv d1'},
+            {href:'/services#permmakeup',img:'/gallery/IMG_1060.JPEG',alt:'Permanent Makeup',name:'Permanent Makeup',desc:'Flawless brows, liner, and lips that look perfect every single morning.',cls:'rv d2'},
+            {href:'/services#botox',img:'https://images.unsplash.com/photo-1731355771418-f10ab62c9f86?w=600&h=450&fit=crop&auto=format',alt:'Botox',name:'Botox',desc:'Smooth fine lines and refresh your look with expert cosmetic injections.',cls:'rv d3'},
+            {href:'/services#massage',img:'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=450&fit=crop&auto=format',alt:'Massage',name:'Massage',desc:'Relaxing therapeutic massage to melt away tension from head to toe.',cls:'rv d4'},
           ].map(s => (
             <Link key={s.name} href={s.href} className={`svc-card ${s.cls}`}>
               <img className="svc-img" src={s.img} alt={s.alt} loading="lazy"/>
