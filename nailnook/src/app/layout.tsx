@@ -32,6 +32,10 @@ const pinyonScript = Pinyon_Script({
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_BUSINESS_NAME ?? 'Nail Nook',
   description: process.env.NEXT_PUBLIC_BUSINESS_TAGLINE ?? 'Luxury Nails. Effortless Beauty.',
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
