@@ -380,7 +380,28 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
 }
 .hero-badge i { color: var(--primary); font-size: 1rem; }
 
-/* Hero form card */
+/* Hero image */
+.hero-image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: slideUp 0.7s ease-out 0.3s both;
+}
+.hero-img {
+  width: 100%;
+  max-width: 580px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+  -webkit-mask-image:
+    radial-gradient(ellipse 88% 82% at 55% 48%, black 30%, rgba(0,0,0,0.85) 50%, transparent 75%);
+  mask-image:
+    radial-gradient(ellipse 88% 82% at 55% 48%, black 30%, rgba(0,0,0,0.85) 50%, transparent 75%);
+  filter: drop-shadow(0 16px 48px rgba(0,0,0,0.45)) brightness(1.05) saturate(1.1);
+}
+
+/* Hero form card — kept for reference if re-used */
 .hero-form-wrap {
   display: flex;
   align-items: center;
@@ -498,7 +519,89 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
   .hero-subtitle { max-width: 100%; margin-left: auto; margin-right: auto; }
   .hero-ctas { justify-content: center; }
   .hero-badge-row { justify-content: center; }
-  .hero-form-card { max-width: 100%; }
+  .hero-img { max-width: 100%; }
+}
+
+/* ─────────────────────────────────────────────────────────
+   AVAILABILITY FORM SECTION
+───────────────────────────────────────────────────────── */
+.availability-section { background: var(--bg); }
+.availability-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 4rem;
+  align-items: start;
+}
+.availability-text h2 { color: var(--blue); margin-bottom: 0.75rem; }
+.availability-text p { color: var(--gray); font-size: 1.05rem; margin-bottom: 1.75rem; }
+.availability-perks { display: flex; flex-direction: column; gap: 0.6rem; }
+.avail-perk {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--blue);
+}
+.avail-perk i { color: var(--primary); }
+
+.avail-form { display: flex; flex-direction: column; gap: 0; }
+.avail-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.avail-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+.avail-group label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.avail-group input,
+.avail-group select,
+.avail-group textarea {
+  background: var(--light-gray);
+  border: 1.5px solid #E5E7EB;
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s, background 0.2s;
+  outline: none;
+  width: 100%;
+}
+.avail-group input::placeholder,
+.avail-group textarea::placeholder { color: #9CA3AF; }
+.avail-group input:focus,
+.avail-group select:focus,
+.avail-group textarea:focus {
+  border-color: var(--primary);
+  background: #fff;
+}
+.avail-group textarea { resize: none; }
+.avail-note {
+  text-align: center;
+  margin-top: 0.85rem;
+  color: var(--gray);
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.avail-note i { color: var(--primary); }
+
+@media (max-width: 768px) {
+  .availability-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .avail-row { grid-template-columns: 1fr; }
 }
 
 /* ─────────────────────────────────────────────────────────

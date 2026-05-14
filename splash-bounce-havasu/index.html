@@ -98,49 +98,14 @@
         </div>
       </div>
 
-      <!-- Right: booking inquiry form -->
-      <div class="hero-form-wrap" style="animation: slideUp 0.7s ease-out 0.3s both;">
-        <div class="hero-form-card">
-          <div class="hero-form-header">
-            <h3>Check Availability</h3>
-            <p>Tell us about your event and we'll get back to you within a few hours.</p>
-          </div>
-          <form class="hero-form" onsubmit="return false;">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="hf-name">Your Name</label>
-                <input type="text" id="hf-name" placeholder="Jane Smith" autocomplete="name" />
-              </div>
-              <div class="form-group">
-                <label for="hf-phone">Phone Number</label>
-                <input type="tel" id="hf-phone" placeholder="(928) 555-0000" autocomplete="tel" />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="hf-date">Event Date</label>
-                <input type="date" id="hf-date" />
-              </div>
-              <div class="form-group">
-                <label for="hf-unit">Rental Type</label>
-                <select id="hf-unit">
-                  <option value="">Select a unit...</option>
-                  <option value="classic">Classic Bounce House</option>
-                  <option value="splash">Splash &amp; Slide Combo</option>
-                  <option value="unsure">Not Sure Yet</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="hf-message">Anything else we should know?</label>
-              <textarea id="hf-message" rows="3" placeholder="Party size, location, special requests..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Check Availability</button>
-          </form>
-          <p class="hero-form-note">
-            <i class="fa-solid fa-lock"></i> We never share your information. No spam.
-          </p>
-        </div>
+      <!-- Right: bounce house image -->
+      <div class="hero-image-wrap">
+        <img
+          class="hero-img"
+          src="https://images.pexels.com/photos/6379672/pexels-photo-6379672.jpeg?auto=compress&cs=tinysrgb&w=900"
+          alt="Kids having fun on a bounce house water slide"
+          loading="eager"
+        />
       </div>
     </div>
 
@@ -148,6 +113,61 @@
     <div class="hero-scroll">
       <span>Scroll</span>
       <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       AVAILABILITY FORM
+  ═══════════════════════════════════════════════════════ -->
+  <section class="section availability-section" id="availability">
+    <div class="container">
+      <div class="availability-layout">
+        <div class="availability-text reveal">
+          <div class="tag" style="display:inline-block;background:var(--light);color:var(--primary-dk);font-family:var(--font-heading);font-weight:700;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.35rem 1rem;border-radius:4px;margin-bottom:0.9rem;">Book Your Date</div>
+          <h2>Check Availability</h2>
+          <p>Fill out the form and we'll confirm your date within a few hours. Weekends book up fast — don't wait!</p>
+          <div class="availability-perks">
+            <div class="avail-perk"><i class="fa-solid fa-check"></i> Free delivery &amp; setup</div>
+            <div class="avail-perk"><i class="fa-solid fa-check"></i> No hidden fees</div>
+            <div class="avail-perk"><i class="fa-solid fa-check"></i> Same-day response</div>
+          </div>
+        </div>
+        <div class="availability-form-wrap reveal reveal-delay-2">
+          <form class="avail-form" onsubmit="return false;">
+            <div class="avail-row">
+              <div class="avail-group">
+                <label for="av-name">Your Name</label>
+                <input type="text" id="av-name" placeholder="Jane Smith" autocomplete="name" />
+              </div>
+              <div class="avail-group">
+                <label for="av-phone">Phone Number</label>
+                <input type="tel" id="av-phone" placeholder="(928) 555-0000" autocomplete="tel" />
+              </div>
+            </div>
+            <div class="avail-row">
+              <div class="avail-group">
+                <label for="av-date">Event Date</label>
+                <input type="date" id="av-date" />
+              </div>
+              <div class="avail-group">
+                <label for="av-unit">Rental Type</label>
+                <select id="av-unit">
+                  <option value="">Select a unit...</option>
+                  <option value="classic">Classic Bounce House</option>
+                  <option value="splash">Splash &amp; Slide Combo</option>
+                  <option value="unsure">Not Sure Yet</option>
+                </select>
+              </div>
+            </div>
+            <div class="avail-group">
+              <label for="av-message">Anything else we should know?</label>
+              <textarea id="av-message" rows="3" placeholder="Party size, location, special requests..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Check Availability</button>
+            <p class="avail-note"><i class="fa-solid fa-lock"></i> We never share your info. No spam.</p>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 
