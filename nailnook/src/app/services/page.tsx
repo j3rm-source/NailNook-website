@@ -178,7 +178,7 @@ export default function ServicesPage() {
 
       {/* PILL NAV */}
       <div className="svc-pills">
-        {[['#manicure','Manicure'],['#pedicure','Pedicure'],['#acrylic','Acrylic'],['#gel','Gel Extensions'],['#art','Nail Art'],['#waxing','Waxing'],['#lashes','Lash Extensions'],['#permmakeup','Perm. Makeup'],['#botox','Botox'],['#massage','Massage']].map(([href,label]) => (
+        {[['#manicure','Manicure'],['#pedicure','Pedicure'],['#acrylic','Acrylic'],['#gel','Gel Extensions'],['#art','Nail Art'],['#waxing','Waxing'],['#lashes','Lash Extensions'],['#permmakeup','Perm. Makeup'],['#botox','Botox'],['#massage','Massage'],['#hair','Hair Treatment']].map(([href,label]) => (
           <a key={href} href={href} className="pill">{label}</a>
         ))}
       </div>
@@ -332,6 +332,22 @@ export default function ServicesPage() {
             <h2 className="svc-title">Massage</h2>
             <p className="svc-desc">Unwind completely with a therapeutic massage designed to ease tension, improve circulation, and restore balance. From a quick relaxation session to a deep tissue treatment, our massage therapists customize every session to your needs.</p>
             <p className="price-note">Book in advance — massage appointments fill quickly.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* HAIR TREATMENT */}
+      <div className="svc-section" id="hair">
+        <div className="svc-inner rv">
+          <div className="svc-detail-img">
+            <img src="/team/ricci/work-2.jpg" alt="Hair Treatment" loading="lazy"/>
+            <span className="svc-img-label">Hair Treatment</span>
+          </div>
+          <div>
+            <span className="svc-icon-big">11</span>
+            <h2 className="svc-title">Hair Treatment</h2>
+            <p className="svc-desc">From vibrant color and sun-kissed highlights to balayage, cuts, and blowouts — our hair specialists deliver salon-quality results tailored to your hair type and vision. Whether you&apos;re looking for a subtle refresh or a bold transformation, we&apos;ve got you covered.</p>
+            <p className="price-note">Book a consultation to discuss your color goals.</p>
           </div>
         </div>
       </div>
