@@ -32,9 +32,17 @@ That's you. Your job: read the right SKILL.md, run bundled scripts in the right 
 | `frontend-webdesign` | Build any frontend UI — components, pages, full apps |
 | `add-webhook` | Create new Modal webhook endpoints |
 
-Run scripts from the project root (the directory containing this CLAUDE.md):
+**Windows note:** Use `py` instead of `python3` — the `python3` alias is not registered on this machine.
+
+Skills installed via Claude Code live at `C:\Users\jerem\.claude\skills\` (user-level), not inside this project. Run them from their own directory:
 ```bash
-python3 skills/scrape-leads/scripts/scrape_apify.py --query "Plumbers" --location "Texas" --max_items 25 --output .tmp/test.json
+cd /c/Users/jerem/.claude/skills/googlemaps-scraper
+py ./scripts/gmaps_lead_pipeline.py --search "plumbers in Phoenix AZ" --limit 50
+```
+
+Project-local skills (if any) live under `skills/` here and are run from the project root:
+```bash
+py skills/scrape-leads/scripts/scrape_apify.py --query "Plumbers" --location "Texas" --max_items 25 --output .tmp/test.json
 ```
 
 ## Subagents (`Agents/`)
@@ -61,9 +69,11 @@ Three subagents, each with a self-contained context. All are **read-only reporte
 
 ## Setup
 
-Launch Claude Code from the project root (the directory containing this CLAUDE.md). All script paths are relative to that directory. Each skill bundles its own dependencies — install them as needed per skill.
+Launch Claude Code from the project root (the directory containing this CLAUDE.md). Each skill bundles its own dependencies — install them as needed per skill.
 
-Edit `.env` in the project root with the keys you need.
+**`.env` placement:** Scripts use `load_dotenv()` which walks up the directory tree. For user-level skills at `C:\Users\jerem\.claude\skills\`, place `.env` at `C:\Users\jerem\.claude\.env` so all skills find it automatically. A `.env` in this project root covers project-local scripts only.
+
+**Google OAuth files:** `credentials.json` and `token.json` must be in the working directory when a Sheets-writing script runs (i.e., the skill's own directory for user-level skills). On first run of any Sheets skill, the OAuth flow generates `token.json` — keep both files there for subsequent runs.
 
 ## File Layout
 
@@ -140,6 +150,7 @@ A generic Next.js booking app template (Next.js 15, React 19, TypeScript, Tailwi
 
 ### Dev commands (run from inside `Scheduale page/`)
 ```bash
+# Note: path has a space — quote it in bash: cd "Scheduale page"
 npm run dev      # start dev server on :3000
 npm run build    # production build
 npm run lint     # ESLint

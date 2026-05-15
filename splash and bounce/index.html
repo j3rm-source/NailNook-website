@@ -3,20 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Splash and Bounce Havasu — Bounce House Rentals</title>
-  <meta name="description" content="Havasu's #1 bounce house and water slide rentals. Delivery, setup, and takedown included. Book your party today!" />
+  <title>Splash and Bounce Havasu — Bounce House &amp; Water Slide Rentals</title>
+  <meta name="description" content="Lake Havasu's bounce house and water slide combo rentals. Beat the heat — delivery, setup, and takedown included. Book your party today!" />
 
-  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-
-  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -27,16 +20,16 @@
   <header class="nav-header">
     <nav class="nav-container">
       <a href="#" class="nav-logo">
-        <i class="fa-solid fa-house-chimney logo-icon"></i>
+        <i class="fa-solid fa-droplet logo-icon"></i>
         Splash <span>&amp; Bounce</span> Havasu
       </a>
 
       <ul class="nav-links" id="navLinks">
         <li><a href="#services">Rentals</a></li>
         <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#why-us">About Us</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li class="nav-cta"><a href="#contact">Check Availability</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li class="nav-cta"><a href="#contact">Book Now</a></li>
       </ul>
 
       <button class="nav-hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false">
@@ -46,10 +39,9 @@
   </header>
 
   <!-- ══════════════════════════════════════════════════════
-       HERO — Animated
+       HERO
   ═══════════════════════════════════════════════════════ -->
   <section class="hero">
-    <!-- Floating bubbles -->
     <div class="hero-bubble"></div>
     <div class="hero-bubble"></div>
     <div class="hero-bubble"></div>
@@ -57,7 +49,6 @@
     <div class="hero-bubble"></div>
 
     <div class="hero-content">
-      <!-- Left: text -->
       <div class="hero-text">
         <div class="hero-tag">
           <i class="fa-solid fa-location-dot"></i>
@@ -65,20 +56,21 @@
         </div>
 
         <h1>
-          Make Your Party<br>
-          <span class="highlight">Unforgettable</span>
+          The Hottest Days<br>
+          Need the <span class="highlight">Coolest</span><br>
+          Bounce Houses <span class="castle-emoji">🏰</span>
         </h1>
 
         <p class="hero-subtitle">
-          Bounce houses, water slides, and combo units — delivered, set up, and taken down so you can focus on the fun. Serving the Havasu area.
+          Bounce houses and water slide combos delivered, set up, and torn down so you can focus on the fun. Built for Havasu summers.
         </p>
 
         <div class="hero-ctas">
-          <a href="#services" class="btn btn-primary">
-            See Our Rentals
+          <a href="#contact" class="btn btn-primary">
+            <i class="fa-solid fa-calendar-check"></i> Book Now
           </a>
-          <a href="#contact" class="btn btn-outline">
-            Check Availability
+          <a href="#services" class="btn btn-outline">
+            See Rentals
           </a>
         </div>
 
@@ -93,12 +85,11 @@
           </div>
           <div class="hero-badge">
             <i class="fa-solid fa-star"></i>
-            Havasu-Based
+            5.0 Rating
           </div>
         </div>
       </div>
 
-      <!-- Right: booking inquiry form -->
       <div class="hero-form-wrap" style="animation: slideUp 0.7s ease-out 0.3s both;">
         <div class="hero-form-card">
           <div class="hero-form-header">
@@ -125,26 +116,26 @@
                 <label for="hf-unit">Rental Type</label>
                 <select id="hf-unit">
                   <option value="">Select a unit...</option>
-                  <option value="classic">Classic Bounce House</option>
+                  <option value="tots">Tiny Tots Bounce</option>
+                  <option value="classic">Castle Combo</option>
                   <option value="splash">Splash &amp; Slide Combo</option>
                   <option value="unsure">Not Sure Yet</option>
                 </select>
               </div>
             </div>
             <div class="form-group">
-              <label for="hf-message">Anything else we should know?</label>
+              <label for="hf-message">Anything else?</label>
               <textarea id="hf-message" rows="3" placeholder="Party size, location, special requests..."></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Check Availability</button>
           </form>
           <p class="hero-form-note">
-            <i class="fa-solid fa-lock"></i> We never share your information. No spam.
+            <i class="fa-solid fa-lock"></i> We never share your info. No spam.
           </p>
         </div>
       </div>
     </div>
 
-    <!-- Scroll indicator -->
     <div class="hero-scroll">
       <span>Scroll</span>
       <i class="fa-solid fa-chevron-down"></i>
@@ -152,26 +143,117 @@
   </section>
 
   <!-- ══════════════════════════════════════════════════════
-       SERVICES
+       ALERT STRIP
+  ═══════════════════════════════════════════════════════ -->
+  <div class="alert-strip">
+    <div class="alert-strip-inner">
+      <div class="alert-item">
+        <i class="fa-solid fa-temperature-high"></i>
+        <strong>115°F in Havasu</strong> — Our water slide combos keep kids cool all day long
+      </div>
+      <div class="alert-divider">•</div>
+      <div class="alert-item">
+        <i class="fa-solid fa-calendar-xmark"></i>
+        <strong>Weekends booking fast</strong> — Reserve your date before it's gone
+      </div>
+      <div class="alert-divider">•</div>
+      <div class="alert-item">
+        <i class="fa-solid fa-phone"></i>
+        Call or text: <a href="tel:+19285551234">(928) 555-1234</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       WHY CHOOSE US
+  ═══════════════════════════════════════════════════════ -->
+  <section class="section why-us" id="why-us">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="tag">Why Us</div>
+        <h2>The Splash &amp; Bounce Difference</h2>
+        <p>We're your neighbors — a local Havasu family serious about safety, cleanliness, and making your party stress-free.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon">
+            <i class="fa-solid fa-shield-check"></i>
+          </div>
+          <h3>Safety Certified</h3>
+          <p>All units are commercially manufactured, inspected before every rental, and secured to meet Arizona safety standards.</p>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon">
+            <i class="fa-solid fa-droplet"></i>
+          </div>
+          <h3>Water Slide Built In</h3>
+          <p>It's one unit — bounce inside, then rocket down a 20-foot water slide into the splash pool. No separate setup needed.</p>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon">
+            <i class="fa-solid fa-file-shield"></i>
+          </div>
+          <h3>Fully Insured</h3>
+          <p>We carry full commercial liability insurance so you can relax and enjoy the party without worry.</p>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-4">
+          <div class="feature-icon">
+            <i class="fa-solid fa-sun"></i>
+          </div>
+          <h3>Local &amp; Havasu-Proud</h3>
+          <p>We live here and we know the heat. Booking local means faster response times and flexible scheduling that works for Havasu summers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SERVICES / RENTALS
   ═══════════════════════════════════════════════════════ -->
   <section class="section services" id="services">
     <div class="container">
       <div class="section-heading reveal">
         <div class="tag">Our Rentals</div>
         <h2>Pick Your Perfect Setup</h2>
-        <p>Every rental includes delivery, professional setup, and takedown — all you do is enjoy.</p>
+        <p>Every rental includes delivery, professional setup, and full takedown — all you do is enjoy the party.</p>
       </div>
 
       <div class="services-grid">
 
-        <!-- Service 1: Classic Bounce -->
+        <!-- Tier 1: Tiny Tots -->
         <div class="service-card reveal reveal-delay-1">
-          <img class="service-card-img" src="https://images.pexels.com/photos/6379672/pexels-photo-6379672.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Classic bounce house" loading="lazy" />
+          <img class="service-card-img" src="https://images.pexels.com/photos/6379672/pexels-photo-6379672.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Toddler bounce house rental" loading="lazy" />
           <div class="service-card-body">
-            <div class="service-card-tag">Most Popular</div>
-            <h3>Classic Bounce House</h3>
+            <div class="service-card-tag">Ages 2–6</div>
+            <h3>Tiny Tots Bounce</h3>
             <p>
-              Our 15×15 bounce house is the perfect centerpiece for any backyard birthday party or neighborhood event. Built with commercial-grade vinyl and mesh windows on all four sides so parents can keep a close eye on the fun — while kids bounce to their hearts' content. Fits up to 8 kids at a time and works on grass or concrete with proper anchoring.
+              Sized perfectly for the little ones. Our 12×12 toddler-friendly bounce house has lower walls, a gentle entry ramp, and mesh windows on every side so parents always have eyes on the fun. Soft, commercial-grade vinyl with rounded interior edges — no sharp corners, no worries.
+            </p>
+            <div class="service-card-meta">
+              <div class="service-price">$125 <span>/ 4 hrs</span></div>
+              <div class="service-perks">
+                <span class="service-perk"><i class="fa-solid fa-check"></i> Delivery</span>
+                <span class="service-perk"><i class="fa-solid fa-check"></i> Setup</span>
+                <span class="service-perk"><i class="fa-solid fa-check"></i> Takedown</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 2: Castle Combo — Most Popular -->
+        <div class="service-card service-card--featured reveal reveal-delay-2">
+          <img class="service-card-img" src="https://images.pexels.com/photos/16138038/pexels-photo-16138038.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Castle combo bounce house rental" loading="lazy" />
+          <div class="service-card-body">
+            <div class="service-card-tag service-card-tag--popular">
+              <i class="fa-solid fa-fire"></i> Most Popular
+            </div>
+            <h3>Castle Combo</h3>
+            <p>
+              Our flagship 15×15 bounce house is the centerpiece of any backyard birthday or block party. Commercial-grade vinyl, mesh windows on all four sides, and room for up to 8 kids at a time. Works on grass or concrete. The go-to rental for ages 5–12 — big enough to be exciting, manageable enough for parents to breathe easy.
             </p>
             <div class="service-card-meta">
               <div class="service-price">$150 <span>/ 4 hrs</span></div>
@@ -184,14 +266,14 @@
           </div>
         </div>
 
-        <!-- Service 2: Splash & Slide Combo -->
-        <div class="service-card reveal reveal-delay-2">
+        <!-- Tier 3: Splash & Slide -->
+        <div class="service-card reveal reveal-delay-3">
           <img class="service-card-img" src="https://images.pexels.com/photos/28121636/pexels-photo-28121636.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bounce house water slide combo" loading="lazy" />
           <div class="service-card-body">
-            <div class="service-card-tag">Beat the Heat</div>
+            <div class="service-card-tag">Beat the Heat · Ages 4+</div>
             <h3>Splash &amp; Slide Combo</h3>
             <p>
-              Beat the Havasu heat with our water slide and bounce combo unit. A full 20-foot slide feeds directly into a splash pool at the base — making it the most-talked-about feature at any summer party. Kids can bounce inside, then rocket down the slide into the cool water. Ideal for ages 4 and up. Requires a standard garden hose connection (you provide the water, we bring the fun).
+              One unit — bounce inside, then rocket down a full 20-foot water slide into a splash pool at the base. The most-talked-about feature at any Havasu summer party. Keeps kids cool and occupied for hours. Requires a standard garden hose connection (you bring the water, we bring the rest). Ideal for mixed-age groups.
             </p>
             <div class="service-card-meta">
               <div class="service-price">$225 <span>/ 4 hrs</span></div>
@@ -225,149 +307,190 @@
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
           <h3>1. Browse &amp; Choose</h3>
-          <p>Pick the rental that fits your party size, age group, and budget. Not sure? Text us — we'll help you choose.</p>
+          <p>Pick the rental that fits your party size, age group, and budget. Not sure which unit? Text us and we'll help you decide.</p>
         </div>
 
         <div class="step-card reveal reveal-delay-2">
           <div class="step-icon-wrap">
             <i class="fa-solid fa-calendar-check"></i>
           </div>
-          <h3>2. Book Your Date</h3>
-          <p>Reserve your unit with a quick call or text. We'll confirm your time slot, address, and any special setup needs.</p>
+          <h3>2. Reserve Your Date</h3>
+          <p>Book with a quick call or text. We'll confirm your date, address, and any setup requirements — no complicated contracts.</p>
         </div>
 
         <div class="step-card reveal reveal-delay-3">
           <div class="step-icon-wrap">
-            <i class="fa-solid fa-circle-check"></i>
-          </div>
-          <h3>3. We Handle the Rest</h3>
-          <p>Our crew arrives early, delivers, inflates, and anchors everything before your guests show up — then returns to break it all down.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════════════
-       WHY CHOOSE US
-  ═══════════════════════════════════════════════════════ -->
-  <section class="section why-us" id="why-us">
-    <div class="container">
-      <div class="section-heading reveal">
-        <div class="tag">Why Us</div>
-        <h2>The Splash &amp; Bounce Difference</h2>
-        <p>We're your neighbors — a local Havasu family that's serious about safety, cleanliness, and making your event stress-free.</p>
-      </div>
-
-      <div class="features-grid">
-        <div class="feature-card reveal reveal-delay-1">
-          <div class="feature-icon">
-            <i class="fa-solid fa-shield-check"></i>
-          </div>
-          <h3>Safety Certified</h3>
-          <p>All units are commercially manufactured, inspected before every rental, and secured to meet Arizona safety standards.</p>
-        </div>
-
-        <div class="feature-card reveal reveal-delay-2">
-          <div class="feature-icon">
             <i class="fa-solid fa-truck-fast"></i>
           </div>
-          <h3>Delivery &amp; Setup Included</h3>
-          <p>No hauling, no guessing. We deliver, inflate, anchor, and set up — then return to break everything down when you're done.</p>
+          <h3>3. We Deliver &amp; Set Up</h3>
+          <p>Our crew arrives early, inflates, and anchors everything before your first guest walks through the gate. All you have to do is answer the door.</p>
         </div>
 
-        <div class="feature-card reveal reveal-delay-3">
-          <div class="feature-icon">
-            <i class="fa-solid fa-children"></i>
+        <div class="step-card reveal reveal-delay-4">
+          <div class="step-icon-wrap">
+            <i class="fa-solid fa-party-horn"></i>
           </div>
-          <h3>All Ages Welcome</h3>
-          <p>From toddler birthdays to adult company picnics, we have units suited for every age group and event size.</p>
-        </div>
-
-        <div class="feature-card reveal reveal-delay-4">
-          <div class="feature-icon">
-            <i class="fa-solid fa-sun"></i>
-          </div>
-          <h3>Local &amp; Havasu-Proud</h3>
-          <p>We live here, we know the heat, and we plan around it. Booking local means faster response and flexible scheduling.</p>
+          <h3>4. Party. We Break Down.</h3>
+          <p>Enjoy every minute of your event. When it's over, we return to deflate, pack up, and haul everything away. Zero cleanup.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════════════════════
-       GALLERY
+       REVIEWS
   ═══════════════════════════════════════════════════════ -->
-  <section class="section gallery" id="gallery">
+  <section class="section reviews" id="reviews">
     <div class="container">
       <div class="section-heading reveal">
-        <div class="tag">Gallery</div>
-        <h2>See the Fun in Action</h2>
-        <p>Real events, real smiles. Check out some of the parties we've been part of.</p>
-      </div>
-
-      <div class="gallery-grid reveal">
-        <div class="gallery-item tall">
-          <img src="https://images.pexels.com/photos/16138038/pexels-photo-16138038.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Colorful bounce house" loading="lazy" />
-          <div class="gallery-overlay">
-            <span class="gallery-overlay-label">Classic Bounce House</span>
+        <div class="tag">Reviews</div>
+        <h2>What Havasu Families Are Saying</h2>
+        <div class="reviews-score reveal">
+          <div class="reviews-stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
           </div>
-        </div>
-
-        <div class="gallery-item">
-          <img src="https://images.pexels.com/photos/28173101/pexels-photo-28173101.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bounce house water slide combo" loading="lazy" />
-          <div class="gallery-overlay">
-            <span class="gallery-overlay-label">Splash &amp; Slide Combo</span>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <img src="https://images.pexels.com/photos/35069104/pexels-photo-35069104.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Inflatable bounce house rental" loading="lazy" />
-          <div class="gallery-overlay">
-            <span class="gallery-overlay-label">Birthday Celebrations</span>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <img src="https://images.pexels.com/photos/17935410/pexels-photo-17935410.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Kids playing in bounce house" loading="lazy" />
-          <div class="gallery-overlay">
-            <span class="gallery-overlay-label">Kids' Events</span>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <img src="https://images.pexels.com/photos/28121636/pexels-photo-28121636.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bounce house combo unit" loading="lazy" />
-          <div class="gallery-overlay">
-            <span class="gallery-overlay-label">Water Slide Fun</span>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <img src="https://images.pexels.com/photos/6379672/pexels-photo-6379672.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bounce house rental" loading="lazy" />
-          <div class="gallery-overlay">
-            <span class="gallery-overlay-label">Backyard Rentals</span>
-          </div>
+          <span class="reviews-score-num">5.0</span>
+          <span class="reviews-score-label">Average Rating</span>
         </div>
       </div>
 
-      <p class="gallery-cta reveal">
-        Photos coming soon — follow us on Instagram for the latest events!
-        &nbsp;<a href="#contact" style="color: var(--primary-dk); font-weight:600;">@splashandbounce_havasu</a>
-      </p>
+      <div class="reviews-grid">
+        <div class="review-card reveal reveal-delay-1">
+          <div class="review-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">"Best decision we made for Tyler's 7th birthday. 115 degrees outside and all the kids were on that splash combo for three hours straight. They were exhausted in the best possible way. Worth every penny."</p>
+          <div class="review-author">
+            <div class="review-avatar">S</div>
+            <div>
+              <div class="review-name">Sarah M.</div>
+              <div class="review-location">Lake Havasu City</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-2">
+          <div class="review-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">"These guys showed up early, had everything set up before our first guest arrived, and came back right on time to break it all down. Total professionals. The Castle Combo was a huge hit with the kids — I'll be booking again for sure."</p>
+          <div class="review-author">
+            <div class="review-avatar">M</div>
+            <div>
+              <div class="review-name">Mike R.</div>
+              <div class="review-location">Havasu Heights</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-3">
+          <div class="review-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">"We've rented twice now. The kids would be miserable in the Havasu heat without this — the water slide is the only thing that keeps them outside and having fun all summer. Booking for the third time this August."</p>
+          <div class="review-author">
+            <div class="review-avatar">J</div>
+            <div>
+              <div class="review-name">Jessica L.</div>
+              <div class="review-location">Lake Havasu City</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════════════════════
-       CTA BANNER
+       BOOK NOW CTA
   ═══════════════════════════════════════════════════════ -->
   <section class="cta-banner">
     <div class="container">
       <div class="cta-inner reveal">
-        <h2>Ready to Reserve Your Date?</h2>
-        <p>Book your unit today and let us take care of the rest. Dates fill up fast — especially on weekends!</p>
-        <div class="cta-buttons">
-          <a href="#contact" class="btn btn-white">Check Availability</a>
-          <a href="tel:+19285551234" class="btn btn-outline">Call or Text Us</a>
+        <div class="cta-urgency-chip">
+          <i class="fa-solid fa-bolt"></i> Weekends Booking Fast
         </div>
+        <h2>Ready to Reserve Your Date?</h2>
+        <p>Lock in your weekend before someone else does. Delivery, setup, and takedown are all included — just show up and party.</p>
+        <div class="cta-buttons">
+          <a href="#contact" class="btn btn-white">
+            <i class="fa-solid fa-calendar-check"></i> Book Now
+          </a>
+        </div>
+        <div class="cta-phone">
+          <i class="fa-solid fa-phone"></i>
+          Prefer to call? <a href="tel:+19285551234">(928) 555-1234</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       FAQ
+  ═══════════════════════════════════════════════════════ -->
+  <section class="section faq" id="faq">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="tag">FAQ</div>
+        <h2>Common Questions</h2>
+        <p>Answers to what parents in Havasu ask us most.</p>
+      </div>
+
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Is it safe to use a bounce house in Havasu's heat?
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes — with a few smart practices. We recommend scheduling rentals in the morning (before noon) or evening (after 5pm) to avoid peak heat. Our Splash &amp; Slide Combo is specifically designed for hot-weather use — the constant water keeps the vinyl cool and kids hydrated and comfortable. We also recommend setting up in a shaded area if possible. When in doubt, give us a call and we'll help you plan around the forecast.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Do you deliver and set up?
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Always. Every rental includes delivery to your address, full professional setup (inflation, anchoring, safety checks), and complete takedown when you're done. You don't touch anything except the fun. There's no hauling, no guessing how it goes together, and no cleanup afterward — that's all on us.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What do I need to provide for the water slide combo?
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Just a standard garden hose with enough reach to connect to the unit. We handle everything else. The water runs continuously while the slide is in use, so make sure your hose bib is accessible before our crew arrives. We'll connect it during setup and disconnect it when we tear down.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How far in advance should I book?
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>As early as possible, especially for summer weekends. Friday through Sunday slots in June, July, and August fill up weeks out. We recommend booking at least 2–3 weeks in advance to lock in your first-choice date. Weekday rentals are typically more available on shorter notice.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What if it's too windy or the weather turns bad?
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Safety first. If winds exceed safe operating limits (typically 25+ mph) we'll contact you to reschedule at no charge. In Havasu, rain is rare in summer but we'll work with you to find a solution. Our commitment is that you're never stuck paying for a rental that couldn't be safely used — we'll make it right.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -378,14 +501,13 @@
   <footer class="footer" id="contact">
     <div class="container">
       <div class="footer-grid">
-        <!-- Brand -->
         <div class="footer-brand">
           <a href="#" class="nav-logo">
-            <i class="fa-solid fa-house-chimney logo-icon"></i>
+            <i class="fa-solid fa-droplet logo-icon"></i>
             Splash <span style="color:var(--accent)">&amp; Bounce</span> Havasu
           </a>
           <p>
-            Lake Havasu City's bounce house rental company. Backyard birthdays, neighborhood block parties, school events — we set it up and break it down so you can enjoy every moment.
+            Lake Havasu City's bounce house and water slide rental company. Backyard birthdays, block parties, school events — we set it up and break it down so you enjoy every minute.
           </p>
           <div class="footer-social">
             <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
@@ -394,18 +516,16 @@
           </div>
         </div>
 
-        <!-- Links -->
         <div class="footer-col">
           <h4>Quick Links</h4>
           <ul>
             <li><a href="#services">Rentals</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#why-us">About Us</a></li>
-            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#faq">FAQ</a></li>
           </ul>
         </div>
 
-        <!-- Contact -->
         <div class="footer-col">
           <h4>Contact Us</h4>
           <div class="contact-item">
@@ -425,12 +545,11 @@
 
       <div class="footer-bottom">
         <span>&copy; 2025 Splash and Bounce Havasu. All rights reserved.</span>
-        <span>Made with <i class="fa-solid fa-heart" style="color:var(--accent)"></i> in Lake Havasu City</span>
+        <span>Made with <i class="fa-solid fa-heart" style="color:var(--primary)"></i> in Lake Havasu City</span>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="js/main.js"></script>
 </body>
 </html>

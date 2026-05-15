@@ -1,7 +1,7 @@
 /* Splash and Bounce Havasu — Main JS */
 
 /* ── Mobile Nav ─────────────────────────────────────────── */
-const toggle  = document.getElementById('navToggle');
+const toggle   = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 
 toggle.addEventListener('click', () => {
@@ -9,7 +9,6 @@ toggle.addEventListener('click', () => {
   toggle.setAttribute('aria-expanded', open);
 });
 
-/* Close nav when a link is clicked */
 navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     navLinks.classList.remove('open');
@@ -25,27 +24,45 @@ window.addEventListener('scroll', () => {
 
 /* ── Scroll Reveal ──────────────────────────────────────── */
 const revealEls = document.querySelectorAll('.reveal');
-
-const observer = new IntersectionObserver((entries) => {
+const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+      revealObserver.unobserve(entry.target);
     }
   });
 }, { threshold: 0.12 });
 
-revealEls.forEach(el => observer.observe(el));
+revealEls.forEach(el => revealObserver.observe(el));
 
-/* ── Smooth scroll for anchor links ─────────────────────── */
+/* ── Smooth scroll ──────────────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', e => {
     const target = document.querySelector(anchor.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      const offset = 68; /* nav height */
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      const top = target.getBoundingClientRect().top + window.scrollY - 68;
       window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+/* ── FAQ Accordion ──────────────────────────────────────── */
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+
+    /* Close all */
+    document.querySelectorAll('.faq-item.open').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.faq-question').setAttribute('aria-expanded', false);
+    });
+
+    /* Open clicked unless it was already open */
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', true);
     }
   });
 });
