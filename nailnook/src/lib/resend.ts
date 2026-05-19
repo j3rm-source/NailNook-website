@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
-const OWNER_EMAIL = process.env.OWNER_EMAIL || ''
+const OWNER_EMAIL = (process.env.OWNER_EMAIL || '').split(',').map(e => e.trim()).filter(Boolean)
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'bookings@nailnook.com'
 
 export async function sendOwnerBookingEmail({
@@ -23,7 +23,7 @@ export async function sendOwnerBookingEmail({
   time: string
   note?: string | null
 }) {
-  if (!resend || !OWNER_EMAIL) return
+  if (!resend || !OWNER_EMAIL.length) return
 
   await resend.emails.send({
     from: FROM_EMAIL,
@@ -62,7 +62,7 @@ export async function sendOwnerChatBookingEmail({
   specialistName: string
   preferredTime: string
 }) {
-  if (!resend || !OWNER_EMAIL) return
+  if (!resend || !OWNER_EMAIL.length) return
 
   await resend.emails.send({
     from: FROM_EMAIL,

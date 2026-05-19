@@ -9,7 +9,8 @@
       "Bash(unzip -o rita.zip -d rita)",
       "WebSearch",
       "Skill(googlemaps-scraper)",
-      "Skill(googlemaps-scraper:*)"
+      "Skill(googlemaps-scraper:*)",
+      "Bash(py -c ' *)"
     ]
   }
 }
