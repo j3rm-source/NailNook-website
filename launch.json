@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "splash-and-bounce",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-m", "http.server", "3456", "--directory", "C:\\Users\\jerem\\OneDrive\\Documents\\New folder\\.claude\\.claude\\splash and bounce"],
+      "port": 3456
+    }
+  ]
+}

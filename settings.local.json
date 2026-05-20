@@ -10,7 +10,11 @@
       "WebSearch",
       "Skill(googlemaps-scraper)",
       "Skill(googlemaps-scraper:*)",
-      "Bash(py -c ' *)"
+      "Bash(py -c ' *)",
+      "WebFetch(domain:www.bluemarinefoundation.com)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\jerem\\\\OneDrive\\\\Documents\\\\New folder\\\\.claude\\\\.claude\\\\splash and bounce\\\\\" | Where-Object { $_.Name -match \"havasu\" })",
+      "WebFetch(domain:www.caljump.com)"
     ]
   }
 }
