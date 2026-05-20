@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -42,11 +42,11 @@
        HERO
   ═══════════════════════════════════════════════════════ -->
   <section class="hero">
-    <div class="hero-bubble"></div>
-    <div class="hero-bubble"></div>
-    <div class="hero-bubble"></div>
-    <div class="hero-bubble"></div>
-    <div class="hero-bubble"></div>
+    <!-- Floating emoji -->
+    <span class="hero-emoji" aria-hidden="true">☀️</span>
+    <span class="hero-emoji" aria-hidden="true">💦</span>
+    <span class="hero-emoji" aria-hidden="true">🌊</span>
+    <span class="hero-emoji" aria-hidden="true">🎉</span>
 
     <div class="hero-content">
       <div class="hero-text">
@@ -90,7 +90,7 @@
         </div>
       </div>
 
-      <div class="hero-form-wrap" style="animation: slideUp 0.7s ease-out 0.3s both;">
+      <div class="hero-form-wrap">
         <div class="hero-form-card">
           <div class="hero-form-header">
             <h3>Check Availability</h3>
@@ -127,7 +127,7 @@
               <label for="hf-message">Anything else?</label>
               <textarea id="hf-message" rows="3" placeholder="Party size, location, special requests..."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Check Availability</button>
+            <button type="submit" class="btn btn-primary btn-block">Reserve My Date</button>
           </form>
           <p class="hero-form-note">
             <i class="fa-solid fa-lock"></i> We never share your info. No spam.
@@ -142,26 +142,39 @@
     </div>
   </section>
 
+  <!-- Wave: hero → alert strip -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,20 C240,55 480,5 720,30 C960,55 1200,5 1440,25 L1440,60 L0,60 Z" fill="#FFD60A"/>
+    </svg>
+  </div>
+
   <!-- ══════════════════════════════════════════════════════
        ALERT STRIP
   ═══════════════════════════════════════════════════════ -->
   <div class="alert-strip">
-    <div class="alert-strip-inner">
-      <div class="alert-item">
-        <i class="fa-solid fa-temperature-high"></i>
-        <strong>115°F in Havasu</strong> — Our water slide combos keep kids cool all day long
-      </div>
-      <div class="alert-divider">•</div>
-      <div class="alert-item">
-        <i class="fa-solid fa-calendar-xmark"></i>
-        <strong>Weekends booking fast</strong> — Reserve your date before it's gone
-      </div>
-      <div class="alert-divider">•</div>
-      <div class="alert-item">
-        <i class="fa-solid fa-phone"></i>
-        Call or text: <a href="tel:+19285551234">(928) 555-1234</a>
-      </div>
+    <div class="alert-strip-track">
+      <!-- duplicated for seamless loop -->
+      <div class="alert-item"><i class="fa-solid fa-temperature-high"></i><strong>115°F in Havasu</strong> — Our water slide combos keep kids cool all day long</div>
+      <span class="alert-dot">•</span>
+      <div class="alert-item"><i class="fa-solid fa-calendar-xmark"></i><strong>Weekends booking fast</strong> — Reserve your date before it's gone</div>
+      <span class="alert-dot">•</span>
+      <div class="alert-item"><i class="fa-solid fa-phone"></i>Call or text: <a href="tel:+19285551234">(928) 555-1234</a></div>
+      <span class="alert-dot">•</span>
+      <div class="alert-item"><i class="fa-solid fa-temperature-high"></i><strong>115°F in Havasu</strong> — Our water slide combos keep kids cool all day long</div>
+      <span class="alert-dot">•</span>
+      <div class="alert-item"><i class="fa-solid fa-calendar-xmark"></i><strong>Weekends booking fast</strong> — Reserve your date before it's gone</div>
+      <span class="alert-dot">•</span>
+      <div class="alert-item"><i class="fa-solid fa-phone"></i>Call or text: <a href="tel:+19285551234">(928) 555-1234</a></div>
+      <span class="alert-dot">•</span>
     </div>
+  </div>
+
+  <!-- Wave: alert strip → why us -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,35 C360,5 1080,55 1440,20 L1440,0 L0,0 Z" fill="#FFD60A"/>
+    </svg>
   </div>
 
   <!-- ══════════════════════════════════════════════════════
@@ -210,6 +223,13 @@
       </div>
     </div>
   </section>
+
+  <!-- Wave: why us → services -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,20 C360,55 1080,5 1440,35 L1440,60 L0,60 Z" fill="#E8F8FC"/>
+    </svg>
+  </div>
 
   <!-- ══════════════════════════════════════════════════════
        SERVICES / RENTALS
@@ -290,6 +310,13 @@
     </div>
   </section>
 
+  <!-- Wave: services → how it works -->
+  <div class="wave-divider wave-divider--flip">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,20 C360,55 1080,5 1440,35 L1440,0 L0,0 Z" fill="#E8F8FC"/>
+    </svg>
+  </div>
+
   <!-- ══════════════════════════════════════════════════════
        HOW IT WORKS
   ═══════════════════════════════════════════════════════ -->
@@ -336,6 +363,13 @@
       </div>
     </div>
   </section>
+
+  <!-- Wave: how it works → reviews -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C480,5 960,55 1440,20 L1440,60 L0,60 Z" fill="#E8F8FC"/>
+    </svg>
+  </div>
 
   <!-- ══════════════════════════════════════════════════════
        REVIEWS
@@ -404,6 +438,13 @@
     </div>
   </section>
 
+  <!-- Wave: reviews → CTA -->
+  <div class="wave-divider wave-divider--flip">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C480,5 960,55 1440,20 L1440,0 L0,0 Z" fill="#E8F8FC"/>
+    </svg>
+  </div>
+
   <!-- ══════════════════════════════════════════════════════
        BOOK NOW CTA
   ═══════════════════════════════════════════════════════ -->
@@ -427,6 +468,13 @@
       </div>
     </div>
   </section>
+
+  <!-- Wave: CTA → FAQ -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,15 C240,50 480,5 720,30 C960,55 1200,10 1440,25 L1440,60 L0,60 Z" fill="#fff"/>
+    </svg>
+  </div>
 
   <!-- ══════════════════════════════════════════════════════
        FAQ
@@ -495,6 +543,13 @@
     </div>
   </section>
 
+  <!-- Wave: FAQ → footer -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,25 C360,55 1080,5 1440,30 L1440,60 L0,60 Z" fill="#0D1B2A"/>
+    </svg>
+  </div>
+
   <!-- ══════════════════════════════════════════════════════
        FOOTER / CONTACT
   ═══════════════════════════════════════════════════════ -->
@@ -504,7 +559,7 @@
         <div class="footer-brand">
           <a href="#" class="nav-logo">
             <i class="fa-solid fa-droplet logo-icon"></i>
-            Splash <span style="color:var(--accent)">&amp; Bounce</span> Havasu
+            Splash <span style="color:var(--sky)">&amp; Bounce</span> Havasu
           </a>
           <p>
             Lake Havasu City's bounce house and water slide rental company. Backyard birthdays, block parties, school events — we set it up and break it down so you enjoy every minute.
@@ -545,11 +600,11 @@
 
       <div class="footer-bottom">
         <span>&copy; 2025 Splash and Bounce Havasu. All rights reserved.</span>
-        <span>Made with <i class="fa-solid fa-heart" style="color:var(--primary)"></i> in Lake Havasu City</span>
+        <span>Made with <i class="fa-solid fa-heart" style="color:var(--coral)"></i> in Lake Havasu City</span>
       </div>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=2"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 /* Splash and Bounce Havasu — Main JS */
 
+
 /* ── Mobile Nav ─────────────────────────────────────────── */
 const toggle   = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
